@@ -246,6 +246,7 @@ md_a_html <- function(ruta_md, ruta_html, css) {
   linea_h1 <- md_texto[str_starts(md_texto, "^# ")]
   titulo   <- if (length(linea_h1) > 0)
     str_remove(linea_h1[1], "^# ") else basename(tools::file_path_sans_ext(ruta_md))
+    message(glue("DEBUG titulo: '{titulo}'"))
 
   # Convertir md a html con pandoc (sin --standalone para obtener sólo el fragmento)
   tmp_html <- tempfile(fileext = ".html")
