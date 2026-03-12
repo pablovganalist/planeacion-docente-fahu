@@ -137,6 +137,9 @@ nombre_largo <- switch(UNIDAD_PROF,
   titulo_esp(nombre_largo_upper)
 )
 
+message(glue("DEBUG nombre_largo: '{nombre_largo}' | UNIDAD_PROF: '{UNIDAD_PROF}'"))
+
+
 # =============================================================================
 # SUBCONJUNTOS CLAVE
 # =============================================================================
