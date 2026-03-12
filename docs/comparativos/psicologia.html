@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escuela de Psicología — Informe comparado 2024–2026</title>
+  <style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #394049;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem 4rem;
+  background: #fff;
+}
+header {
+  border-bottom: 3px solid #00A499;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+.facultad {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #00A499;
+  margin: 0 0 0.25rem;
+}
+h1 {
+  font-size: 1.35rem;
+  color: #394049;
+  margin: 0.2rem 0;
+}
+.subtitulo {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0.2rem 0 0.6rem;
+}
+.botones {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+.btn {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+.btn-volver {
+  background: #e9ecef;
+  color: #394049;
+}
+.btn-pdf {
+  background: #00A499;
+  color: white;
+}
+.btn-pdf:hover { background: #008a80; }
+h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #394049;
+  border-left: 4px solid #EA7600;
+  padding-left: 0.7rem;
+  margin: 2.5rem 0 1rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-bottom: 1.5rem;
+}
+thead th {
+  background: #394049;
+  color: white;
+  padding: 0.5rem 0.7rem;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+}
+thead th.col-left {
+  text-align: left;
+}
+tbody td {
+  padding: 0.42rem 0.7rem;
+  border-bottom: 1px solid #e5e7ea;
+  text-align: right;
+}
+tbody td.col-left {
+  text-align: left;
+  font-weight: 500;
+}
+tbody tr:nth-child(even) {
+  background: #f8f9fa;
+}
+tbody tr.fila-total td {
+  background: #EAAA0022;
+  font-weight: 700;
+  border-top: 2px solid #EAAA00;
+}
+.alerta { color: #c0392b; font-weight: 700; }
+.ok { color: #27ae60; }
+.nota {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: -0.8rem;
+  margin-bottom: 1.5rem;
+}
+.pie {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+  font-size: 0.72rem;
+  color: #aaa;
+  text-align: center;
+}
+@media print {
+  .botones { display: none; }
+  body { padding: 1rem; }
+}
+  </style>
+</head>
+<body>
+<header>
+  <p class="facultad">Facultad de Humanidades</p>
+  <h1>Escuela de Psicología</h1>
+  <p class="subtitulo">Informe comparado 2024–2026</p>
+  <div class="botones">
+    <a href="../index.html" class="btn btn-volver">← Volver al índice</a>
+    <button class="btn btn-pdf" onclick="window.print()">⬇ Descargar PDF</button>
+  </div>
+</header>
+<main>
+
+<h2>Horas pedagógicas planeadas</h2>
+<p class="nota">Horas totales de los cursos del departamento, agrupadas por tipo de contrato del docente asignado.</p>
+<table>
+  <thead><tr>
+      <th class="col-left">Periodo</th>
+      <th class="">Jornada (HP)</th>
+      <th class="">Por hora (HP)</th>
+      <th class="">SP (HP)</th>
+      <th class="">Total HP</th>
+  </tr></thead>
+  <tbody>
+    <tr><td class="col-left">2do sem 2024</td><td class="">168</td><td class="">598</td><td class="">48</td><td class="">814</td></tr>
+    <tr><td class="col-left">1er sem 2025</td><td class="">160</td><td class="">644</td><td class="">20</td><td class="">824</td></tr>
+    <tr><td class="col-left">2do sem 2025</td><td class="">192</td><td class="">730</td><td class="">46</td><td class="">968</td></tr>
+    <tr><td class="col-left">1er sem 2026</td><td class="">198</td><td class="">676</td><td class="">58</td><td class="">932</td></tr>
+  </tbody>
+</table>
+
+<h2>Cobertura según tipo de contrato</h2>
+<p class="nota">Porcentaje de horas pedagógicas cubiertas por cada tipo de contrato sobre el total del departamento.</p>
+<table>
+  <thead><tr>
+      <th class="col-left">Periodo</th>
+      <th class="">Jornada</th>
+      <th class="">Por hora</th>
+      <th class="">SP</th>
+  </tr></thead>
+  <tbody>
+    <tr><td class="col-left">2do sem 2024</td><td class="">20.6%</td><td class="">73.5%</td><td class="">5.9%</td></tr>
+    <tr><td class="col-left">1er sem 2025</td><td class="">19.4%</td><td class="">78.2%</td><td class="">2.4%</td></tr>
+    <tr><td class="col-left">2do sem 2025</td><td class="">19.8%</td><td class="">75.4%</td><td class="">4.8%</td></tr>
+    <tr><td class="col-left">1er sem 2026</td><td class="">21.2%</td><td class="">72.5%</td><td class="">6.2%</td></tr>
+  </tbody>
+</table>
+
+<h2>Promedio de horas por académico jornada</h2>
+<p class="nota">Calculado sobre académicos de jornada (excluye autoridades y profesores por hora). La norma institucional es ≥ 12 HP por semestre.</p>
+<table>
+  <thead><tr>
+      <th class="col-left">Periodo</th>
+      <th class="">N académicos</th>
+      <th class="">HP jornada</th>
+      <th class="">Promedio HP</th>
+      <th class="">≥ 12 HP</th>
+  </tr></thead>
+  <tbody>
+    <tr><td class="col-left">2do sem 2024</td><td class="">12</td><td class="">44</td><td class="">3.7</td><td class=""><span class="alerta">✗</span></td></tr>
+    <tr><td class="col-left">1er sem 2025</td><td class="">12</td><td class="">44</td><td class="">3.7</td><td class=""><span class="alerta">✗</span></td></tr>
+    <tr><td class="col-left">2do sem 2025</td><td class="">13</td><td class="">42</td><td class="">3.2</td><td class=""><span class="alerta">✗</span></td></tr>
+    <tr><td class="col-left">1er sem 2026</td><td class="">13</td><td class="">50</td><td class="">3.8</td><td class=""><span class="alerta">✗</span></td></tr>
+  </tbody>
+</table>
+
+</main>
+<div class="pie">Base elaborada a partir de los registros de planeación docente FAHU. Código elaborado por Pablo Valenzuela con apoyo de Claude de Anthropic.</div>
+</body>
+</html>
