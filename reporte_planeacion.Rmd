@@ -257,8 +257,8 @@ prom_hc <- if (n_claustro > 0) round(hp_total_jornada$hc / n_claustro, 1) else 0
 # Iterar por CARRERA + PLAN — pregrado primero, luego postgrado
 carreras_list <- df_cursos |>
   mutate(pre_orden = if_else(str_detect(str_to_upper(pre), "PREGRADO"), 1L, 2L)) |>
-  arrange(pre_orden, carrera, plan) |>
-  distinct(carrera, plan, pre_orden)
+  arrange(pre_orden, carrera, codprog) |>
+  distinct(carrera, codprog, pre_orden)
 
 tiene_insc <- any(!is.na(df_cursos$insc))
 ```
@@ -369,10 +369,10 @@ if (prom_hp > 0 && prom_hp < 12) {
 for (i in seq_len(nrow(carreras_list))) {
 
   carr <- carreras_list$carrera[i]
-  plan_cod <- carreras_list$plan[i]
+  plan_cod <- carreras_list$codprog[i]
 
   df_carr <- df_cursos |>
-    filter(carrera == carr, plan == plan_cod) |>
+    filter(carrera == carr, codprog == plan_cod) |>
     arrange(nivel, cod, sec)
 
   tipo <- df_carr |> pull(pre) |> first()

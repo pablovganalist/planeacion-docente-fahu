@@ -14,7 +14,6 @@ library(tidyverse)
 library(glue)
 
 # ── Configuracion ─────────────────────────────────────────────────────────────
-setwd("G:/tu/carpeta")     # <- CAMBIA ESTO
 
 CARPETA_MD   <- "informes_md"
 CARPETA_HTML <- "informes_html"
