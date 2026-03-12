@@ -266,11 +266,18 @@ md_a_html <- function(ruta_md, ruta_html, css) {
     str_replace_all('<h1[^>]*>.*?</h1>', '')
 
   boton_pdf <- '<button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button>'
-
-   slug_unidad <- str_remove(nombre, "^[0-9]+_")
+  slug_unidad <- str_remove(tools::file_path_sans_ext(basename(ruta_html)), "^[0-9]+_")
   boton_comp  <- paste0(
-    '<a href=\"comparativos/', slug_unidad, '.html\" class=\"btn-comp\">',
+    '<a href="comparativos/', slug_unidad, '.html" class="btn-comp">',
     '&#128202; Informe comparado 2024&#8211;2026</a>'
+  )
+  header_html <- paste0(
+    '<header>\n',
+    '<p class="facultad">', INSTITUCION, '</p>\n',
+    '<h1>', titulo, '</h1>\n',
+    '<p class="periodo">', PERIODO, '</p>\n',
+    '<div class="botones-header">', boton_comp, ' ', boton_pdf, '</div>\n',
+    '</header>'
   )
 
   html_final <- paste0('<!DOCTYPE html>
