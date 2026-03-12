@@ -75,8 +75,7 @@ df_raw <- read_excel(ARCHIVO, sheet = 1) |>
     unidad_prof = str_to_upper(str_squish(unidad_prof)),
     cargo       = str_to_upper(str_squish(cargo)),
     pre         = str_to_title(str_squish(pre)),
-    tipo        = str_to_upper(str_squish(tipo)),
-    sec         = paste0(tipo, "-", nsec),
+    sec         = str_to_upper(str_squish(sec)),
 
     # ── Contrato estandarizado ────────────────────────────────────────────────
     tipo_contrato = case_when(
