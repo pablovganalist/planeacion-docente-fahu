@@ -15,7 +15,7 @@ library(knitr)
 library(openxlsx)
 
 # ── Configuración ──────────────────────────────────────────────────────────────
-ARCHIVO   <- "BASE12026.xlsx"
+ARCHIVO   <- "BASE_SEMESTRE.xlsx"
 PERIODO   <- "Primer semestre 2026"
 PLANTILLA <- "reporte_planeacion.Rmd"
 
