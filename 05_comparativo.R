@@ -216,10 +216,14 @@ generar_comparativo <- function(UP) {
   UP <- str_to_upper(str_squish(UP))
 
   nombre_titulo <- switch(UP,
+    "EDUCACIÓN"                = "Departamento de Educación",
+    "ESTUDIOS POLÍTICOS"       = "Departamento de Estudios Políticos",
+    "FILOSOFÍA"                = "Departamento de Filosofía",
+    "HISTORIA"                 = "Departamento de Historia",
     "LINGÜÍSTICA Y LITERATURA" = "Departamento de Lingüística y Literatura",
     "PERIODISMO"               = "Escuela de Periodismo",
     "PSICOLOGÍA"               = "Escuela de Psicología",
-    paste("Departamento de", titulo_esp(str_to_title(UP)))
+    UP
   )
 
   # Helper: obtener nombre largo de la unidad en un periodo
