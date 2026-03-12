@@ -47,6 +47,15 @@ cat("── Paso 3: exportando a HTML...\n")
 source("04_exportar_html.R", local = TRUE)
 cat("   OK\n\n")
 
+# ── 4. Informes comparativos desde base histórica ────────────────────────────
+cat("── Paso 4: generando comparativos históricos...\n")
+if (file.exists("BASE_HISTORICA_FAHU.xlsx")) {
+  source("05_comparativo.R", local = TRUE)
+  cat("   OK\n\n")
+} else {
+  cat("   OMITIDO (BASE_HISTORICA_FAHU.xlsx no encontrada)\n\n")
+}
+
 cat("=============================================================\n")
 cat(glue("  Informes disponibles en: {CARPETA_HTML}/\n"))
 cat("=============================================================\n")
