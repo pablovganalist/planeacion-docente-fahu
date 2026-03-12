@@ -1,0 +1,3080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escuela de Periodismo — Primer semestre 2026</title>
+  <style>
+/* ── Tipografia y base ───────────────────────────────────── */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #394049;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem 4rem;
+  background: #fff;
+}
+
+/* ── Encabezados ─────────────────────────────────────────── */
+/* h1 se define en el bloque header institucional más abajo */
+h2 {
+  color: #394049;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-left: 5px solid #EA7600;
+  padding-left: 0.6rem;
+  margin-top: 2rem;
+}
+h3, h3.carr-titulo {
+  color: #498BCA;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.2rem;
+}
+
+/* ── Tablas ──────────────────────────────────────────────── */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0 1.5rem;
+  font-size: 12.5px;
+}
+thead tr {
+  background-color: #394049;
+  color: white;
+}
+thead th {
+  padding: 7px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+tbody tr:nth-child(even) {
+  background-color: #F5F7F8;
+}
+tbody tr:hover {
+  background-color: #E8F8F7;
+}
+tbody td {
+  padding: 5px 12px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+/* ── Filas de totales: se detectan porque tienen <strong> en todas las celdas
+      Aplica a filas A, B, C de la tabla de horas y al promedio del claustro ── */
+tbody tr:has(td > strong) {
+  background-color: #FFF3CD;
+  border-top: 2px solid #EAAA00;
+  border-bottom: 2px solid #EAAA00;
+}
+tbody tr:has(td > strong) td {
+  font-weight: 700;
+  color: #394049;
+}
+
+/* ── Cupos bajos (⚠): celda con simbolo de advertencia ───── */
+tbody td:has(> span.alerta) {
+  color: #C8102E;
+  font-weight: 700;
+}
+
+/* ── Blockquotes (alertas y notas) ──────────────────────── */
+blockquote {
+  border-left: 4px solid #00A499;
+  background: #E8F8F7;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0 4px 4px 0;
+  color: #394049;
+}
+blockquote p { margin: 0; }
+
+/* ── Header institucional ────────────────────────────────── */
+header {
+  border-bottom: 3px solid #00A499;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+/* Nombre de la facultad: supraencabezado pequeño sobre el título */
+p.facultad {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00A499;
+  margin: 0 0 0.2rem 0;
+}
+/* h1: nombre de la unidad — título principal */
+h1 {
+  color: #394049;
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem 0;
+  border: none;        /* anula el border-bottom que estaba antes en h1 */
+  padding: 0;
+}
+/* Subtitulo de periodo */
+.periodo {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+}
+
+/* ── Código de programa bajo el nombre de carrera ────────── */
+.cod-programa {
+  font-size: 0.85rem;
+  color: #394049;
+  background-color: #F0F0F0;
+  border-left: 4px solid #498BCA;
+  padding: 0.3rem 0.8rem;
+  margin-top: -0.8rem;
+  margin-bottom: 0.8rem;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.03em;
+}
+
+/* ── Pie de pagina ───────────────────────────────────────── */
+.pie {
+  margin-top: 3rem;
+  padding-top: 0.8rem;
+  border-top: 2px solid #00A499;
+  font-size: 11px;
+  color: #666;
+}
+
+/* ── Codigo de programa ──────────────────────────────────── */
+p.cod-programa {
+  font-size: 0.82rem;
+  color: #394049;
+  background: #F0F2F4;
+  border-left: 4px solid #498BCA;
+  padding: 0.3rem 0.8rem;
+  margin-top: -0.6rem;
+  margin-bottom: 0.9rem;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.02em;
+}
+
+/* ── Boton descargar PDF ─────────────────────────────────── */
+.btn-pdf {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  padding: 0.45rem 1.1rem;
+  background: #00A499;
+  color: white !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.03em;
+}
+.btn-pdf:hover {
+  background: #394049;
+}
+
+/* ── Impresion ───────────────────────────────────────────── */
+@media print {
+  body { max-width: 100%; padding: 1cm; font-size: 11px; }
+  h2 { page-break-before: auto; }
+  table { font-size: 10px; }
+  tbody tr:has(td > strong) { background-color: #FFF3CD !important; }
+  .btn-pdf { display: none; }
+  p.cod-programa { background: #eee !important; }
+}
+  </style>
+</head>
+<body>
+<header>
+<p class="facultad">Facultad de Humanidades</p>
+<h1>Escuela de Periodismo</h1>
+<p class="periodo">Primer semestre 2026</p>
+<button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button>
+</header>
+<main>
+
+<h2 id="horas-planeadas-de-la-unidad">1. Horas planeadas de la
+unidad</h2>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="63%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Descripción</th>
+<th align="right">Horas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>A (i+ii+iii+iv)</strong></td>
+<td align="left"><strong>Horas planeadas pregrado</strong></td>
+<td align="right"><strong>676</strong></td>
+</tr>
+<tr class="even">
+<td align="left">i</td>
+<td align="left">Horas profesores de jornada de la unidad</td>
+<td align="right">108</td>
+</tr>
+<tr class="odd">
+<td align="left">ii</td>
+<td align="left">Horas profesores por hora de clase</td>
+<td align="right">534</td>
+</tr>
+<tr class="even">
+<td align="left">iii</td>
+<td align="left">Horas de profesores de jornada externos a la
+unidad</td>
+<td align="right">28</td>
+</tr>
+<tr class="odd">
+<td align="left">iv</td>
+<td align="left">Sin profesor asignado</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>B (v+vi+vii)</strong></td>
+<td align="left"><strong>Horas planeadas postgrado</strong></td>
+<td align="right"><strong>46</strong></td>
+</tr>
+<tr class="odd">
+<td align="left">v</td>
+<td align="left">Horas profesores de jornada de la unidad</td>
+<td align="right">34</td>
+</tr>
+<tr class="even">
+<td align="left">vi</td>
+<td align="left">Horas profesores por hora de clase</td>
+<td align="right">12</td>
+</tr>
+<tr class="odd">
+<td align="left">vii</td>
+<td align="left">Horas de profesores de jornada externos a la
+unidad</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>C (A+B)</strong></td>
+<td align="left"><strong>Total horas planeadas unidad</strong></td>
+<td align="right"><strong>722</strong></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Descripción</th>
+<th align="right">Horas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">D (i+v)</td>
+<td align="left">Horas profesores de jornada de la unidad</td>
+<td align="right">142</td>
+</tr>
+<tr class="even">
+<td align="left">E (ii+vi)</td>
+<td align="left">Horas profesores por hora de clase</td>
+<td align="right">546</td>
+</tr>
+<tr class="odd">
+<td align="left">F (iii+vii)</td>
+<td align="left">Horas de profesores de jornada externos</td>
+<td align="right">28</td>
+</tr>
+<tr class="even">
+<td align="left">G</td>
+<td align="left">Sin profesor asignado</td>
+<td align="right">6</td>
+</tr>
+</tbody>
+</table>
+<p>La unidad registra un total de <strong>722 horas</strong> de clases
+planeadas, divididas en 676 horas en pregrado y 46 horas en postgrado.
+Los profesores de jornada de la unidad cubren el 20% del total, mientras
+que los profesores por hora cubren el 76%.</p>
+<hr />
+<h2 id="cobertura-de-horas-por-académicos-según-contratación">2.
+Cobertura de horas por académicos según contratación</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Descripción</th>
+<th align="right">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">% cobertura profesores por horas — pregrado</td>
+<td align="right">79</td>
+</tr>
+<tr class="even">
+<td align="left">% cobertura profesores por horas — postgrado</td>
+<td align="right">26</td>
+</tr>
+<tr class="odd">
+<td align="left">% cobertura profesores por horas — total</td>
+<td align="right">76</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Descripción</th>
+<th align="right">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">% cobertura profesores de jornada — pregrado</td>
+<td align="right">16</td>
+</tr>
+<tr class="even">
+<td align="left">% cobertura profesores de jornada — postgrado</td>
+<td align="right">74</td>
+</tr>
+<tr class="odd">
+<td align="left">% cobertura profesores de jornada — total</td>
+<td align="right">20</td>
+</tr>
+</tbody>
+</table>
+<p>En pregrado la cobertura de profesores de jornada es del 16%. En
+postgrado es de 74%. En total, los profesores de jornada cubren el 20%
+del total de horas planeadas en la unidad.</p>
+<hr />
+<h2 id="promedio-de-horas-académicos-de-jornada-claustro">3. Promedio de
+horas académicos de jornada (claustro)</h2>
+<table>
+<colgroup>
+<col width="42%" />
+<col width="23%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Profesor</th>
+<th align="right">Horas pedagógicas¹</th>
+<th align="right">Horas cronológicas equiv.²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Alejandra Lorena Phillippi Miranda</td>
+<td align="right">4</td>
+<td align="right">4.8</td>
+</tr>
+<tr class="even">
+<td align="left">David Alejandro Jofre Leiva</td>
+<td align="right">8</td>
+<td align="right">9.6</td>
+</tr>
+<tr class="odd">
+<td align="left">Edi Efraín Bámaca López</td>
+<td align="right">12</td>
+<td align="right">14.4</td>
+</tr>
+<tr class="even">
+<td align="left">Eduardo Hernan Roman Alvarez</td>
+<td align="right">18</td>
+<td align="right">21.6</td>
+</tr>
+<tr class="odd">
+<td align="left">Lorena Beatriz Valderrana Zenteno</td>
+<td align="right">14</td>
+<td align="right">16.8</td>
+</tr>
+<tr class="even">
+<td align="left">María Ximena Orchard Rieiro</td>
+<td align="right">12</td>
+<td align="right">14.4</td>
+</tr>
+<tr class="odd">
+<td align="left">Nicolas David Del Valle Orellana</td>
+<td align="right">4</td>
+<td align="right">4.8</td>
+</tr>
+<tr class="even">
+<td align="left">Pedro Leonardo Reyes Garcia</td>
+<td align="right">16</td>
+<td align="right">19.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Rene Eduardo Jara Reyes</td>
+<td align="right">18</td>
+<td align="right">21.6</td>
+</tr>
+<tr class="even">
+<td align="left">Ricardo Ramírez Vallejos</td>
+<td align="right">8</td>
+<td align="right">9.6</td>
+</tr>
+<tr class="odd">
+<td align="left">Verónica Rocamora Villena</td>
+<td align="right">12</td>
+<td align="right">14.4</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Promedio de docencia semestral</strong></td>
+<td align="right">14</td>
+<td align="right">16.8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Horas de autoridades</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Nombre</th>
+<th align="left">Cargo</th>
+<th align="right">Horas ped.</th>
+<th align="right">EQ cron.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Antoine Faure</td>
+<td align="left">DIRECTOR</td>
+<td align="right">28</td>
+<td align="right">33.6</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Las horas de los académicos con cargos en el gobierno superior de la
+universidad (Decano/a, Vicedecano/a, Director/a VIME) y de los
+directores de unidades académicas se incluyen en el total de horas de la
+unidad, pero estas autoridades <strong>no forman parte del
+claustro</strong> y no se consideran en el cálculo del promedio de
+docencia.</p>
+</blockquote>
+<p>En promedio los académicos del claustro realizan <strong>14 horas
+pedagógicas</strong> de docencia en Primer semestre 2026.</p>
+<blockquote>
+<p>El promedio (14 HP) <strong>cumple</strong> el estandar normativo de
+12 horas pedagogicas.</p>
+</blockquote>
+<blockquote>
+<p>¹ Incluye todas las secciones del académico, aunque correspondan a
+carreras de otras unidades. Los cursos sello se cuentan una sola vez por
+docente.</p>
+<p>² Horas pedagógicas × 1,2.</p>
+</blockquote>
+<hr />
+<h2 id="planeación-docente">4. Planeación docente</h2>
+<h3 class="carr-titulo">
+Periodismo
+</h3>
+<p class="cod-programa">
+Código de programa: 5111
+</p>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="4%" />
+<col width="56%" />
+<col width="3%" />
+<col width="2%" />
+<col width="3%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">NIVEL</th>
+<th align="left">COD</th>
+<th align="left">CURSO</th>
+<th align="left">SEC</th>
+<th align="right">H</th>
+<th align="right">CUPO</th>
+<th align="left">PROFESOR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47312</td>
+<td align="left">Géneros Y Técnicas Periodísticas</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">4 ⚠</td>
+<td align="left">Eduardo Hernan Roman Alvarez</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47312</td>
+<td align="left">Géneros Y Técnicas Periodísticas</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">4 ⚠</td>
+<td align="left">Eduardo Hernan Roman Alvarez</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47312</td>
+<td align="left">Géneros Y Técnicas Periodísticas</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">4 ⚠</td>
+<td align="left">Eduardo Hernan Roman Alvarez</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47324</td>
+<td align="left">Entrevista</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Amanda Marton Ramaciotti</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47324</td>
+<td align="left">Entrevista</td>
+<td align="left">E-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Rodrigo Edgardo Araya Campos</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47324</td>
+<td align="left">Entrevista</td>
+<td align="left">E-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Clara Isabel Paulina Pérez Gutiérrez</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47324</td>
+<td align="left">Entrevista</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Amanda Marton Ramaciotti</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47324</td>
+<td align="left">Entrevista</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Rodrigo Edgardo Araya Campos</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47324</td>
+<td align="left">Entrevista</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Clara Isabel Paulina Pérez Gutiérrez</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47325</td>
+<td align="left">Periodismo Fotográfico</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Ximena Myriam Riffo Piña</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47325</td>
+<td align="left">Periodismo Fotográfico</td>
+<td align="left">E-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Ximena Myriam Riffo Piña</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47325</td>
+<td align="left">Periodismo Fotográfico</td>
+<td align="left">E-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Edgard Alejandro Garrido Carrera</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47325</td>
+<td align="left">Periodismo Fotográfico</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Ximena Myriam Riffo Piña</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47325</td>
+<td align="left">Periodismo Fotográfico</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Ximena Myriam Riffo Piña</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47325</td>
+<td align="left">Periodismo Fotográfico</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Edgard Alejandro Garrido Carrera</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47326</td>
+<td align="left">Taller De Narrativa</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Galo Geraldo Ghigliotto Ghigliotto</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47326</td>
+<td align="left">Taller De Narrativa</td>
+<td align="left">E-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Carlos Andrés Tromben Reyes</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47326</td>
+<td align="left">Taller De Narrativa</td>
+<td align="left">E-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Montserrat Martorell Colón</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47326</td>
+<td align="left">Taller De Narrativa</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Galo Geraldo Ghigliotto Ghigliotto</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47326</td>
+<td align="left">Taller De Narrativa</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Carlos Andrés Tromben Reyes</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47326</td>
+<td align="left">Taller De Narrativa</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Montserrat Martorell Colón</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47326</td>
+<td align="left">Taller De Narrativa</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Galo Geraldo Ghigliotto Ghigliotto</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47326</td>
+<td align="left">Taller De Narrativa</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Carlos Andrés Tromben Reyes</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47326</td>
+<td align="left">Taller De Narrativa</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Montserrat Martorell Colón</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47327</td>
+<td align="left">Teoría De La Comunicación Iv</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Juan Pablo Sánchez Sepúlveda</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47327</td>
+<td align="left">Teoría De La Comunicación Iv</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Cristian Alexis Cabello Valenzuela</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47327</td>
+<td align="left">Teoría De La Comunicación Iv</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Rene Eduardo Jara Reyes</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47327</td>
+<td align="left">Teoría De La Comunicación Iv</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">Juan Pablo Sánchez Sepúlveda</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47327</td>
+<td align="left">Teoría De La Comunicación Iv</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">Cristian Alexis Cabello Valenzuela</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47327</td>
+<td align="left">Teoría De La Comunicación Iv</td>
+<td align="left">T-3</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">Rene Eduardo Jara Reyes</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47328</td>
+<td align="left">Seminario De Economía</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">Maria Soledad Pinto Nuñez</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47328</td>
+<td align="left">Seminario De Economía</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">Carlos Andrés Tromben Reyes</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47328</td>
+<td align="left">Seminario De Economía</td>
+<td align="left">T-3</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">Andrés Ismael Almeida Farga</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47329</td>
+<td align="left">Epistemología</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">Patricia Helena Junge Cerda</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47329</td>
+<td align="left">Epistemología</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">Patricia Helena Junge Cerda</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47329</td>
+<td align="left">Epistemología</td>
+<td align="left">T-3</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">Rene Eduardo Jara Reyes</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47336</td>
+<td align="left">Reportaje</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Carolina Guiomar Trejo Vidal</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47336</td>
+<td align="left">Reportaje</td>
+<td align="left">E-2</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Paula Patricia Huenchumil Jerez</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47336</td>
+<td align="left">Reportaje</td>
+<td align="left">E-3</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Edgard Alejandro Garrido Carrera</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47336</td>
+<td align="left">Reportaje</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Carolina Guiomar Trejo Vidal</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47336</td>
+<td align="left">Reportaje</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Paula Patricia Huenchumil Jerez</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47336</td>
+<td align="left">Reportaje</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Edgard Alejandro Garrido Carrera</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47337</td>
+<td align="left">Periodismo Audiovisual</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Eduardo Inostroza Carvajal</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47337</td>
+<td align="left">Periodismo Audiovisual</td>
+<td align="left">E-2</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Claudia Lorena Lewinsohn Castro</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47337</td>
+<td align="left">Periodismo Audiovisual</td>
+<td align="left">E-3</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Rodrigo Sebastian Robledo Maturana</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47337</td>
+<td align="left">Periodismo Audiovisual</td>
+<td align="left">L-1</td>
+<td align="right">4</td>
+<td align="right">21</td>
+<td align="left">Paola Dragnic García</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47337</td>
+<td align="left">Periodismo Audiovisual</td>
+<td align="left">L-2</td>
+<td align="right">4</td>
+<td align="right">21</td>
+<td align="left">Carolina Guiomar Trejo Vidal</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47337</td>
+<td align="left">Periodismo Audiovisual</td>
+<td align="left">L-3</td>
+<td align="right">4</td>
+<td align="right">21</td>
+<td align="left">Nelsón Rodrigo Sepulveda Villegas</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47338</td>
+<td align="left">Cultura Digital</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Pedro Leonardo Reyes Garcia</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47338</td>
+<td align="left">Cultura Digital</td>
+<td align="left">E-2</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Luis Leonel Yañez Uribe</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47338</td>
+<td align="left">Cultura Digital</td>
+<td align="left">E-3</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Pedro Leonardo Reyes Garcia</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47338</td>
+<td align="left">Cultura Digital</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Pedro Leonardo Reyes Garcia</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47338</td>
+<td align="left">Cultura Digital</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Luis Leonel Yañez Uribe</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47338</td>
+<td align="left">Cultura Digital</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Pedro Leonardo Reyes Garcia</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47338</td>
+<td align="left">Cultura Digital</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Pedro Leonardo Reyes Garcia</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47338</td>
+<td align="left">Cultura Digital</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Luis Leonel Yañez Uribe</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47338</td>
+<td align="left">Cultura Digital</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">21</td>
+<td align="left">Pedro Leonardo Reyes Garcia</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47339</td>
+<td align="left">Gestión De La Comunicación</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">21</td>
+<td align="left">Carla Cristina Avila Ramírez</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47339</td>
+<td align="left">Gestión De La Comunicación</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">21</td>
+<td align="left">Juan Carlos Rosillo Villena</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47339</td>
+<td align="left">Gestión De La Comunicación</td>
+<td align="left">T-3</td>
+<td align="right">4</td>
+<td align="right">21</td>
+<td align="left">Sergio Andres Cabezon Mellado</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">¿Qué Es Una Sociedad Justa? Teoría Social Normativa Y
+Desafíos De Cambio Social</td>
+<td align="left">S-1</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Jorge Araya Moya</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Derechos Humanos Desde Los Juegos De Rol De Mesa</td>
+<td align="left">S-11</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Nelson Andrés Ortiz Villalobos</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Derechos Humanos Y Desarrollo Sostenible: Una Mirada
+Critica Y Situada Desde Latinoamérica</td>
+<td align="left">S-12</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Angela Carolina Morales Ravest</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Electivo Ii</td>
+<td align="left">S-12</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Teresa Perez Cosgaya</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Desarrollo De Estrategias Y Proyectos De Incidencia
+Social Y Política Desde La Sociedad Civil</td>
+<td align="left">S-13</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Mauricio Iván Weibel Barahona</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Educación De Adultos</td>
+<td align="left">S-14</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Miguel Ivan Pedraza Gutierrez</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">El Arte Como Puente: Metodologías Interdisciplinares
+Para Comprender La Cultura Visual</td>
+<td align="left">S-15</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Manuel Antonio Aguirre Ossa</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Datos Para Contar Historias: Análisis Y Visualización
+Para Humanidades Y Ciencias Sociales</td>
+<td align="left">S-15</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Camilo Avendaño</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">El Podcast Educativo: Voz, Creación Y Comunicación
+Digital</td>
+<td align="left">S-16</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Eduardo Inostroza Carvajal</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">S-17</td>
+<td align="right">2</td>
+<td align="right">3 ⚠</td>
+<td align="left">Luis Edilio Hernández Astudillo</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Electivo Ii</td>
+<td align="left">S-18</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Ignacio Olavarría</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Fotografía De Principio Con Un Fin</td>
+<td align="left">S-19</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Ximena Myriam Riffo Piña</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Acción: Teoría Y Práctica De La Ética Ambiental</td>
+<td align="left">S-2</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Hernan Augusto Neira Barrera</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Gobernanza Y Transparencia Desde Los Derechos
+Humanos</td>
+<td align="left">S-20</td>
+<td align="right">2</td>
+<td align="right">3 ⚠</td>
+<td align="left">Francisco Zambrano Meza</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Herramientas Socioemocionales En Contextos De
+Diversidad</td>
+<td align="left">S-21</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Isabel Margarita Puga Young</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Historia Aplicada: Desarrollo Territorial
+Sostenible</td>
+<td align="left">S-22</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Pablo Alberto Lacoste Ssa</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Juego: Herramienta Educativa Y Para La Intervención
+Social</td>
+<td align="left">S-24</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Juan Armando Bastias Ovalle</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">La Comunicación De La Lengua De Señas Chilena.</td>
+<td align="left">S-26</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Diego Manzo Faúndez</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">La Escuela Como Organización Que Cuida</td>
+<td align="left">S-27</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Sergio Ignacio Galdames Poblete</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">La Representaciones Del Futuro En El Cine De
+Ciencia-Ficción Y Distópico.</td>
+<td align="left">S-28</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Christian Alejandro Retamal Hernandez</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Laboratorio De Cocreación De Gobernanza Para La
+Sostenibilidad</td>
+<td align="left">S-29</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Israel Patricio Perez Vargas</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Electivo Ii</td>
+<td align="left">S-30</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Marco Iraola</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Neurodivergencias Y Salud Mental Comunitaria:
+Aplicación Del Paradigma Neuroafirmativo En</td>
+<td align="left">S-32</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Illaritza Siuxie Parada Cortés</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Electivo Ii</td>
+<td align="left">S-33</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Catalina Santos</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Electivo Ii</td>
+<td align="left">S-33</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Teresa Perez Cosgaya</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Participación Ciudadana Y Territorio</td>
+<td align="left">S-34</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Mónica Alejandra Vargas Aguirre</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">La Cárcel Como Problema Social: Justicia, Desigualdad Y
+Conflicto En Chile</td>
+<td align="left">S-35</td>
+<td align="right">2</td>
+<td align="right">3 ⚠</td>
+<td align="left">Lucía Dammert Guardia</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Persona Humana Y Justicia Social: Elementos
+Ético-Valóricos Para Una Comprensión Del Ejerc</td>
+<td align="left">S-35</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Mauricio Chapsal Escudero</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Psicodrama: Estrategias Para El Abordaje De Grupos
+Desde Lo Individual Y Lo Colectivo.</td>
+<td align="left">S-36</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Gabriel Alejandro Silva Mancilla</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Electivo Ii</td>
+<td align="left">S-39</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Santiago Castillo</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Arte Y Cultura Para La Promoción De Los Derechos
+Humanos</td>
+<td align="left">S-4</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Mariela Edith Llancaqueo Jimenez</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Territorios En Conflicto: Desafíos De Sostenibilidad Y
+Justicia Socioambiental</td>
+<td align="left">S-40</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Natalia Alejandra Aravena Solís</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Electivo Ii</td>
+<td align="left">S-42</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Gloria Andrea Fernández Lagos</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Electivo Ii</td>
+<td align="left">S-49</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Edinson Alejandro Muñoz Arias</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Arte, Ciudad Y Espacio Público</td>
+<td align="left">S-5</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Andrea Carolina Catalán Muñoz</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Ciudadanía Cultura Y Buenvivir</td>
+<td align="left">S-6</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Maria Paulina Soto Labbe</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Electivo Ii</td>
+<td align="left">S-7</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Camilo Avendaño</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Controversias Y Posicionamientos Éticos Para Una
+Ciudadanía Crítica</td>
+<td align="left">S-8</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">María Elena Abarca Salinas</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Curiosidades Sobre El Cerebro</td>
+<td align="left">S-9</td>
+<td align="right">4</td>
+<td align="right">3 ⚠</td>
+<td align="left">Juan Amaro Fuenzalida</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Taller De Produccion Periodisticas</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">Eduardo Hernan Roman Alvarez</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Estrategias Digitales</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">Mónica Ventura Alcaíno</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Periodismo Deportivo</td>
+<td align="left">T-3</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">Patricio Antonio Torres Bustos</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Humor, Memoria Y Escritura: Prensa Y Representaciones
+Sociales</td>
+<td align="left">T-4</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">Jorge Fernando Montealegre Iturra</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47341</td>
+<td align="left">Metodología De La Investigación Cuantitativa</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">21</td>
+<td align="left">Debora Magdalena Jana Aguirre</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47341</td>
+<td align="left">Metodología De La Investigación Cuantitativa</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">21</td>
+<td align="left">Mónica Alejandra Vargas Aguirre</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47341</td>
+<td align="left">Metodología De La Investigación Cuantitativa</td>
+<td align="left">T-3</td>
+<td align="right">4</td>
+<td align="right">21</td>
+<td align="left">Debora Magdalena Jana Aguirre</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">David Alejandro Jofre Leiva</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-10</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Carla Cristina Avila Ramírez</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-11</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Carolina Guiomar Trejo Vidal</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-12</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Eduardo Hernan Roman Alvarez</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-13</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Rene Eduardo Jara Reyes</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Pedro Leonardo Reyes Garcia</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Ricardo Ramírez Vallejos</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-4</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Antoine Faure</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-5</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Edi Efraín Bámaca López</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-6</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Paula Patricia Huenchumil Jerez</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-7</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">María Ximena Orchard Rieiro</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-8</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Lorena Beatriz Valderrana Zenteno</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">L-9</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Verónica Rocamora Villena</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">David Alejandro Jofre Leiva</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-10</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Carla Cristina Avila Ramírez</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-11</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Carolina Guiomar Trejo Vidal</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-12</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Eduardo Hernan Roman Alvarez</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-13</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Rene Eduardo Jara Reyes</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Pedro Leonardo Reyes Garcia</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Ricardo Ramírez Vallejos</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-4</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Antoine Faure</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-5</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Edi Efraín Bámaca López</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-6</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Paula Patricia Huenchumil Jerez</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-7</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">María Ximena Orchard Rieiro</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-8</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Lorena Beatriz Valderrana Zenteno</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47349</td>
+<td align="left">Seminario De Título I</td>
+<td align="left">T-9</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Verónica Rocamora Villena</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47350</td>
+<td align="left">Especializacion Ii</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Nicolas David Del Valle Orellana</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47350</td>
+<td align="left">Especializacion Ii</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="left">Maria Soledad Pinto Nuñez</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47350</td>
+<td align="left">Especializacion Ii</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">32</td>
+<td align="left">Mariela Edith Llancaqueo Jimenez</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47350</td>
+<td align="left">Especializacion Ii</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Nicolas David Del Valle Orellana</td>
+</tr>
+<tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">47350</td>
+<td align="left">Especializacion Ii</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="left">Maria Soledad Pinto Nuñez</td>
+</tr>
+<tr class="even">
+<td align="left">NOVENO</td>
+<td align="left">47350</td>
+<td align="left">Especializacion Ii</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">32</td>
+<td align="left">Mariela Edith Llancaqueo Jimenez</td>
+</tr>
+<tr class="odd">
+<td align="left">DECIMO</td>
+<td align="left">47348</td>
+<td align="left">Práctica Profesional</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">María Soledad Urquieta Fuentes</td>
+</tr>
+<tr class="even">
+<td align="left">DECIMO</td>
+<td align="left">47348</td>
+<td align="left">Práctica Profesional</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">Amanda Marton Ramaciotti</td>
+</tr>
+<tr class="odd">
+<td align="left">DECIMO</td>
+<td align="left">47351</td>
+<td align="left">Seminario De Título Ii</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Paula Patricia Huenchumil Jerez</td>
+</tr>
+<tr class="even">
+<td align="left">DECIMO</td>
+<td align="left">47351</td>
+<td align="left">Seminario De Título Ii</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Paula Patricia Huenchumil Jerez</td>
+</tr>
+</tbody>
+</table>
+<p>La carrera registra <strong>142 secciones</strong> en <strong>17
+cursos</strong> con <strong>404 horas pedagógicas</strong>, dictadas por
+<strong>75 profesores</strong> (incluye 38 seccion(es) sello).</p>
+<h3 class="carr-titulo">
+Periodismo
+</h3>
+<p class="cod-programa">
+Código de programa: 5112
+</p>
+<table>
+<colgroup>
+<col width="7%" />
+<col width="5%" />
+<col width="42%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">NIVEL</th>
+<th align="left">COD</th>
+<th align="left">CURSO</th>
+<th align="left">SEC</th>
+<th align="right">H</th>
+<th align="right">CUPO</th>
+<th align="left">PROFESOR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47400</td>
+<td align="left">Reporteo Y Ética Periodística</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Alejandro Rene Guillier Alvarez</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47400</td>
+<td align="left">Reporteo Y Ética Periodística</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Mauricio Iván Weibel Barahona</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47400</td>
+<td align="left">Reporteo Y Ética Periodística</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Clara Isabel Paulina Pérez Gutiérrez</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47400</td>
+<td align="left">Reporteo Y Ética Periodística</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Alejandro Rene Guillier Alvarez</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47400</td>
+<td align="left">Reporteo Y Ética Periodística</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Mauricio Iván Weibel Barahona</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47400</td>
+<td align="left">Reporteo Y Ética Periodística</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Clara Isabel Paulina Pérez Gutiérrez</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47401</td>
+<td align="left">Taller Transmedial De Reporteo</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Armando Hernán Jaque Avila</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47401</td>
+<td align="left">Taller Transmedial De Reporteo</td>
+<td align="left">E-2</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Cristóbal Leonardo Chávez Bravo</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47401</td>
+<td align="left">Taller Transmedial De Reporteo</td>
+<td align="left">E-3</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Natalia Figueroa Sepúlveda</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47401</td>
+<td align="left">Taller Transmedial De Reporteo</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Armando Hernán Jaque Avila</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47401</td>
+<td align="left">Taller Transmedial De Reporteo</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Cristóbal Leonardo Chávez Bravo</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47401</td>
+<td align="left">Taller Transmedial De Reporteo</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Natalia Figueroa Sepúlveda</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47401</td>
+<td align="left">Taller Transmedial De Reporteo</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Oscar Nicolas Alfonso Egnen Del Pino</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47401</td>
+<td align="left">Taller Transmedial De Reporteo</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Oscar Nicolas Alfonso Egnen Del Pino</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47401</td>
+<td align="left">Taller Transmedial De Reporteo</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Oscar Nicolas Alfonso Egnen Del Pino</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47402</td>
+<td align="left">Curso Sello I: Cultura Y Alfabetización Digital</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Patricia Angélica Peña Miranda</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47402</td>
+<td align="left">Curso Sello I: Cultura Y Alfabetización Digital</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Sebastián Ricardo Ansaldo Marín</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47402</td>
+<td align="left">Curso Sello I: Cultura Y Alfabetización Digital</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Alejandra Lorena Phillippi Miranda</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47402</td>
+<td align="left">Curso Sello I: Cultura Y Alfabetización Digital</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Patricia Angélica Peña Miranda</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47402</td>
+<td align="left">Curso Sello I: Cultura Y Alfabetización Digital</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Sebastián Ricardo Ansaldo Marín</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47402</td>
+<td align="left">Curso Sello I: Cultura Y Alfabetización Digital</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Alejandra Lorena Phillippi Miranda</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47403</td>
+<td align="left">Introducción A Las Humanidades Y Ciencias Sociales</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">María Rocio Casas Bulnes</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47403</td>
+<td align="left">Introducción A Las Humanidades Y Ciencias Sociales</td>
+<td align="left">E-2</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Lorena Denisse Etcheberry Rojas</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47403</td>
+<td align="left">Introducción A Las Humanidades Y Ciencias Sociales</td>
+<td align="left">E-3</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Lorena Denisse Etcheberry Rojas</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47403</td>
+<td align="left">Introducción A Las Humanidades Y Ciencias Sociales</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">María Rocio Casas Bulnes</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47403</td>
+<td align="left">Introducción A Las Humanidades Y Ciencias Sociales</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Lorena Denisse Etcheberry Rojas</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47403</td>
+<td align="left">Introducción A Las Humanidades Y Ciencias Sociales</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Lorena Denisse Etcheberry Rojas</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47404</td>
+<td align="left">Filosofía</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">25</td>
+<td align="left">Héctor Mauricio Cataldo González</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47404</td>
+<td align="left">Filosofía</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">25</td>
+<td align="left">Héctor Mauricio Cataldo González</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47404</td>
+<td align="left">Filosofía</td>
+<td align="left">T-3</td>
+<td align="right">4</td>
+<td align="right">25</td>
+<td align="left">Verónica Elizabeth González Pereira</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47405</td>
+<td align="left">Epistemología De La Investigación En Comunicación</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">25</td>
+<td align="left">Verónica Rocamora Villena</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47405</td>
+<td align="left">Epistemología De La Investigación En Comunicación</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">25</td>
+<td align="left">Verónica Elizabeth González Pereira</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47405</td>
+<td align="left">Epistemología De La Investigación En Comunicación</td>
+<td align="left">T-3</td>
+<td align="right">4</td>
+<td align="right">25</td>
+<td align="left">Verónica Elizabeth González Pereira</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47406</td>
+<td align="left">Inglés I</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Paloma Estefania Morales Gutierrez</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47406</td>
+<td align="left">Inglés I</td>
+<td align="left">E-2</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Alvaro Garcia Vargas</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47406</td>
+<td align="left">Inglés I</td>
+<td align="left">E-3</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Paloma Estefania Morales Gutierrez</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47406</td>
+<td align="left">Inglés I</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Paloma Estefania Morales Gutierrez</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47406</td>
+<td align="left">Inglés I</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">25</td>
+<td align="left">Paloma Estefania Morales Gutierrez</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47415</td>
+<td align="left">Entrevistas</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Jose Miguel Infante Sazo</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47415</td>
+<td align="left">Entrevistas</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Leslie Nataly Ayala Castro</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47415</td>
+<td align="left">Entrevistas</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Amanda Marton Ramaciotti</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47415</td>
+<td align="left">Entrevistas</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Jose Miguel Infante Sazo</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47415</td>
+<td align="left">Entrevistas</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Leslie Nataly Ayala Castro</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47415</td>
+<td align="left">Entrevistas</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Amanda Marton Ramaciotti</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47416</td>
+<td align="left">Taller Transmedial De Producción Noticiosa</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Sin Profesor</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47416</td>
+<td align="left">Taller Transmedial De Producción Noticiosa</td>
+<td align="left">E-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Sin Profesor</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47416</td>
+<td align="left">Taller Transmedial De Producción Noticiosa</td>
+<td align="left">E-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Sin Profesor</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47416</td>
+<td align="left">Taller Transmedial De Producción Noticiosa</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Edgard Alejandro Garrido Carrera</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47416</td>
+<td align="left">Taller Transmedial De Producción Noticiosa</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Edgard Alejandro Garrido Carrera</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47416</td>
+<td align="left">Taller Transmedial De Producción Noticiosa</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Edgard Alejandro Garrido Carrera</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47417</td>
+<td align="left">Psicología Social Y Comunicación</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Rosemberg Franco Orrego</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47417</td>
+<td align="left">Psicología Social Y Comunicación</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Ricardo Ramírez Vallejos</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47417</td>
+<td align="left">Psicología Social Y Comunicación</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Cesar Rodrigo Pacheco Silva</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47417</td>
+<td align="left">Psicología Social Y Comunicación</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Rosemberg Franco Orrego</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47417</td>
+<td align="left">Psicología Social Y Comunicación</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Ricardo Ramírez Vallejos</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47417</td>
+<td align="left">Psicología Social Y Comunicación</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Cesar Rodrigo Pacheco Silva</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47418</td>
+<td align="left">Historia De Las Comunicaciones Ii</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Carla Andrea Rivera Aravena</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47418</td>
+<td align="left">Historia De Las Comunicaciones Ii</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Lorena Beatriz Valderrana Zenteno</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47418</td>
+<td align="left">Historia De Las Comunicaciones Ii</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Carla Andrea Rivera Aravena</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47418</td>
+<td align="left">Historia De Las Comunicaciones Ii</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Carla Andrea Rivera Aravena</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47418</td>
+<td align="left">Historia De Las Comunicaciones Ii</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Lorena Beatriz Valderrana Zenteno</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47418</td>
+<td align="left">Historia De Las Comunicaciones Ii</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Carla Andrea Rivera Aravena</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47419</td>
+<td align="left">Introducción Al Estudio De La Comunicación</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">Juan Pablo Sánchez Sepúlveda</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47419</td>
+<td align="left">Introducción Al Estudio De La Comunicación</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">David Alejandro Jofre Leiva</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47419</td>
+<td align="left">Introducción Al Estudio De La Comunicación</td>
+<td align="left">T-3</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="left">Loreto De Los Angeles Montero Munoz</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47420</td>
+<td align="left">Estudios De Semiología Y Narrativas</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Rubén Ignacio Dittus Benavente</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47420</td>
+<td align="left">Estudios De Semiología Y Narrativas</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Carlos Joaquín Ossa Swears</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47420</td>
+<td align="left">Estudios De Semiología Y Narrativas</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Eduardo Hernan Roman Alvarez</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47420</td>
+<td align="left">Estudios De Semiología Y Narrativas</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Rubén Ignacio Dittus Benavente</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47420</td>
+<td align="left">Estudios De Semiología Y Narrativas</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Eduardo Hernan Roman Alvarez</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47421</td>
+<td align="left">Metodología De La Investigación En Comunicación Ii</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Edi Efraín Bámaca López</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47421</td>
+<td align="left">Metodología De La Investigación En Comunicación Ii</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Debora Magdalena Jana Aguirre</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47421</td>
+<td align="left">Metodología De La Investigación En Comunicación Ii</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Alejandra Carola Ruiz Tarrés</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47421</td>
+<td align="left">Metodología De La Investigación En Comunicación Ii</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Edi Efraín Bámaca López</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47421</td>
+<td align="left">Metodología De La Investigación En Comunicación Ii</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Debora Magdalena Jana Aguirre</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47421</td>
+<td align="left">Metodología De La Investigación En Comunicación Ii</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">18</td>
+<td align="left">Alejandra Carola Ruiz Tarrés</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47422</td>
+<td align="left">Inglés Iii</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Paloma Estefania Morales Gutierrez</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47422</td>
+<td align="left">Inglés Iii</td>
+<td align="left">E-2</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Carolina Herrera Urrutia</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47422</td>
+<td align="left">Inglés Iii</td>
+<td align="left">E-3</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Paloma Estefania Morales Gutierrez</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47422</td>
+<td align="left">Inglés Iii</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Paloma Estefania Morales Gutierrez</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47422</td>
+<td align="left">Inglés Iii</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Carolina Herrera Urrutia</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47422</td>
+<td align="left">Inglés Iii</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Paloma Estefania Morales Gutierrez</td>
+</tr>
+</tbody>
+</table>
+<p>La carrera registra <strong>82 secciones</strong> en <strong>15
+cursos</strong> con <strong>182 horas pedagógicas</strong>, dictadas por
+<strong>37 profesores</strong>.</p>
+<h3 class="carr-titulo">
+Periodismo Vespertino
+</h3>
+<p class="cod-programa">
+Código de programa: 5108
+</p>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="6%" />
+<col width="35%" />
+<col width="4%" />
+<col width="4%" />
+<col width="5%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">NIVEL</th>
+<th align="left">COD</th>
+<th align="left">CURSO</th>
+<th align="left">SEC</th>
+<th align="right">H</th>
+<th align="right">CUPO</th>
+<th align="left">PROFESOR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47250</td>
+<td align="left">Fundamentos Del Periodismo</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Amanda Marton Ramaciotti</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47250</td>
+<td align="left">Fundamentos Del Periodismo</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Amanda Marton Ramaciotti</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47251</td>
+<td align="left">Teorías Del Lenguaje</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">20</td>
+<td align="left">Tuillang Arnoldo Yuing Alfaro</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47252</td>
+<td align="left">Fundamentos De La Comunicación</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">20</td>
+<td align="left">Juan Pablo Sánchez Sepúlveda</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47253</td>
+<td align="left">Periodismo Con Perspectiva Feminista</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Natalia Figueroa Sepúlveda</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47253</td>
+<td align="left">Periodismo Con Perspectiva Feminista</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Natalia Figueroa Sepúlveda</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">47254</td>
+<td align="left">Inglés Básico</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Ernaldo Menares Velasco</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">47254</td>
+<td align="left">Inglés Básico</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Ernaldo Menares Velasco</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47260</td>
+<td align="left">Imagen Y Diseño</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Edgard Alejandro Garrido Carrera</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47260</td>
+<td align="left">Imagen Y Diseño</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Edgard Alejandro Garrido Carrera</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47261</td>
+<td align="left">Cultura Digital</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Diego Vicente Ortiz Fuentes</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47261</td>
+<td align="left">Cultura Digital</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Diego Vicente Ortiz Fuentes</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47262</td>
+<td align="left">Comunicación Y Organización</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Sergio Andres Cabezon Mellado</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47262</td>
+<td align="left">Comunicación Y Organización</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">Sergio Andres Cabezon Mellado</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47263</td>
+<td align="left">Inglés Especializado Ii</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Paloma Estefania Morales Gutierrez</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">47263</td>
+<td align="left">Inglés Especializado Ii</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Paloma Estefania Morales Gutierrez</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">47264</td>
+<td align="left">Fundamentos De La Investigación</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">Rene Eduardo Jara Reyes</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47270</td>
+<td align="left">Investigación Periodística</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Paula Patricia Huenchumil Jerez</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47270</td>
+<td align="left">Investigación Periodística</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">Paula Patricia Huenchumil Jerez</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47271</td>
+<td align="left">Periodísmo Radial</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Claudia Andrea Cayo Gómez</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47271</td>
+<td align="left">Periodísmo Radial</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Claudia Andrea Cayo Gómez</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47272</td>
+<td align="left">Cultura Audiovisual</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Carolina Guiomar Trejo Vidal</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47272</td>
+<td align="left">Cultura Audiovisual</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">Carolina Guiomar Trejo Vidal</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47273</td>
+<td align="left">Especialización Ii</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">Luz Villarroel Marquez</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47273</td>
+<td align="left">Especialización Ii</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">Luz Villarroel Marquez</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">47274</td>
+<td align="left">Inglés Especializado Iii</td>
+<td align="left">E-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">William Augusto Godoy De La Rosa</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">47274</td>
+<td align="left">Inglés Especializado Iii</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">William Augusto Godoy De La Rosa</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47280</td>
+<td align="left">Área Reportaje</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">9 ⚠</td>
+<td align="left">Amanda Marton Ramaciotti</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47280</td>
+<td align="left">Área Organizacional</td>
+<td align="left">L-2</td>
+<td align="right">2</td>
+<td align="right">9 ⚠</td>
+<td align="left">Carla Cristina Avila Ramírez</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47280</td>
+<td align="left">Área Audiovisual</td>
+<td align="left">L-3</td>
+<td align="right">2</td>
+<td align="right">9 ⚠</td>
+<td align="left">Carolina Guiomar Trejo Vidal</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47280</td>
+<td align="left">Área Reportaje</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">9 ⚠</td>
+<td align="left">Amanda Marton Ramaciotti</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47280</td>
+<td align="left">Área Organizacional</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">9 ⚠</td>
+<td align="left">Carla Cristina Avila Ramírez</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47280</td>
+<td align="left">Área Audiovisual</td>
+<td align="left">T-3</td>
+<td align="right">4</td>
+<td align="right">9 ⚠</td>
+<td align="left">Carolina Guiomar Trejo Vidal</td>
+</tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47281</td>
+<td align="left">Práctica Profesional</td>
+<td align="left">L-1</td>
+<td align="right">4</td>
+<td align="right">10</td>
+<td align="left">María Soledad Urquieta Fuentes</td>
+</tr>
+</tbody>
+</table>
+<p>La carrera registra <strong>34 secciones</strong> en <strong>17
+cursos</strong> con <strong>90 horas pedagógicas</strong>, dictadas por
+<strong>17 profesores</strong>.</p>
+<h3 class="carr-titulo">
+Magíster en Ciencias de la Comunicación
+</h3>
+<p class="cod-programa">
+Código de programa: 9564
+</p>
+<table>
+<colgroup>
+<col width="4%" />
+<col width="55%" />
+<col width="5%" />
+<col width="4%" />
+<col width="4%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">COD</th>
+<th align="left">CURSO</th>
+<th align="left">SECCION</th>
+<th align="right">HORAS</th>
+<th align="right">CUPOS</th>
+<th align="left">PROFESOR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">47941</td>
+<td align="left">Comunicación Pública I</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">12</td>
+<td align="left">Juan Pablo Arancibia Carrizo.</td>
+</tr>
+<tr class="even">
+<td align="left">47942</td>
+<td align="left">Teorías De La Comunicación De Las Ciencias Y La
+Tecnología</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="left">Lorena Beatriz Valderrana Zenteno</td>
+</tr>
+<tr class="odd">
+<td align="left">47943</td>
+<td align="left">Epistemología Y Problemas De La Investigación En
+Comunicación</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="left">María Ximena Orchard Rieiro</td>
+</tr>
+<tr class="even">
+<td align="left">47944</td>
+<td align="left">Electivo I “Acción Colectiva Y Movimientos Sociales En
+Transformación Comunicativa”</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="left">Gloria Baigorrotegui Baigorrotegui.</td>
+</tr>
+<tr class="odd">
+<td align="left">47949</td>
+<td align="left">Electivo Iii “Estrategias De Análisis Cualitativo”</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">8 ⚠</td>
+<td align="left">María Ximena Orchard Rieiro</td>
+</tr>
+<tr class="even">
+<td align="left">47950</td>
+<td align="left">Taller De Escritura Académica Y Ética De La
+Investigación</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">8 ⚠</td>
+<td align="left">Rubén Ignacio Dittus Benavente.</td>
+</tr>
+<tr class="odd">
+<td align="left">47951</td>
+<td align="left">Proyecto De Graduación (Seminario)</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">1 ⚠</td>
+<td align="left">Lorena Beatriz Valderrana Zenteno</td>
+</tr>
+<tr class="even">
+<td align="left">47951</td>
+<td align="left">Proyecto De Graduación (Seminario)</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">1 ⚠</td>
+<td align="left">Verónica Rocamora Villena</td>
+</tr>
+<tr class="odd">
+<td align="left">47951</td>
+<td align="left">Proyecto De Graduación (Seminario)</td>
+<td align="left">T-3</td>
+<td align="right">4</td>
+<td align="right">1 ⚠</td>
+<td align="left">María Ximena Orchard Rieiro</td>
+</tr>
+<tr class="even">
+<td align="left">47951</td>
+<td align="left">Proyecto De Graduación (Seminario)</td>
+<td align="left">T-4</td>
+<td align="right">4</td>
+<td align="right">1 ⚠</td>
+<td align="left">Antoine Faure</td>
+</tr>
+<tr class="odd">
+<td align="left">47951</td>
+<td align="left">Proyecto De Graduación (Seminario)</td>
+<td align="left">T-5</td>
+<td align="right">4</td>
+<td align="right">1 ⚠</td>
+<td align="left">Ricardo Ramírez Vallejos.</td>
+</tr>
+<tr class="even">
+<td align="left">47951</td>
+<td align="left">Proyecto De Graduación (Seminario)</td>
+<td align="left">T-6</td>
+<td align="right">4</td>
+<td align="right">1 ⚠</td>
+<td align="left">Antoine Faure</td>
+</tr>
+<tr class="odd">
+<td align="left">47951</td>
+<td align="left">Proyecto De Graduación (Seminario)</td>
+<td align="left">T-6</td>
+<td align="right">4</td>
+<td align="right">1 ⚠</td>
+<td align="left">Antoine Faure</td>
+</tr>
+<tr class="even">
+<td align="left">47952</td>
+<td align="left">Trabajo De Graduación (Tesis)</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">1 ⚠</td>
+<td align="left">Edi Efraín Bámaca López</td>
+</tr>
+</tbody>
+</table>
+<p>La carrera registra <strong>14 secciones</strong> en <strong>8
+cursos</strong> con <strong>46 horas pedagógicas</strong>, dictadas por
+<strong>9 profesores</strong>.</p>
+<blockquote>
+<p>La columna <strong>INSC</strong> se completará una vez que los
+estudiantes inscriban sus asignaturas.</p>
+</blockquote>
+<hr />
+<h2 id="consideraciones">Consideraciones</h2>
+<p>Para la planeación docente se deben utilizar las orientaciones
+emitidas por la VRA.</p>
+<p>De acuerdo con la normativa, el promedio de docencia del conjunto del
+claustro debe ser de <strong>12 horas pedagógicas</strong>. La unidad
+registra un promedio de <strong>14 HP</strong> en Primer semestre
+2026.</p>
+<p>El promedio considera únicamente a los académicos del claustro
+(<code>CARGO = ACADEMICO</code>) y excluye a las autoridades. Los cursos
+sello se contabilizan una sola vez por docente.</p>
+</main>
+<div class="pie">Base elaborada a partir de los registros de planeación docente. Código elaborado por Pablo Valenzuela con apoyo de Claude de Anthropic · Primer semestre 2026</div>
+</body>
+</html>
