@@ -50,7 +50,15 @@ primera_mayus <- function(x) vapply(x, primera_mayus_1, character(1), USE.NAMES 
 
 df_raw <- read_excel(params$archivo, sheet = 1) |>
   clean_names() |>
-  rename(unidad_dep = unidad, unidad_prof = unidad_profesor) |>
+  rename(
+    unidad_dep  = unidad,
+    unidad_prof = unidad_profesor,
+    curso       = asignatura,
+    cod         = codcur,
+    pre         = prepost,
+    cupo        = cupos,
+    insc        = inscritos
+  ) |>
   mutate(
     profesor    = str_to_title(str_squish(profesor)),
     curso       = str_to_title(str_squish(curso)),

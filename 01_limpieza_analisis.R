@@ -59,7 +59,12 @@ df_raw <- read_excel(ARCHIVO, sheet = 1) |>
     unidad_dep  = unidad,
     unidad_prof = unidad_profesor,
     horas_ped   = horas_ped,
-    eq_cron     = eq_cron
+    eq_cron     = eq_cron,
+    curso       = asignatura,
+    cod         = codcur,
+    pre         = prepost,
+    cupo        = cupos,
+    insc        = inscritos
   ) |>
   mutate(
     # ── Texto ─────────────────────────────────────────────────────────────────
