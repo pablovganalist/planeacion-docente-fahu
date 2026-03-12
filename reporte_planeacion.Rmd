@@ -126,7 +126,16 @@ nombre_largo_upper <- df_raw |>
 
 if (length(nombre_largo_upper) == 0) nombre_largo_upper <- UNIDAD_PROF
 
-nombre_largo <- titulo_esp(nombre_largo_upper)   # solo para el encabezado
+nombre_largo <- switch(UNIDAD_PROF,
+  "EDUCACIÓN"                = "Departamento de Educación",
+  "ESTUDIOS POLÍTICOS"       = "Departamento de Estudios Políticos",
+  "FILOSOFÍA"                = "Departamento de Filosofía",
+  "HISTORIA"                 = "Departamento de Historia",
+  "LINGÜÍSTICA Y LITERATURA" = "Departamento de Lingüística y Literatura",
+  "PERIODISMO"               = "Escuela de Periodismo",
+  "PSICOLOGÍA"               = "Escuela de Psicología",
+  titulo_esp(nombre_largo_upper)
+)
 
 # =============================================================================
 # SUBCONJUNTOS CLAVE
