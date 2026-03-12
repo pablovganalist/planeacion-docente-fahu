@@ -186,7 +186,25 @@ p.cod-programa {{
   font-family: "Courier New", monospace;
   letter-spacing: 0.02em;
 }}
-
+/* ── Botones header ──────────────────────────────────────── */
+.botones-header {{
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}}
+.btn-comp {{
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: {C_BLUE};
+  color: white !important;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}}
+.btn-comp:hover {{ background: #3a7ab8; }}
 /* ── Boton descargar PDF ─────────────────────────────────── */
 .btn-pdf {{
   display: inline-block;
@@ -249,27 +267,20 @@ md_a_html <- function(ruta_md, ruta_html, css) {
 
   boton_pdf <- '<button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button>'
 
+   slug_unidad <- str_remove(nombre, "^[0-9]+_")
+  boton_comp  <- paste0(
+    '<a href=\"comparativos/', slug_unidad, '.html\" class=\"btn-comp\">',
+    '&#128202; Informe comparado 2024&#8211;2026</a>'
+  )
+
   header_html <- paste0(
     '<header>\n',
     '<p class="facultad">', INSTITUCION, '</p>\n',
     '<h1>', titulo, '</h1>\n',
     '<p class="periodo">', PERIODO, '</p>\n',
-    boton_pdf, '\n',
+    '<div class="botones-header">', boton_comp, ' ', boton_pdf, '</div>\n',
     '</header>'
   )
-
-  html_final <- paste0('<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>', titulo, ' — ', PERIODO, '</title>
-  <style>
-', css, '
-  </style>
-</head>
-<body>
-', header_html, '
 <main>
 ', html_body, '
 </main>
