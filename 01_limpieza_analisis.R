@@ -37,7 +37,7 @@ library(glue)
 # ── Configuracion ─────────────────────────────────────────────────────────────
 # setwd: no necesario en CI (wd = raíz del repo)
 
-ARCHIVO        <- "BASE12026.xlsx"
+ARCHIVO        <- "BASE_SEMESTRE.xlsx"
 PERIODO        <- "Primer semestre 2026"
 CARPETA_SALIDA <- "output"
 
