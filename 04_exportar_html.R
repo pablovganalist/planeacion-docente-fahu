@@ -273,14 +273,18 @@ md_a_html <- function(ruta_md, ruta_html, css) {
     '&#128202; Informe comparado 2024&#8211;2026</a>'
   )
 
-  header_html <- paste0(
-    '<header>\n',
-    '<p class="facultad">', INSTITUCION, '</p>\n',
-    '<h1>', titulo, '</h1>\n',
-    '<p class="periodo">', PERIODO, '</p>\n',
-    '<div class="botones-header">', boton_comp, ' ', boton_pdf, '</div>\n',
-    '</header>'
-  )
+  html_final <- paste0('<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>', titulo, ' — ', PERIODO, '</title>
+  <style>
+', css, '
+  </style>
+</head>
+<body>
+', header_html, '
 <main>
 ', html_body, '
 </main>
@@ -290,6 +294,7 @@ md_a_html <- function(ruta_md, ruta_html, css) {
 
   writeLines(html_final, ruta_html, useBytes = TRUE)
 }
+
 
 # =============================================================================
 # 3. CONVERTIR TODOS LOS .md
