@@ -4,7 +4,7 @@ output:
   md_document:
     variant: gfm
 params:
-  archivo:  "BASE12026.xlsx"
+  archivo:  "BASE_SEMESTRE.xlsx"
   unidad:   "HISTORIA"
   periodo:  "Primer semestre 2026"
 ---

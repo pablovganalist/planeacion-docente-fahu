@@ -14,10 +14,10 @@ library(tidyverse)
 library(glue)
 
 # ── Configuracion ─────────────────────────────────────────────────────────────
-# setwd: no necesario en CI (wd = raíz del repo)
+setwd("G:/tu/carpeta")     # <- CAMBIA ESTO
 
 CARPETA_MD   <- "informes_md"
-CARPETA_HTML <- "docs"
+CARPETA_HTML <- "informes_html"
 PERIODO      <- "Primer semestre 2026"
 INSTITUCION  <- "Facultad de Humanidades"
 
@@ -186,7 +186,8 @@ p.cod-programa {{
   font-family: "Courier New", monospace;
   letter-spacing: 0.02em;
 }}
-/* ── Botones header ──────────────────────────────────────── */
+
+/* ── Boton descargar PDF ─────────────────────────────────── */
 .botones-header {{
   display: flex;
   gap: 0.6rem;
@@ -197,15 +198,13 @@ p.cod-programa {{
   display: inline-block;
   padding: 0.38rem 0.9rem;
   background: {C_BLUE};
-  color: white !important;
+  color: white;
   border-radius: 4px;
   font-size: 0.78rem;
   font-weight: 600;
   text-decoration: none;
-  letter-spacing: 0.03em;
 }}
 .btn-comp:hover {{ background: #3a7ab8; }}
-/* ── Boton descargar PDF ─────────────────────────────────── */
 .btn-pdf {{
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -266,11 +265,14 @@ md_a_html <- function(ruta_md, ruta_html, css) {
     str_replace_all('<h1[^>]*>.*?</h1>', '')
 
   boton_pdf <- '<button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button>'
-  slug_unidad <- str_remove(tools::file_path_sans_ext(basename(ruta_html)), "^[0-9]+_")
+
+  # Derivar slug desde nombre de archivo (ej: "02_historia" -> "historia")
+  slug_unidad <- str_remove(nombre, "^[0-9]+_")
   boton_comp  <- paste0(
     '<a href="comparativos/', slug_unidad, '.html" class="btn-comp">',
-    '&#128202; Informe comparado 2024&#8211;2026</a>'
+    '📊 Informe comparado 2024–2026</a>'
   )
+
   header_html <- paste0(
     '<header>\n',
     '<p class="facultad">', INSTITUCION, '</p>\n',
@@ -301,7 +303,6 @@ md_a_html <- function(ruta_md, ruta_html, css) {
 
   writeLines(html_final, ruta_html, useBytes = TRUE)
 }
-
 
 # =============================================================================
 # 3. CONVERTIR TODOS LOS .md
