@@ -1,6 +1,6 @@
 # Planeación docente — Facultad de Humanidades USACH
 
-Informes automáticos de planeación docente generados a partir de la base de datos semestral.
+Informes automáticos  de planeación docente generados a partir de la base de datos semestral.
 
 ## Cómo actualizar los informes
 
