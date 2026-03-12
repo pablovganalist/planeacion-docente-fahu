@@ -45,7 +45,7 @@ jobs:
           install.packages(c(
             "rmarkdown", "knitr",
             "tidyverse", "readxl", "janitor",
-            "glue", "openxlsx"
+            "glue", "openxlsx", "writexl"
           ), repos = "https://cloud.r-project.org")
         shell: Rscript {0}
 
