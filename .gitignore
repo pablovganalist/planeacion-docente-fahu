@@ -1,0 +1,15 @@
+# Carpetas generadas — se regeneran en cada CI
+informes_md/
+output/
+
+# R temporal
+*.Rhistory
+.Rdata
+.Rproj.user/
+*.Rproj
+
+# macOS
+.DS_Store
+
+# Excel temporales
+~$*.xlsx

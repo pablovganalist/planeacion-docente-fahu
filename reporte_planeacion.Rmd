@@ -1,0 +1,437 @@
+---
+title: "Informe de horas de docencia"
+output:
+  md_document:
+    variant: gfm
+params:
+  archivo:  "BASE12026.xlsx"
+  unidad:   "HISTORIA"
+  periodo:  "Primer semestre 2026"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+library(tidyverse)
+library(readxl)
+library(janitor)
+library(knitr)
+library(glue)
+
+# titulo_esp: capitaliza solo 1ª palabra + sustantivos; preposiciones en minúscula
+# Vectorizada para usar en mutate()
+titulo_esp_1 <- function(x) {
+  menores <- c("de","del","en","y","e","con","para","la","el","los","las",
+               "un","una","por","sin","a","o","u","al","sobre","bajo","ante",
+               "desde","hasta","entre","según","hacia","tras")
+  palabras <- str_split(str_to_lower(str_squish(x)), "\\s+")[[1]]
+  resultado <- purrr::imap_chr(palabras, function(w, i) {
+    if (i == 1 || !(w %in% menores))
+      paste0(toupper(substr(w, 1, 1)), substr(w, 2, nchar(w)))
+    else w
+  })
+  paste(resultado, collapse = " ")
+}
+titulo_esp <- function(x) vapply(x, titulo_esp_1, character(1), USE.NAMES = FALSE)
+
+# primera_mayus: solo la primera letra del string en mayúscula (norma española
+# para nombres de asignaturas: solo primera palabra va con mayúscula)
+primera_mayus_1 <- function(x) {
+  x <- str_squish(str_to_lower(x))
+  if (nchar(x) == 0) return(x)
+  paste0(toupper(substr(x, 1, 1)), substr(x, 2, nchar(x)))
+}
+primera_mayus <- function(x) vapply(x, primera_mayus_1, character(1), USE.NAMES = FALSE)
+
+# =============================================================================
+# CARGA Y LIMPIEZA
+# params$unidad es el valor CORTO de UNIDAD PROFESOR, ej: "HISTORIA"
+# =============================================================================
+
+df_raw <- read_excel(params$archivo, sheet = 1) |>
+  clean_names() |>
+  rename(unidad_dep = unidad, unidad_prof = unidad_profesor) |>
+  mutate(
+    profesor    = str_to_title(str_squish(profesor)),
+    curso       = str_to_title(str_squish(curso)),
+    carrera     = titulo_esp(str_squish(carrera)),
+    unidad_dep  = str_to_upper(str_squish(unidad_dep)),
+    unidad_prof = str_to_upper(str_squish(unidad_prof)),
+    cargo       = str_to_upper(str_squish(cargo)),
+    pre         = str_to_title(str_squish(pre)),
+    sec         = str_to_upper(str_squish(sec)),
+    tipo_contrato = case_when(
+      contrato == "JORNADA"  ~ "Jornada",
+      contrato == "POR HORA" ~ "Por Hora",
+      contrato == "SP"       ~ "Sin Planta",
+      TRUE                   ~ "Sin Informacion"
+    ),
+    tipo_cargo = case_when(
+      cargo == "ACADEMICO"                   ~ "Academico",
+      cargo == "ACADEMICO POR HORA DE CLASE" ~ "Academico Por Hora",
+      cargo == "SIN PROFESOR"                ~ "Sin profesor",
+      TRUE                                   ~ "Autoridad"
+    ),
+    en_claustro = cargo == "ACADEMICO",
+    es_sello    = str_starts(sec, "S"),
+    nivel_label = case_when(
+      nivel == 1  ~ "PRIMERO",  nivel == 2  ~ "SEGUNDO",
+      nivel == 3  ~ "TERCERO",  nivel == 4  ~ "CUARTO",
+      nivel == 5  ~ "QUINTO",   nivel == 6  ~ "SEXTO",
+      nivel == 7  ~ "SEPTIMO",  nivel == 8  ~ "OCTAVO",
+      nivel == 9  ~ "NOVENO",   nivel == 10 ~ "DECIMO",
+      TRUE ~ as.character(nivel)
+    ),
+    across(c(t, e, l, horas_ped, eq_cron, cupo),
+           ~ replace_na(as.numeric(.), 0)),
+    insc = as.numeric(insc)
+  ) |>
+  # DEDUP GLOBAL por PROFESOR:
+  #   S (sellos)  → duplicado si mismo PROFESOR + CURSO (nombre del curso)
+  #                 El mismo sello puede tener distintos códigos y sec numbers,
+  #                 pero no puede haber dos cursos con el mismo nombre.
+  #   T / E / L   → duplicado si mismo PROFESOR + SEC + COD
+  #                 El mismo número de sección puede aparecer en varias carreras
+  #                 del mismo curso (mismo COD). Distinto COD = sección diferente.
+  mutate(
+    # T/E/L: todas las filas cuentan (una seccion por carrera/programa)
+    # S:     dedup por PROFESOR + SEC — el mismo sello siempre suma 4h, una vez
+    seccion_duplicada = es_sello & duplicated(paste(profesor, sec)),
+    horas_prof = if_else(seccion_duplicada, 0L, horas_ped),
+    eq_prof    = if_else(seccion_duplicada, 0,  eq_cron)
+  )
+
+# ── Valor de unidad (exacto, en mayúsculas) ───────────────────────────────────
+# params$unidad es el valor corto de UNIDAD PROFESOR: "HISTORIA", "LINGÜÍSTICA"
+UNIDAD_PROF <- str_to_upper(str_squish(params$unidad))
+
+# ── Nombre largo del departamento (en MAYUSCULAS, como viene en los datos) ────
+# Se obtiene del valor más frecuente de UNIDAD donde dictan los profesores
+# de esta unidad_prof. Se guarda en mayúsculas para hacer joins exactos.
+# La versión título (str_to_title) solo se usa para mostrar en el encabezado.
+nombre_largo_upper <- df_raw |>
+  filter(unidad_prof == UNIDAD_PROF) |>
+  count(unidad_dep) |>
+  slice_max(n, n = 1) |>
+  pull(unidad_dep)   # ya viene en MAYUSCULAS desde el mutate()
+
+if (length(nombre_largo_upper) == 0) nombre_largo_upper <- UNIDAD_PROF
+
+nombre_largo <- titulo_esp(nombre_largo_upper)   # solo para el encabezado
+
+# =============================================================================
+# SUBCONJUNTOS CLAVE
+# =============================================================================
+
+# A) Todas las secciones donde el PROFESOR pertenece a esta unidad
+#    (incluye cursos de otras unidades que dicte ese profesor)
+#    → horas_prof ya tiene dedup global de sellos (una vez por PROFESOR+SEC)
+#    → se usa para el claustro y el promedio de horas del docente
+df_profs <- df_raw |>
+  filter(unidad_prof == UNIDAD_PROF)
+
+# B) Todas las secciones de los CURSOS que pertenecen a esta unidad
+#    (incluye profesores externos que vienen a dictar aquí)
+#    → para la tabla de planeación (sección 4) y el desglose A/B/C
+df_cursos <- df_raw |>
+  filter(unidad_dep == nombre_largo_upper) |>
+  # DEDUP LOCAL: dentro de esta unidad, cada sello cuenta UNA vez
+  # (el mismo sello puede aparecer en varias carreras de la misma unidad)
+  mutate(
+    seccion_dup_local = es_sello & duplicated(paste(profesor, sec)),
+    horas_unidad = if_else(seccion_dup_local, 0L, horas_ped),
+    eq_unidad    = if_else(seccion_dup_local, 0,  eq_cron)
+  )
+
+# Pregrado / postgrado de los CURSOS de la unidad (para desglose A/B/C)
+dc_pre  <- df_cursos |> filter(pre == "Pregrado")
+dc_post <- df_cursos |> filter(pre == "Postgrado")
+
+# =============================================================================
+# CALCULOS DE HORAS (desglose institucional A/B/C)
+# =============================================================================
+
+# h() usa horas_unidad: dedup LOCAL de sellos dentro de la unidad
+# (distinto de horas_prof que tiene dedup GLOBAL para calcular la carga del profesor)
+h <- function(data, ctrato = NULL) {
+  if (!is.null(ctrato)) data <- data |> filter(tipo_contrato == ctrato)
+  sum(data$horas_unidad, na.rm = TRUE)
+}
+
+# i  / v   Jornada propia: profesores de ESTA unidad con jornada
+#          que dictan en los cursos de la unidad
+#          → horas_unidad tiene dedup LOCAL de sellos dentro de esta unidad
+hj_pre  <- dc_pre  |>
+  filter(tipo_contrato == "Jornada", unidad_prof == UNIDAD_PROF) |>
+  summarise(h = sum(horas_unidad)) |> pull(h)
+
+hj_post <- dc_post |>
+  filter(tipo_contrato == "Jornada", unidad_prof == UNIDAD_PROF) |>
+  summarise(h = sum(horas_unidad)) |> pull(h)
+
+# ii / vi  Por hora (h() ya usa horas_unidad)
+hph_pre  <- h(dc_pre,  "Por Hora")
+hph_post <- h(dc_post, "Por Hora")
+
+# iii / vii Jornada externa: profesores de jornada de OTRA unidad
+#           que dictan en los cursos de ESTA unidad
+hext_pre <- dc_pre |>
+  filter(tipo_contrato == "Jornada",
+         unidad_prof   != UNIDAD_PROF,
+         !unidad_prof  %in% c("HORA DE CLASE","SIN PROFESOR")) |>
+  summarise(h = sum(horas_unidad)) |> pull(h)
+
+hext_post <- dc_post |>
+  filter(tipo_contrato == "Jornada",
+         unidad_prof   != UNIDAD_PROF,
+         !unidad_prof  %in% c("HORA DE CLASE","SIN PROFESOR")) |>
+  summarise(h = sum(horas_unidad)) |> pull(h)
+
+# iv / (sin postgrado) Sin profesor asignado
+hsp_pre  <- dc_pre  |> filter(cargo == "SIN PROFESOR") |>
+  summarise(h = sum(horas_unidad)) |> pull(h)
+hsp_post <- dc_post |> filter(cargo == "SIN PROFESOR") |>
+  summarise(h = sum(horas_unidad)) |> pull(h)
+
+# Totales
+tot_pre  <- hj_pre  + hph_pre  + hext_pre  + hsp_pre
+tot_post <- hj_post + hph_post + hext_post + hsp_post
+tot_gen  <- tot_pre + tot_post
+
+# Coberturas
+pct <- function(n, d) if (d > 0) round(n / d * 100) else 0
+
+pct_j_pre   <- pct(hj_pre,  tot_pre);  pct_ph_pre  <- pct(hph_pre,  tot_pre)
+pct_j_post  <- pct(hj_post, tot_post); pct_ph_post <- pct(hph_post, tot_post)
+pct_j_tot   <- pct(hj_pre  + hj_post,  tot_gen)
+pct_ph_tot  <- pct(hph_pre + hph_post, tot_gen)
+
+# =============================================================================
+# CLAUSTRO (solo ACADEMICO, agrupado por UNIDAD PROFESOR)
+# Incluye TODAS las horas del academico aunque dicte en otras unidades
+# =============================================================================
+
+# Tabla de academicos del claustro (solo ACADEMICO)
+claustro <- df_profs |>
+  filter(en_claustro) |>
+  group_by(profesor) |>
+  summarise(hp = sum(horas_prof), hc = sum(eq_prof), .groups = "drop") |>
+  arrange(profesor)
+
+# Autoridades (suman horas a la unidad pero NO entran al divisor del promedio)
+autoridades <- df_profs |>
+  filter(tipo_cargo == "Autoridad") |>
+  group_by(profesor, cargo) |>
+  summarise(hp = sum(horas_prof), hc = sum(eq_prof), .groups = "drop") |>
+  arrange(profesor)
+
+# PROMEDIO CORRECTO:
+#   Numerador   = horas de TODOS los jornada (academicos + autoridades)
+#   Denominador = numero de academicos del claustro unicamente
+#
+# Ejemplo: 10 profs x 4 HP = 40 HP totales, 1 es decano
+#   -> promedio = 40 / 9 = 4,4  (no 4,0)
+
+hp_total_jornada <- df_profs |>
+  filter(tipo_contrato == "Jornada") |>
+  summarise(hp = sum(horas_prof), hc = sum(eq_prof))
+
+n_claustro <- nrow(claustro)
+
+prom_hp <- if (n_claustro > 0) round(hp_total_jornada$hp / n_claustro, 1) else 0
+prom_hc <- if (n_claustro > 0) round(hp_total_jornada$hc / n_claustro, 1) else 0
+
+# =============================================================================
+# CARRERAS para sección 4 (cursos de la unidad, ordenados por pre y carrera)
+# =============================================================================
+
+# Iterar por CARRERA + PLAN — pregrado primero, luego postgrado
+carreras_list <- df_cursos |>
+  mutate(pre_orden = if_else(str_detect(str_to_upper(pre), "PREGRADO"), 1L, 2L)) |>
+  arrange(pre_orden, carrera, plan) |>
+  distinct(carrera, plan, pre_orden)
+
+tiene_insc <- any(!is.na(df_cursos$insc))
+```
+
+# `r nombre_largo`
+
+## 1. Horas planeadas de la unidad
+
+| | Descripción | Horas |
+|:---|:---|---:|
+| **A (i+ii+iii+iv)** | **Horas planeadas pregrado** | **`r tot_pre`** |
+| i | Horas profesores de jornada de la unidad | `r hj_pre` |
+| ii | Horas profesores por hora de clase | `r hph_pre` |
+| iii | Horas de profesores de jornada externos a la unidad | `r hext_pre` |
+| iv | Sin profesor asignado | `r hsp_pre` |
+| **B (v+vi+vii)** | **Horas planeadas postgrado** | **`r tot_post`** |
+| v | Horas profesores de jornada de la unidad | `r hj_post` |
+| vi | Horas profesores por hora de clase | `r hph_post` |
+| vii | Horas de profesores de jornada externos a la unidad | `r hext_post` |
+| **C (A+B)** | **Total horas planeadas unidad** | **`r tot_gen`** |
+
+| | Descripción | Horas |
+|:---|:---|---:|
+| D (i+v) | Horas profesores de jornada de la unidad | `r hj_pre + hj_post` |
+| E (ii+vi) | Horas profesores por hora de clase | `r hph_pre + hph_post` |
+| F (iii+vii) | Horas de profesores de jornada externos | `r hext_pre + hext_post` |
+| G | Sin profesor asignado | `r hsp_pre + hsp_post` |
+
+La unidad registra un total de **`r tot_gen` horas** de clases planeadas, divididas en `r tot_pre` horas en pregrado y `r tot_post` horas en postgrado. Los profesores de jornada de la unidad cubren el `r pct_j_tot`% del total, mientras que los profesores por hora cubren el `r pct_ph_tot`%.
+
+---
+
+## 2. Cobertura de horas por académicos según contratación
+
+| Descripción | % |
+|:---|---:|
+| % cobertura profesores por horas — pregrado | `r pct_ph_pre` |
+| % cobertura profesores por horas — postgrado | `r pct_ph_post` |
+| % cobertura profesores por horas — total | `r pct_ph_tot` |
+
+| Descripción | % |
+|:---|---:|
+| % cobertura profesores de jornada — pregrado | `r pct_j_pre` |
+| % cobertura profesores de jornada — postgrado | `r pct_j_post` |
+| % cobertura profesores de jornada — total | `r pct_j_tot` |
+
+En pregrado la cobertura de profesores de jornada es del `r pct_j_pre`%. En postgrado es de `r pct_j_post`%. En total, los profesores de jornada cubren el `r pct_j_tot`% del total de horas planeadas en la unidad.
+
+---
+
+## 3. Promedio de horas académicos de jornada (claustro)
+
+```{r tabla_claustro, results='asis'}
+if (nrow(claustro) > 0) {
+  bind_rows(
+    claustro |> rename(Profesor = profesor,
+                       `Horas pedagógicas¹`         = hp,
+                       `Horas cronológicas equiv.²` = hc),
+    tibble(Profesor                     = "**Promedio de docencia semestral**",
+           `Horas pedagógicas¹`         = prom_hp,
+           `Horas cronológicas equiv.²` = prom_hc)
+  ) |> kable(align = c("l","r","r")) |> print()
+} else {
+  cat("_No se registran académicos en el claustro de esta unidad._\n")
+}
+```
+
+```{r tabla_autoridades, results='asis'}
+if (nrow(autoridades) > 0) {
+  cat("\n**Horas de autoridades**\n\n")
+  autoridades |>
+    rename(Nombre = profesor, Cargo = cargo,
+           `Horas ped.` = hp, `EQ cron.` = hc) |>
+    kable(align = c("l","l","r","r")) |> print()
+  cat(paste0(
+    "\n> Las horas de los académicos con cargos en el gobierno superior de la ",
+    "universidad (Decano/a, Vicedecano/a, Director/a VIME) y de los directores ",
+    "de unidades académicas se incluyen en el total de horas de la unidad, ",
+    "pero estas autoridades **no forman parte del claustro** y no se consideran ",
+    "en el cálculo del promedio de docencia.\n\n"
+  ))
+}
+```
+
+En promedio los académicos del claustro realizan **`r prom_hp` horas pedagógicas** de docencia en `r params$periodo`.
+
+```{r alerta_promedio, results='asis'}
+if (prom_hp > 0 && prom_hp < 12) {
+  cat(glue(
+    "\n> Advertencia: El promedio ({prom_hp} HP) esta **por debajo** del ",
+    "estandar normativo de 12 horas pedagogicas.\n\n"))
+} else if (prom_hp >= 12) {
+  cat(glue(
+    "\n> El promedio ({prom_hp} HP) **cumple** el estandar normativo ",
+    "de 12 horas pedagogicas.\n\n"))
+}
+```
+
+> ¹ Incluye todas las secciones del académico, aunque correspondan a carreras de otras unidades. Los cursos sello se cuentan una sola vez por docente.
+>
+> ² Horas pedagógicas × 1,2.
+
+---
+
+## 4. Planeación docente
+
+```{r planeacion_carreras, results='asis'}
+for (i in seq_len(nrow(carreras_list))) {
+
+  carr <- carreras_list$carrera[i]
+  plan_cod <- carreras_list$plan[i]
+
+  df_carr <- df_cursos |>
+    filter(carrera == carr, plan == plan_cod) |>
+    arrange(nivel, cod, sec)
+
+  tipo <- df_carr |> pull(pre) |> first()
+
+  cat(paste0(
+    '\n\n<h3 class="carr-titulo">', carr, '</h3>\n',
+    '<p class="cod-programa">C\u00f3digo de programa: ', plan_cod, '</p>\n\n'
+  ))
+
+  # Marcar cupos < 10 con ⚠ en la columna de cupo
+  marcar_cupo <- function(x) if_else(x > 0 & x < 10, paste0(x, " ⚠"), as.character(x))
+
+  if (tipo == "Pregrado") {
+    tab <- df_carr |>
+      mutate(cupo_fmt = marcar_cupo(cupo)) |>
+      select(NIVEL = nivel_label, COD = cod, CURSO = curso,
+             SEC = sec, H = horas_ped, CUPO = cupo_fmt, PROFESOR = profesor)
+    aln <- c("l","l","l","l","r","r","l")
+  } else {
+    tab <- df_carr |>
+      mutate(cupo_fmt = marcar_cupo(cupo)) |>
+      select(COD = cod, CURSO = curso, SECCION = sec,
+             HORAS = horas_ped, CUPOS = cupo_fmt, PROFESOR = profesor)
+    aln <- c("l","l","l","r","r","l")
+  }
+
+  if (tiene_insc) {
+    tab <- bind_cols(tab, INSC = df_carr$insc)
+    aln <- c(aln, "r")
+  }
+
+  print(kable(tab, align = aln))
+  cat("\n")
+
+  n_sec   <- nrow(df_carr)
+  n_cur   <- n_distinct(df_carr$cod)
+  n_prof  <- n_distinct(df_carr$profesor)
+  h_tot   <- sum(df_carr$horas_ped)
+  n_sello <- sum(df_carr$es_sello & !df_carr$seccion_duplicada)
+
+  cat(paste0(
+    "La carrera registra **", n_sec, " secciones** en **", n_cur, " cursos** ",
+    "con **", h_tot, " horas pedagógicas**, ",
+    "dictadas por **", n_prof, " profesor", ifelse(n_prof==1,"","es"), "**",
+    ifelse(n_sello > 0, paste0(" (incluye ", n_sello, " seccion(es) sello)"), ""), ".\n\n"
+  ))
+
+  sin_cupo <- df_carr |>
+    filter(cupo == 0, cargo != "SIN PROFESOR") |>
+    mutate(txt = glue("{cod} {primera_mayus(curso)} ({sec})")) |>
+    pull(txt)
+
+  if (length(sin_cupo) > 0)
+    writeLines(c(paste0("> Sin cupo asignado: ", paste(sin_cupo, collapse="; "), "."), ""))
+}
+
+if (!tiene_insc)
+  cat("\n> La columna **INSC** se completará una vez que los estudiantes inscriban sus asignaturas.\n\n")
+```
+
+---
+
+## Consideraciones
+
+Para la planeación docente se deben utilizar las orientaciones emitidas por la VRA.
+
+De acuerdo con la normativa, el promedio de docencia del conjunto del claustro debe ser de **12 horas pedagógicas**. La unidad registra un promedio de **`r prom_hp` HP** en `r params$periodo`.
+
+El promedio considera únicamente a los académicos del claustro (`CARGO = ACADEMICO`) y excluye a las autoridades. Los cursos sello se contabilizan una sola vez por docente.
+
+
