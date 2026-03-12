@@ -16,7 +16,7 @@ library(glue)
 # ── Configuracion ─────────────────────────────────────────────────────────────
 # setwd: no necesario en CI (wd = raíz del repo)
 
-ARCHIVO       <- "BASE12026.xlsx"
+ARCHIVO       <- "BASE_SEMESTRE.xlsx"
 PLANTILLA     <- "reporte_planeacion.Rmd"
 PERIODO       <- "Primer semestre 2026"
 CARPETA_MD    <- "informes_md"
