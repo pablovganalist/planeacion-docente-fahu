@@ -74,6 +74,13 @@ body {{
   padding: 2rem 2.5rem 4rem;
   background: #fff;
 }}
+@media (max-width: 600px) {{
+  body {{ padding: 1rem 1rem 3rem; font-size: 12px; }}
+  h1 {{ font-size: 1.1rem; }}
+  h2 {{ font-size: 0.85rem; }}
+  .botones {{ flex-direction: column; }}
+  .btn-volver, .btn-informe, .btn-pdf {{ text-align: center; }}
+}}
 header {{
   border-bottom: 3px solid {C_TEAL};
   padding-bottom: 1rem;
@@ -94,6 +101,12 @@ h1 {{ font-size: 1.35rem; color: {C_DARK}; margin: 0.2rem 0; }}
   background: #e9ecef; color: {C_DARK}; border-radius: 4px;
   font-size: 0.78rem; font-weight: 600; text-decoration: none;
 }}
+.btn-informe {{
+  display: inline-block; padding: 0.38rem 0.9rem;
+  background: {C_ORANGE}; color: white; border-radius: 4px;
+  font-size: 0.78rem; font-weight: 600; text-decoration: none;
+}}
+.btn-informe:hover {{ background: #c96500; }}
 .btn-pdf {{
   display: inline-block; padding: 0.38rem 0.9rem;
   background: {C_TEAL}; color: white; border-radius: 4px;
@@ -106,7 +119,8 @@ h2 {{
   padding-left: 0.7rem; margin: 2.5rem 0 0.5rem;
 }}
 .nota {{ font-size: 0.75rem; color: #888; margin: 0 0 0.8rem; }}
-table {{ width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 0.5rem; }}
+.tabla-wrap {{ overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 0.5rem; }}
+table {{ width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 380px; }}
 thead th {{
   background: {C_DARK}; color: white; padding: 0.5rem 0.7rem;
   text-align: center; font-weight: 600; white-space: nowrap;
@@ -143,8 +157,8 @@ html_tabla <- function(encabezados, filas_df, fila_destacada = NULL) {
     }, character(1))
     paste0('<tr', cls_tr, '>', paste(tds, collapse=''), '</tr>')
   }, character(1))
-  paste0('<table>\n<thead><tr>', paste(th, collapse=''), '</tr></thead>\n',
-         '<tbody>\n', paste(trs, collapse='\n'), '\n</tbody>\n</table>')
+  paste0('<div class="tabla-wrap"><table>\n<thead><tr>', paste(th, collapse=''), '</tr></thead>\n',
+         '<tbody>\n', paste(trs, collapse='\n'), '\n</tbody>\n</table></div>')
 }
 
 # =============================================================================
@@ -300,6 +314,11 @@ generar_comparativo <- function(UP) {
   anio_min <- min(periodos$ano); anio_max <- max(periodos$ano)
   rango    <- if (anio_min==anio_max) as.character(anio_min) else
               paste0(anio_min,"\u2013",anio_max)
+  slug_u        <- slug(UP)
+  # Número de orden del informe (índice de UNIDADES + prefijo con ceros)
+  idx_u         <- which(UNIDADES == UP)
+  prefijo_u     <- formatC(idx_u, width=2, flag="0")
+  archivo_inf   <- paste0("../", prefijo_u, "_", slug_u, ".html")
 
   html_out <- paste0(
 '<!DOCTYPE html>
@@ -316,7 +335,8 @@ generar_comparativo <- function(UP) {
   <h1>', nombre_titulo, '</h1>
   <p class="subtitulo">', TITULO_INFORME, ' ', rango, '</p>
   <div class="botones">
-    <a href="../index.html" class="btn-volver">\u2190 Volver al \u00edndice</a>
+    <a href="../index.html" class="btn-volver">\u2190 \u00cdndice</a>
+    <a href="', archivo_inf, '" class="btn-informe">\u2190 Informe ', etiq_periodo(sem_actual_ano, sem_actual_per), '</a>
     <button class="btn-pdf" onclick="window.print()">\u2b07 Descargar PDF</button>
   </div>
 </header>
