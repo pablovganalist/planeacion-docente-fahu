@@ -156,7 +156,8 @@ p.cod-programa {
   font-family: "Courier New", monospace;
   letter-spacing: 0.02em;
 }
-/* ── Botones header ──────────────────────────────────────── */
+
+/* ── Boton descargar PDF ─────────────────────────────────── */
 .botones-header {
   display: flex;
   gap: 0.6rem;
@@ -167,15 +168,23 @@ p.cod-programa {
   display: inline-block;
   padding: 0.38rem 0.9rem;
   background: #498BCA;
-  color: white !important;
+  color: white;
   border-radius: 4px;
   font-size: 0.78rem;
   font-weight: 600;
   text-decoration: none;
-  letter-spacing: 0.03em;
 }
 .btn-comp:hover { background: #3a7ab8; }
-/* ── Boton descargar PDF ─────────────────────────────────── */
+.btn-indice {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #e9ecef;
+  color: #394049;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
 .btn-pdf {
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -210,7 +219,7 @@ p.cod-programa {
 <p class="facultad">Facultad de Humanidades</p>
 <h1>Departamento de Educación</h1>
 <p class="periodo">Primer semestre 2026</p>
-<div class="botones-header"><a href="comparativos/educacion.html" class="btn-comp">&#128202; Informe comparado 2024&#8211;2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
+<div class="botones-header"><a href="index.html" class="btn-indice">← Índice</a> <a href="comparativos/educacion.html" class="btn-comp">📊 Informe comparado 2024–2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
 </header>
 <main>
 
@@ -243,13 +252,13 @@ unidad</h2>
 <tr class="odd">
 <td align="left">ii</td>
 <td align="left">Horas profesores por hora de clase</td>
-<td align="right">446</td>
+<td align="right">434</td>
 </tr>
 <tr class="even">
 <td align="left">iii</td>
 <td align="left">Horas de profesores de jornada externos a la
 unidad</td>
-<td align="right">0</td>
+<td align="right">12</td>
 </tr>
 <tr class="odd">
 <td align="left">iv</td>
@@ -301,12 +310,12 @@ unidad</td>
 <tr class="even">
 <td align="left">E (ii+vi)</td>
 <td align="left">Horas profesores por hora de clase</td>
-<td align="right">478</td>
+<td align="right">466</td>
 </tr>
 <tr class="odd">
 <td align="left">F (iii+vii)</td>
 <td align="left">Horas de profesores de jornada externos</td>
-<td align="right">0</td>
+<td align="right">12</td>
 </tr>
 <tr class="even">
 <td align="left">G</td>
@@ -318,7 +327,7 @@ unidad</td>
 <p>La unidad registra un total de <strong>638 horas</strong> de clases
 planeadas, divididas en 586 horas en pregrado y 52 horas en postgrado.
 Los profesores de jornada de la unidad cubren el 24% del total, mientras
-que los profesores por hora cubren el 75%.</p>
+que los profesores por hora cubren el 73%.</p>
 <hr />
 <h2 id="cobertura-de-horas-por-académicos-según-contratación">2.
 Cobertura de horas por académicos según contratación</h2>
@@ -332,7 +341,7 @@ Cobertura de horas por académicos según contratación</h2>
 <tbody>
 <tr class="odd">
 <td align="left">% cobertura profesores por horas — pregrado</td>
-<td align="right">76</td>
+<td align="right">74</td>
 </tr>
 <tr class="even">
 <td align="left">% cobertura profesores por horas — postgrado</td>
@@ -340,7 +349,7 @@ Cobertura de horas por académicos según contratación</h2>
 </tr>
 <tr class="odd">
 <td align="left">% cobertura profesores por horas — total</td>
-<td align="right">75</td>
+<td align="right">73</td>
 </tr>
 </tbody>
 </table>
@@ -392,7 +401,7 @@ horas académicos de jornada (claustro)</h2>
 <td align="right">14.4</td>
 </tr>
 <tr class="even">
-<td align="left">Claudia Alejandra Cordoba Calquin</td>
+<td align="left">Claudia Cordoba Calquin</td>
 <td align="right">12.0</td>
 <td align="right">14.4</td>
 </tr>
@@ -450,12 +459,6 @@ horas académicos de jornada (claustro)</h2>
 </table>
 <p><strong>Horas de autoridades</strong></p>
 <table>
-<colgroup>
-<col width="45%" />
-<col width="23%" />
-<col width="16%" />
-<col width="14%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Nombre</th>
@@ -478,7 +481,7 @@ horas académicos de jornada (claustro)</h2>
 <td align="right">28.8</td>
 </tr>
 <tr class="odd">
-<td align="left">Saul Alejandro Contreras Palma</td>
+<td align="left">Saul Contreras Palma</td>
 <td align="left">VICEDECANO</td>
 <td align="right">8</td>
 <td align="right">9.6</td>
@@ -571,7 +574,7 @@ Social</td>
 <td align="left">T-2</td>
 <td align="right">4</td>
 <td align="right">30</td>
-<td align="left">Claudia Alejandra Cordoba Calquin</td>
+<td align="left">Claudia Cordoba Calquin</td>
 </tr>
 <tr class="odd">
 <td align="left">PRIMERO</td>
@@ -862,7 +865,7 @@ Enseñanza</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">22</td>
-<td align="left">Saul Alejandro Contreras Palma</td>
+<td align="left">Saul Contreras Palma</td>
 </tr>
 <tr class="even">
 <td align="left">TERCERO</td>
@@ -1552,7 +1555,7 @@ Mención iii (a) (T-1); 42262 Mención iii (b) (T-1); 42262 Mención iii
 de integración mención a (T-1).</p>
 </blockquote>
 <h3 class="carr-titulo">
-Programa de Regularizacion Educación Técnico Profesional
+Programa de Regularización para Profesores Técnico Profesional
 </h3>
 <p class="cod-programa">
 Código de programa: 6849
@@ -1981,7 +1984,7 @@ Propuestas De Aprendizaje</td>
 cursos</strong> con <strong>144 horas pedagógicas</strong>, dictadas por
 <strong>17 profesores</strong>.</p>
 <h3 class="carr-titulo">
-Magíster en Educación con Mención Curriculum y Evaluación
+Magister en Educación Mención Curriculum y Evaluación
 </h3>
 <p class="cod-programa">
 Código de programa: 9562
@@ -2076,7 +2079,7 @@ Código de programa: 9562
 cursos</strong> con <strong>32 horas pedagógicas</strong>, dictadas por
 <strong>7 profesores</strong>.</p>
 <h3 class="carr-titulo">
-Magíster en Educación con Mención en Gestión y Liderazgo Educacional
+Magíster en Educación Mención Gestión y Liderazgo Educacional
 </h3>
 <p class="cod-programa">
 Código de programa: 9580

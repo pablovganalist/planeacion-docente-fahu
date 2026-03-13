@@ -156,7 +156,8 @@ p.cod-programa {
   font-family: "Courier New", monospace;
   letter-spacing: 0.02em;
 }
-/* ── Botones header ──────────────────────────────────────── */
+
+/* ── Boton descargar PDF ─────────────────────────────────── */
 .botones-header {
   display: flex;
   gap: 0.6rem;
@@ -167,15 +168,23 @@ p.cod-programa {
   display: inline-block;
   padding: 0.38rem 0.9rem;
   background: #498BCA;
-  color: white !important;
+  color: white;
   border-radius: 4px;
   font-size: 0.78rem;
   font-weight: 600;
   text-decoration: none;
-  letter-spacing: 0.03em;
 }
 .btn-comp:hover { background: #3a7ab8; }
-/* ── Boton descargar PDF ─────────────────────────────────── */
+.btn-indice {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #e9ecef;
+  color: #394049;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
 .btn-pdf {
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -210,7 +219,7 @@ p.cod-programa {
 <p class="facultad">Facultad de Humanidades</p>
 <h1>Departamento de Historia</h1>
 <p class="periodo">Primer semestre 2026</p>
-<div class="botones-header"><a href="comparativos/historia.html" class="btn-comp">&#128202; Informe comparado 2024&#8211;2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
+<div class="botones-header"><a href="index.html" class="btn-indice">← Índice</a> <a href="comparativos/historia.html" class="btn-comp">📊 Informe comparado 2024–2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
 </header>
 <main>
 
@@ -374,9 +383,9 @@ del total de horas planeadas en la unidad.</p>
 horas académicos de jornada (claustro)</h2>
 <table>
 <colgroup>
-<col width="44%" />
-<col width="22%" />
-<col width="32%" />
+<col width="42%" />
+<col width="23%" />
+<col width="33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -388,58 +397,58 @@ horas académicos de jornada (claustro)</h2>
 <tbody>
 <tr class="odd">
 <td align="left">Adriana Isabel Palomera Valenzuela</td>
-<td align="right">14.0</td>
+<td align="right">14</td>
 <td align="right">16.8</td>
 </tr>
 <tr class="even">
 <td align="left">Carolina Garcia Gonzalez</td>
-<td align="right">24.0</td>
-<td align="right">28.8</td>
+<td align="right">36</td>
+<td align="right">43.2</td>
 </tr>
 <tr class="odd">
-<td align="left">Christian Alejandro Retamal Hernandez</td>
-<td align="right">20.0</td>
+<td align="left">Christian Retamal Hernandez</td>
+<td align="right">20</td>
 <td align="right">24.0</td>
 </tr>
 <tr class="even">
-<td align="left">Claudio Fernando Pérez Silva</td>
-<td align="right">28.0</td>
+<td align="left">Claudio Perez Silva</td>
+<td align="right">28</td>
 <td align="right">33.6</td>
 </tr>
 <tr class="odd">
 <td align="left">Igor Goicovic Donoso</td>
-<td align="right">20.0</td>
+<td align="right">20</td>
 <td align="right">24.0</td>
 </tr>
 <tr class="even">
 <td align="left">Lucia Victoria Valencia Castaneda</td>
-<td align="right">24.0</td>
+<td align="right">24</td>
 <td align="right">28.8</td>
 </tr>
 <tr class="odd">
 <td align="left">Mariana Sofía Labarca Pinto</td>
-<td align="right">47.0</td>
+<td align="right">47</td>
 <td align="right">56.4</td>
 </tr>
 <tr class="even">
-<td align="left">Mario Fernando Garces Duran</td>
-<td align="right">22.0</td>
+<td align="left">Mario Garces Duran</td>
+<td align="right">22</td>
 <td align="right">26.4</td>
 </tr>
 <tr class="odd">
 <td align="left">Rolando Eugenio Alvarez Vallejos</td>
-<td align="right">27.0</td>
+<td align="right">27</td>
 <td align="right">32.4</td>
 </tr>
 <tr class="even">
 <td align="left">Xochitl Guadalupe Inostroza Ponce</td>
-<td align="right">60.0</td>
+<td align="right">60</td>
 <td align="right">72.0</td>
 </tr>
 <tr class="odd">
 <td align="left"><strong>Promedio de docencia semestral</strong></td>
-<td align="right">34.8</td>
-<td align="right">41.8</td>
+<td align="right">36</td>
+<td align="right">43.2</td>
 </tr>
 </tbody>
 </table>
@@ -482,11 +491,11 @@ unidad, pero estas autoridades <strong>no forman parte del
 claustro</strong> y no se consideran en el cálculo del promedio de
 docencia.</p>
 </blockquote>
-<p>En promedio los académicos del claustro realizan <strong>34.8 horas
+<p>En promedio los académicos del claustro realizan <strong>36 horas
 pedagógicas</strong> de docencia en Primer semestre 2026.</p>
 <blockquote>
-<p>El promedio (34.8 HP) <strong>cumple</strong> el estandar normativo
-de 12 horas pedagogicas.</p>
+<p>El promedio (36 HP) <strong>cumple</strong> el estandar normativo de
+12 horas pedagogicas.</p>
 </blockquote>
 <blockquote>
 <p>¹ Incluye todas las secciones del académico, aunque correspondan a
@@ -838,7 +847,7 @@ Ultramar</td>
 <td align="left">T-2</td>
 <td align="right">4</td>
 <td align="right">8 ⚠</td>
-<td align="left">Christian Alejandro Retamal Hernandez</td>
+<td align="left">Christian Retamal Hernandez</td>
 </tr>
 <tr class="even">
 <td align="left">TERCERO</td>
@@ -1084,7 +1093,7 @@ Digital</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Hernan Augusto Neira Barrera</td>
+<td align="left">Hernan Neira Barrera</td>
 </tr>
 <tr class="even">
 <td align="left">SEXTO</td>
@@ -1172,7 +1181,7 @@ Ciencia-Ficción Y Distópico</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Christian Alejandro Retamal Hernandez</td>
+<td align="left">Christian Retamal Hernandez</td>
 </tr>
 <tr class="odd">
 <td align="left">SEXTO</td>
@@ -1278,7 +1287,7 @@ Debates Éticos De La Nueva Revolución In</td>
 <td align="left">S-38</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Edinson Alejandro Muñoz Arias</td>
+<td align="left">Edinson Muñoz Arias</td>
 </tr>
 <tr class="even">
 <td align="left">SEXTO</td>
@@ -1317,7 +1326,7 @@ Justicia Socioambiental</td>
 <td align="left">S-41</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Claudio Fernando Pérez Silva</td>
+<td align="left">Claudio Perez Silva</td>
 </tr>
 <tr class="even">
 <td align="left">SEXTO</td>
@@ -1364,7 +1373,7 @@ Ciudadanía Crítica</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">20</td>
-<td align="left">Christian Alejandro Retamal Hernandez</td>
+<td align="left">Christian Retamal Hernandez</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
@@ -1373,7 +1382,7 @@ Ciudadanía Crítica</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">20</td>
-<td align="left">Claudio Fernando Pérez Silva</td>
+<td align="left">Claudio Perez Silva</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
@@ -1427,7 +1436,7 @@ Ciudadanía Crítica</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">2 ⚠</td>
-<td align="left">Claudio Fernando Pérez Silva</td>
+<td align="left">Claudio Perez Silva</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
@@ -1454,7 +1463,7 @@ Ciudadanía Crítica</td>
 <td align="left">T-4</td>
 <td align="right">4</td>
 <td align="right">2 ⚠</td>
-<td align="left">Mario Fernando Garces Duran</td>
+<td align="left">Mario Garces Duran</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
@@ -1499,7 +1508,7 @@ Ciudadanía Crítica</td>
 <td align="left">T-9</td>
 <td align="right">4</td>
 <td align="right">2 ⚠</td>
-<td align="left">Christian Alejandro Retamal Hernandez</td>
+<td align="left">Christian Retamal Hernandez</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
@@ -1640,7 +1649,7 @@ Digital</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Hernan Augusto Neira Barrera</td>
+<td align="left">Hernan Neira Barrera</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
@@ -1738,7 +1747,7 @@ Ciencia-Ficción Y Distópico.</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Christian Alejandro Retamal Hernandez</td>
+<td align="left">Christian Retamal Hernandez</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
@@ -1843,7 +1852,7 @@ Desde Lo Individual Y Lo Colectivo.</td>
 <td align="left">S-38</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Edinson Alejandro Muñoz Arias</td>
+<td align="left">Edinson Muñoz Arias</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
@@ -1929,7 +1938,7 @@ Ciudadanía Crítica</td>
 <td align="left">T-41</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Claudio Fernando Pérez Silva</td>
+<td align="left">Claudio Perez Silva</td>
 </tr>
 <tr class="odd">
 <td align="left">OCTAVO</td>
@@ -2043,7 +2052,7 @@ Digital</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Hernan Augusto Neira Barrera</td>
+<td align="left">Hernan Neira Barrera</td>
 </tr>
 <tr class="odd">
 <td align="left">OCTAVO</td>
@@ -2122,7 +2131,7 @@ Ciencia-Ficción Y Distópico.</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Christian Alejandro Retamal Hernandez</td>
+<td align="left">Christian Retamal Hernandez</td>
 </tr>
 <tr class="odd">
 <td align="left">OCTAVO</td>
@@ -2218,7 +2227,7 @@ Desde Lo Individual Y Lo Colectivo.</td>
 <td align="left">S-38</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Edinson Alejandro Muñoz Arias</td>
+<td align="left">Edinson Muñoz Arias</td>
 </tr>
 <tr class="odd">
 <td align="left">OCTAVO</td>
@@ -2304,7 +2313,7 @@ Ciudadanía Crítica</td>
 <td align="left">T-41</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Claudio Fernando Pérez Silva</td>
+<td align="left">Claudio Perez Silva</td>
 </tr>
 </tbody>
 </table>
@@ -2394,7 +2403,7 @@ Código de programa: 6634
 <td align="left">T-2</td>
 <td align="right">2</td>
 <td align="right">30</td>
-<td align="left">Christian Alejandro Retamal Hernandez</td>
+<td align="left">Christian Retamal Hernandez</td>
 </tr>
 <tr class="odd">
 <td align="left">PRIMERO</td>
@@ -2708,7 +2717,7 @@ Digital</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Hernan Augusto Neira Barrera</td>
+<td align="left">Hernan Neira Barrera</td>
 </tr>
 <tr class="odd">
 <td align="left">TERCERO</td>
@@ -2796,7 +2805,7 @@ Ciencia-Ficción Y Distópico.</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Christian Alejandro Retamal Hernandez</td>
+<td align="left">Christian Retamal Hernandez</td>
 </tr>
 <tr class="even">
 <td align="left">TERCERO</td>
@@ -2892,7 +2901,7 @@ Desde Lo Individual Y Lo Colectivo.</td>
 <td align="left">S-38</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Edinson Alejandro Muñoz Arias</td>
+<td align="left">Edinson Muñoz Arias</td>
 </tr>
 <tr class="even">
 <td align="left">TERCERO</td>
@@ -3133,7 +3142,7 @@ Ccss</td>
 <td align="left">T-3</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Mario Fernando Garces Duran</td>
+<td align="left">Mario Garces Duran</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
@@ -3321,7 +3330,7 @@ Cs Sociales</td>
 <td align="left">T-3</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Mario Fernando Garces Duran</td>
+<td align="left">Mario Garces Duran</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
@@ -3384,7 +3393,7 @@ Cs Sociales</td>
 <td align="left">T-3</td>
 <td align="right">4</td>
 <td align="right">1 ⚠</td>
-<td align="left">Mario Fernando Garces Duran</td>
+<td align="left">Mario Garces Duran</td>
 </tr>
 <tr class="odd">
 <td align="left">OCTAVO</td>
@@ -3447,7 +3456,7 @@ Cs Sociales</td>
 <td align="left">T-11</td>
 <td align="right">4</td>
 <td align="right">4 ⚠</td>
-<td align="left">Saul Alejandro Contreras Palma</td>
+<td align="left">Saul Contreras Palma</td>
 </tr>
 <tr class="even">
 <td align="left">NOVENO</td>
@@ -3510,7 +3519,7 @@ Cs Sociales</td>
 <td align="left">T-8</td>
 <td align="right">4</td>
 <td align="right">4 ⚠</td>
-<td align="left">Claudia Alejandra Cordoba Calquin</td>
+<td align="left">Claudia Cordoba Calquin</td>
 </tr>
 <tr class="odd">
 <td align="left">NOVENO</td>
@@ -3865,15 +3874,15 @@ Pedagogía en Historia y Ciencias Sociales
 <p class="cod-programa">
 Código de programa: 6636
 </p>
-<table>
+<table style="width:100%;">
 <colgroup>
 <col width="7%" />
-<col width="5%" />
-<col width="39%" />
+<col width="6%" />
+<col width="40%" />
 <col width="4%" />
 <col width="4%" />
 <col width="5%" />
-<col width="33%" />
+<col width="31%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -3957,7 +3966,7 @@ Código de programa: 6636
 <td align="left">T-2</td>
 <td align="right">2</td>
 <td align="right">32</td>
-<td align="left">Christian Alejandro Retamal Hernandez</td>
+<td align="left">Christian Retamal Hernandez</td>
 </tr>
 <tr class="odd">
 <td align="left">PRIMERO</td>
@@ -4163,7 +4172,7 @@ Código de programa: 6636
 cursos</strong> con <strong>140 horas pedagógicas</strong>, dictadas por
 <strong>13 profesores</strong>.</p>
 <h3 class="carr-titulo">
-Doctorado en Historia
+Doctorado Historia
 </h3>
 <p class="cod-programa">
 Código de programa: 9479
@@ -4202,7 +4211,7 @@ Código de programa: 9479
 <td align="left">T-1</td>
 <td align="right">2</td>
 <td align="right">7 ⚠</td>
-<td align="left">Claudio Fernando Pérez Silva</td>
+<td align="left">Claudio Perez Silva</td>
 </tr>
 <tr class="odd">
 <td align="left">49716</td>
@@ -4369,7 +4378,7 @@ Código de programa: 9414
 <td align="left">T-2</td>
 <td align="right">6</td>
 <td align="right">3 ⚠</td>
-<td align="left">Pedro Juan Canales Tapia.</td>
+<td align="left">Pedro Juan Canales Tapia</td>
 </tr>
 <tr class="odd">
 <td align="left">49912</td>
@@ -4401,7 +4410,7 @@ Código de programa: 9414
 <td align="left">T-2</td>
 <td align="right">6</td>
 <td align="right">3 ⚠</td>
-<td align="left">Pedro Juan Canales Tapia.</td>
+<td align="left">Pedro Juan Canales Tapia</td>
 </tr>
 <tr class="odd">
 <td align="left">49914</td>
@@ -4457,7 +4466,7 @@ Código de programa: 9414
 <td align="left">T-5</td>
 <td align="right">6</td>
 <td align="right">3 ⚠</td>
-<td align="left">Mario Fernando Garces Duran</td>
+<td align="left">Mario Garces Duran</td>
 </tr>
 <tr class="even">
 <td align="left">49915</td>
@@ -4473,7 +4482,7 @@ Código de programa: 9414
 <td align="left">T-7</td>
 <td align="right">6</td>
 <td align="right">3 ⚠</td>
-<td align="left">Claudio Fernando Pérez Silva</td>
+<td align="left">Claudio Perez Silva</td>
 </tr>
 <tr class="even">
 <td align="left">49916</td>
@@ -4498,7 +4507,7 @@ estudiantes inscriban sus asignaturas.</p>
 emitidas por la VRA.</p>
 <p>De acuerdo con la normativa, el promedio de docencia del conjunto del
 claustro debe ser de <strong>12 horas pedagógicas</strong>. La unidad
-registra un promedio de <strong>34.8 HP</strong> en Primer semestre
+registra un promedio de <strong>36 HP</strong> en Primer semestre
 2026.</p>
 <p>El promedio considera únicamente a los académicos del claustro
 (<code>CARGO = ACADEMICO</code>) y excluye a las autoridades. Los cursos

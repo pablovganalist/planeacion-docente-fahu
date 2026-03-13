@@ -156,7 +156,8 @@ p.cod-programa {
   font-family: "Courier New", monospace;
   letter-spacing: 0.02em;
 }
-/* ── Botones header ──────────────────────────────────────── */
+
+/* ── Boton descargar PDF ─────────────────────────────────── */
 .botones-header {
   display: flex;
   gap: 0.6rem;
@@ -167,15 +168,23 @@ p.cod-programa {
   display: inline-block;
   padding: 0.38rem 0.9rem;
   background: #498BCA;
-  color: white !important;
+  color: white;
   border-radius: 4px;
   font-size: 0.78rem;
   font-weight: 600;
   text-decoration: none;
-  letter-spacing: 0.03em;
 }
 .btn-comp:hover { background: #3a7ab8; }
-/* ── Boton descargar PDF ─────────────────────────────────── */
+.btn-indice {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #e9ecef;
+  color: #394049;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
 .btn-pdf {
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -210,7 +219,7 @@ p.cod-programa {
 <p class="facultad">Facultad de Humanidades</p>
 <h1>Departamento de Filosofía</h1>
 <p class="periodo">Primer semestre 2026</p>
-<div class="botones-header"><a href="comparativos/filosofia.html" class="btn-comp">&#128202; Informe comparado 2024&#8211;2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
+<div class="botones-header"><a href="index.html" class="btn-indice">← Índice</a> <a href="comparativos/filosofia.html" class="btn-comp">📊 Informe comparado 2024–2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
 </header>
 <main>
 
@@ -393,48 +402,38 @@ horas académicos de jornada (claustro)</h2>
 </tr>
 <tr class="even">
 <td align="left">Francisco Javier Aoiz Monreal</td>
-<td align="right">6.0</td>
-<td align="right">7.2</td>
-</tr>
-<tr class="odd">
-<td align="left">Francisco Javier Aoiz Monreal.</td>
-<td align="right">8.0</td>
-<td align="right">9.6</td>
-</tr>
-<tr class="even">
-<td align="left">Hernan Augusto Neira Barrera</td>
-<td align="right">12.0</td>
-<td align="right">14.4</td>
-</tr>
-<tr class="odd">
-<td align="left">Mario Sobarzo Morales</td>
-<td align="right">16.0</td>
-<td align="right">19.2</td>
-</tr>
-<tr class="even">
-<td align="left">Mauricio Chapsal Escudero</td>
 <td align="right">14.0</td>
 <td align="right">16.8</td>
 </tr>
 <tr class="odd">
+<td align="left">Hernan Neira Barrera</td>
+<td align="right">12.0</td>
+<td align="right">14.4</td>
+</tr>
+<tr class="even">
+<td align="left">Mario Sobarzo Morales</td>
+<td align="right">16.0</td>
+<td align="right">19.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Mauricio Chapsal Escudero</td>
+<td align="right">14.0</td>
+<td align="right">16.8</td>
+</tr>
+<tr class="even">
 <td align="left">Sebastián Briceño Domínguez</td>
 <td align="right">16.0</td>
 <td align="right">19.2</td>
 </tr>
-<tr class="even">
-<td align="left">Wilfredo Humberto Quezada Pulido</td>
-<td align="right">8.0</td>
-<td align="right">9.6</td>
-</tr>
 <tr class="odd">
-<td align="left">Wilfredo Humberto Quezada Pulido.</td>
-<td align="right">4.0</td>
-<td align="right">4.8</td>
+<td align="left">Wilfredo Quezada Pulido</td>
+<td align="right">12.0</td>
+<td align="right">14.4</td>
 </tr>
 <tr class="even">
 <td align="left"><strong>Promedio de docencia semestral</strong></td>
-<td align="right">12.2</td>
-<td align="right">14.7</td>
+<td align="right">15.7</td>
+<td align="right">18.9</td>
 </tr>
 </tbody>
 </table>
@@ -450,7 +449,7 @@ horas académicos de jornada (claustro)</h2>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Marcelo Pablo Diaz Soto</td>
+<td align="left">Marcelo Diaz Soto</td>
 <td align="left">DIRECTOR</td>
 <td align="right">14</td>
 <td align="right">16.8</td>
@@ -465,10 +464,10 @@ unidad, pero estas autoridades <strong>no forman parte del
 claustro</strong> y no se consideran en el cálculo del promedio de
 docencia.</p>
 </blockquote>
-<p>En promedio los académicos del claustro realizan <strong>12.2 horas
+<p>En promedio los académicos del claustro realizan <strong>15.7 horas
 pedagógicas</strong> de docencia en Primer semestre 2026.</p>
 <blockquote>
-<p>El promedio (12.2 HP) <strong>cumple</strong> el estandar normativo
+<p>El promedio (15.7 HP) <strong>cumple</strong> el estandar normativo
 de 12 horas pedagogicas.</p>
 </blockquote>
 <blockquote>
@@ -489,11 +488,11 @@ Código de programa: 6528
 <colgroup>
 <col width="5%" />
 <col width="4%" />
-<col width="56%" />
+<col width="57%" />
 <col width="3%" />
-<col width="2%" />
 <col width="3%" />
-<col width="23%" />
+<col width="3%" />
+<col width="22%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -541,7 +540,7 @@ Código de programa: 6528
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">25</td>
-<td align="left">Wilfredo Humberto Quezada Pulido</td>
+<td align="left">Wilfredo Quezada Pulido</td>
 </tr>
 <tr class="odd">
 <td align="left">PRIMERO</td>
@@ -550,7 +549,7 @@ Código de programa: 6528
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">25</td>
-<td align="left">Marcelo Pablo Diaz Soto</td>
+<td align="left">Marcelo Diaz Soto</td>
 </tr>
 <tr class="even">
 <td align="left">PRIMERO</td>
@@ -614,7 +613,7 @@ Científico</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">25</td>
-<td align="left">Wilfredo Humberto Quezada Pulido</td>
+<td align="left">Wilfredo Quezada Pulido</td>
 </tr>
 <tr class="odd">
 <td align="left">TERCERO</td>
@@ -623,7 +622,7 @@ Científico</td>
 <td align="left">T-1</td>
 <td align="right">2</td>
 <td align="right">25</td>
-<td align="left">Marcelo Pablo Diaz Soto</td>
+<td align="left">Marcelo Diaz Soto</td>
 </tr>
 <tr class="even">
 <td align="left">TERCERO</td>
@@ -677,7 +676,7 @@ Científico</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">20</td>
-<td align="left">Hernan Augusto Neira Barrera</td>
+<td align="left">Hernan Neira Barrera</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
@@ -817,7 +816,7 @@ Digital</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Hernan Augusto Neira Barrera</td>
+<td align="left">Hernan Neira Barrera</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
@@ -895,7 +894,7 @@ Ciencia-Ficción Y Distópico.</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Christian Alejandro Retamal Hernandez</td>
+<td align="left">Christian Retamal Hernandez</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
@@ -1073,7 +1072,7 @@ Ciudadanía Crítica</td>
 <td align="left">T-39</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Edinson Alejandro Muñoz Arias</td>
+<td align="left">Edinson Muñoz Arias</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
@@ -1209,7 +1208,7 @@ I</td>
 cursos</strong> con <strong>264 horas pedagógicas</strong>, dictadas por
 <strong>53 profesores</strong> (incluye 1 seccion(es) sello).</p>
 <h3 class="carr-titulo">
-Magíster en Filosofía de las Ciencias
+Magíster en Filosofía de la Ciencia
 </h3>
 <p class="cod-programa">
 Código de programa: 9570
@@ -1217,11 +1216,11 @@ Código de programa: 9570
 <table>
 <colgroup>
 <col width="5%" />
-<col width="48%" />
+<col width="49%" />
 <col width="7%" />
 <col width="5%" />
 <col width="5%" />
-<col width="27%" />
+<col width="26%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1240,7 +1239,7 @@ Código de programa: 9570
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">10</td>
-<td align="left">Francisco Javier Aoiz Monreal.</td>
+<td align="left">Francisco Javier Aoiz Monreal</td>
 </tr>
 <tr class="even">
 <td align="left">48870</td>
@@ -1264,7 +1263,7 @@ Código de programa: 9570
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Wilfredo Humberto Quezada Pulido.</td>
+<td align="left">Wilfredo Quezada Pulido</td>
 </tr>
 <tr class="odd">
 <td align="left">48875</td>
@@ -1272,7 +1271,7 @@ Código de programa: 9570
 <td align="left">T-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Ricardo Gabriel Elías Moreno.</td>
+<td align="left">Ricardo Gabriel Elías Moreno</td>
 </tr>
 <tr class="even">
 <td align="left">48875</td>
@@ -1281,7 +1280,7 @@ Mente</td>
 <td align="left">T-3</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Marcelo Pablo Diaz Soto</td>
+<td align="left">Marcelo Diaz Soto</td>
 </tr>
 <tr class="odd">
 <td align="left">48876</td>
@@ -1305,7 +1304,7 @@ Mente</td>
 <td align="left">T-3</td>
 <td align="right">4</td>
 <td align="right">1 ⚠</td>
-<td align="left">Francisco Javier Aoiz Monreal.</td>
+<td align="left">Francisco Javier Aoiz Monreal</td>
 </tr>
 <tr class="even">
 <td align="left">48876</td>
@@ -1313,7 +1312,7 @@ Mente</td>
 <td align="left">T-4</td>
 <td align="right">4</td>
 <td align="right">1 ⚠</td>
-<td align="left">Marcelo Pablo Diaz Soto</td>
+<td align="left">Marcelo Diaz Soto</td>
 </tr>
 <tr class="odd">
 <td align="left">48876</td>
@@ -1321,7 +1320,7 @@ Mente</td>
 <td align="left">T-5</td>
 <td align="right">4</td>
 <td align="right">1 ⚠</td>
-<td align="left">Hernan Augusto Neira Barrera</td>
+<td align="left">Hernan Neira Barrera</td>
 </tr>
 </tbody>
 </table>
@@ -1338,7 +1337,7 @@ estudiantes inscriban sus asignaturas.</p>
 emitidas por la VRA.</p>
 <p>De acuerdo con la normativa, el promedio de docencia del conjunto del
 claustro debe ser de <strong>12 horas pedagógicas</strong>. La unidad
-registra un promedio de <strong>12.2 HP</strong> en Primer semestre
+registra un promedio de <strong>15.7 HP</strong> en Primer semestre
 2026.</p>
 <p>El promedio considera únicamente a los académicos del claustro
 (<code>CARGO = ACADEMICO</code>) y excluye a las autoridades. Los cursos

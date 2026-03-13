@@ -156,7 +156,8 @@ p.cod-programa {
   font-family: "Courier New", monospace;
   letter-spacing: 0.02em;
 }
-/* ── Botones header ──────────────────────────────────────── */
+
+/* ── Boton descargar PDF ─────────────────────────────────── */
 .botones-header {
   display: flex;
   gap: 0.6rem;
@@ -167,15 +168,23 @@ p.cod-programa {
   display: inline-block;
   padding: 0.38rem 0.9rem;
   background: #498BCA;
-  color: white !important;
+  color: white;
   border-radius: 4px;
   font-size: 0.78rem;
   font-weight: 600;
   text-decoration: none;
-  letter-spacing: 0.03em;
 }
 .btn-comp:hover { background: #3a7ab8; }
-/* ── Boton descargar PDF ─────────────────────────────────── */
+.btn-indice {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #e9ecef;
+  color: #394049;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
 .btn-pdf {
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -210,7 +219,7 @@ p.cod-programa {
 <p class="facultad">Facultad de Humanidades</p>
 <h1>Escuela de Psicología</h1>
 <p class="periodo">Primer semestre 2026</p>
-<div class="botones-header"><a href="comparativos/psicologia.html" class="btn-comp">&#128202; Informe comparado 2024&#8211;2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
+<div class="botones-header"><a href="index.html" class="btn-indice">← Índice</a> <a href="comparativos/psicologia.html" class="btn-comp">📊 Informe comparado 2024–2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
 </header>
 <main>
 
@@ -243,7 +252,7 @@ unidad</h2>
 <tr class="odd">
 <td align="left">ii</td>
 <td align="left">Horas profesores por hora de clase</td>
-<td align="right">660</td>
+<td align="right">664</td>
 </tr>
 <tr class="even">
 <td align="left">iii</td>
@@ -254,7 +263,7 @@ unidad</td>
 <tr class="odd">
 <td align="left">iv</td>
 <td align="left">Sin profesor asignado</td>
-<td align="right">58</td>
+<td align="right">54</td>
 </tr>
 <tr class="even">
 <td align="left"><strong>B (v+vi+vii)</strong></td>
@@ -301,7 +310,7 @@ unidad</td>
 <tr class="even">
 <td align="left">E (ii+vi)</td>
 <td align="left">Horas profesores por hora de clase</td>
-<td align="right">672</td>
+<td align="right">676</td>
 </tr>
 <tr class="odd">
 <td align="left">F (iii+vii)</td>
@@ -311,14 +320,14 @@ unidad</td>
 <tr class="even">
 <td align="left">G</td>
 <td align="left">Sin profesor asignado</td>
-<td align="right">62</td>
+<td align="right">58</td>
 </tr>
 </tbody>
 </table>
 <p>La unidad registra un total de <strong>932 horas</strong> de clases
 planeadas, divididas en 900 horas en pregrado y 32 horas en postgrado.
 Los profesores de jornada de la unidad cubren el 18% del total, mientras
-que los profesores por hora cubren el 72%.</p>
+que los profesores por hora cubren el 73%.</p>
 <hr />
 <h2 id="cobertura-de-horas-por-académicos-según-contratación">2.
 Cobertura de horas por académicos según contratación</h2>
@@ -332,7 +341,7 @@ Cobertura de horas por académicos según contratación</h2>
 <tbody>
 <tr class="odd">
 <td align="left">% cobertura profesores por horas — pregrado</td>
-<td align="right">73</td>
+<td align="right">74</td>
 </tr>
 <tr class="even">
 <td align="left">% cobertura profesores por horas — postgrado</td>
@@ -340,7 +349,7 @@ Cobertura de horas por académicos según contratación</h2>
 </tr>
 <tr class="odd">
 <td align="left">% cobertura profesores por horas — total</td>
-<td align="right">72</td>
+<td align="right">73</td>
 </tr>
 </tbody>
 </table>
@@ -402,12 +411,12 @@ horas académicos de jornada (claustro)</h2>
 <td align="right">19.2</td>
 </tr>
 <tr class="even">
-<td align="left">Dante Miguel Castillo Guajardo</td>
+<td align="left">Dante Castillo Guajardo</td>
 <td align="right">12.0</td>
 <td align="right">14.4</td>
 </tr>
 <tr class="odd">
-<td align="left">Gloria Miryam Mora Guerrero</td>
+<td align="left">Gloria Miryam Mora</td>
 <td align="right">12.0</td>
 <td align="right">14.4</td>
 </tr>
@@ -1059,7 +1068,7 @@ Código de programa: 5223
 <td align="left">L-2</td>
 <td align="right">2</td>
 <td align="right">26</td>
-<td align="left">Dante Miguel Castillo Guajardo</td>
+<td align="left">Dante Castillo Guajardo</td>
 </tr>
 <tr class="odd">
 <td align="left">TERCERO</td>
@@ -1077,7 +1086,7 @@ Código de programa: 5223
 <td align="left">L-4</td>
 <td align="right">2</td>
 <td align="right">26</td>
-<td align="left">Dante Miguel Castillo Guajardo</td>
+<td align="left">Dante Castillo Guajardo</td>
 </tr>
 <tr class="odd">
 <td align="left">TERCERO</td>
@@ -1095,7 +1104,7 @@ Código de programa: 5223
 <td align="left">T-2</td>
 <td align="right">4</td>
 <td align="right">26</td>
-<td align="left">Dante Miguel Castillo Guajardo</td>
+<td align="left">Dante Castillo Guajardo</td>
 </tr>
 <tr class="odd">
 <td align="left">TERCERO</td>
@@ -1113,7 +1122,7 @@ Código de programa: 5223
 <td align="left">T-4</td>
 <td align="right">4</td>
 <td align="right">26</td>
-<td align="left">Dante Miguel Castillo Guajardo</td>
+<td align="left">Dante Castillo Guajardo</td>
 </tr>
 <tr class="odd">
 <td align="left">TERCERO</td>
@@ -1302,7 +1311,7 @@ Código de programa: 5223
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">26</td>
-<td align="left">Gloria Miryam Mora Guerrero</td>
+<td align="left">Gloria Miryam Mora</td>
 </tr>
 <tr class="even">
 <td align="left">TERCERO</td>
@@ -1729,7 +1738,7 @@ Digital</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Hernan Augusto Neira Barrera</td>
+<td align="left">Hernan Neira Barrera</td>
 </tr>
 <tr class="odd">
 <td align="left">QUINTO</td>
@@ -1816,7 +1825,7 @@ Ciencia-Ficción Y Distópico.</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Christian Alejandro Retamal Hernandez</td>
+<td align="left">Christian Retamal Hernandez</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
@@ -1910,7 +1919,7 @@ Desde Lo Individual Y Lo Colectivo.</td>
 <td align="left">S-38</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Edinson Alejandro Muñoz Arias</td>
+<td align="left">Edinson Muñoz Arias</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
@@ -2471,7 +2480,7 @@ Ciudadanía Crítica</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">25</td>
-<td align="left">Gloria Miryam Mora Guerrero</td>
+<td align="left">Gloria Miryam Mora</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
@@ -3069,9 +3078,9 @@ Organizaciones Vi</td>
 </table>
 <p>La carrera registra <strong>277 secciones</strong> en <strong>36
 cursos</strong> con <strong>900 horas pedagógicas</strong>, dictadas por
-<strong>135 profesores</strong> (incluye 13 seccion(es) sello).</p>
+<strong>135 profesores</strong> (incluye 12 seccion(es) sello).</p>
 <h3 class="carr-titulo">
-Magíster en Psicología Educacioanl
+Magíster en Psicología Educacional
 </h3>
 <p class="cod-programa">
 Código de programa: 9574
@@ -3103,7 +3112,7 @@ Educacional</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">12</td>
-<td align="left">Carolina Paz Jorquera Martinez.</td>
+<td align="left">Carolina Paz Jorquera Martinez</td>
 </tr>
 <tr class="even">
 <td align="left">48781</td>
@@ -3120,7 +3129,7 @@ Contexto Educativo</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">12</td>
-<td align="left">Gloria Miryam Mora Guerrero</td>
+<td align="left">Gloria Miryam Mora</td>
 </tr>
 <tr class="even">
 <td align="left">48786</td>
@@ -3146,7 +3155,7 @@ Condiciones Necesarias Para Articular</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">12</td>
-<td align="left">Gabriel Prosser Bravo.</td>
+<td align="left">Gabriel Prosser Bravo</td>
 </tr>
 <tr class="odd">
 <td align="left">48787</td>
@@ -3164,7 +3173,7 @@ Y/O Innovación Psicosocial En Contextos Educativos</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
 <td align="right">12</td>
-<td align="left">Claudia Andrea Fonseca Carrillo.</td>
+<td align="left">Claudia Andrea Fonseca Carrillo</td>
 </tr>
 </tbody>
 </table>
