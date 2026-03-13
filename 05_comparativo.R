@@ -315,10 +315,12 @@ generar_comparativo <- function(UP) {
   rango    <- if (anio_min==anio_max) as.character(anio_min) else
               paste0(anio_min,"\u2013",anio_max)
   slug_u        <- slug(UP)
-  # Número de orden del informe (índice de UNIDADES + prefijo con ceros)
-  idx_u         <- which(UNIDADES == UP)
-  prefijo_u     <- formatC(idx_u, width=2, flag="0")
-  archivo_inf   <- paste0("../", prefijo_u, "_", slug_u, ".html")
+  # Buscar el archivo HTML real en docs/ para obtener el prefijo correcto
+  archivos_docs <- list.files("docs", pattern = paste0("_", slug_u, "\\.html$"))
+  archivo_inf   <- if (length(archivos_docs) > 0)
+    paste0("../", archivos_docs[1])
+  else
+    paste0("../01_", slug_u, ".html")  # fallback
 
   html_out <- paste0(
 '<!DOCTYPE html>

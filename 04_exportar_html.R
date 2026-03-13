@@ -16,7 +16,7 @@ library(glue)
 # ── Configuracion ─────────────────────────────────────────────────────────────
 
 CARPETA_MD   <- "informes_md"
-CARPETA_HTML <- "informes_html"
+CARPETA_HTML <- "docs"
 PERIODO      <- "Primer semestre 2026"
 INSTITUCION  <- "Facultad de Humanidades"
 
