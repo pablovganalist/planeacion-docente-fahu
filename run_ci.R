@@ -56,6 +56,11 @@ if (file.exists("BASE_HISTORICA_FAHU.xlsx")) {
   cat("   OMITIDO (BASE_HISTORICA_FAHU.xlsx no encontrada)\n\n")
 }
 
+# ── 5. Exportar archivos LaTeX ────────────────────────────────────────────────
+cat("── Paso 5: exportando a LaTeX...\n")
+source("06_exportar_latex.R", local = TRUE)
+cat("   OK\n\n")
+
 cat("=============================================================\n")
 cat(glue("  Informes disponibles en: {CARPETA_HTML}/\n"))
 cat("=============================================================\n")
