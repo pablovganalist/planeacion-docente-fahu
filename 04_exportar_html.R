@@ -204,6 +204,16 @@ p.cod-programa {{
   text-decoration: none;
 }}
 .btn-comp:hover {{ background: #3a7ab8; }}
+.btn-indice {{
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #e9ecef;
+  color: {C_DARK};
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}}
 .btn-pdf {{
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -246,7 +256,6 @@ md_a_html <- function(ruta_md, ruta_html, css) {
   linea_h1 <- md_texto[str_starts(md_texto, "^# ")]
   titulo   <- if (length(linea_h1) > 0)
     str_remove(linea_h1[1], "^# ") else basename(tools::file_path_sans_ext(ruta_md))
-    message(glue("DEBUG titulo: '{titulo}'"))
 
   # Convertir md a html con pandoc (sin --standalone para obtener sólo el fragmento)
   tmp_html <- tempfile(fileext = ".html")
@@ -264,7 +273,8 @@ md_a_html <- function(ruta_md, ruta_html, css) {
     # Eliminar el <h1> que Pandoc genera desde el "# nombre" del md
     str_replace_all('<h1[^>]*>.*?</h1>', '')
 
-  boton_pdf <- '<button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button>'
+  boton_pdf    <- '<button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button>'
+  boton_indice <- '<a href="index.html" class="btn-indice">← Índice</a>'
 
   # Derivar slug desde nombre de archivo (ej: "02_historia" -> "historia")
   slug_unidad <- str_remove(nombre, "^[0-9]+_")
@@ -278,7 +288,7 @@ md_a_html <- function(ruta_md, ruta_html, css) {
     '<p class="facultad">', INSTITUCION, '</p>\n',
     '<h1>', titulo, '</h1>\n',
     '<p class="periodo">', PERIODO, '</p>\n',
-    '<div class="botones-header">', boton_comp, ' ', boton_pdf, '</div>\n',
+    '<div class="botones-header">', boton_indice, ' ', boton_comp, ' ', boton_pdf, '</div>\n',
     '</header>'
   )
 
@@ -376,25 +386,51 @@ index_html <- glue('<!DOCTYPE html>
       max-width: 700px;
       margin: 3rem auto;
       padding: 0 2rem;
-      color: #222;
+      color: #394049;
     }}
     h1 {{
       color: {C_TEAL};
       border-bottom: 3px solid {C_TEAL};
       padding-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
     }}
     .subtitulo {{
       color: #555;
-      margin-top: -0.5rem;
-      margin-bottom: 2rem;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
     }}
+    /* ── Tabs ── */
+    .tabs {{
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid {C_TEAL};
+      margin-bottom: 1.8rem;
+    }}
+    .tab-btn {{
+      padding: 0.5rem 1.4rem;
+      border: none;
+      background: #f0f0f0;
+      color: #555;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 4px 4px 0 0;
+      margin-right: 3px;
+      transition: background 0.15s;
+    }}
+    .tab-btn.activo {{
+      background: {C_TEAL};
+      color: white;
+    }}
+    .tab-panel {{ display: none; }}
+    .tab-panel.activo {{ display: block; }}
+    /* ── Lista informes ── */
     ul {{
       list-style: none;
       padding: 0;
     }}
-    li {{
-      margin: 0.5rem 0;
-    }}
+    li {{ margin: 0.5rem 0; }}
     a {{
       color: {C_BLUE};
       text-decoration: none;
@@ -410,6 +446,49 @@ index_html <- glue('<!DOCTYPE html>
       border-left-color: {C_TEAL};
       color: {C_TEAL};
     }}
+    /* ── Acerca ── */
+    .acerca h2 {{
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: {C_DARK};
+      border-left: 4px solid {C_ORANGE};
+      padding-left: 0.7rem;
+      margin: 2rem 0 0.5rem;
+    }}
+    .acerca h2:first-child {{ margin-top: 0; }}
+    .acerca p, .acerca li {{
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #444;
+    }}
+    .acerca ul {{
+      list-style: disc;
+      padding-left: 1.4rem;
+    }}
+    .acerca li {{
+      margin: 0.3rem 0;
+      display: list-item;
+      padding: 0;
+      border: none;
+      background: none;
+    }}
+    .acerca li:hover {{ background: none; }}
+    .acerca a {{
+      display: inline;
+      padding: 0;
+      border: none;
+      font-size: 0.88rem;
+    }}
+    .formula {{
+      background: #f5f7f8;
+      border-left: 3px solid {C_GOLD};
+      padding: 0.6rem 1rem;
+      margin: 0.8rem 0;
+      font-size: 0.85rem;
+      border-radius: 0 4px 4px 0;
+    }}
+    /* ── Pie ── */
     .pie {{
       margin-top: 3rem;
       font-size: 11px;
@@ -417,15 +496,72 @@ index_html <- glue('<!DOCTYPE html>
       border-top: 1px solid #eee;
       padding-top: 0.8rem;
     }}
+    @media (max-width: 500px) {{
+      body {{ margin: 1.5rem auto; padding: 0 1rem; }}
+      .tab-btn {{ padding: 0.5rem 0.9rem; font-size: 0.82rem; }}
+    }}
   </style>
 </head>
 <body>
   <h1>Informes de planeación docente</h1>
   <p class="subtitulo">{INSTITUCION} &mdash; {PERIODO}</p>
-  <ul>
+
+  <div class="tabs">
+    <button class="tab-btn activo" onclick="mostrarTab(\'informes\', this)">Informes</button>
+    <button class="tab-btn" onclick="mostrarTab(\'acerca\', this)">Acerca</button>
+  </div>
+
+  <div id="informes" class="tab-panel activo">
+    <ul>
 {items_html}
-  </ul>
-  <p class="pie">Generado el {fecha_gen} &bull; {length(generados)} informes</p>
+    </ul>
+    <p class="pie">Generado el {fecha_gen} &bull; {length(generados)} informes</p>
+  </div>
+
+  <div id="acerca" class="tab-panel acerca">
+
+    <h2>Contabilización de horas</h2>
+    <p>Cada informe reporta las <strong>horas pedagógicas (HP)</strong> planeadas para el semestre, organizadas según el tipo de contrato del docente y el nivel de estudios (pregrado / postgrado). Las horas cronológicas equivalentes (HC) se obtienen multiplicando las HP por 1,2.</p>
+    <p>El desglose institucional distingue:</p>
+    <ul>
+      <li><strong>Horas jornada propias (i, v):</strong> docentes de planta de la propia unidad.</li>
+      <li><strong>Horas por hora de clase (ii, vi):</strong> docentes contratados por hora.</li>
+      <li><strong>Horas jornada externas (iii, vii):</strong> docentes de planta de otra unidad que dictan en esta.</li>
+      <li><strong>Sin profesor asignado (iv):</strong> secciones sin docente a la fecha del informe.</li>
+    </ul>
+    <p>Los <strong>cursos sello</strong> (secciones tipo S) se contabilizan <em>una sola vez por docente</em>, aunque aparezcan en múltiples carreras o programas. Esto evita la sobrecontabilización de horas en unidades que ofrecen sellos a varias carreras.</p>
+
+    <h2>Promedio de horas del claustro</h2>
+    <p>El promedio de docencia del claustro se calcula de la siguiente forma:</p>
+    <div class="formula">
+      <strong>Promedio HP</strong> = HP totales jornada ÷ N académicos del claustro
+    </div>
+    <p>El <strong>numerador</strong> incluye las horas pedagógicas de <em>todos</em> los docentes de jornada de la unidad, incluyendo las autoridades (directores, decana, etc.). El <strong>denominador</strong> considera únicamente a los académicos con cargo <em>ACADÉMICO</em>, excluyendo a las autoridades. Esto refleja la carga efectiva distribuida entre quienes tienen dedicación regular a la docencia.</p>
+
+    <h2>Norma institucional</h2>
+    <p>De acuerdo con la normativa interna, el promedio de docencia del conjunto del claustro debe ser de <strong>12 horas pedagógicas</strong> por semestre. Los informes marcan con <span style="color:#27ae60;font-weight:700">✓</span> las unidades que cumplen esta norma y con <span style="color:#c0392b;font-weight:700">✗</span> las que se encuentran por debajo.</p>
+    <p>Esta norma aplica al promedio del claustro completo, no a cada académico individualmente. Una unidad puede tener académicos con cargas muy distintas y aun así cumplir o no cumplir el estándar.</p>
+
+    <h2>Relación con los planes de estudio</h2>
+    <p>Las horas planeadas se cruzan con la estructura de cada plan de estudios vigente. Cada sección de un curso está asociada a una carrera y programa (CODPROG), lo que permite distinguir:</p>
+    <ul>
+      <li>Las horas que la unidad destina a <strong>sus propias carreras</strong> versus a carreras de otras unidades.</li>
+      <li>La distribución entre <strong>pregrado y postgrado</strong>.</li>
+      <li>Los cursos sin cupo asignado, que pueden indicar secciones en proceso de adjudicación.</li>
+    </ul>
+    <p>Los informes no validan si las horas planeadas coinciden con la carga definida en el plan de estudios — esa verificación corresponde a cada unidad en coordinación con la Dirección de Docencia.</p>
+
+    <p class="pie">Generado el {fecha_gen} &bull; {length(generados)} informes</p>
+  </div>
+
+  <script>
+    function mostrarTab(id, btn) {{
+      document.querySelectorAll(\'.tab-panel\').forEach(p => p.classList.remove(\'activo\'));
+      document.querySelectorAll(\'.tab-btn\').forEach(b => b.classList.remove(\'activo\'));
+      document.getElementById(id).classList.add(\'activo\');
+      btn.classList.add(\'activo\');
+    }}
+  </script>
 </body>
 </html>')
 
