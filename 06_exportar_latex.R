@@ -70,73 +70,73 @@ etiq_periodo <- function(anio, per) {
 # ── Preámbulo LaTeX ────────────────────────────────────────────────────────────
 preambulo <- function(titulo_doc) {
   glue(
-'\\\\documentclass[11pt, a4paper]{{article}}
+'\\documentclass[11pt, a4paper]{{article}}
 
 % ── Codificación y fuentes ──────────────────────────────────────────────────
-\\\\usepackage[utf8]{{inputenc}}
-\\\\usepackage[T1]{{fontenc}}
-\\\\usepackage[spanish]{{babel}}
-\\\\usepackage{{lmodern}}
+\\usepackage[utf8]{{inputenc}}
+\\usepackage[T1]{{fontenc}}
+\\usepackage[spanish]{{babel}}
+\\usepackage{{lmodern}}
 
 % ── Márgenes ────────────────────────────────────────────────────────────────
-\\\\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{{geometry}}
+\\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{{geometry}}
 
 % ── Colores institucionales ──────────────────────────────────────────────────
-\\\\usepackage[table]{{xcolor}}
-\\\\definecolor{{usachTeal}}{{HTML}}{{00A499}}
-\\\\definecolor{{usachOrange}}{{HTML}}{{EA7600}}
-\\\\definecolor{{usachDark}}{{HTML}}{{394049}}
-\\\\definecolor{{usachBlue}}{{HTML}}{{498BCA}}
-\\\\definecolor{{usachGold}}{{HTML}}{{EAAA00}}
-\\\\definecolor{{rowEven}}{{HTML}}{{F5F7F8}}
-\\\\definecolor{{rowHighlight}}{{HTML}}{{FFF8E1}}
+\\usepackage[table]{{xcolor}}
+\\definecolor{{usachTeal}}{{HTML}}{{00A499}}
+\\definecolor{{usachOrange}}{{HTML}}{{EA7600}}
+\\definecolor{{usachDark}}{{HTML}}{{394049}}
+\\definecolor{{usachBlue}}{{HTML}}{{498BCA}}
+\\definecolor{{usachGold}}{{HTML}}{{EAAA00}}
+\\definecolor{{rowEven}}{{HTML}}{{F5F7F8}}
+\\definecolor{{rowHighlight}}{{HTML}}{{FFF8E1}}
 
 % ── Tablas ──────────────────────────────────────────────────────────────────
-\\\\usepackage{{booktabs}}
-\\\\usepackage{{tabularx}}
-\\\\usepackage{{multirow}}
-\\\\usepackage{{array}}
-\\\\renewcommand{{\\\\arraystretch}}{{1.35}}
+\\usepackage{{booktabs}}
+\\usepackage{{tabularx}}
+\\usepackage{{multirow}}
+\\usepackage{{array}}
+\\renewcommand{{\\arraystretch}}{{1.35}}
 
 % ── Encabezados y secciones ─────────────────────────────────────────────────
-\\\\usepackage{{titlesec}}
-\\\\titleformat{{\\\\section}}[block]
-  {{\\\\normalfont\\\\large\\\\bfseries\\\\color{{usachDark}}}}
+\\usepackage{{titlesec}}
+\\titleformat{{\\section}}[block]
+  {{\\normalfont\\large\\bfseries\\color{{usachDark}}}}
   {{}}{{0pt}}
-  {{\\\\colorbox{{usachTeal}}{{\\\\textcolor{{white}}{{\\\\hspace{{4pt}}\\\\thesection.\\\\hspace{{4pt}}}}}}\\\\hspace{{6pt}}}}
-\\\\titleformat{{\\\\subsection}}[block]
-  {{\\\\normalfont\\\\normalsize\\\\bfseries\\\\color{{usachDark}}}}
+  {{\\colorbox{{usachTeal}}{{\\textcolor{{white}}{{\\hspace{{4pt}}\\thesection.\\hspace{{4pt}}}}}}\\hspace{{6pt}}}}
+\\titleformat{{\\subsection}}[block]
+  {{\\normalfont\\normalsize\\bfseries\\color{{usachDark}}}}
   {{}}{{0pt}}
-  {{\\\\textcolor{{usachOrange}}{{\\\\rule[-.3ex]{{4pt}}{{1.2em}}}}\\\\hspace{{6pt}}}}
-\\\\titlespacing*{{\\\\section}}{{0pt}}{{1.2em}}{{0.6em}}
-\\\\titlespacing*{{\\\\subsection}}{{0pt}}{{1em}}{{0.4em}}
+  {{\\textcolor{{usachOrange}}{{\\rule[-.3ex]{{4pt}}{{1.2em}}}}\\hspace{{6pt}}}}
+\\titlespacing*{{\\section}}{{0pt}}{{1.2em}}{{0.6em}}
+\\titlespacing*{{\\subsection}}{{0pt}}{{1em}}{{0.4em}}
 
 % ── Cabeceras y pies ─────────────────────────────────────────────────────────
-\\\\usepackage{{fancyhdr}}
-\\\\pagestyle{{fancy}}
-\\\\fancyhf{{}}
-\\\\fancyhead[L]{{\\\\small\\\\color{{usachDark}} {tex_esc(INSTITUCION)}}}
-\\\\fancyhead[R]{{\\\\small\\\\color{{usachDark}} {tex_esc(PERIODO)}}}
-\\\\fancyfoot[C]{{\\\\small\\\\thepage}}
-\\\\renewcommand{{\\\\headrulewidth}}{{0.4pt}}
+\\usepackage{{fancyhdr}}
+\\pagestyle{{fancy}}
+\\fancyhf{{}}
+\\fancyhead[L]{{\\small\\color{{usachDark}} {tex_esc(INSTITUCION)}}}
+\\fancyhead[R]{{\\small\\color{{usachDark}} {tex_esc(PERIODO)}}}
+\\fancyfoot[C]{{\\small\\thepage}}
+\\renewcommand{{\\headrulewidth}}{{0.4pt}}
 
 % ── Misceláneos ──────────────────────────────────────────────────────────────
-\\\\usepackage{{parskip}}
-\\\\usepackage{{microtype}}
-\\\\usepackage{{hyperref}}
-\\\\hypersetup{{colorlinks=true, linkcolor=usachBlue, urlcolor=usachBlue}}
+\\usepackage{{parskip}}
+\\usepackage{{microtype}}
+\\usepackage{{hyperref}}
+\\hypersetup{{colorlinks=true, linkcolor=usachBlue, urlcolor=usachBlue}}
 
-\\\\begin{{document}}
+\\begin{{document}}
 
 % ── Portada ──────────────────────────────────────────────────────────────────
-\\\\begin{{center}}
-  {{\\\\Large\\\\bfseries\\\\color{{usachDark}} {tex_esc(titulo_doc)}}}\\\\\\\\[0.4em]
-  {{\\\\large\\\\color{{usachTeal}} {tex_esc(INSTITUCION)}}}\\\\\\\\[0.2em]
-  {{\\\\normalsize\\\\color{{gray}} {tex_esc(PERIODO)}}}
-\\\\end{{center}}
-\\\\vspace{{0.5em}}
-\\\\textcolor{{usachTeal}}{{\\\\rule{{\\\\linewidth}}{{2pt}}}}
-\\\\vspace{{1em}}
+\\begin{{center}}
+  {{\\Large\\bfseries\\color{{usachDark}} {tex_esc(titulo_doc)}}}\\\\[0.4em]
+  {{\\large\\color{{usachTeal}} {tex_esc(INSTITUCION)}}}\\\\[0.2em]
+  {{\\normalsize\\color{{gray}} {tex_esc(PERIODO)}}}
+\\end{{center}}
+\\vspace{{0.5em}}
+\\textcolor{{usachTeal}}{{\\rule{{\\linewidth}}{{2pt}}}}
+\\vspace{{1em}}
 '
   )
 }
