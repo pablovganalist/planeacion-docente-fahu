@@ -1,192 +1,194 @@
 # =============================================================================
 # 06_exportar_latex.R
-# Genera un .tex por unidad combinando:
-#   - Informe del semestre actual (misma lógica que reporte_planeacion.Rmd)
-#   - Tablas comparativas históricas (misma lógica que 05_comparativo.R)
+# Genera un .tex por unidad combinando informe del semestre + comparativos
+# Output: docs/latex/{slug}.tex — listo para Overleaf
 #
-# Output: docs/latex/{slug}.tex — uno por unidad, listo para Overleaf
+# REGLA DE ESCAPING:
+#   En R string con comillas dobles:
+#     "\\"   -> un backslash en el archivo  -> comando LaTeX \cmd
+#     "\\\\" -> dos backslashes en archivo  -> salto de fila LaTeX \\
 # =============================================================================
 
 library(readxl)
 library(janitor)
 library(tidyverse)
-library(glue)
 
-# ── Configuración ──────────────────────────────────────────────────────────────
-ARCHIVO_SEM    <- "BASE_SEMESTRE.xlsx"
-ARCHIVO_HIST   <- "BASE_HISTORICA_FAHU.xlsx"
-CARPETA_LATEX  <- file.path("docs", "latex")
-INSTITUCION    <- "Facultad de Humanidades"
-PERIODO        <- "Primer semestre 2026"
-NORMA_PROM_HP  <- 12
-
-CARGOS_AUTORIDAD <- c("DIRECTOR","DIRECTORA","DECANA","VICEDECANO",
-                      "VIME","DIRECTORA INNED")
+# -- Configuracion -------------------------------------------------------------
+ARCHIVO_SEM   <- "BASE_SEMESTRE.xlsx"
+ARCHIVO_HIST  <- "BASE_HISTORICA_FAHU.xlsx"
+CARPETA_LATEX <- file.path("docs", "latex")
+INSTITUCION   <- "Facultad de Humanidades"
+PERIODO       <- "Primer semestre 2026"
+NORMA_PROM_HP <- 12
 
 NOMBRES_UNIDAD <- c(
   "HISTORIA"                 = "Departamento de Historia",
+  "EDUCACION"                = "Departamento de Educación",
   "EDUCACIÓN"                = "Departamento de Educación",
+  "ESTUDIOS POLITICOS"       = "Departamento de Estudios Políticos",
   "ESTUDIOS POLÍTICOS"       = "Departamento de Estudios Políticos",
+  "FILOSOFIA"                = "Departamento de Filosofía",
   "FILOSOFÍA"                = "Departamento de Filosofía",
+  "LINGUISTICA Y LITERATURA" = "Departamento de Lingüística y Literatura",
   "LINGÜÍSTICA Y LITERATURA" = "Departamento de Lingüística y Literatura",
   "PERIODISMO"               = "Escuela de Periodismo",
+  "PSICOLOGIA"               = "Escuela de Psicología",
   "PSICOLOGÍA"               = "Escuela de Psicología"
 )
 
-# ── Helpers ────────────────────────────────────────────────────────────────────
+# -- Helpers ------------------------------------------------------------------
 slug <- function(x) {
   x |> str_to_lower() |>
-    str_replace_all("[áàä]","a") |> str_replace_all("[éèë]","e") |>
-    str_replace_all("[íìï]","i") |> str_replace_all("[óòö]","o") |>
-    str_replace_all("[úùü]","u") |> str_replace_all("ñ","n") |>
+    str_replace_all("[áàäâ]","a") |> str_replace_all("[éèëê]","e") |>
+    str_replace_all("[íìïî]","i") |> str_replace_all("[óòöô]","o") |>
+    str_replace_all("[úùüû]","u") |> str_replace_all("ñ","n")      |>
     str_replace_all("[^a-z0-9]+","_") |> str_remove("^_|_$")
 }
 
-# Escapar caracteres especiales de LaTeX
+# Escapar TEXTO PLANO para LaTeX. NO llamar sobre strings que ya son LaTeX.
 tex_esc <- function(x) {
   x <- as.character(x)
-  x <- str_replace_all(x, "\\\\", "\\\\textbackslash{}")
-  x <- str_replace_all(x, "&",  "\\\\&")
-  x <- str_replace_all(x, "%",  "\\\\%")
-  x <- str_replace_all(x, "\\$", "\\\\$")
-  x <- str_replace_all(x, "#",  "\\\\#")
-  x <- str_replace_all(x, "_",  "\\\\_")
-  x <- str_replace_all(x, "\\{", "\\\\{")
-  x <- str_replace_all(x, "\\}", "\\\\}")
-  x <- str_replace_all(x, "~",  "\\\\textasciitilde{}")
-  x <- str_replace_all(x, "\\^", "\\\\textasciicircum{}")
+  x <- str_replace_all(x, fixed("\\"), "\\textbackslash{}")
+  x <- str_replace_all(x, fixed("&"),  "\\&")
+  x <- str_replace_all(x, fixed("%"),  "\\%")
+  x <- str_replace_all(x, fixed("$"),  "\\$")
+  x <- str_replace_all(x, fixed("#"),  "\\#")
+  x <- str_replace_all(x, fixed("_"),  "\\_")
+  x <- str_replace_all(x, fixed("{"),  "\\{")
+  x <- str_replace_all(x, fixed("}"),  "\\}")
+  x <- str_replace_all(x, fixed("~"),  "\\textasciitilde{}")
+  x <- str_replace_all(x, fixed("^"),  "\\textasciicircum{}")
   x
 }
 
+# Formateo numerico — devuelven LaTeX listo, NO pasar por tex_esc
 fmt_hp  <- function(x) ifelse(is.na(x) | x == 0, "---",
-                               formatC(x, format="f", digits=0, big.mark="."))
+                               formatC(as.numeric(x), format="f", digits=0, big.mark="."))
 fmt_pct <- function(x) ifelse(is.na(x), "---",
-                               paste0(formatC(x*100, format="f", digits=1), "\\%"))
+                               paste0(formatC(x * 100, format="f", digits=1), "\\%"))
 
 etiq_periodo <- function(anio, per) {
-  paste0(if (per == 1) "1\\textsuperscript{er} sem. " else "2\\textsuperscript{do} sem. ", anio)
+  sem <- if (per == 1) "1\\textsuperscript{er} sem." else "2\\textsuperscript{do} sem."
+  paste(sem, anio)
 }
 
-# ── Preámbulo LaTeX ────────────────────────────────────────────────────────────
-preambulo <- function(titulo_doc) {
-  glue(
-'\\documentclass[11pt, a4paper]{{article}}
-
-% ── Codificación y fuentes ──────────────────────────────────────────────────
-\\usepackage[utf8]{{inputenc}}
-\\usepackage[T1]{{fontenc}}
-\\usepackage[spanish]{{babel}}
-\\usepackage{{lmodern}}
-
-% ── Márgenes ────────────────────────────────────────────────────────────────
-\\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{{geometry}}
-
-% ── Colores institucionales ──────────────────────────────────────────────────
-\\usepackage[table]{{xcolor}}
-\\definecolor{{usachTeal}}{{HTML}}{{00A499}}
-\\definecolor{{usachOrange}}{{HTML}}{{EA7600}}
-\\definecolor{{usachDark}}{{HTML}}{{394049}}
-\\definecolor{{usachBlue}}{{HTML}}{{498BCA}}
-\\definecolor{{usachGold}}{{HTML}}{{EAAA00}}
-\\definecolor{{rowEven}}{{HTML}}{{F5F7F8}}
-\\definecolor{{rowHighlight}}{{HTML}}{{FFF8E1}}
-
-% ── Tablas ──────────────────────────────────────────────────────────────────
-\\usepackage{{booktabs}}
-\\usepackage{{tabularx}}
-\\usepackage{{multirow}}
-\\usepackage{{array}}
-\\renewcommand{{\\arraystretch}}{{1.35}}
-
-% ── Encabezados y secciones ─────────────────────────────────────────────────
-\\usepackage{{titlesec}}
-\\titleformat{{\\section}}[block]
-  {{\\normalfont\\large\\bfseries\\color{{usachDark}}}}
-  {{}}{{0pt}}
-  {{\\colorbox{{usachTeal}}{{\\textcolor{{white}}{{\\hspace{{4pt}}\\thesection.\\hspace{{4pt}}}}}}\\hspace{{6pt}}}}
-\\titleformat{{\\subsection}}[block]
-  {{\\normalfont\\normalsize\\bfseries\\color{{usachDark}}}}
-  {{}}{{0pt}}
-  {{\\textcolor{{usachOrange}}{{\\rule[-.3ex]{{4pt}}{{1.2em}}}}\\hspace{{6pt}}}}
-\\titlespacing*{{\\section}}{{0pt}}{{1.2em}}{{0.6em}}
-\\titlespacing*{{\\subsection}}{{0pt}}{{1em}}{{0.4em}}
-
-% ── Cabeceras y pies ─────────────────────────────────────────────────────────
-\\usepackage{{fancyhdr}}
-\\pagestyle{{fancy}}
-\\fancyhf{{}}
-\\fancyhead[L]{{\\small\\color{{usachDark}} {tex_esc(INSTITUCION)}}}
-\\fancyhead[R]{{\\small\\color{{usachDark}} {tex_esc(PERIODO)}}}
-\\fancyfoot[C]{{\\small\\thepage}}
-\\renewcommand{{\\headrulewidth}}{{0.4pt}}
-
-% ── Misceláneos ──────────────────────────────────────────────────────────────
-\\usepackage{{parskip}}
-\\usepackage{{microtype}}
-\\usepackage{{hyperref}}
-\\hypersetup{{colorlinks=true, linkcolor=usachBlue, urlcolor=usachBlue}}
-
-\\begin{{document}}
-
-% ── Portada ──────────────────────────────────────────────────────────────────
-\\begin{{center}}
-  {{\\Large\\bfseries\\color{{usachDark}} {tex_esc(titulo_doc)}}}\\\\[0.4em]
-  {{\\large\\color{{usachTeal}} {tex_esc(INSTITUCION)}}}\\\\[0.2em]
-  {{\\normalsize\\color{{gray}} {tex_esc(PERIODO)}}}
-\\end{{center}}
-\\vspace{{0.5em}}
-\\textcolor{{usachTeal}}{{\\rule{{\\linewidth}}{{2pt}}}}
-\\vspace{{1em}}
-'
-  )
-}
-
-# ── Función: tabla LaTeX genérica ──────────────────────────────────────────────
-# encabezados: vector de strings
-# df: data.frame con las filas
-# fila_dest: índice de fila a destacar (NULL = ninguna)
-# col_izq: índices de columnas alineadas a la izquierda
-tabla_latex <- function(encabezados, df, fila_dest = NULL, col_izq = 1) {
+# -- Tabla LaTeX ---------------------------------------------------------------
+# IMPORTANTE: df debe tener valores ya listos para LaTeX (no se re-escapan).
+# tex_esc solo se aplica a 'encabezados' (texto plano).
+tabla_latex <- function(encabezados, df, fila_dest = NULL,
+                        col_izq = 1, ancho_x = FALSE) {
   n <- ncol(df)
-  # Especificación de columnas
-  col_spec <- vapply(seq_len(n), function(j) {
-    if (j %in% col_izq) "l" else "r"
-  }, character(1))
-  col_spec_str <- paste(col_spec, collapse = "")
+  if (ancho_x) {
+    specs <- vapply(seq_len(n), function(j)
+      if (j == col_izq[1]) "X" else if (j %in% col_izq) "l" else "r", character(1))
+    env_b <- paste0("\\begin{tabularx}{\\linewidth}{", paste(specs, collapse=""), "}")
+    env_e <- "\\end{tabularx}"
+  } else {
+    specs <- vapply(seq_len(n), function(j)
+      if (j %in% col_izq) "l" else "r", character(1))
+    env_b <- paste0("\\begin{tabular}{", paste(specs, collapse=""), "}")
+    env_e <- "\\end{tabular}"
+  }
 
-  # Cabecera
-  header <- paste(
-    paste0("\\\\textbf{\\\\textcolor{white}{", tex_esc(encabezados), "}}"),
-    collapse = " & "
-  )
+  head_cells <- paste0("\\textbf{\\textcolor{white}{", tex_esc(encabezados), "}}")
+  head_row   <- paste(head_cells, collapse = " & ")
 
-  # Filas
   filas <- vapply(seq_len(nrow(df)), function(i) {
-    vals <- vapply(seq_len(n), function(j) tex_esc(df[i, j]), character(1))
-    fila_str <- paste(vals, collapse = " & ")
-    color <- if (!is.null(fila_dest) && i == fila_dest)
-      "\\\\rowcolor{rowHighlight}"
-    else if (i %% 2 == 0)
-      "\\\\rowcolor{rowEven}"
-    else ""
-    paste0(color, fila_str, " \\\\\\\\")
+    vals <- vapply(seq_len(n), function(j) as.character(df[i, j]), character(1))
+    color <- if (!is.null(fila_dest) && i == fila_dest) "\\rowcolor{rowHighlight}"
+             else if (i %% 2 == 0) "\\rowcolor{rowEven}"
+             else ""
+    if (!is.null(fila_dest) && i == fila_dest) vals <- paste0("\\textbf{", vals, "}")
+    paste0(color, paste(vals, collapse = " & "), " \\\\")
   }, character(1))
 
-  paste0(
-    "\\\\begin{tabular}{", col_spec_str, "}\n",
-    "\\\\toprule\n",
-    "\\\\rowcolor{usachDark} ", header, " \\\\\\\\\n",
-    "\\\\midrule\n",
-    paste(filas, collapse = "\n"), "\n",
-    "\\\\bottomrule\n",
-    "\\\\end{tabular}\n"
+  paste(env_b, "\\toprule",
+        paste0("\\rowcolor{usachDark} ", head_row, " \\\\"),
+        "\\midrule",
+        paste(filas, collapse = "\n"),
+        "\\bottomrule", env_e, sep = "\n")
+}
+
+# -- Preambulo -----------------------------------------------------------------
+# Construido linea a linea con paste() para evitar ambiguedades de escaping.
+# Cada "\\cmd" en R = "\cmd" en el archivo .tex
+preambulo_latex <- function(titulo_doc) {
+  paste(
+    "\\documentclass[11pt, a4paper]{article}",
+    "",
+    "% -- Codificacion y fuentes",
+    "\\usepackage[utf8]{inputenc}",
+    "\\usepackage[T1]{fontenc}",
+    "\\usepackage[spanish]{babel}",
+    "\\usepackage{lmodern}",
+    "",
+    "% -- Margenes",
+    "\\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}",
+    "",
+    "% -- Colores institucionales",
+    "\\usepackage[table]{xcolor}",
+    "\\definecolor{usachTeal}{HTML}{00A499}",
+    "\\definecolor{usachOrange}{HTML}{EA7600}",
+    "\\definecolor{usachDark}{HTML}{394049}",
+    "\\definecolor{usachBlue}{HTML}{498BCA}",
+    "\\definecolor{usachGold}{HTML}{EAAA00}",
+    "\\definecolor{rowEven}{HTML}{F5F7F8}",
+    "\\definecolor{rowHighlight}{HTML}{FFF8E1}",
+    "",
+    "% -- Tablas",
+    "\\usepackage{booktabs}",
+    "\\usepackage{tabularx}",
+    "\\usepackage{array}",
+    "\\renewcommand{\\arraystretch}{1.35}",
+    "",
+    "% -- Secciones",
+    "\\usepackage{titlesec}",
+    "\\titleformat{\\section}[block]",
+    "  {\\normalfont\\large\\bfseries\\color{usachDark}}",
+    "  {}{}",
+    "  {\\colorbox{usachTeal}{\\textcolor{white}{\\hspace{4pt}\\thesection.\\hspace{4pt}}}\\hspace{6pt}}",
+    "\\titleformat{\\subsection}[block]",
+    "  {\\normalfont\\normalsize\\bfseries\\color{usachDark}}",
+    "  {}{}",
+    "  {\\textcolor{usachOrange}{\\rule[-.3ex]{4pt}{1.2em}}\\hspace{6pt}}",
+    "\\titlespacing*{\\section}{0pt}{1.2em}{0.6em}",
+    "\\titlespacing*{\\subsection}{0pt}{1em}{0.4em}",
+    "",
+    "% -- Encabezados y pies",
+    "\\usepackage{fancyhdr}",
+    "\\pagestyle{fancy}",
+    "\\fancyhf{}",
+    paste0("\\fancyhead[L]{\\small\\color{usachDark} ", tex_esc(INSTITUCION), "}"),
+    paste0("\\fancyhead[R]{\\small\\color{usachDark} ", tex_esc(PERIODO), "}"),
+    "\\fancyfoot[C]{\\small\\thepage}",
+    "\\renewcommand{\\headrulewidth}{0.4pt}",
+    "",
+    "% -- Miscelaneos",
+    "\\usepackage{parskip}",
+    "\\usepackage{microtype}",
+    "\\usepackage{amssymb}",
+    "\\usepackage{hyperref}",
+    "\\hypersetup{colorlinks=true, linkcolor=usachBlue, urlcolor=usachBlue}",
+    "",
+    "\\begin{document}",
+    "",
+    "% -- Portada",
+    "\\begin{center}",
+    paste0("  {\\Large\\bfseries\\color{usachDark} ", tex_esc(titulo_doc), "} \\\\[0.4em]"),
+    paste0("  {\\large\\color{usachTeal} ", tex_esc(INSTITUCION), "} \\\\[0.2em]"),
+    paste0("  {\\normalsize\\color{gray} ", tex_esc(PERIODO), "}"),
+    "\\end{center}",
+    "\\vspace{0.5em}",
+    "\\textcolor{usachTeal}{\\rule{\\linewidth}{2pt}}",
+    "\\vspace{1em}",
+    "",
+    sep = "\n"
   )
 }
 
 # =============================================================================
-# CARGA Y PREPARACIÓN — misma lógica que reporte_planeacion.Rmd
+# CARGA DE DATOS
 # =============================================================================
-
 cargar_base <- function(path) {
   read_excel(path) |>
     clean_names() |>
@@ -212,10 +214,10 @@ cargar_base <- function(path) {
         contrato == "JORNADA"  ~ "Jornada",
         contrato == "POR HORA" ~ "Por Hora",
         contrato == "SP"       ~ "Sin Planta",
-        TRUE                   ~ "Sin Información"
+        TRUE                   ~ "Sin Informacion"
       ),
-      en_claustro  = cargo == "ACADEMICO",
-      es_sello     = str_starts(tipo, "S"),
+      en_claustro = cargo == "ACADEMICO",
+      es_sello    = str_starts(tipo, "S"),
       across(c(horas_ped, eq_cron), ~ replace_na(as.numeric(.), 0))
     )
 }
@@ -232,8 +234,8 @@ aplicar_dedup <- function(df) {
     ungroup()
 }
 
-if (!file.exists(ARCHIVO_SEM))  stop(glue("No se encuentra: '{ARCHIVO_SEM}'"))
-if (!file.exists(ARCHIVO_HIST)) stop(glue("No se encuentra: '{ARCHIVO_HIST}'"))
+if (!file.exists(ARCHIVO_SEM))  stop(paste0("No se encuentra: '", ARCHIVO_SEM, "'"))
+if (!file.exists(ARCHIVO_HIST)) stop(paste0("No se encuentra: '", ARCHIVO_HIST, "'"))
 
 df_sem  <- cargar_base(ARCHIVO_SEM)  |> aplicar_dedup()
 df_hist <- cargar_base(ARCHIVO_HIST) |> aplicar_dedup()
@@ -247,34 +249,23 @@ periodos <- df_todo |>
   arrange(ano, periodo) |>
   mutate(etiq = map2_chr(ano, periodo, etiq_periodo))
 
-etiq_sem_actual <- etiq_periodo(sem_ano, sem_per)
-
-message(glue("Periodos: {paste(periodos$etiq, collapse=' | ')}"))
+message("Periodos: ", paste(periodos$etiq, collapse = " | "))
 
 # =============================================================================
-# FUNCIÓN PRINCIPAL: generar .tex por unidad
+# GENERADOR POR UNIDAD
 # =============================================================================
-
 generar_latex <- function(UP) {
   UP <- str_to_upper(str_squish(UP))
   nombre_unidad <- NOMBRES_UNIDAD[UP]
   if (is.na(nombre_unidad)) nombre_unidad <- str_to_title(UP)
 
-  # ── Datos del semestre actual para esta unidad ──────────────────────────────
   df_u <- df_sem |> filter(unidad_prof == UP)
-  if (nrow(df_u) == 0) {
-    message(glue("  OMITIDO {UP}: sin datos en el semestre actual"))
-    return(invisible(NULL))
-  }
+  if (nrow(df_u) == 0) { message("  OMITIDO ", UP); return(invisible(NULL)) }
 
-  # Nombre largo (para filtrar cursos de la unidad)
   nombre_largo_upper <- df_u |>
-    count(unidad_dep) |>
-    slice_max(n, n = 1, with_ties = FALSE) |>
-    pull(unidad_dep)
+    count(unidad_dep) |> slice_max(n, n=1, with_ties=FALSE) |> pull(unidad_dep)
 
-  # Cursos de la unidad (dedup local de sellos)
-  df_cursos <- df_sem |>
+  dc <- df_sem |>
     filter(unidad_dep == nombre_largo_upper) |>
     arrange(profesor, sec) |>
     mutate(
@@ -282,258 +273,237 @@ generar_latex <- function(UP) {
       horas_unidad    = if_else(sello_dup_local, 0L, as.integer(horas_ped))
     )
 
-  dc_pre  <- df_cursos |> filter(pre == "Pregrado")
-  dc_post <- df_cursos |> filter(pre == "Postgrado")
+  dc_pre  <- dc |> filter(pre == "Pregrado")
+  dc_post <- dc |> filter(pre == "Postgrado")
 
-  h <- function(data, ctrato = NULL) {
-    if (!is.null(ctrato)) data <- data |> filter(tipo_contrato == ctrato)
-    sum(data$horas_unidad, na.rm = TRUE)
-  }
+  hj  <- function(d) sum(d$horas_unidad[d$tipo_contrato=="Jornada"  & d$unidad_prof==UP])
+  hph <- function(d) sum(d$horas_unidad[d$tipo_contrato=="Por Hora"])
+  hxt <- function(d) sum(d$horas_unidad[d$tipo_contrato=="Jornada"  & d$unidad_prof!=UP])
+  hsp <- function(d) sum(d$horas_unidad[d$cargo=="SIN PROFESOR"])
+  ht  <- function(d) sum(d$horas_unidad)
 
-  # Horas por tipo y nivel
-  hj_pre   <- sum(dc_pre[dc_pre$tipo_contrato=="Jornada" & dc_pre$unidad_prof==UP,  ]$horas_unidad)
-  hph_pre  <- h(dc_pre,  "Por Hora")
-  hext_pre <- sum(dc_pre[dc_pre$tipo_contrato=="Jornada" & dc_pre$unidad_prof!=UP,  ]$horas_unidad)
-  hsp_pre  <- sum(dc_pre[dc_pre$cargo=="SIN PROFESOR", ]$horas_unidad)
-  tot_pre  <- h(dc_pre)
+  hj_p  <- hj(dc_pre);  hph_p <- hph(dc_pre);  hxt_p <- hxt(dc_pre)
+  hsp_p <- hsp(dc_pre); tot_p <- ht(dc_pre)
+  hj_g  <- hj(dc_post); hph_g <- hph(dc_post); hxt_g <- hxt(dc_post)
+  hsp_g <- hsp(dc_post);tot_g <- ht(dc_post)
+  tot   <- tot_p + tot_g
 
-  hj_post   <- sum(dc_post[dc_post$tipo_contrato=="Jornada" & dc_post$unidad_prof==UP, ]$horas_unidad)
-  hph_post  <- h(dc_post, "Por Hora")
-  hext_post <- sum(dc_post[dc_post$tipo_contrato=="Jornada" & dc_post$unidad_prof!=UP, ]$horas_unidad)
-  hsp_post  <- sum(dc_post[dc_post$cargo=="SIN PROFESOR", ]$horas_unidad)
-  tot_post  <- h(dc_post)
-  tot_gen   <- tot_pre + tot_post
+  pct <- function(n, d) if (!is.na(d) && d > 0) n / d else NA_real_
 
-  pct <- function(n, d) if (d > 0) round(n / d * 100) else 0
-
-  # Claustro (solo ACADEMICO)
   claustro <- df_u |>
     filter(en_claustro) |>
     group_by(profesor) |>
-    summarise(hp = sum(horas_prof), .groups = "drop") |>
+    summarise(hp = sum(horas_prof), .groups="drop") |>
     arrange(profesor)
 
-  n_claustro    <- nrow(claustro)
-  hp_tot_jornada <- df_u |> filter(tipo_contrato == "Jornada") |> pull(horas_prof) |> sum()
-  prom_hp       <- if (n_claustro > 0) round(hp_tot_jornada / n_claustro, 1) else 0
+  n_cl   <- nrow(claustro)
+  hp_jor <- df_u |> filter(tipo_contrato=="Jornada") |> pull(horas_prof) |> sum()
+  prom   <- if (n_cl > 0) round(hp_jor / n_cl, 1) else 0
 
-  # ── SECCIÓN 1: Horas planeadas ──────────────────────────────────────────────
-  tab1_df <- tibble(
-    Código      = c("A","i","ii","iii","iv","B","v","vi","vii","C"),
-    Descripción = c(
+  # -- Tabla 1: horas planeadas ------------------------------------------------
+  # Texto en Descripcion ya escapado con tex_esc; HP formateado con fmt_hp
+  tab1 <- data.frame(
+    Cod = c("A","i","ii","iii","iv","B","v","vi","vii","C"),
+    Descripcion = tex_esc(c(
       "Horas planeadas pregrado",
-      "Jornada propia",
-      "Por hora de clase",
-      "Jornada externa",
-      "Sin profesor asignado",
+      "Jornada propia","Por hora de clase","Jornada externa","Sin profesor asignado",
       "Horas planeadas postgrado",
-      "Jornada propia",
-      "Por hora de clase",
-      "Jornada externa",
+      "Jornada propia","Por hora de clase","Jornada externa",
       "Total horas planeadas (A+B)"
-    ),
-    HP = c(tot_pre, hj_pre, hph_pre, hext_pre, hsp_pre,
-           tot_post, hj_post, hph_post, hext_post, tot_gen) |>
-      vapply(fmt_hp, character(1))
+    )),
+    HP = vapply(c(tot_p,hj_p,hph_p,hxt_p,hsp_p,
+                  tot_g,hj_g,hph_g,hxt_g,tot),
+                fmt_hp, character(1)),
+    stringsAsFactors = FALSE
   )
 
-  filas_dest1 <- c(1, 6, 10)
-
-  # Tabla con filas destacadas manualmente
+  # Tabla 1 manual con filas especiales en negrita
   tabla1 <- local({
-    n <- ncol(tab1_df)
-    header <- paste(
-      paste0("\\textbf{\\textcolor{white}{", tex_esc(names(tab1_df)), "}}"),
-      collapse = " & "
-    )
-    filas <- vapply(seq_len(nrow(tab1_df)), function(i) {
-      vals <- vapply(seq_len(n), function(j) tex_esc(tab1_df[i, j]), character(1))
-      color <- if (i %in% filas_dest1) "\\rowcolor{usachGold!25}"
-               else if (i %% 2 == 0)  "\\rowcolor{rowEven}"
-               else ""
-      bold  <- if (i %in% filas_dest1) {
-        paste0("\\textbf{", vals, "}")
-      } else vals
-      paste0(color, paste(bold, collapse = " & "), " \\\\")
+    dest <- c(1, 6, 10)
+    hdr  <- paste(paste0("\\textbf{\\textcolor{white}{",
+                          tex_esc(c("Cód.","Descripción","HP")), "}}"),
+                  collapse = " & ")
+    rows <- vapply(seq_len(nrow(tab1)), function(i) {
+      v <- as.character(tab1[i,])
+      col <- if (i %in% dest) "\\rowcolor{rowHighlight}" else
+             if (i %% 2 == 0) "\\rowcolor{rowEven}" else ""
+      if (i %in% dest) v <- paste0("\\textbf{", v, "}")
+      paste0(col, paste(v, collapse=" & "), " \\\\")
     }, character(1))
-    paste0(
-      "\\begin{tabularx}{\\linewidth}{l X r}\n",
-      "\\toprule\n",
-      "\\rowcolor{usachDark} ", header, " \\\\\n",
-      "\\midrule\n",
-      paste(filas, collapse = "\n"), "\n",
-      "\\bottomrule\n",
-      "\\end{tabularx}\n"
-    )
+    paste("\\begin{tabularx}{\\linewidth}{l X r}", "\\toprule",
+          paste0("\\rowcolor{usachDark} ", hdr, " \\\\"),
+          "\\midrule", paste(rows, collapse="\n"),
+          "\\bottomrule", "\\end{tabularx}", sep="\n")
   })
 
-  # ── SECCIÓN 2: Cobertura ────────────────────────────────────────────────────
-  tab2_df <- tibble(
-    `Tipo de contrato` = c("Jornada propia", "Por hora de clase",
-                           "Jornada externa", "Sin profesor"),
-    Pregrado  = c(pct(hj_pre,   tot_pre), pct(hph_pre,  tot_pre),
-                  pct(hext_pre, tot_pre), pct(hsp_pre,  tot_pre)) |>
-                vapply(function(x) paste0(x, "\\%"), character(1)),
-    Postgrado = c(pct(hj_post,   tot_post), pct(hph_post,  tot_post),
-                  pct(hext_post, tot_post), pct(hsp_post,  tot_post)) |>
-                vapply(function(x) paste0(x, "\\%"), character(1)),
-    Total     = c(pct(hj_pre+hj_post,     tot_gen),
-                  pct(hph_pre+hph_post,   tot_gen),
-                  pct(hext_pre+hext_post, tot_gen),
-                  pct(hsp_pre+hsp_post,   tot_gen)) |>
-                vapply(function(x) paste0(x, "\\%"), character(1))
+  # -- Tabla 2: cobertura ------------------------------------------------------
+  tab2 <- data.frame(
+    Tipo      = tex_esc(c("Jornada propia","Por hora de clase",
+                           "Jornada externa","Sin profesor")),
+    Pregrado  = vapply(c(pct(hj_p,tot_p),pct(hph_p,tot_p),
+                          pct(hxt_p,tot_p),pct(hsp_p,tot_p)), fmt_pct, character(1)),
+    Postgrado = vapply(c(pct(hj_g,tot_g),pct(hph_g,tot_g),
+                          pct(hxt_g,tot_g),pct(hsp_g,tot_g)), fmt_pct, character(1)),
+    Total     = vapply(c(pct(hj_p+hj_g,tot),pct(hph_p+hph_g,tot),
+                          pct(hxt_p+hxt_g,tot),pct(hsp_p+hsp_g,tot)),
+                       fmt_pct, character(1)),
+    stringsAsFactors = FALSE
   )
-  tabla2 <- tabla_latex(names(tab2_df), tab2_df, col_izq = 1)
+  tabla2 <- tabla_latex(c("Tipo de contrato","Pregrado","Postgrado","Total"), tab2, col_izq=1)
 
-  # ── SECCIÓN 3: Claustro ─────────────────────────────────────────────────────
-  cumple_str <- if (prom_hp >= NORMA_PROM_HP)
-    paste0("\\textcolor{green!60!black}{\\textbf{Cumple}} (", prom_hp, " HP)")
+  # -- Tabla 3: claustro -------------------------------------------------------
+  tab3 <- data.frame(
+    Academico = tex_esc(claustro$profesor),
+    HP        = fmt_hp(claustro$hp),
+    stringsAsFactors = FALSE
+  )
+  tabla3 <- tabla_latex(c("Académico","HP"), tab3, col_izq=1)
+
+  cumple_str <- if (prom >= NORMA_PROM_HP)
+    paste0("\\textcolor{green!60!black}{\\textbf{Cumple}} (", prom, " HP)")
   else
-    paste0("\\textcolor{red!70!black}{\\textbf{No cumple}} (", prom_hp, " HP)")
+    paste0("\\textcolor{red!70!black}{\\textbf{No cumple}} (", prom, " HP)")
 
-  tab3_df <- claustro |>
-    mutate(
-      Profesor = tex_esc(profesor),
-      HP       = fmt_hp(hp)
-    ) |>
-    select(Profesor, HP)
+  # -- Comparativos ------------------------------------------------------------
+  fila_act <- which(periodos$ano==sem_ano & periodos$periodo==sem_per)
 
-  tabla3 <- tabla_latex(c("Académico", "HP"), as.data.frame(tab3_df), col_izq = 1)
-
-  # ── SECCIÓN 4: Comparativos históricos ─────────────────────────────────────
-  fila_act <- which(periodos$ano == sem_ano & periodos$periodo == sem_per)
-
-  # Helper: cursos de la unidad en un periodo con dedup local
   cursos_per <- function(anio, per) {
-    nl <- df_todo |>
-      filter(unidad_prof == UP, ano == anio, periodo == per) |>
-      count(unidad_dep) |>
-      slice_max(n, n = 1, with_ties = FALSE) |>
-      pull(unidad_dep)
-    if (length(nl) == 0) return(NULL)
-    df_todo |>
-      filter(unidad_dep == nl, ano == anio, periodo == per) |>
+    dp <- df_todo |> filter(unidad_prof==UP, ano==anio, periodo==per)
+    if (nrow(dp)==0) return(NULL)
+    nl <- dp |> count(unidad_dep) |> slice_max(n,n=1,with_ties=FALSE) |> pull(unidad_dep)
+    df_todo |> filter(unidad_dep==nl, ano==anio, periodo==per) |>
       arrange(profesor, sec) |>
       mutate(
-        sello_dup_local = es_sello & duplicated(paste(profesor, sec)),
+        sello_dup_local = es_sello & duplicated(paste(profesor,sec)),
         horas_unidad    = if_else(sello_dup_local, 0L, as.integer(horas_ped))
       )
   }
 
-  # Tabla comp 1: horas planeadas
   tcomp1 <- map_dfr(seq_len(nrow(periodos)), function(i) {
-    dc <- cursos_per(periodos$ano[i], periodos$periodo[i])
-    if (is.null(dc))
-      return(tibble(Periodo=periodos$etiq[i], Jornada="---", `Por hora`="---", SP="---", Total="---"))
-    hp_j <- sum(dc$horas_unidad[dc$tipo_contrato=="Jornada"])
-    hp_h <- sum(dc$horas_unidad[dc$tipo_contrato=="Por Hora"])
-    hp_s <- sum(dc$horas_unidad[dc$tipo_contrato=="Sin Planta"])
-    tibble(Periodo=periodos$etiq[i], Jornada=fmt_hp(hp_j),
-           `Por hora`=fmt_hp(hp_h), SP=fmt_hp(hp_s), Total=fmt_hp(hp_j+hp_h+hp_s))
+    d <- cursos_per(periodos$ano[i], periodos$periodo[i])
+    if (is.null(d)) return(data.frame(Periodo=periodos$etiq[i],Jornada="---",
+                           `Por hora`="---",SP="---",Total="---",check.names=FALSE))
+    hp_j <- sum(d$horas_unidad[d$tipo_contrato=="Jornada"])
+    hp_h <- sum(d$horas_unidad[d$tipo_contrato=="Por Hora"])
+    hp_s <- sum(d$horas_unidad[d$tipo_contrato=="Sin Planta"])
+    data.frame(Periodo=periodos$etiq[i],Jornada=fmt_hp(hp_j),
+               `Por hora`=fmt_hp(hp_h),SP=fmt_hp(hp_s),
+               Total=fmt_hp(hp_j+hp_h+hp_s),check.names=FALSE)
   })
 
-  # Tabla comp 2: cobertura
   tcomp2 <- map_dfr(seq_len(nrow(periodos)), function(i) {
-    dc <- cursos_per(periodos$ano[i], periodos$periodo[i])
-    if (is.null(dc))
-      return(tibble(Periodo=periodos$etiq[i], Jornada="---", `Por hora`="---", SP="---"))
-    hp_j <- sum(dc$horas_unidad[dc$tipo_contrato=="Jornada"])
-    hp_h <- sum(dc$horas_unidad[dc$tipo_contrato=="Por Hora"])
-    hp_s <- sum(dc$horas_unidad[dc$tipo_contrato=="Sin Planta"])
-    tot  <- hp_j + hp_h + hp_s
-    tibble(Periodo=periodos$etiq[i],
-           Jornada    = fmt_pct(if(tot>0) hp_j/tot else NA),
-           `Por hora` = fmt_pct(if(tot>0) hp_h/tot else NA),
-           SP         = fmt_pct(if(tot>0) hp_s/tot else NA))
+    d <- cursos_per(periodos$ano[i], periodos$periodo[i])
+    if (is.null(d)) return(data.frame(Periodo=periodos$etiq[i],Jornada="---",
+                           `Por hora`="---",SP="---",check.names=FALSE))
+    hp_j <- sum(d$horas_unidad[d$tipo_contrato=="Jornada"])
+    hp_h <- sum(d$horas_unidad[d$tipo_contrato=="Por Hora"])
+    hp_s <- sum(d$horas_unidad[d$tipo_contrato=="Sin Planta"])
+    tt   <- hp_j+hp_h+hp_s
+    data.frame(Periodo=periodos$etiq[i],
+               Jornada    = fmt_pct(if(tt>0) hp_j/tt else NA),
+               `Por hora` = fmt_pct(if(tt>0) hp_h/tt else NA),
+               SP         = fmt_pct(if(tt>0) hp_s/tt else NA),
+               check.names=FALSE)
   })
 
-  # Tabla comp 3: promedio claustro
   tcomp3 <- map_dfr(seq_len(nrow(periodos)), function(i) {
-    dp <- df_todo |> filter(unidad_prof==UP, ano==periodos$ano[i], periodo==periodos$periodo[i])
-    if (nrow(dp) == 0)
-      return(tibble(Periodo=periodos$etiq[i], `N acad.`="---",
-                    `HP jornada`="---", Promedio="---", Norma="---"))
-    n_cl   <- dp |> filter(en_claustro) |> distinct(profesor) |> nrow()
-    hp_jor <- dp |> filter(tipo_contrato=="Jornada") |> pull(horas_prof) |> sum(na.rm=TRUE)
-    prom   <- if (n_cl > 0) round(hp_jor / n_cl, 1) else NA
-    norma  <- if (is.na(prom)) "---" else
-              if (prom >= NORMA_PROM_HP) "$\\checkmark$" else "$\\times$"
-    tibble(Periodo=periodos$etiq[i], `N acad.`=as.character(n_cl),
-           `HP jornada`=fmt_hp(hp_jor),
-           Promedio=ifelse(is.na(prom),"---",as.character(prom)),
-           Norma=norma)
+    dp <- df_todo |> filter(unidad_prof==UP,ano==periodos$ano[i],periodo==periodos$periodo[i])
+    if (nrow(dp)==0) return(data.frame(Periodo=periodos$etiq[i],`N acad.`="---",
+                            `HP jornada`="---",Promedio="---",Norma="---",check.names=FALSE))
+    nc  <- dp |> filter(en_claustro) |> distinct(profesor) |> nrow()
+    hpj <- dp |> filter(tipo_contrato=="Jornada") |> pull(horas_prof) |> sum(na.rm=TRUE)
+    pr  <- if(nc>0) round(hpj/nc,1) else NA_real_
+    nrm <- if(is.na(pr)) "---" else if(pr>=NORMA_PROM_HP) "$\\checkmark$" else "$\\times$"
+    data.frame(Periodo=periodos$etiq[i],`N acad.`=as.character(nc),
+               `HP jornada`=fmt_hp(hpj),
+               Promedio=ifelse(is.na(pr),"---",as.character(pr)),
+               Norma=nrm, check.names=FALSE)
   })
 
-  tabla_comp1 <- tabla_latex(names(tcomp1), as.data.frame(tcomp1), fila_dest=fila_act, col_izq=1)
-  tabla_comp2 <- tabla_latex(names(tcomp2), as.data.frame(tcomp2), fila_dest=fila_act, col_izq=1)
-  tabla_comp3 <- tabla_latex(names(tcomp3), as.data.frame(tcomp3), fila_dest=fila_act, col_izq=1)
+  tc1 <- tabla_latex(names(tcomp1), tcomp1, fila_dest=fila_act, col_izq=1)
+  tc2 <- tabla_latex(names(tcomp2), tcomp2, fila_dest=fila_act, col_izq=1)
+  tc3 <- tabla_latex(names(tcomp3), tcomp3, fila_dest=fila_act, col_izq=1)
 
-  # ── Ensamblar documento ─────────────────────────────────────────────────────
-  fecha_gen <- format(Sys.time(), "%d/%m/%Y")
+  # -- Ensamblar ---------------------------------------------------------------
+  fecha_gen  <- format(Sys.time(), "%d/%m/%Y")
+  etiq_rango <- paste0(periodos$etiq[1], " -- ", periodos$etiq[nrow(periodos)])
 
-  cuerpo <- paste0(
-    preambulo(nombre_unidad),
-
-    "\\section{Horas planeadas del departamento}\n\n",
-    "Las horas pedagógicas (HP) planeadas para el ", tex_esc(PERIODO),
-    " se distribuyen según el tipo de contrato del docente y el nivel de estudios.\n\n",
-    tabla1, "\n\n",
-
-    "\\subsection{Cobertura según tipo de contrato}\n\n",
-    tabla2, "\n\n",
-
-    "\\section{Claustro académico}\n\n",
-    "El promedio de horas pedagógicas del claustro es: ", cumple_str,
-    ". La norma institucional es de \\textbf{", NORMA_PROM_HP, " HP}.\n\n",
-    "\\textit{Numerador}: HP de todos los jornada (académicos + autoridades). ",
-    "\\textit{Denominador}: solo académicos con cargo ACADÉMICO.\n\n",
-    tabla3, "\n\n",
-
-    "\\section{Evolución histórica (", tex_esc(periodos$etiq[1]), "–",
-    tex_esc(periodos$etiq[nrow(periodos)]), ")}\n\n",
-    "\\textit{El semestre en curso aparece destacado en amarillo.}\n\n",
-
-    "\\subsection{Horas planeadas por período}\n\n",
-    tabla_comp1, "\n\n",
-
-    "\\subsection{Cobertura por tipo de contrato}\n\n",
-    tabla_comp2, "\n\n",
-
-    "\\subsection{Promedio HP del claustro por período}\n\n",
-    "Norma: $\\geq$ ", NORMA_PROM_HP, " HP. ",
-    "$\\checkmark$ = cumple~~~$\\times$ = no cumple\n\n",
-    tabla_comp3, "\n\n",
-
-    "\\vfill\n",
-    "\\textcolor{gray}{\\footnotesize Base elaborada a partir de los registros de ",
-    "planeación docente FAHU. Código elaborado por Pablo Valenzuela con apoyo de ",
-    "Claude de Anthropic. Generado el ", fecha_gen, ".}\n\n",
-
-    "\\end{document}\n"
+  cuerpo <- paste(
+    preambulo_latex(nombre_unidad),
+    "\\section{Horas planeadas del departamento}",
+    "",
+    paste0("Las horas pedagógicas (HP) planeadas para el ",
+           tex_esc(PERIODO), " se distribuyen según el tipo de",
+           " contrato del docente y el nivel de estudios."),
+    "",
+    tabla1,
+    "",
+    "\\subsection{Cobertura según tipo de contrato}",
+    "",
+    tabla2,
+    "",
+    "\\section{Claustro académico}",
+    "",
+    paste0("El promedio de HP del claustro es: ", cumple_str,
+           ". Norma institucional: \\textbf{", NORMA_PROM_HP, " HP}."),
+    "",
+    paste0("\\textit{Numerador}: HP de todos los jornada (académicos + autoridades). ",
+           "\\textit{Denominador}: solo académicos con cargo ACADÉMICO."),
+    "",
+    tabla3,
+    "",
+    paste0("\\section{Evolución histórica (", etiq_rango, ")}"),
+    "",
+    "\\textit{El semestre en curso aparece destacado en amarillo.}",
+    "",
+    "\\subsection{Horas planeadas por período}",
+    "",
+    tc1,
+    "",
+    "\\subsection{Cobertura por tipo de contrato}",
+    "",
+    tc2,
+    "",
+    "\\subsection{Promedio HP del claustro por período}",
+    "",
+    paste0("Norma: $\\geq$ ", NORMA_PROM_HP, " HP.\\quad",
+           "$\\checkmark$ = cumple \\quad $\\times$ = no cumple"),
+    "",
+    tc3,
+    "",
+    "\\vfill",
+    paste0("{\\footnotesize\\color{gray} Elaborado a partir de los registros de",
+           " planeación docente FAHU. Generado el ", fecha_gen, ".}"),
+    "",
+    "\\end{document}",
+    sep = "\n"
   )
 
   ruta <- file.path(CARPETA_LATEX, paste0(slug(UP), ".tex"))
   writeLines(cuerpo, ruta, useBytes = TRUE)
-  message(glue("    OK {basename(ruta)}"))
+  message("    OK ", basename(ruta))
 }
 
 # =============================================================================
-# EJECUCIÓN
+# EJECUCION
 # =============================================================================
-
 if (!dir.exists(CARPETA_LATEX)) dir.create(CARPETA_LATEX, recursive = TRUE)
 
+# Una clave por unidad (evitar duplicados con/sin tilde)
 unidades <- names(NOMBRES_UNIDAD)
-message(glue("\nGenerando {length(unidades)} archivos .tex...\n"))
-generados <- character(0); errores <- character(0)
+unidades <- unidades[!duplicated(slug(unidades))]
+
+message("\nGenerando ", length(unidades), " archivos .tex...\n")
+generados <- character(0)
+errores   <- character(0)
 
 for (u in unidades) {
-  message(glue("  {u}..."))
+  message("  ", u, "...")
   tryCatch({
     generar_latex(u)
     generados <- c(generados, slug(u))
   }, error = function(e) {
-    message(glue("    ERROR: {conditionMessage(e)}"))
+    message("    ERROR: ", conditionMessage(e))
     errores <<- c(errores, u)
   })
 }
@@ -541,8 +511,7 @@ for (u in unidades) {
 cat("\n=====================================================\n")
 cat("  ARCHIVOS LaTeX GENERADOS\n")
 cat("=====================================================\n")
-cat(glue("  Carpeta: {CARPETA_LATEX}/\n"))
-cat(glue("  Total:   {length(generados)} archivo(s)\n"))
-if (length(errores) > 0)
-  cat(glue("  Fallaron: {paste(errores, collapse=', ')}\n"))
+cat("  Carpeta: ", CARPETA_LATEX, "/\n", sep="")
+cat("  Total:   ", length(generados), " archivo(s)\n", sep="")
+if (length(errores) > 0) cat("  Fallaron: ", paste(errores, collapse=", "), "\n", sep="")
 cat("\n")
