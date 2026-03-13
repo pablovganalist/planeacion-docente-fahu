@@ -1,0 +1,179 @@
+\\documentclass[11pt, a4paper]{article}
+
+% ── Codificación y fuentes ──────────────────────────────────────────────────
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage[spanish]{babel}
+\\usepackage{lmodern}
+
+% ── Márgenes ────────────────────────────────────────────────────────────────
+\\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+
+% ── Colores institucionales ──────────────────────────────────────────────────
+\\usepackage[table]{xcolor}
+\\definecolor{usachTeal}{HTML}{00A499}
+\\definecolor{usachOrange}{HTML}{EA7600}
+\\definecolor{usachDark}{HTML}{394049}
+\\definecolor{usachBlue}{HTML}{498BCA}
+\\definecolor{usachGold}{HTML}{EAAA00}
+\\definecolor{rowEven}{HTML}{F5F7F8}
+\\definecolor{rowHighlight}{HTML}{FFF8E1}
+
+% ── Tablas ──────────────────────────────────────────────────────────────────
+\\usepackage{booktabs}
+\\usepackage{tabularx}
+\\usepackage{multirow}
+\\usepackage{array}
+\\renewcommand{\\arraystretch}{1.35}
+
+% ── Encabezados y secciones ─────────────────────────────────────────────────
+\\usepackage{titlesec}
+\\titleformat{\\section}[block]
+  {\\normalfont\\large\\bfseries\\color{usachDark}}
+  {}{0pt}
+  {\\colorbox{usachTeal}{\\textcolor{white}{\\hspace{4pt}\\thesection.\\hspace{4pt}}}\\hspace{6pt}}
+\\titleformat{\\subsection}[block]
+  {\\normalfont\\normalsize\\bfseries\\color{usachDark}}
+  {}{0pt}
+  {\\textcolor{usachOrange}{\\rule[-.3ex]{4pt}{1.2em}}\\hspace{6pt}}
+\\titlespacing*{\\section}{0pt}{1.2em}{0.6em}
+\\titlespacing*{\\subsection}{0pt}{1em}{0.4em}
+
+% ── Cabeceras y pies ─────────────────────────────────────────────────────────
+\\usepackage{fancyhdr}
+\\pagestyle{fancy}
+\\fancyhf{}
+\\fancyhead[L]{\\small\\color{usachDark} Facultad de Humanidades}
+\\fancyhead[R]{\\small\\color{usachDark} Primer semestre 2026}
+\\fancyfoot[C]{\\small\\thepage}
+\\renewcommand{\\headrulewidth}{0.4pt}
+
+% ── Misceláneos ──────────────────────────────────────────────────────────────
+\\usepackage{parskip}
+\\usepackage{microtype}
+\\usepackage{hyperref}
+\\hypersetup{colorlinks=true, linkcolor=usachBlue, urlcolor=usachBlue}
+
+\\begin{document}
+
+% ── Portada ──────────────────────────────────────────────────────────────────
+\\begin{center}
+  {\\Large\\bfseries\\color{usachDark} Departamento de Historia}\\\\[0.4em]
+  {\\large\\color{usachTeal} Facultad de Humanidades}\\\\[0.2em]
+  {\\normalsize\\color{gray} Primer semestre 2026}
+\\end{center}
+\\vspace{0.5em}
+\\textcolor{usachTeal}{\\rule{\\linewidth}{2pt}}
+\\vspace{1em}\section{Horas planeadas del departamento}
+
+Las horas pedagógicas (HP) planeadas para el Primer semestre 2026 se distribuyen según el tipo de contrato del docente y el nivel de estudios.
+
+\begin{tabularx}{\linewidth}{l X r}
+\toprule
+\rowcolor{usachDark} \textbf{\textcolor{white}{Código}} & \textbf{\textcolor{white}{Descripción}} & \textbf{\textcolor{white}{HP}} \\
+\midrule
+\rowcolor{usachGold!25}\textbf{A} & \textbf{Horas planeadas pregrado} & \textbf{993} \\
+\rowcolor{rowEven}i & Jornada propia & 222 \\
+ii & Por hora de clase & 647 \\
+\rowcolor{rowEven}iii & Jornada externa & 58 \\
+iv & Sin profesor asignado & 66 \\
+\rowcolor{usachGold!25}\textbf{B} & \textbf{Horas planeadas postgrado} & \textbf{166} \\
+v & Jornada propia & 122 \\
+\rowcolor{rowEven}vi & Por hora de clase & 12 \\
+vii & Jornada externa & 12 \\
+\rowcolor{usachGold!25}\textbf{C} & \textbf{Total horas planeadas (A+B)} & \textbf{1.159} \\
+\bottomrule
+\end{tabularx}
+
+
+\subsection{Cobertura según tipo de contrato}
+
+\\begin{tabular}{lrrr}
+\\toprule
+\\rowcolor{usachDark} \\textbf{\\textcolor{white}{Tipo de contrato}} & \\textbf{\\textcolor{white}{Pregrado}} & \\textbf{\\textcolor{white}{Postgrado}} & \\textbf{\\textcolor{white}{Total}} \\\\
+\\midrule
+Jornada propia & 22\textbackslash\{\}\% & 73\textbackslash\{\}\% & 30\textbackslash\{\}\% \\\\
+\\rowcolor{rowEven}Por hora de clase & 65\textbackslash\{\}\% & 7\textbackslash\{\}\% & 57\textbackslash\{\}\% \\\\
+Jornada externa & 6\textbackslash\{\}\% & 7\textbackslash\{\}\% & 6\textbackslash\{\}\% \\\\
+\\rowcolor{rowEven}Sin profesor & 7\textbackslash\{\}\% & 12\textbackslash\{\}\% & 7\textbackslash\{\}\% \\\\
+\\bottomrule
+\\end{tabular}
+
+
+\section{Claustro académico}
+
+El promedio de horas pedagógicas del claustro es: \textcolor{green!60!black}{\textbf{Cumple}} (36 HP). La norma institucional es de \textbf{12 HP}.
+
+\textit{Numerador}: HP de todos los jornada (académicos + autoridades). \textit{Denominador}: solo académicos con cargo ACADÉMICO.
+
+\\begin{tabular}{lr}
+\\toprule
+\\rowcolor{usachDark} \\textbf{\\textcolor{white}{Académico}} & \\textbf{\\textcolor{white}{HP}} \\\\
+\\midrule
+Adriana Isabel Palomera Valenzuela & 14 \\\\
+\\rowcolor{rowEven}Carolina Garcia Gonzalez & 36 \\\\
+Christian Retamal Hernandez & 20 \\\\
+\\rowcolor{rowEven}Claudio Perez Silva & 28 \\\\
+Igor Goicovic Donoso & 20 \\\\
+\\rowcolor{rowEven}Lucia Victoria Valencia Castaneda & 24 \\\\
+Mariana Sofía Labarca Pinto & 47 \\\\
+\\rowcolor{rowEven}Mario Garces Duran & 22 \\\\
+Rolando Eugenio Alvarez Vallejos & 27 \\\\
+\\rowcolor{rowEven}Xochitl Guadalupe Inostroza Ponce & 60 \\\\
+\\bottomrule
+\\end{tabular}
+
+
+\section{Evolución histórica (2\textbackslash\{\}textsuperscript\{do\} sem. 2024–1\textbackslash\{\}textsuperscript\{er\} sem. 2026)}
+
+\textit{El semestre en curso aparece destacado en amarillo.}
+
+\subsection{Horas planeadas por período}
+
+\\begin{tabular}{lrrrr}
+\\toprule
+\\rowcolor{usachDark} \\textbf{\\textcolor{white}{Periodo}} & \\textbf{\\textcolor{white}{Jornada}} & \\textbf{\\textcolor{white}{Por hora}} & \\textbf{\\textcolor{white}{SP}} & \\textbf{\\textcolor{white}{Total}} \\\\
+\\midrule
+2\textbackslash\{\}textsuperscript\{do\} sem. 2024 & 391 & 972 & 56 & 1.419 \\\\
+\\rowcolor{rowEven}1\textbackslash\{\}textsuperscript\{er\} sem. 2025 & 412 & 605 & 20 & 1.037 \\\\
+2\textbackslash\{\}textsuperscript\{do\} sem. 2025 & 459 & 965 & 42 & 1.466 \\\\
+\\rowcolor{rowHighlight}1\textbackslash\{\}textsuperscript\{er\} sem. 2026 & 414 & 659 & 86 & 1.159 \\\\
+\\bottomrule
+\\end{tabular}
+
+
+\subsection{Cobertura por tipo de contrato}
+
+\\begin{tabular}{lrrr}
+\\toprule
+\\rowcolor{usachDark} \\textbf{\\textcolor{white}{Periodo}} & \\textbf{\\textcolor{white}{Jornada}} & \\textbf{\\textcolor{white}{Por hora}} & \\textbf{\\textcolor{white}{SP}} \\\\
+\\midrule
+2\textbackslash\{\}textsuperscript\{do\} sem. 2024 & 27.6\textbackslash\{\}\% & 68.5\textbackslash\{\}\% & 3.9\textbackslash\{\}\% \\\\
+\\rowcolor{rowEven}1\textbackslash\{\}textsuperscript\{er\} sem. 2025 & 39.7\textbackslash\{\}\% & 58.3\textbackslash\{\}\% & 1.9\textbackslash\{\}\% \\\\
+2\textbackslash\{\}textsuperscript\{do\} sem. 2025 & 31.3\textbackslash\{\}\% & 65.8\textbackslash\{\}\% & 2.9\textbackslash\{\}\% \\\\
+\\rowcolor{rowHighlight}1\textbackslash\{\}textsuperscript\{er\} sem. 2026 & 35.7\textbackslash\{\}\% & 56.9\textbackslash\{\}\% & 7.4\textbackslash\{\}\% \\\\
+\\bottomrule
+\\end{tabular}
+
+
+\subsection{Promedio HP del claustro por período}
+
+Norma: $\geq$ 12 HP. $\checkmark$ = cumple~~~$\times$ = no cumple
+
+\\begin{tabular}{lrrrr}
+\\toprule
+\\rowcolor{usachDark} \\textbf{\\textcolor{white}{Periodo}} & \\textbf{\\textcolor{white}{N acad.}} & \\textbf{\\textcolor{white}{HP jornada}} & \\textbf{\\textcolor{white}{Promedio}} & \\textbf{\\textcolor{white}{Norma}} \\\\
+\\midrule
+2\textbackslash\{\}textsuperscript\{do\} sem. 2024 & 12 & 277 & 23.1 & \$\textbackslash\{\}checkmark\$ \\\\
+\\rowcolor{rowEven}1\textbackslash\{\}textsuperscript\{er\} sem. 2025 & 12 & 346 & 28.8 & \$\textbackslash\{\}checkmark\$ \\\\
+2\textbackslash\{\}textsuperscript\{do\} sem. 2025 & 11 & 321 & 29.2 & \$\textbackslash\{\}checkmark\$ \\\\
+\\rowcolor{rowHighlight}1\textbackslash\{\}textsuperscript\{er\} sem. 2026 & 10 & 360 & 36 & \$\textbackslash\{\}checkmark\$ \\\\
+\\bottomrule
+\\end{tabular}
+
+
+\vfill
+\textcolor{gray}{\footnotesize Base elaborada a partir de los registros de planeación docente FAHU. Código elaborado por Pablo Valenzuela con apoyo de Claude de Anthropic. Generado el 13/03/2026.}
+
+\end{document}
+
