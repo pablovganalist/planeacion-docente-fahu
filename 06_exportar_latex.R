@@ -68,7 +68,8 @@ fmt_pct <- function(x) ifelse(is.na(x), "---",
                                paste0(formatC(x * 100, format="f", digits=1), "\\%"))
 
 etiq_periodo <- function(anio, per) {
-  sem <- if (per == 1) "1\\textsuperscript{er} sem." else "2\\textsuperscript{do} sem."
+  if (is.na(per) || is.na(anio)) return(NA_character_)
+  sem <- if (isTRUE(per == 1)) "1\\textsuperscript{er} sem." else "2\\textsuperscript{do} sem."
   paste(sem, anio)
 }
 
@@ -249,6 +250,7 @@ sem_per <- max(df_sem$periodo, na.rm = TRUE)
 
 periodos <- df_todo |>
   distinct(ano, periodo) |>
+  filter(!is.na(ano), !is.na(periodo)) |>
   arrange(ano, periodo) |>
   mutate(etiq = map2_chr(ano, periodo, etiq_periodo))
 
