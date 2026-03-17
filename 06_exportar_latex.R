@@ -489,9 +489,11 @@ generar_latex <- function(UP) {
 # =============================================================================
 if (!dir.exists(CARPETA_LATEX)) dir.create(CARPETA_LATEX, recursive = TRUE)
 
-# Una clave por unidad (evitar duplicados con/sin tilde)
-unidades <- names(NOMBRES_UNIDAD)
-unidades <- unidades[!duplicated(slug(unidades))]
+# Usar las claves con tilde — coinciden exactamente con los datos
+unidades <- c(
+  "HISTORIA", "EDUCACIÓN", "ESTUDIOS POLÍTICOS", "FILOSOFÍA",
+  "LINGÜÍSTICA Y LITERATURA", "PERIODISMO", "PSICOLOGÍA"
+)
 
 message("\nGenerando ", length(unidades), " archivos .tex...\n")
 generados <- character(0)
