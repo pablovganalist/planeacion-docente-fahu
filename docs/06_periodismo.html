@@ -203,6 +203,41 @@ p.cod-programa {
   background: #394049;
 }
 
+/* ── Claustro expandible ─────────────────────────────────── */
+tr.acad-row { cursor: pointer; transition: background .15s; }
+tr.acad-row:hover { background: #E8F8F7 !important; }
+tr.acad-row.abierto { background: #E8F8F7 !important; font-weight: 600; }
+td.td-nombre { display: flex; align-items: center; gap: .5rem; }
+.flecha {
+  display: inline-block; width: 14px; font-size: 10px;
+  color: #00A499; transition: transform .2s; flex-shrink: 0;
+}
+tr.acad-row.abierto .flecha { transform: rotate(90deg); }
+tr.detalle-row { display: none; }
+tr.detalle-row.visible { display: table-row; }
+tr.detalle-row > td {
+  padding: 0;
+  background: #f4fbfb;
+  border-bottom: 2px solid #00A499;
+}
+.detalle-inner {
+  padding: .5rem 1rem .7rem 2.4rem;
+}
+.detalle-inner table {
+  font-size: 11.5px; width: auto; min-width: 480px;
+  margin: 0; border-collapse: collapse;
+}
+.detalle-inner thead tr { background: #555; }
+.detalle-inner thead th { padding: 4px 10px; font-weight: 500; color: white; text-align: left; }
+.detalle-inner thead th.num { text-align: right; }
+.detalle-inner tbody tr:nth-child(even) { background: #eef7f7; }
+.detalle-inner tbody tr:hover { background: #d6f0ef; }
+.detalle-inner tbody td { padding: 3px 10px; }
+.detalle-inner tbody td.num { text-align: right; }
+.detalle-total {
+  font-size: 11px; color: #555; margin-top: .35rem;
+}
+
 /* ── Impresion ───────────────────────────────────────────── */
 @media print {
   body { max-width: 100%; padding: 1cm; font-size: 11px; }
@@ -211,6 +246,8 @@ p.cod-programa {
   tbody tr:has(td > strong) { background-color: #FFF3CD !important; }
   .btn-pdf { display: none; }
   p.cod-programa { background: #eee !important; }
+  tr.detalle-row { display: table-row !important; }
+  .flecha { display: none; }
 }
   </style>
 </head>
@@ -221,6 +258,13 @@ p.cod-programa {
 <p class="periodo">Primer semestre 2026</p>
 <div class="botones-header"><a href="index.html" class="btn-indice">← Índice</a> <a href="comparativos/periodismo.html" class="btn-comp">📊 Informe comparado 2024–2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
 </header>
+<script>
+function toggleAcad(row) {
+  var det = row.nextElementSibling;
+  var open = row.classList.toggle("abierto");
+  det.classList.toggle("visible", open);
+}
+</script>
 <main>
 
 <h2 id="horas-planeadas-de-la-unidad">1. Horas planeadas de la
@@ -382,73 +426,1285 @@ del total de horas planeadas en la unidad.</p>
 <h2 id="promedio-de-horas-académicos-de-jornada-claustro">3. Promedio de
 horas académicos de jornada (claustro)</h2>
 <table>
-<colgroup>
-<col width="42%" />
-<col width="23%" />
-<col width="33%" />
-</colgroup>
 <thead>
-<tr class="header">
-<th align="left">Profesor</th>
-<th align="right">Horas pedagógicas¹</th>
-<th align="right">Horas cronológicas equiv.²</th>
+<tr>
+<th>
+Académico <span style="font-weight:400;font-size:10px">(clic para ver
+cursos)</span>
+</th>
+<th style="text-align:right">
+HP   <span style="font-weight:400">Prom. claustro: <span
+style="color:#27ae60;font-weight:600">15.4 HP ✓</span></span>
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">David Alejandro Jofre Leiva</td>
-<td align="right">8.0</td>
-<td align="right">9.6</td>
+<tr class="acad-row" onclick="toggleAcad(this)">
+<td class="td-nombre">
+<span class="flecha">►</span>David Alejandro Jofre Leiva
+</td>
+<td style="text-align:right">
+<span style="color:#c0392b;font-weight:700">8</span>
+</td>
 </tr>
-<tr class="even">
-<td align="left">Edi Efraín Bámaca López</td>
-<td align="right">12.0</td>
-<td align="right">14.4</td>
+<tr class="detalle-row">
+<td colspan="2">
+<div class="detalle-inner">
+<table>
+<thead>
+<tr>
+<th>
+Nivel
+</th>
+<th>
+Carrera
+</th>
+<th>
+Cód.
+</th>
+<th>
+Asignatura
+</th>
+<th class="num">
+HP
+</th>
 </tr>
-<tr class="odd">
-<td align="left">Eduardo Roman Alvarez</td>
-<td align="right">18.0</td>
-<td align="right">21.6</td>
+</thead>
+<tbody>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
 </tr>
-<tr class="even">
-<td align="left">Lorena Beatriz Valderrana Zenteno</td>
-<td align="right">14.0</td>
-<td align="right">16.8</td>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
 </tr>
-<tr class="odd">
-<td align="left">María Ximena Orchard Rieiro</td>
-<td align="right">12.0</td>
-<td align="right">14.4</td>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47419
+</td>
+<td>
+Introducción Al Estudio De La Comunicación
+</td>
+<td class="num">
+4
+</td>
 </tr>
-<tr class="even">
-<td align="left">Nicolas Del Valle Orellana</td>
-<td align="right">4.0</td>
-<td align="right">4.8</td>
+</tbody>
+</table>
+<p class="detalle-total">
+Total HP: <strong>8</strong>
+</p>
+</div>
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Pedro Leonardo Reyes Garcia</td>
-<td align="right">16.0</td>
-<td align="right">19.2</td>
+<tr class="acad-row" onclick="toggleAcad(this)">
+<td class="td-nombre">
+<span class="flecha">►</span>Edi Efraín Bámaca López
+</td>
+<td style="text-align:right">
+<span style="color:#27ae60;font-weight:700">12</span>
+</td>
 </tr>
-<tr class="even">
-<td align="left">Rene Eduardo Jara Reyes</td>
-<td align="right">18.0</td>
-<td align="right">21.6</td>
+<tr class="detalle-row">
+<td colspan="2">
+<div class="detalle-inner">
+<table>
+<thead>
+<tr>
+<th>
+Nivel
+</th>
+<th>
+Carrera
+</th>
+<th>
+Cód.
+</th>
+<th>
+Asignatura
+</th>
+<th class="num">
+HP
+</th>
 </tr>
-<tr class="odd">
-<td align="left">Ricardo Ramírez Vallejos</td>
-<td align="right">8.0</td>
-<td align="right">9.6</td>
+</thead>
+<tbody>
+<tr>
+<td>
+Postgrado
+</td>
+<td>
+Magíster en Ciencias de la Comunicación
+</td>
+<td>
+47952
+</td>
+<td>
+Trabajo De Graduación (Tesis)
+</td>
+<td class="num">
+4
+</td>
 </tr>
-<tr class="even">
-<td align="left">Verónica Rocamora Villena</td>
-<td align="right">12.0</td>
-<td align="right">14.4</td>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47421
+</td>
+<td>
+Metodología De La Investigación En Comunicación Ii
+</td>
+<td class="num">
+2
+</td>
 </tr>
-<tr class="odd">
-<td align="left"><strong>Promedio de docencia semestral</strong></td>
-<td align="right">15.4</td>
-<td align="right">18.5</td>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47421
+</td>
+<td>
+Metodología De La Investigación En Comunicación Ii
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p class="detalle-total">
+Total HP: <strong>12</strong>
+</p>
+</div>
+</td>
+</tr>
+<tr class="acad-row" onclick="toggleAcad(this)">
+<td class="td-nombre">
+<span class="flecha">►</span>Eduardo Roman Alvarez
+</td>
+<td style="text-align:right">
+<span style="color:#27ae60;font-weight:700">18</span>
+</td>
+</tr>
+<tr class="detalle-row">
+<td colspan="2">
+<div class="detalle-inner">
+<table>
+<thead>
+<tr>
+<th>
+Nivel
+</th>
+<th>
+Carrera
+</th>
+<th>
+Cód.
+</th>
+<th>
+Asignatura
+</th>
+<th class="num">
+HP
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47312
+</td>
+<td>
+Géneros Y Técnicas Periodísticas
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47312
+</td>
+<td>
+Géneros Y Técnicas Periodísticas
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47420
+</td>
+<td>
+Estudios De Semiología Y Narrativas
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47312
+</td>
+<td>
+Géneros Y Técnicas Periodísticas
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47340
+</td>
+<td>
+Taller De Produccion Periodisticas
+</td>
+<td class="num">
+4
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47420
+</td>
+<td>
+Estudios De Semiología Y Narrativas
+</td>
+<td class="num">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p class="detalle-total">
+Total HP: <strong>18</strong>
+</p>
+</div>
+</td>
+</tr>
+<tr class="acad-row" onclick="toggleAcad(this)">
+<td class="td-nombre">
+<span class="flecha">►</span>Lorena Beatriz Valderrana Zenteno
+</td>
+<td style="text-align:right">
+<span style="color:#27ae60;font-weight:700">14</span>
+</td>
+</tr>
+<tr class="detalle-row">
+<td colspan="2">
+<div class="detalle-inner">
+<table>
+<thead>
+<tr>
+<th>
+Nivel
+</th>
+<th>
+Carrera
+</th>
+<th>
+Cód.
+</th>
+<th>
+Asignatura
+</th>
+<th class="num">
+HP
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Postgrado
+</td>
+<td>
+Magíster en Ciencias de la Comunicación
+</td>
+<td>
+47942
+</td>
+<td>
+Teorías De La Comunicación De Las Ciencias Y La Tecnología
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Postgrado
+</td>
+<td>
+Magíster en Ciencias de la Comunicación
+</td>
+<td>
+47951
+</td>
+<td>
+Proyecto De Graduación (Seminario)
+</td>
+<td class="num">
+4
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47418
+</td>
+<td>
+Historia De Las Comunicaciones Ii
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47418
+</td>
+<td>
+Historia De Las Comunicaciones Ii
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p class="detalle-total">
+Total HP: <strong>14</strong>
+</p>
+</div>
+</td>
+</tr>
+<tr class="acad-row" onclick="toggleAcad(this)">
+<td class="td-nombre">
+<span class="flecha">►</span>María Ximena Orchard Rieiro
+</td>
+<td style="text-align:right">
+<span style="color:#27ae60;font-weight:700">12</span>
+</td>
+</tr>
+<tr class="detalle-row">
+<td colspan="2">
+<div class="detalle-inner">
+<table>
+<thead>
+<tr>
+<th>
+Nivel
+</th>
+<th>
+Carrera
+</th>
+<th>
+Cód.
+</th>
+<th>
+Asignatura
+</th>
+<th class="num">
+HP
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Postgrado
+</td>
+<td>
+Magíster en Ciencias de la Comunicación
+</td>
+<td>
+47943
+</td>
+<td>
+Epistemología Y Problemas De La Investigación En Comunicación
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Postgrado
+</td>
+<td>
+Magíster en Ciencias de la Comunicación
+</td>
+<td>
+47949
+</td>
+<td>
+Electivo Iii “Estrategias De Análisis Cualitativo”
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Postgrado
+</td>
+<td>
+Magíster en Ciencias de la Comunicación
+</td>
+<td>
+47951
+</td>
+<td>
+Proyecto De Graduación (Seminario)
+</td>
+<td class="num">
+4
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p class="detalle-total">
+Total HP: <strong>12</strong>
+</p>
+</div>
+</td>
+</tr>
+<tr class="acad-row" onclick="toggleAcad(this)">
+<td class="td-nombre">
+<span class="flecha">►</span>Nicolas Del Valle Orellana
+</td>
+<td style="text-align:right">
+<span style="color:#c0392b;font-weight:700">4</span>
+</td>
+</tr>
+<tr class="detalle-row">
+<td colspan="2">
+<div class="detalle-inner">
+<table>
+<thead>
+<tr>
+<th>
+Nivel
+</th>
+<th>
+Carrera
+</th>
+<th>
+Cód.
+</th>
+<th>
+Asignatura
+</th>
+<th class="num">
+HP
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47350
+</td>
+<td>
+Especializacion Ii
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47350
+</td>
+<td>
+Especializacion Ii
+</td>
+<td class="num">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p class="detalle-total">
+Total HP: <strong>4</strong>
+</p>
+</div>
+</td>
+</tr>
+<tr class="acad-row" onclick="toggleAcad(this)">
+<td class="td-nombre">
+<span class="flecha">►</span>Pedro Leonardo Reyes Garcia
+</td>
+<td style="text-align:right">
+<span style="color:#27ae60;font-weight:700">16</span>
+</td>
+</tr>
+<tr class="detalle-row">
+<td colspan="2">
+<div class="detalle-inner">
+<table>
+<thead>
+<tr>
+<th>
+Nivel
+</th>
+<th>
+Carrera
+</th>
+<th>
+Cód.
+</th>
+<th>
+Asignatura
+</th>
+<th class="num">
+HP
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47338
+</td>
+<td>
+Cultura Digital
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47338
+</td>
+<td>
+Cultura Digital
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47338
+</td>
+<td>
+Cultura Digital
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47338
+</td>
+<td>
+Cultura Digital
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47338
+</td>
+<td>
+Cultura Digital
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47338
+</td>
+<td>
+Cultura Digital
+</td>
+<td class="num">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p class="detalle-total">
+Total HP: <strong>16</strong>
+</p>
+</div>
+</td>
+</tr>
+<tr class="acad-row" onclick="toggleAcad(this)">
+<td class="td-nombre">
+<span class="flecha">►</span>Rene Eduardo Jara Reyes
+</td>
+<td style="text-align:right">
+<span style="color:#27ae60;font-weight:700">18</span>
+</td>
+</tr>
+<tr class="detalle-row">
+<td colspan="2">
+<div class="detalle-inner">
+<table>
+<thead>
+<tr>
+<th>
+Nivel
+</th>
+<th>
+Carrera
+</th>
+<th>
+Cód.
+</th>
+<th>
+Asignatura
+</th>
+<th class="num">
+HP
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47327
+</td>
+<td>
+Teoría De La Comunicación Iv
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47264
+</td>
+<td>
+Fundamentos De La Investigación
+</td>
+<td class="num">
+4
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47327
+</td>
+<td>
+Teoría De La Comunicación Iv
+</td>
+<td class="num">
+4
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47329
+</td>
+<td>
+Epistemología
+</td>
+<td class="num">
+4
+</td>
+</tr>
+</tbody>
+</table>
+<p class="detalle-total">
+Total HP: <strong>18</strong>
+</p>
+</div>
+</td>
+</tr>
+<tr class="acad-row" onclick="toggleAcad(this)">
+<td class="td-nombre">
+<span class="flecha">►</span>Ricardo Ramírez Vallejos
+</td>
+<td style="text-align:right">
+<span style="color:#c0392b;font-weight:700">8</span>
+</td>
+</tr>
+<tr class="detalle-row">
+<td colspan="2">
+<div class="detalle-inner">
+<table>
+<thead>
+<tr>
+<th>
+Nivel
+</th>
+<th>
+Carrera
+</th>
+<th>
+Cód.
+</th>
+<th>
+Asignatura
+</th>
+<th class="num">
+HP
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47417
+</td>
+<td>
+Psicología Social Y Comunicación
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47417
+</td>
+<td>
+Psicología Social Y Comunicación
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p class="detalle-total">
+Total HP: <strong>8</strong>
+</p>
+</div>
+</td>
+</tr>
+<tr class="acad-row" onclick="toggleAcad(this)">
+<td class="td-nombre">
+<span class="flecha">►</span>Verónica Rocamora Villena
+</td>
+<td style="text-align:right">
+<span style="color:#27ae60;font-weight:700">12</span>
+</td>
+</tr>
+<tr class="detalle-row">
+<td colspan="2">
+<div class="detalle-inner">
+<table>
+<thead>
+<tr>
+<th>
+Nivel
+</th>
+<th>
+Carrera
+</th>
+<th>
+Cód.
+</th>
+<th>
+Asignatura
+</th>
+<th class="num">
+HP
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Postgrado
+</td>
+<td>
+Magíster en Ciencias de la Comunicación
+</td>
+<td>
+47951
+</td>
+<td>
+Proyecto De Graduación (Seminario)
+</td>
+<td class="num">
+4
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47405
+</td>
+<td>
+Epistemología De La Investigación En Comunicación
+</td>
+<td class="num">
+4
+</td>
+</tr>
+<tr>
+<td>
+Pregrado
+</td>
+<td>
+Periodismo
+</td>
+<td>
+47349
+</td>
+<td>
+Seminario De Título I
+</td>
+<td class="num">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p class="detalle-total">
+Total HP: <strong>12</strong>
+</p>
+</div>
+</td>
 </tr>
 </tbody>
 </table>
