@@ -170,6 +170,8 @@ cargar_base <- function(path) {
     clean_names() |>
     rename(unidad_dep  = unidad,
            unidad_prof = unidad_profesor) |>
+    rename_with(~ "horas_ped",  any_of(c("horas_ped",  "horasped")))  |>
+    rename_with(~ "horas_plan", any_of(c("horas_plan", "horasplan"))) |>
     mutate(
       profesor    = str_to_title(str_squish(profesor)),
       unidad_dep  = str_to_upper(str_squish(unidad_dep)),
@@ -186,7 +188,7 @@ cargar_base <- function(path) {
       ),
       en_claustro  = cargo == "ACADEMICO",
       es_sello     = str_starts(tipo, "S"),
-      across(c(horas_ped, eq_cron), ~ replace_na(as.numeric(.), 0))
+      across(c(horas_ped, horas_plan, eq_cron), ~ replace_na(as.numeric(.), 0))
     )
 }
 
@@ -258,7 +260,7 @@ generar_comparativo <- function(UP) {
       arrange(profesor, sec) |>
       mutate(
         sello_dup_local = es_sello & duplicated(paste(profesor, sec)),
-        horas_unidad    = if_else(sello_dup_local, 0L, as.integer(horas_ped))
+        horas_unidad    = if_else(sello_dup_local, 0L, as.integer(horas_plan))
       )
   }
 

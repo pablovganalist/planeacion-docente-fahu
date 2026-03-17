@@ -59,6 +59,8 @@ df_raw <- read_excel(params$archivo, sheet = 1) |>
     cupo        = cupos,
     insc        = inscritos
   ) |>
+  rename_with(~ "horas_ped",  any_of(c("horas_ped",  "horasped")))  |>
+  rename_with(~ "horas_plan", any_of(c("horas_plan", "horasplan"))) |>
   mutate(
     profesor    = str_to_title(str_squish(profesor)),
     curso       = str_to_title(str_squish(curso)),
@@ -91,7 +93,7 @@ df_raw <- read_excel(params$archivo, sheet = 1) |>
       nivel == 9  ~ "NOVENO",   nivel == 10 ~ "DECIMO",
       TRUE ~ as.character(nivel)
     ),
-    across(c(t, e, l, horas_ped, eq_cron, cupo),
+    across(c(t, e, l, s, horas_ped, horas_plan, eq_cron, cupo),
            ~ replace_na(as.numeric(.), 0)),
     insc = as.numeric(insc)
   ) |>
@@ -137,9 +139,6 @@ nombre_largo <- switch(UNIDAD_PROF,
   titulo_esp(nombre_largo_upper)
 )
 
-message(glue("DEBUG nombre_largo: '{nombre_largo}' | UNIDAD_PROF: '{UNIDAD_PROF}'"))
-
-
 # =============================================================================
 # SUBCONJUNTOS CLAVE
 # =============================================================================
@@ -160,7 +159,7 @@ df_cursos <- df_raw |>
   # (el mismo sello puede aparecer en varias carreras de la misma unidad)
   mutate(
     seccion_dup_local = es_sello & duplicated(paste(profesor, sec)),
-    horas_unidad = if_else(seccion_dup_local, 0L, horas_ped),
+    horas_unidad = if_else(seccion_dup_local, 0L, horas_plan),
     eq_unidad    = if_else(seccion_dup_local, 0,  eq_cron)
   )
 

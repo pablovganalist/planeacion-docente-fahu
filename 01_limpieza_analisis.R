@@ -58,14 +58,14 @@ df_raw <- read_excel(ARCHIVO, sheet = 1) |>
   rename(
     unidad_dep  = unidad,
     unidad_prof = unidad_profesor,
-    horas_ped   = horas_ped,
-    eq_cron     = eq_cron,
     curso       = asignatura,
     cod         = codcur,
     pre         = prepost,
     cupo        = cupos,
     insc        = inscritos
   ) |>
+  rename_with(~ "horas_ped",  any_of(c("horas_ped",  "horasped")))  |>
+  rename_with(~ "horas_plan", any_of(c("horas_plan", "horasplan"))) |>
   mutate(
     # ── Texto ─────────────────────────────────────────────────────────────────
     profesor    = str_to_title(str_squish(profesor)),
@@ -122,7 +122,7 @@ df_raw <- read_excel(ARCHIVO, sheet = 1) |>
     ),
 
     # ── Numericas ─────────────────────────────────────────────────────────────
-    across(c(t, e, l, horas_ped, eq_cron, cupo),
+    across(c(t, e, l, s, horas_ped, horas_plan, eq_cron, cupo),
            ~ replace_na(as.numeric(.), 0)),
     insc = as.numeric(insc)   # permanece NA hasta inscripcion
   )
@@ -304,7 +304,7 @@ tabla_resumen_unidades <- function(df) {
       group_by(profesor, sec) |>
       mutate(seccion_dup_local = es_sello & duplicated(paste(profesor, sec))) |>
       ungroup() |>
-      mutate(horas_unidad = if_else(seccion_dup_local, 0L, horas_ped),
+      mutate(horas_unidad = if_else(seccion_dup_local, 0L, horas_plan),
              eq_unidad    = if_else(seccion_dup_local, 0,  eq_cron))
 
     # Claustro y promedio (sobre d_profs con dedup global)
