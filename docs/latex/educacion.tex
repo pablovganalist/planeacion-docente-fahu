@@ -1,15 +1,15 @@
 \documentclass[11pt, a4paper]{article}
 
-% ── Codificación y fuentes ──────────────────────────────────────────────────
+% -- Codificacion y fuentes
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
 \usepackage{lmodern}
 
-% ── Márgenes ────────────────────────────────────────────────────────────────
+% -- Margenes
 \usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
 
-% ── Colores institucionales ──────────────────────────────────────────────────
+% -- Colores institucionales
 \usepackage[table]{xcolor}
 \definecolor{usachTeal}{HTML}{00A499}
 \definecolor{usachOrange}{HTML}{EA7600}
@@ -19,27 +19,26 @@
 \definecolor{rowEven}{HTML}{F5F7F8}
 \definecolor{rowHighlight}{HTML}{FFF8E1}
 
-% ── Tablas ──────────────────────────────────────────────────────────────────
+% -- Tablas
 \usepackage{booktabs}
 \usepackage{tabularx}
-\usepackage{multirow}
 \usepackage{array}
 \renewcommand{\arraystretch}{1.35}
 
-% ── Encabezados y secciones ─────────────────────────────────────────────────
+% -- Secciones
 \usepackage{titlesec}
 \titleformat{\section}[block]
   {\normalfont\large\bfseries\color{usachDark}}
-  {}{0pt}
+  {}{}
   {\colorbox{usachTeal}{\textcolor{white}{\hspace{4pt}\thesection.\hspace{4pt}}}\hspace{6pt}}
 \titleformat{\subsection}[block]
   {\normalfont\normalsize\bfseries\color{usachDark}}
-  {}{0pt}
+  {}{}
   {\textcolor{usachOrange}{\rule[-.3ex]{4pt}{1.2em}}\hspace{6pt}}
 \titlespacing*{\section}{0pt}{1.2em}{0.6em}
 \titlespacing*{\subsection}{0pt}{1em}{0.4em}
 
-% ── Cabeceras y pies ─────────────────────────────────────────────────────────
+% -- Encabezados y pies
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
@@ -48,133 +47,129 @@
 \fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 
-% ── Misceláneos ──────────────────────────────────────────────────────────────
+% -- Miscelaneos
 \usepackage{parskip}
 \usepackage{microtype}
+\usepackage{amssymb}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true, linkcolor=usachBlue, urlcolor=usachBlue}
 
 \begin{document}
 
-% ── Portada ──────────────────────────────────────────────────────────────────
+% -- Portada
 \begin{center}
-  {\Large\bfseries\color{usachDark} Departamento de Educación}\\[0.4em]
-  {\large\color{usachTeal} Facultad de Humanidades}\\[0.2em]
+  {\Large\bfseries\color{usachDark} Departamento de Educación} \\[0.4em]
+  {\large\color{usachTeal} Facultad de Humanidades} \\[0.2em]
   {\normalsize\color{gray} Primer semestre 2026}
 \end{center}
 \vspace{0.5em}
 \textcolor{usachTeal}{\rule{\linewidth}{2pt}}
-\vspace{1em}\section{Horas planeadas del departamento}
+\vspace{1em}
+
+\section{Horas planeadas del departamento}
 
 Las horas pedagógicas (HP) planeadas para el Primer semestre 2026 se distribuyen según el tipo de contrato del docente y el nivel de estudios.
 
 \begin{tabularx}{\linewidth}{l X r}
 \toprule
-\rowcolor{usachDark} \textbf{\textcolor{white}{Código}} & \textbf{\textcolor{white}{Descripción}} & \textbf{\textcolor{white}{HP}} \\
+\rowcolor{usachDark} \textbf{\textcolor{white}{Cód.}} & \textbf{\textcolor{white}{Descripción}} & \textbf{\textcolor{white}{HP}} \\
 \midrule
-\rowcolor{usachGold!25}\textbf{A} & \textbf{Horas planeadas pregrado} & \textbf{586} \\
+\rowcolor{rowHighlight}\textbf{A} & \textbf{Horas planeadas pregrado} & \textbf{586} \\
 \rowcolor{rowEven}i & Jornada propia & 132 \\
 ii & Por hora de clase & 434 \\
 \rowcolor{rowEven}iii & Jornada externa & 12 \\
 iv & Sin profesor asignado & 8 \\
-\rowcolor{usachGold!25}\textbf{B} & \textbf{Horas planeadas postgrado} & \textbf{52} \\
+\rowcolor{rowHighlight}\textbf{B} & \textbf{Horas planeadas postgrado} & \textbf{52} \\
 v & Jornada propia & 20 \\
 \rowcolor{rowEven}vi & Por hora de clase & 32 \\
 vii & Jornada externa & --- \\
-\rowcolor{usachGold!25}\textbf{C} & \textbf{Total horas planeadas (A+B)} & \textbf{638} \\
+\rowcolor{rowHighlight}\textbf{C} & \textbf{Total horas planeadas (A+B)} & \textbf{638} \\
 \bottomrule
 \end{tabularx}
 
-
 \subsection{Cobertura según tipo de contrato}
 
-\\begin{tabular}{lrrr}
-\\toprule
-\\rowcolor{usachDark} \\textbf{\\textcolor{white}{Tipo de contrato}} & \\textbf{\\textcolor{white}{Pregrado}} & \\textbf{\\textcolor{white}{Postgrado}} & \\textbf{\\textcolor{white}{Total}} \\\\
-\\midrule
-Jornada propia & 23\textbackslash\{\}\% & 38\textbackslash\{\}\% & 24\textbackslash\{\}\% \\\\
-\\rowcolor{rowEven}Por hora de clase & 74\textbackslash\{\}\% & 62\textbackslash\{\}\% & 73\textbackslash\{\}\% \\\\
-Jornada externa & 2\textbackslash\{\}\% & 0\textbackslash\{\}\% & 2\textbackslash\{\}\% \\\\
-\\rowcolor{rowEven}Sin profesor & 1\textbackslash\{\}\% & 0\textbackslash\{\}\% & 1\textbackslash\{\}\% \\\\
-\\bottomrule
-\\end{tabular}
-
+\begin{tabular}{lrrr}
+\toprule
+\rowcolor{usachDark} \textbf{\textcolor{white}{Tipo de contrato}} & \textbf{\textcolor{white}{Pregrado}} & \textbf{\textcolor{white}{Postgrado}} & \textbf{\textcolor{white}{Total}} \\
+\midrule
+Jornada propia & 22.5\% & 38.5\% & 23.8\% \\
+\rowcolor{rowEven}Por hora de clase & 74.1\% & 61.5\% & 73.0\% \\
+Jornada externa & 2.0\% & 0.0\% & 1.9\% \\
+\rowcolor{rowEven}Sin profesor & 1.4\% & 0.0\% & 1.3\% \\
+\bottomrule
+\end{tabular}
 
 \section{Claustro académico}
 
-El promedio de horas pedagógicas del claustro es: \textcolor{green!60!black}{\textbf{Cumple}} (18.9 HP). La norma institucional es de \textbf{12 HP}.
+El promedio de HP del claustro es: \textcolor{green!60!black}{\textbf{Cumple}} (18.9 HP). Norma institucional: \textbf{12 HP}.
 
 \textit{Numerador}: HP de todos los jornada (académicos + autoridades). \textit{Denominador}: solo académicos con cargo ACADÉMICO.
 
-\\begin{tabular}{lr}
-\\toprule
-\\rowcolor{usachDark} \\textbf{\\textcolor{white}{Académico}} & \\textbf{\\textcolor{white}{HP}} \\\\
-\\midrule
-Catherine Flores Gomez & 12 \\\\
-\\rowcolor{rowEven}Claudia Cordoba Calquin & 12 \\\\
-Constanza Herrera Seda & 16 \\\\
-\\rowcolor{rowEven}Daniel Eduardo Rios Munoz & 16 \\\\
-David Andrés Herrera Araya & 12 \\\\
-\\rowcolor{rowEven}Elisa Del Carmen Loncon Antileo & 12 \\\\
-Jaime Andres Retamal Salazar & 12 \\\\
-\\rowcolor{rowEven}Juan Eusebio Silva Quiroz & 12 \\\\
-Natalia Ester Ferrada Quezada & 24 \\\\
-\\rowcolor{rowEven}Sergio Ignacio Galdames Poblete & 20 \\\\
-Sylvia Contreras Salinas & 20 \\\\
-\\bottomrule
-\\end{tabular}
+\begin{tabular}{lr}
+\toprule
+\rowcolor{usachDark} \textbf{\textcolor{white}{Académico}} & \textbf{\textcolor{white}{HP}} \\
+\midrule
+Catherine Flores Gomez & 12 \\
+\rowcolor{rowEven}Claudia Cordoba Calquin & 12 \\
+Constanza Herrera Seda & 16 \\
+\rowcolor{rowEven}Daniel Eduardo Rios Munoz & 16 \\
+David Andrés Herrera Araya & 12 \\
+\rowcolor{rowEven}Elisa Del Carmen Loncon Antileo & 12 \\
+Jaime Andres Retamal Salazar & 12 \\
+\rowcolor{rowEven}Juan Eusebio Silva Quiroz & 12 \\
+Natalia Ester Ferrada Quezada & 24 \\
+\rowcolor{rowEven}Sergio Ignacio Galdames Poblete & 20 \\
+Sylvia Contreras Salinas & 20 \\
+\bottomrule
+\end{tabular}
 
-
-\section{Evolución histórica (2\textbackslash\{\}textsuperscript\{do\} sem. 2024–1\textbackslash\{\}textsuperscript\{er\} sem. 2026)}
+\section{Evolución histórica (2\textsuperscript{do} sem. 2024 -- 1\textsuperscript{er} sem. 2026)}
 
 \textit{El semestre en curso aparece destacado en amarillo.}
 
 \subsection{Horas planeadas por período}
 
-\\begin{tabular}{lrrrr}
-\\toprule
-\\rowcolor{usachDark} \\textbf{\\textcolor{white}{Periodo}} & \\textbf{\\textcolor{white}{Jornada}} & \\textbf{\\textcolor{white}{Por hora}} & \\textbf{\\textcolor{white}{SP}} & \\textbf{\\textcolor{white}{Total}} \\\\
-\\midrule
-2\textbackslash\{\}textsuperscript\{do\} sem. 2024 & 66 & 318 & 20 & 404 \\\\
-\\rowcolor{rowEven}1\textbackslash\{\}textsuperscript\{er\} sem. 2025 & 80 & 258 & 52 & 390 \\\\
-2\textbackslash\{\}textsuperscript\{do\} sem. 2025 & 110 & 414 & --- & 524 \\\\
-\\rowcolor{rowHighlight}1\textbackslash\{\}textsuperscript\{er\} sem. 2026 & 164 & 466 & 8 & 638 \\\\
-\\bottomrule
-\\end{tabular}
-
+\begin{tabular}{lrrrr}
+\toprule
+\rowcolor{usachDark} \textbf{\textcolor{white}{Periodo}} & \textbf{\textcolor{white}{Jornada}} & \textbf{\textcolor{white}{Por hora}} & \textbf{\textcolor{white}{SP}} & \textbf{\textcolor{white}{Total}} \\
+\midrule
+2\textsuperscript{do} sem. 2024 & 66 & 318 & 20 & 404 \\
+\rowcolor{rowEven}1\textsuperscript{er} sem. 2025 & 80 & 258 & 52 & 390 \\
+2\textsuperscript{do} sem. 2025 & 110 & 414 & --- & 524 \\
+\rowcolor{rowHighlight}\textbf{1\textsuperscript{er} sem. 2026} & \textbf{164} & \textbf{466} & \textbf{8} & \textbf{638} \\
+\bottomrule
+\end{tabular}
 
 \subsection{Cobertura por tipo de contrato}
 
-\\begin{tabular}{lrrr}
-\\toprule
-\\rowcolor{usachDark} \\textbf{\\textcolor{white}{Periodo}} & \\textbf{\\textcolor{white}{Jornada}} & \\textbf{\\textcolor{white}{Por hora}} & \\textbf{\\textcolor{white}{SP}} \\\\
-\\midrule
-2\textbackslash\{\}textsuperscript\{do\} sem. 2024 & 16.3\textbackslash\{\}\% & 78.7\textbackslash\{\}\% & 5.0\textbackslash\{\}\% \\\\
-\\rowcolor{rowEven}1\textbackslash\{\}textsuperscript\{er\} sem. 2025 & 20.5\textbackslash\{\}\% & 66.2\textbackslash\{\}\% & 13.3\textbackslash\{\}\% \\\\
-2\textbackslash\{\}textsuperscript\{do\} sem. 2025 & 21.0\textbackslash\{\}\% & 79.0\textbackslash\{\}\% & 0.0\textbackslash\{\}\% \\\\
-\\rowcolor{rowHighlight}1\textbackslash\{\}textsuperscript\{er\} sem. 2026 & 25.7\textbackslash\{\}\% & 73.0\textbackslash\{\}\% & 1.3\textbackslash\{\}\% \\\\
-\\bottomrule
-\\end{tabular}
-
+\begin{tabular}{lrrr}
+\toprule
+\rowcolor{usachDark} \textbf{\textcolor{white}{Periodo}} & \textbf{\textcolor{white}{Jornada}} & \textbf{\textcolor{white}{Por hora}} & \textbf{\textcolor{white}{SP}} \\
+\midrule
+2\textsuperscript{do} sem. 2024 & 16.3\% & 78.7\% & 5.0\% \\
+\rowcolor{rowEven}1\textsuperscript{er} sem. 2025 & 20.5\% & 66.2\% & 13.3\% \\
+2\textsuperscript{do} sem. 2025 & 21.0\% & 79.0\% & 0.0\% \\
+\rowcolor{rowHighlight}\textbf{1\textsuperscript{er} sem. 2026} & \textbf{25.7\%} & \textbf{73.0\%} & \textbf{1.3\%} \\
+\bottomrule
+\end{tabular}
 
 \subsection{Promedio HP del claustro por período}
 
-Norma: $\geq$ 12 HP. $\checkmark$ = cumple~~~$\times$ = no cumple
+Norma: $\geq$ 12 HP.\quad$\checkmark$ = cumple \quad $\times$ = no cumple
 
-\\begin{tabular}{lrrrr}
-\\toprule
-\\rowcolor{usachDark} \\textbf{\\textcolor{white}{Periodo}} & \\textbf{\\textcolor{white}{N acad.}} & \\textbf{\\textcolor{white}{HP jornada}} & \\textbf{\\textcolor{white}{Promedio}} & \\textbf{\\textcolor{white}{Norma}} \\\\
-\\midrule
-2\textbackslash\{\}textsuperscript\{do\} sem. 2024 & 10 & 112 & 11.2 & \$\textbackslash\{\}times\$ \\\\
-\\rowcolor{rowEven}1\textbackslash\{\}textsuperscript\{er\} sem. 2025 & 10 & 104 & 10.4 & \$\textbackslash\{\}times\$ \\\\
-2\textbackslash\{\}textsuperscript\{do\} sem. 2025 & 11 & 224 & 20.4 & \$\textbackslash\{\}checkmark\$ \\\\
-\\rowcolor{rowHighlight}1\textbackslash\{\}textsuperscript\{er\} sem. 2026 & 11 & 208 & 18.9 & \$\textbackslash\{\}checkmark\$ \\\\
-\\bottomrule
-\\end{tabular}
-
+\begin{tabular}{lrrrr}
+\toprule
+\rowcolor{usachDark} \textbf{\textcolor{white}{Periodo}} & \textbf{\textcolor{white}{N acad.}} & \textbf{\textcolor{white}{HP jornada}} & \textbf{\textcolor{white}{Promedio}} & \textbf{\textcolor{white}{Norma}} \\
+\midrule
+2\textsuperscript{do} sem. 2024 & 10 & 112 & 11.2 & $\times$ \\
+\rowcolor{rowEven}1\textsuperscript{er} sem. 2025 & 10 & 104 & 10.4 & $\times$ \\
+2\textsuperscript{do} sem. 2025 & 11 & 224 & 20.4 & $\checkmark$ \\
+\rowcolor{rowHighlight}\textbf{1\textsuperscript{er} sem. 2026} & \textbf{11} & \textbf{208} & \textbf{18.9} & \textbf{$\checkmark$} \\
+\bottomrule
+\end{tabular}
 
 \vfill
-\textcolor{gray}{\footnotesize Base elaborada a partir de los registros de planeación docente FAHU. Código elaborado por Pablo Valenzuela con apoyo de Claude de Anthropic. Generado el 13/03/2026.}
+{\footnotesize\color{gray} Elaborado a partir de los registros de planeación docente FAHU. Generado el 17/03/2026.}
 
 \end{document}
-
