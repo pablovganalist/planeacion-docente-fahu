@@ -323,15 +323,61 @@ En pregrado la cobertura de profesores de jornada es del `r pct_j_pre`%. En post
 ## 3. Promedio de horas académicos de jornada (claustro)
 
 ```{r tabla_claustro, results='asis'}
+# Tabla expandible: clic en nombre muestra cursos del académico
 if (nrow(claustro) > 0) {
-  bind_rows(
-    claustro |> rename(Profesor = profesor,
-                       `Horas pedagógicas¹`         = hp,
-                       `Horas cronológicas equiv.²` = hc),
-    tibble(Profesor                     = "**Promedio de docencia semestral**",
-           `Horas pedagógicas¹`         = prom_hp,
-           `Horas cronológicas equiv.²` = prom_hc)
-  ) |> kable(align = c("l","r","r")) |> print()
+
+  # Detalle de cursos por académico
+  det_html <- function(prof) {
+    cursos <- df_profs |>
+      filter(profesor == prof, en_claustro) |>
+      select(pre, carrera, cod, curso, sec, horas_prof) |>
+      arrange(pre, carrera, sec)
+    if (nrow(cursos) == 0) return("<em>Sin secciones registradas</em>")
+    filas <- paste(vapply(seq_len(nrow(cursos)), function(i) {
+      r <- cursos[i,]
+      sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class='num'>%s</td></tr>",
+        r$pre, r$carrera, r$cod, r$curso, r$horas_prof)
+    }, character(1)), collapse="")
+    paste0(
+      "<table><thead><tr>",
+      "<th>Nivel</th><th>Carrera</th><th>Cód.</th><th>Asignatura</th><th class='num'>HP</th>",
+      "</tr></thead><tbody>", filas, "</tbody></table>"
+    )
+  }
+
+  badge <- function(hp) {
+    if (hp >= 12) sprintf("<span style='color:#27ae60;font-weight:700'>%s</span>", hp)
+    else          sprintf("<span style='color:#c0392b;font-weight:700'>%s</span>", hp)
+  }
+
+  filas_html <- paste(vapply(seq_len(nrow(claustro)), function(i) {
+    prof <- claustro$profesor[i]
+    hp   <- claustro$hp[i]
+    paste0(
+      sprintf("<tr class='acad-row' onclick='toggleAcad(this)'>"),
+      sprintf("<td class='td-nombre'><span class='flecha'>&#9658;</span>%s</td>", prof),
+      sprintf("<td style='text-align:right'>%s</td>", badge(hp)),
+      "</tr>",
+      "<tr class='detalle-row'><td colspan='2'><div class='detalle-inner'>",
+      det_html(prof),
+      sprintf("<p class='detalle-total'>Total HP: <strong>%s</strong></p>", hp),
+      "</div></td></tr>"
+    )
+  }, character(1)), collapse="\n")
+
+  badge_prom <- if (prom_hp >= 12)
+    sprintf("<span style='color:#27ae60;font-weight:600'>%s HP ✓</span>", prom_hp)
+  else
+    sprintf("<span style='color:#c0392b;font-weight:600'>%s HP ✗</span>", prom_hp)
+
+  cat(paste0(
+    "<table><thead><tr>",
+    "<th>Académico <span style='font-weight:400;font-size:10px'>(clic para ver cursos)</span></th>",
+    sprintf("<th style='text-align:right'>HP &nbsp; <span style='font-weight:400'>Prom. claustro: %s</span></th>", badge_prom),
+    "</tr></thead><tbody>",
+    filas_html,
+    "</tbody></table>\n"
+  ))
 } else {
   cat("_No se registran académicos en el claustro de esta unidad._\n")
 }

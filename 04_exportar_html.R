@@ -232,6 +232,41 @@ p.cod-programa {{
   background: {C_DARK};
 }}
 
+/* ── Claustro expandible ─────────────────────────────────── */
+tr.acad-row {{ cursor: pointer; transition: background .15s; }}
+tr.acad-row:hover {{ background: #E8F8F7 !important; }}
+tr.acad-row.abierto {{ background: #E8F8F7 !important; font-weight: 600; }}
+td.td-nombre {{ display: flex; align-items: center; gap: .5rem; }}
+.flecha {{
+  display: inline-block; width: 14px; font-size: 10px;
+  color: {C_TEAL}; transition: transform .2s; flex-shrink: 0;
+}}
+tr.acad-row.abierto .flecha {{ transform: rotate(90deg); }}
+tr.detalle-row {{ display: none; }}
+tr.detalle-row.visible {{ display: table-row; }}
+tr.detalle-row > td {{
+  padding: 0;
+  background: #f4fbfb;
+  border-bottom: 2px solid {C_TEAL};
+}}
+.detalle-inner {{
+  padding: .5rem 1rem .7rem 2.4rem;
+}}
+.detalle-inner table {{
+  font-size: 11.5px; width: auto; min-width: 480px;
+  margin: 0; border-collapse: collapse;
+}}
+.detalle-inner thead tr {{ background: #555; }}
+.detalle-inner thead th {{ padding: 4px 10px; font-weight: 500; color: white; text-align: left; }}
+.detalle-inner thead th.num {{ text-align: right; }}
+.detalle-inner tbody tr:nth-child(even) {{ background: #eef7f7; }}
+.detalle-inner tbody tr:hover {{ background: #d6f0ef; }}
+.detalle-inner tbody td {{ padding: 3px 10px; }}
+.detalle-inner tbody td.num {{ text-align: right; }}
+.detalle-total {{
+  font-size: 11px; color: #555; margin-top: .35rem;
+}}
+
 /* ── Impresion ───────────────────────────────────────────── */
 @media print {{
   body {{ max-width: 100%; padding: 1cm; font-size: 11px; }}
@@ -240,6 +275,8 @@ p.cod-programa {{
   tbody tr:has(td > strong) {{ background-color: #FFF3CD !important; }}
   .btn-pdf {{ display: none; }}
   p.cod-programa {{ background: #eee !important; }}
+  tr.detalle-row {{ display: table-row !important; }}
+  .flecha {{ display: none; }}
 }}
 ')
 
@@ -304,6 +341,13 @@ md_a_html <- function(ruta_md, ruta_html, css) {
 </head>
 <body>
 ', header_html, '
+<script>
+function toggleAcad(row) {
+  var det = row.nextElementSibling;
+  var open = row.classList.toggle("abierto");
+  det.classList.toggle("visible", open);
+}
+</script>
 <main>
 ', html_body, '
 </main>
