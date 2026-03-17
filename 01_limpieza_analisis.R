@@ -123,7 +123,7 @@ df_raw <- read_excel(ARCHIVO, sheet = 1) |>
 
     # ── Numericas ─────────────────────────────────────────────────────────────
     across(c(t, e, l, s, horas_ped, horas_plan, eq_cron, cupo),
-           ~ replace_na(as.numeric(.), 0)),
+           ~ replace_na(suppressWarnings(as.numeric(.)), 0)),
     insc = as.numeric(insc)   # permanece NA hasta inscripcion
   )
 

@@ -33,7 +33,8 @@ UNIDADES <- c(
 )
 
 etiq_periodo <- function(anio, per) {
-  paste0(if (per == 1) "1er sem " else "2do sem ", anio)
+  if (is.na(per) || is.na(anio)) return(NA_character_)
+  paste0(if (isTRUE(per == 1)) "1er sem " else "2do sem ", anio)
 }
 
 C_TEAL   <- "#00A499"
@@ -188,7 +189,7 @@ cargar_base <- function(path) {
       ),
       en_claustro  = cargo == "ACADEMICO",
       es_sello     = str_starts(tipo, "S"),
-      across(c(horas_ped, horas_plan, eq_cron), ~ replace_na(as.numeric(.), 0))
+      across(c(horas_ped, horas_plan, eq_cron), ~ replace_na(suppressWarnings(as.numeric(.)), 0))
     )
 }
 
@@ -218,6 +219,7 @@ df_todo <- bind_rows(df_hist, df_sem)
 
 periodos <- df_todo |>
   distinct(ano, periodo) |>
+  filter(!is.na(ano), !is.na(periodo)) |>
   arrange(ano, periodo) |>
   mutate(etiq  = map2_chr(ano, periodo, etiq_periodo),
          clave = paste0(ano, "-", periodo))
