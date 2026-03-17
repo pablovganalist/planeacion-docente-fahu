@@ -386,10 +386,52 @@ if (nrow(claustro) > 0) {
 ```{r tabla_autoridades, results='asis'}
 if (nrow(autoridades) > 0) {
   cat("\n**Horas de autoridades**\n\n")
-  autoridades |>
-    rename(Nombre = profesor, Cargo = cargo,
-           `Horas ped.` = hp, `EQ cron.` = hc) |>
-    kable(align = c("l","l","r","r")) |> print()
+
+  det_aut <- function(prof) {
+    cursos <- df_profs |>
+      filter(profesor == prof) |>
+      select(pre, carrera, cod, curso, sec, horas_prof) |>
+      arrange(pre, carrera, sec)
+    if (nrow(cursos) == 0) return("<em>Sin secciones registradas</em>")
+    filas <- paste(vapply(seq_len(nrow(cursos)), function(i) {
+      r <- cursos[i,]
+      sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class='num'>%s</td></tr>",
+        r$pre, r$carrera, r$cod, r$curso, r$horas_prof)
+    }, character(1)), collapse="")
+    paste0(
+      "<table><thead><tr>",
+      "<th>Nivel</th><th>Carrera</th><th>Cód.</th><th>Asignatura</th><th class='num'>HP</th>",
+      "</tr></thead><tbody>", filas, "</tbody></table>"
+    )
+  }
+
+  filas_aut <- paste(vapply(seq_len(nrow(autoridades)), function(i) {
+    prof  <- autoridades$profesor[i]
+    cargo <- autoridades$cargo[i]
+    hp    <- autoridades$hp[i]
+    paste0(
+      "<tr class='acad-row' onclick='toggleAcad(this)'>",
+      sprintf("<td class='td-nombre'><span class='flecha'>&#9658;</span>%s</td>", prof),
+      sprintf("<td>%s</td>", cargo),
+      sprintf("<td style='text-align:right'>%s</td>", hp),
+      "</tr>",
+      "<tr class='detalle-row'><td colspan='3'><div class='detalle-inner'>",
+      det_aut(prof),
+      sprintf("<p class='detalle-total'>Total HP: <strong>%s</strong></p>", hp),
+      "</div></td></tr>"
+    )
+  }, character(1)), collapse="\n")
+
+  cat(paste0(
+    "<table><thead><tr>",
+    "<th>Nombre <span style='font-weight:400;font-size:10px'>(clic para ver cursos)</span></th>",
+    "<th>Cargo</th>",
+    "<th style='text-align:right'>HP</th>",
+    "</tr></thead><tbody>",
+    filas_aut,
+    "</tbody></table>\n"
+  ))
+
   cat(paste0(
     "\n> Las horas de los académicos con cargos en el gobierno superior de la ",
     "universidad (Decano/a, Vicedecano/a, Director/a VIME) y de los directores ",
