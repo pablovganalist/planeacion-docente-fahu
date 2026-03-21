@@ -86,7 +86,6 @@ df_act  <- cargar(ARCHIVO_SEM)
 df_hist <- cargar(ARCHIVO_HIST)
 df_ant  <- df_hist |> filter(ano==ANO_ANT, periodo==PER_ANT)
 
-        paste(head(unique(df_act$codprog),4),collapse=", "))
 
 # =============================================================================
 # PRE-COMPUTAR MÉTRICAS — una fila por (codprog, pre, periodo)
