@@ -552,6 +552,7 @@ index_html <- glue('<!DOCTYPE html>
 
   <div class="tabs">
     <button class="tab-btn activo" onclick="mostrarTab(\'informes\', this)">Informes</button>
+    <button class="tab-btn" onclick="mostrarTab(\'sintesis\', this)">Síntesis por carrera</button>
     <button class="tab-btn" onclick="mostrarTab(\'acerca\', this)">Acerca</button>
   </div>
 
@@ -560,6 +561,19 @@ index_html <- glue('<!DOCTYPE html>
 {items_html}
     </ul>
     <p class="pie">Generado el {fecha_gen} &bull; {length(generados)} informes</p>
+  </div>
+
+  <div id="sintesis" class="tab-panel">
+    <p style="margin-bottom:1rem;font-size:.88rem;color:#555">
+      Distribución de horas planeadas por carrera, programa y nivel. Incluye comparación con el semestre anterior.
+    </p>
+    <a href="sintesis_programas.html" style="
+      display:inline-block;padding:.5rem 1.2rem;background:{C_TEAL};
+      color:white;border-radius:4px;font-size:.88rem;font-weight:600;
+      text-decoration:none">Ver síntesis por carrera →</a>
+    <p style="margin-top:.8rem;font-size:.78rem;color:#aaa">
+      Se abre en una nueva página. Incluye todos los programas ordenados por unidad.
+    </p>
   </div>
 
   <div id="acerca" class="tab-panel acerca">

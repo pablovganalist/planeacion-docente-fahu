@@ -61,6 +61,11 @@ cat("── Paso 5: exportando a LaTeX...\n")
 source("06_exportar_latex.R", local = TRUE)
 cat("   OK\n\n")
 
+# ── 6. Síntesis por carrera y programa ────────────────────────────────────────
+cat("── Paso 6: generando síntesis por programa...\n")
+source("07_sintesis_programas.R", local = TRUE)
+cat("   OK\n\n")
+
 cat("=============================================================\n")
 cat(glue("  Informes disponibles en: {CARPETA_HTML}/\n"))
 cat("=============================================================\n")
