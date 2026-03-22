@@ -5,20 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Escuela de Periodismo — Primer semestre 2026</title>
   <style>
-/* ── Tipografia y base ───────────────────────────────────── */
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   font-size: 13px;
   line-height: 1.65;
   color: #394049;
-  max-width: 900px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 2rem 2.5rem 4rem;
-  background: #fff;
+  padding: 2rem 1.25rem 4rem;
+  background: linear-gradient(180deg, #eef7f6 0%, #f6f7f8 220px);
 }
-
-/* ── Encabezados ─────────────────────────────────────────── */
-/* h1 se define en el bloque header institucional más abajo */
 h2 {
   color: #394049;
   font-size: 1.15rem;
@@ -34,8 +30,6 @@ h3, h3.carr-titulo {
   margin-top: 2rem;
   margin-bottom: 0.2rem;
 }
-
-/* ── Tablas ──────────────────────────────────────────────── */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -61,9 +55,6 @@ tbody td {
   padding: 5px 12px;
   border-bottom: 1px solid #E0E0E0;
 }
-
-/* ── Filas de totales: se detectan porque tienen <strong> en todas las celdas
-      Aplica a filas A, B, C de la tabla de horas y al promedio del claustro ── */
 tbody tr:has(td > strong) {
   background-color: #FFF3CD;
   border-top: 2px solid #EAAA00;
@@ -73,14 +64,10 @@ tbody tr:has(td > strong) td {
   font-weight: 700;
   color: #394049;
 }
-
-/* ── Cupos bajos (⚠): celda con simbolo de advertencia ───── */
 tbody td:has(> span.alerta) {
   color: #C8102E;
   font-weight: 700;
 }
-
-/* ── Blockquotes (alertas y notas) ──────────────────────── */
 blockquote {
   border-left: 4px solid #00A499;
   background: #E8F8F7;
@@ -90,14 +77,14 @@ blockquote {
   color: #394049;
 }
 blockquote p { margin: 0; }
-
-/* ── Header institucional ────────────────────────────────── */
 header {
-  border-bottom: 3px solid #00A499;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
+  border-top: 6px solid #00A499;
+  padding: 1.5rem 1.5rem 1.2rem;
+  margin-bottom: 1.25rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
 }
-/* Nombre de la facultad: supraencabezado pequeño sobre el título */
 p.facultad {
   font-size: 0.78rem;
   font-weight: 700;
@@ -106,23 +93,19 @@ p.facultad {
   color: #00A499;
   margin: 0 0 0.2rem 0;
 }
-/* h1: nombre de la unidad — título principal */
 h1 {
   color: #394049;
   font-size: 1.65rem;
   font-weight: 700;
   margin: 0 0 0.3rem 0;
-  border: none;        /* anula el border-bottom que estaba antes en h1 */
+  border: none;
   padding: 0;
 }
-/* Subtitulo de periodo */
 .periodo {
   color: #666;
   font-size: 0.95rem;
   margin: 0 0 1rem 0;
 }
-
-/* ── Código de programa bajo el nombre de carrera ────────── */
 .cod-programa {
   font-size: 0.85rem;
   color: #394049;
@@ -134,17 +117,6 @@ h1 {
   font-family: "Courier New", monospace;
   letter-spacing: 0.03em;
 }
-
-/* ── Pie de pagina ───────────────────────────────────────── */
-.pie {
-  margin-top: 3rem;
-  padding-top: 0.8rem;
-  border-top: 2px solid #00A499;
-  font-size: 11px;
-  color: #666;
-}
-
-/* ── Codigo de programa ──────────────────────────────────── */
 p.cod-programa {
   font-size: 0.82rem;
   color: #394049;
@@ -156,8 +128,27 @@ p.cod-programa {
   font-family: "Courier New", monospace;
   letter-spacing: 0.02em;
 }
-
-/* ── Boton descargar PDF ─────────────────────────────────── */
+.pie {
+  margin-top: 3rem;
+  padding-top: 0.8rem;
+  border-top: 2px solid #00A499;
+  font-size: 11px;
+  color: #666;
+}
+.contenido {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+  padding: 1.5rem;
+}
+.contenido > h2:first-child {
+  margin-top: 0;
+}
+.contenido hr {
+  border: 0;
+  border-top: 1px solid #e4e7ea;
+  margin: 1.35rem 0;
+}
 .botones-header {
   display: flex;
   gap: 0.6rem;
@@ -187,7 +178,6 @@ p.cod-programa {
 }
 .btn-pdf {
   display: inline-block;
-  margin-bottom: 1.5rem;
   padding: 0.45rem 1.1rem;
   background: #00A499;
   color: white !important;
@@ -202,8 +192,6 @@ p.cod-programa {
 .btn-pdf:hover {
   background: #394049;
 }
-
-/* ── Claustro expandible ─────────────────────────────────── */
 tr.acad-row { cursor: pointer; transition: background .15s; }
 tr.acad-row:hover { background: #E8F8F7 !important; }
 tr.acad-row.abierto { background: #E8F8F7 !important; font-weight: 600; }
@@ -237,10 +225,8 @@ tr.detalle-row > td {
 .detalle-total {
   font-size: 11px; color: #555; margin-top: .35rem;
 }
-
-/* ── Impresion ───────────────────────────────────────────── */
 @media print {
-  body { max-width: 100%; padding: 1cm; font-size: 11px; }
+  body { max-width: 100%; padding: 1cm; font-size: 11px; background: #fff; }
   h2 { page-break-before: auto; }
   table { font-size: 10px; }
   tbody tr:has(td > strong) { background-color: #FFF3CD !important; }
@@ -248,6 +234,7 @@ tr.detalle-row > td {
   p.cod-programa { background: #eee !important; }
   tr.detalle-row { display: table-row !important; }
   .flecha { display: none; }
+  header, .contenido { box-shadow: none; border-radius: 0; }
 }
   </style>
 </head>
@@ -258,23 +245,11 @@ tr.detalle-row > td {
 <p class="periodo">Primer semestre 2026</p>
 <div class="botones-header"><a href="index.html" class="btn-indice">← Índice</a> <a href="comparativos/periodismo.html" class="btn-comp">📊 Informe comparado 2024–2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
 </header>
-<script>
-function toggleAcad(row) {
-  var det = row.nextElementSibling;
-  var open = row.classList.toggle("abierto");
-  det.classList.toggle("visible", open);
-}
-</script>
-<main>
+<main class="contenido">
 
 <h2 id="horas-planeadas-de-la-unidad">1. Horas planeadas de la
 unidad</h2>
 <table>
-<colgroup>
-<col width="25%" />
-<col width="63%" />
-<col width="10%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -286,7 +261,7 @@ unidad</h2>
 <tr class="odd">
 <td align="left"><strong>A (i+ii+iii+iv)</strong></td>
 <td align="left"><strong>Horas planeadas pregrado</strong></td>
-<td align="right"><strong>664</strong></td>
+<td align="right"><strong>666</strong></td>
 </tr>
 <tr class="even">
 <td align="left">i</td>
@@ -302,7 +277,7 @@ unidad</h2>
 <td align="left">iii</td>
 <td align="left">Horas de profesores de jornada externos a la
 unidad</td>
-<td align="right">24</td>
+<td align="right">26</td>
 </tr>
 <tr class="odd">
 <td align="left">iv</td>
@@ -333,7 +308,7 @@ unidad</td>
 <tr class="even">
 <td align="left"><strong>C (A+B)</strong></td>
 <td align="left"><strong>Total horas planeadas unidad</strong></td>
-<td align="right"><strong>710</strong></td>
+<td align="right"><strong>712</strong></td>
 </tr>
 </tbody>
 </table>
@@ -359,7 +334,7 @@ unidad</td>
 <tr class="odd">
 <td align="left">F (iii+vii)</td>
 <td align="left">Horas de profesores de jornada externos</td>
-<td align="right">24</td>
+<td align="right">26</td>
 </tr>
 <tr class="even">
 <td align="left">G</td>
@@ -368,8 +343,8 @@ unidad</td>
 </tr>
 </tbody>
 </table>
-<p>La unidad registra un total de <strong>710 horas</strong> de clases
-planeadas, divididas en 664 horas en pregrado y 46 horas en postgrado.
+<p>La unidad registra un total de <strong>712 horas</strong> de clases
+planeadas, divididas en 666 horas en pregrado y 46 horas en postgrado.
 Los profesores de jornada de la unidad cubren el 20% del total, mientras
 que los profesores por hora cubren el 76%.</p>
 <hr />
@@ -1996,14 +1971,14 @@ Código de programa: 5108
 </p>
 <table>
 <colgroup>
-<col width="8%" />
-<col width="6%" />
+<col width="7%" />
+<col width="5%" />
+<col width="35%" />
+<col width="3%" />
+<col width="2%" />
+<col width="4%" />
 <col width="33%" />
 <col width="4%" />
-<col width="4%" />
-<col width="5%" />
-<col width="32%" />
-<col width="5%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -2371,14 +2346,14 @@ Código de programa: 5111
 </p>
 <table>
 <colgroup>
-<col width="5%" />
+<col width="4%" />
 <col width="3%" />
-<col width="56%" />
-<col width="3%" />
+<col width="59%" />
 <col width="2%" />
-<col width="3%" />
+<col width="1%" />
+<col width="2%" />
 <col width="21%" />
-<col width="3%" />
+<col width="2%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -2393,6 +2368,46 @@ Código de programa: 5111
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td align="left">DECIMO</td>
+<td align="left">47348</td>
+<td align="left">Práctica Profesional</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">María Soledad Urquieta Fuentes</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">DECIMO</td>
+<td align="left">47348</td>
+<td align="left">Práctica Profesional</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">15</td>
+<td align="left">Amanda Marton Ramaciotti</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">DECIMO</td>
+<td align="left">47351</td>
+<td align="left">Seminario De Título Ii</td>
+<td align="left">L-1</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Paula Patricia Huenchumil Jerez</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">DECIMO</td>
+<td align="left">47351</td>
+<td align="left">Seminario De Título Ii</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Paula Patricia Huenchumil Jerez</td>
+<td align="right">NA</td>
+</tr>
 <tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">47312</td>
@@ -2996,8 +3011,8 @@ Código de programa: 5111
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">¿Qué Es Una Sociedad Justa? Teoría Social Normativa Y
-Desafíos De Cambio Social</td>
+<td align="left">Sello: ¿Qué Es Una Sociedad Justa? Teoría Social
+Normativa Y Desafíos De Cambio Social</td>
 <td align="left">S-1</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3007,12 +3022,13 @@ Desafíos De Cambio Social</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Derechos Humanos Desde Los Juegos De Rol De Mesa</td>
+<td align="left">Sello: Derechos Humanos Desde Los Juegos De Rol De
+Mesa</td>
 <td align="left">S-11</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
 <td align="left">Nelson Andrés Ortiz Villalobos</td>
-<td align="right">NA</td>
+<td align="right">3</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
@@ -3028,7 +3044,8 @@ Mirada Critica Y Situada Desde Latinoamérica</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Electivo Ii</td>
+<td align="left">Sello: Conectando Barrios: Buenas Prácticas En Torno A
+La Diversidad Cultural Y La Cohesión Social</td>
 <td align="left">S-12</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3038,8 +3055,8 @@ Mirada Critica Y Situada Desde Latinoamérica</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Desarrollo De Estrategias Y Proyectos De Incidencia
-Social Y Política Desde La Sociedad Civil</td>
+<td align="left">Sello: Desarrollo De Estrategias Y Proyectos De
+Incidencia Social Y Política Desde La Sociedad Civil</td>
 <td align="left">S-13</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3049,7 +3066,7 @@ Social Y Política Desde La Sociedad Civil</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Educación De Adultos</td>
+<td align="left">Sello: Educación De Adultos</td>
 <td align="left">S-14</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3059,8 +3076,8 @@ Social Y Política Desde La Sociedad Civil</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Datos Para Contar Historias: Análisis Y Visualización
-Para Humanidades Y Ciencias Sociales</td>
+<td align="left">Sello: Datos Para Contar Historias: Análisis Y
+Visualización Para Humanidades Y Ciencias Sociales</td>
 <td align="left">S-15</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3070,8 +3087,8 @@ Para Humanidades Y Ciencias Sociales</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">El Arte Como Puente: Metodologías Interdisciplinares
-Para Comprender La Cultura Visual</td>
+<td align="left">Sello: El Arte Como Puente: Metodologías
+Interdisciplinares Para Comprender La Cultura Visual</td>
 <td align="left">S-15</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3081,48 +3098,71 @@ Para Comprender La Cultura Visual</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">El Podcast Educativo: Voz, Creación Y Comunicación
-Digital</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
 <td align="left">S-16</td>
-<td align="right">4</td>
+<td align="right">2</td>
 <td align="right">3 ⚠</td>
 <td align="left">Eduardo Inostroza Carvajal</td>
-<td align="right">NA</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
+<td align="left">S-16</td>
+<td align="right">2</td>
+<td align="right">3 ⚠</td>
+<td align="left">Luciano Guzman</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
 <td align="left">S-17</td>
 <td align="right">2</td>
 <td align="right">3 ⚠</td>
 <td align="left">Luis Edilio Hernández Astudillo</td>
 <td align="right">NA</td>
 </tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">47340</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">S-17</td>
+<td align="right">2</td>
+<td align="right">3 ⚠</td>
+<td align="left">Mario Hernan Radrigan Rubio</td>
+<td align="right">NA</td>
+</tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Electivo Ii</td>
+<td align="left">Sello: Estrategias De Innovación Para La
+Sostenibilidad</td>
 <td align="left">S-18</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
-<td align="left">Ignacio Olavarría</td>
-<td align="right">NA</td>
+<td align="left">Ignacio Olavarría Contreras</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Fotografía De Principio Con Un Fin</td>
+<td align="left">Sello: Fotografía De Principio Con Un Fin</td>
 <td align="left">S-19</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
 <td align="left">Ximena Myriam Riffo Piña</td>
-<td align="right">NA</td>
+<td align="right">1</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Acción: Teoría Y Práctica De La Ética Ambiental</td>
+<td align="left">Sello: Acción: Teoría Y Práctica De La Ética
+Ambiental</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3135,9 +3175,9 @@ Digital</td>
 <td align="left">Sello: Gobernanza Y Transparencia Desde Los Derechos
 Humanos</td>
 <td align="left">S-20</td>
-<td align="right">0</td>
+<td align="right">2</td>
 <td align="right">3 ⚠</td>
-<td align="left">Vanessa Retamal Gutiérrez</td>
+<td align="left">Francisco Zambrano Meza</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
@@ -3148,13 +3188,13 @@ Humanos</td>
 <td align="left">S-20</td>
 <td align="right">2</td>
 <td align="right">3 ⚠</td>
-<td align="left">Francisco Zambrano Meza</td>
+<td align="left">Vanessa Retamal Gutiérrez</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Herramientas Socioemocionales En Contextos De
+<td align="left">Sello: Herramientas Socioemocionales En Contextos De
 Diversidad</td>
 <td align="left">S-21</td>
 <td align="right">4</td>
@@ -3165,7 +3205,7 @@ Diversidad</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Historia Aplicada: Desarrollo Territorial
+<td align="left">Sello: Historia Aplicada: Desarrollo Territorial
 Sostenible</td>
 <td align="left">S-22</td>
 <td align="right">4</td>
@@ -3176,8 +3216,8 @@ Sostenible</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Juego: Herramienta Educativa Y Para La Intervención
-Social</td>
+<td align="left">Sello: Juego: Herramienta Educativa Y Para La
+Intervención Social</td>
 <td align="left">S-24</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3198,7 +3238,7 @@ Chilena</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">La Escuela Como Organización Que Cuida</td>
+<td align="left">Sello: La Escuela Como Organización Que Cuida</td>
 <td align="left">S-27</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3208,7 +3248,7 @@ Chilena</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">La Representaciones Del Futuro En El Cine De
+<td align="left">Sello: La Representaciones Del Futuro En El Cine De
 Ciencia-Ficción Y Distópico.</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
@@ -3219,34 +3259,34 @@ Ciencia-Ficción Y Distópico.</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Laboratorio De Cocreación De Gobernanza Para La
+<td align="left">Sello: Laboratorio De Cocreación De Gobernanza Para La
 Sostenibilidad</td>
 <td align="left">S-29</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
 <td align="left">Israel Patricio Perez Vargas</td>
-<td align="right">NA</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Electivo Ii</td>
+<td align="left">Sello: Liderazgo E Innovación Social</td>
 <td align="left">S-30</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
-<td align="left">Marco Iraola</td>
+<td align="left">Marco Iraola Barboza</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Neurodivergencias Y Salud Mental Comunitaria:
-Aplicación Del Paradigma Neuroafirmativo En</td>
+<td align="left">Sello: Neurodivergencias Y Salud Mental Comunitaria:
+Aplicación Del Paradigma Neuroafirmativo</td>
 <td align="left">S-32</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
 <td align="left">Illaritza Siuxie Parada Cortés</td>
-<td align="right">NA</td>
+<td align="right">1</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
@@ -3262,7 +3302,8 @@ Planetaria</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Electivo Ii</td>
+<td align="left">Sello: Interseccionalidad, Movilidad Humana Y Grupos De
+Especial Protección</td>
 <td align="left">S-33</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3272,12 +3313,12 @@ Planetaria</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Participación Ciudadana Y Territorio</td>
+<td align="left">Sello: Participación Ciudadana Y Territorio</td>
 <td align="left">S-34</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
 <td align="left">Mónica Alejandra Vargas Aguirre</td>
-<td align="right">NA</td>
+<td align="right">1</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
@@ -3292,13 +3333,12 @@ Planetaria</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Persona Humana Y Justicia Social: Elementos
-Ético-Valóricos Para Una Comprensión Del Ejerc</td>
+<td align="left">Sello: Persona Humana Y Justicia Social</td>
 <td align="left">S-35</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
 <td align="left">Mauricio Chapsal Escudero</td>
-<td align="right">NA</td>
+<td align="right">1</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
@@ -3325,19 +3365,19 @@ Historia, Vivienda Y Desigualdad Urbana.</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Arte Y Cultura Para La Promoción De Los Derechos
+<td align="left">Sello: Arte Y Cultura Para La Promoción De Los Derechos
 Humanos</td>
 <td align="left">S-4</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
 <td align="left">Mariela Edith Llancaqueo Jimenez</td>
-<td align="right">NA</td>
+<td align="right">2</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Territorios En Conflicto: Desafíos De Sostenibilidad Y
-Justicia Socioambiental</td>
+<td align="left">Sello: Territorios En Conflicto: Desafíos De
+Sostenibilidad Y Justicia Socioambiental</td>
 <td align="left">S-40</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3347,8 +3387,8 @@ Justicia Socioambiental</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Narrativas Visuales Y Ciudadanía Cultural: Del Manga Al
-Cómic Latinoamericano</td>
+<td align="left">Sello: Narrativas Visuales Y Ciudadanía Cultural: Del
+Manga Al Cómic Latinoamericano</td>
 <td align="left">S-42</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3388,7 +3428,7 @@ Cómic Latinoamericano</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Ciudadanía Cultura Y Buenvivir</td>
+<td align="left">Sello: Ciudadanía Cultura Y Buenvivir</td>
 <td align="left">S-6</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -3398,7 +3438,7 @@ Cómic Latinoamericano</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Análisis De Texto Como Dato: Herramientas
+<td align="left">Sello: Análisis De Texto Como Dato: Herramientas
 Computacionales Para Las Humanidades</td>
 <td align="left">S-7</td>
 <td align="right">4</td>
@@ -3409,7 +3449,7 @@ Computacionales Para Las Humanidades</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Controversias Y Posicionamientos Éticos Para Una
+<td align="left">Sello: Controversias Y Posicionamientos Éticos Para Una
 Ciudadanía Crítica</td>
 <td align="left">S-8</td>
 <td align="right">4</td>
@@ -3420,12 +3460,12 @@ Ciudadanía Crítica</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">47340</td>
-<td align="left">Curiosidades Sobre El Cerebro</td>
+<td align="left">Sello: Curiosidades Sobre El Cerebro</td>
 <td align="left">S-9</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
 <td align="left">Juan Amaro Fuenzalida</td>
-<td align="right">NA</td>
+<td align="right">1</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
@@ -3818,66 +3858,26 @@ Sociales</td>
 <td align="left">Mariela Edith Llancaqueo Jimenez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
-<td align="left">DECIMO</td>
-<td align="left">47348</td>
-<td align="left">Práctica Profesional</td>
-<td align="left">T-1</td>
-<td align="right">4</td>
-<td align="right">15</td>
-<td align="left">María Soledad Urquieta Fuentes</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="left">DECIMO</td>
-<td align="left">47348</td>
-<td align="left">Práctica Profesional</td>
-<td align="left">T-2</td>
-<td align="right">4</td>
-<td align="right">15</td>
-<td align="left">Amanda Marton Ramaciotti</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">DECIMO</td>
-<td align="left">47351</td>
-<td align="left">Seminario De Título Ii</td>
-<td align="left">L-1</td>
-<td align="right">2</td>
-<td align="right">5 ⚠</td>
-<td align="left">Paula Patricia Huenchumil Jerez</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="left">DECIMO</td>
-<td align="left">47351</td>
-<td align="left">Seminario De Título Ii</td>
-<td align="left">T-1</td>
-<td align="right">2</td>
-<td align="right">5 ⚠</td>
-<td align="left">Paula Patricia Huenchumil Jerez</td>
-<td align="right">NA</td>
-</tr>
 </tbody>
 </table>
-<p>La carrera registra <strong>144 secciones</strong> en <strong>17
-cursos</strong> con <strong>404 horas pedagógicas</strong>, dictadas por
-<strong>77 profesores</strong> (incluye 10 seccion(es) sello).</p>
+<p>La carrera registra <strong>146 secciones</strong> en <strong>17
+cursos</strong> con <strong>408 horas pedagógicas</strong>, dictadas por
+<strong>79 profesores</strong> (incluye 8 seccion(es) sello).</p>
 <h3 class="carr-titulo">
 Periodismo
 </h3>
 <p class="cod-programa">
 Código de programa: 5112
 </p>
-<table>
+<table style="width:100%;">
 <colgroup>
-<col width="7%" />
+<col width="6%" />
 <col width="5%" />
-<col width="40%" />
+<col width="42%" />
 <col width="3%" />
-<col width="3%" />
+<col width="2%" />
 <col width="4%" />
-<col width="29%" />
+<col width="31%" />
 <col width="4%" />
 </colgroup>
 <thead>
@@ -4726,12 +4726,12 @@ Código de programa: 9564
 </p>
 <table>
 <colgroup>
-<col width="4%" />
-<col width="54%" />
+<col width="3%" />
+<col width="55%" />
 <col width="5%" />
-<col width="4%" />
-<col width="4%" />
-<col width="22%" />
+<col width="3%" />
+<col width="3%" />
+<col width="23%" />
 <col width="3%" />
 </colgroup>
 <thead>
@@ -4894,5 +4894,15 @@ registra un promedio de <strong>15.4 HP</strong> en Primer semestre
 sello se contabilizan una sola vez por docente.</p>
 </main>
 <div class="pie">Base elaborada a partir de los registros de planeación docente. Código elaborado por Pablo Valenzuela con apoyo de Claude de Anthropic · Primer semestre 2026</div>
+
+<script>
+function toggleAcad(row) {
+  const detail = row.nextElementSibling;
+  if (!detail || !detail.classList.contains("detalle-row")) return;
+  row.classList.toggle("abierto");
+  detail.classList.toggle("visible");
+}
+</script>
 </body>
 </html>
+

@@ -5,20 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Escuela de Psicología — Primer semestre 2026</title>
   <style>
-/* ── Tipografia y base ───────────────────────────────────── */
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   font-size: 13px;
   line-height: 1.65;
   color: #394049;
-  max-width: 900px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 2rem 2.5rem 4rem;
-  background: #fff;
+  padding: 2rem 1.25rem 4rem;
+  background: linear-gradient(180deg, #eef7f6 0%, #f6f7f8 220px);
 }
-
-/* ── Encabezados ─────────────────────────────────────────── */
-/* h1 se define en el bloque header institucional más abajo */
 h2 {
   color: #394049;
   font-size: 1.15rem;
@@ -34,8 +30,6 @@ h3, h3.carr-titulo {
   margin-top: 2rem;
   margin-bottom: 0.2rem;
 }
-
-/* ── Tablas ──────────────────────────────────────────────── */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -61,9 +55,6 @@ tbody td {
   padding: 5px 12px;
   border-bottom: 1px solid #E0E0E0;
 }
-
-/* ── Filas de totales: se detectan porque tienen <strong> en todas las celdas
-      Aplica a filas A, B, C de la tabla de horas y al promedio del claustro ── */
 tbody tr:has(td > strong) {
   background-color: #FFF3CD;
   border-top: 2px solid #EAAA00;
@@ -73,14 +64,10 @@ tbody tr:has(td > strong) td {
   font-weight: 700;
   color: #394049;
 }
-
-/* ── Cupos bajos (⚠): celda con simbolo de advertencia ───── */
 tbody td:has(> span.alerta) {
   color: #C8102E;
   font-weight: 700;
 }
-
-/* ── Blockquotes (alertas y notas) ──────────────────────── */
 blockquote {
   border-left: 4px solid #00A499;
   background: #E8F8F7;
@@ -90,14 +77,14 @@ blockquote {
   color: #394049;
 }
 blockquote p { margin: 0; }
-
-/* ── Header institucional ────────────────────────────────── */
 header {
-  border-bottom: 3px solid #00A499;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
+  border-top: 6px solid #00A499;
+  padding: 1.5rem 1.5rem 1.2rem;
+  margin-bottom: 1.25rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
 }
-/* Nombre de la facultad: supraencabezado pequeño sobre el título */
 p.facultad {
   font-size: 0.78rem;
   font-weight: 700;
@@ -106,23 +93,19 @@ p.facultad {
   color: #00A499;
   margin: 0 0 0.2rem 0;
 }
-/* h1: nombre de la unidad — título principal */
 h1 {
   color: #394049;
   font-size: 1.65rem;
   font-weight: 700;
   margin: 0 0 0.3rem 0;
-  border: none;        /* anula el border-bottom que estaba antes en h1 */
+  border: none;
   padding: 0;
 }
-/* Subtitulo de periodo */
 .periodo {
   color: #666;
   font-size: 0.95rem;
   margin: 0 0 1rem 0;
 }
-
-/* ── Código de programa bajo el nombre de carrera ────────── */
 .cod-programa {
   font-size: 0.85rem;
   color: #394049;
@@ -134,17 +117,6 @@ h1 {
   font-family: "Courier New", monospace;
   letter-spacing: 0.03em;
 }
-
-/* ── Pie de pagina ───────────────────────────────────────── */
-.pie {
-  margin-top: 3rem;
-  padding-top: 0.8rem;
-  border-top: 2px solid #00A499;
-  font-size: 11px;
-  color: #666;
-}
-
-/* ── Codigo de programa ──────────────────────────────────── */
 p.cod-programa {
   font-size: 0.82rem;
   color: #394049;
@@ -156,8 +128,27 @@ p.cod-programa {
   font-family: "Courier New", monospace;
   letter-spacing: 0.02em;
 }
-
-/* ── Boton descargar PDF ─────────────────────────────────── */
+.pie {
+  margin-top: 3rem;
+  padding-top: 0.8rem;
+  border-top: 2px solid #00A499;
+  font-size: 11px;
+  color: #666;
+}
+.contenido {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+  padding: 1.5rem;
+}
+.contenido > h2:first-child {
+  margin-top: 0;
+}
+.contenido hr {
+  border: 0;
+  border-top: 1px solid #e4e7ea;
+  margin: 1.35rem 0;
+}
 .botones-header {
   display: flex;
   gap: 0.6rem;
@@ -187,7 +178,6 @@ p.cod-programa {
 }
 .btn-pdf {
   display: inline-block;
-  margin-bottom: 1.5rem;
   padding: 0.45rem 1.1rem;
   background: #00A499;
   color: white !important;
@@ -202,8 +192,6 @@ p.cod-programa {
 .btn-pdf:hover {
   background: #394049;
 }
-
-/* ── Claustro expandible ─────────────────────────────────── */
 tr.acad-row { cursor: pointer; transition: background .15s; }
 tr.acad-row:hover { background: #E8F8F7 !important; }
 tr.acad-row.abierto { background: #E8F8F7 !important; font-weight: 600; }
@@ -237,10 +225,8 @@ tr.detalle-row > td {
 .detalle-total {
   font-size: 11px; color: #555; margin-top: .35rem;
 }
-
-/* ── Impresion ───────────────────────────────────────────── */
 @media print {
-  body { max-width: 100%; padding: 1cm; font-size: 11px; }
+  body { max-width: 100%; padding: 1cm; font-size: 11px; background: #fff; }
   h2 { page-break-before: auto; }
   table { font-size: 10px; }
   tbody tr:has(td > strong) { background-color: #FFF3CD !important; }
@@ -248,6 +234,7 @@ tr.detalle-row > td {
   p.cod-programa { background: #eee !important; }
   tr.detalle-row { display: table-row !important; }
   .flecha { display: none; }
+  header, .contenido { box-shadow: none; border-radius: 0; }
 }
   </style>
 </head>
@@ -258,23 +245,11 @@ tr.detalle-row > td {
 <p class="periodo">Primer semestre 2026</p>
 <div class="botones-header"><a href="index.html" class="btn-indice">← Índice</a> <a href="comparativos/psicologia.html" class="btn-comp">📊 Informe comparado 2024–2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
 </header>
-<script>
-function toggleAcad(row) {
-  var det = row.nextElementSibling;
-  var open = row.classList.toggle("abierto");
-  det.classList.toggle("visible", open);
-}
-</script>
-<main>
+<main class="contenido">
 
 <h2 id="horas-planeadas-de-la-unidad">1. Horas planeadas de la
 unidad</h2>
 <table>
-<colgroup>
-<col width="25%" />
-<col width="63%" />
-<col width="10%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -286,7 +261,7 @@ unidad</h2>
 <tr class="odd">
 <td align="left"><strong>A (i+ii+iii+iv)</strong></td>
 <td align="left"><strong>Horas planeadas pregrado</strong></td>
-<td align="right"><strong>904</strong></td>
+<td align="right"><strong>906</strong></td>
 </tr>
 <tr class="even">
 <td align="left">i</td>
@@ -302,7 +277,7 @@ unidad</h2>
 <td align="left">iii</td>
 <td align="left">Horas de profesores de jornada externos a la
 unidad</td>
-<td align="right">26</td>
+<td align="right">28</td>
 </tr>
 <tr class="odd">
 <td align="left">iv</td>
@@ -333,7 +308,7 @@ unidad</td>
 <tr class="even">
 <td align="left"><strong>C (A+B)</strong></td>
 <td align="left"><strong>Total horas planeadas unidad</strong></td>
-<td align="right"><strong>936</strong></td>
+<td align="right"><strong>938</strong></td>
 </tr>
 </tbody>
 </table>
@@ -359,7 +334,7 @@ unidad</td>
 <tr class="odd">
 <td align="left">F (iii+vii)</td>
 <td align="left">Horas de profesores de jornada externos</td>
-<td align="right">26</td>
+<td align="right">28</td>
 </tr>
 <tr class="even">
 <td align="left">G</td>
@@ -368,8 +343,8 @@ unidad</td>
 </tr>
 </tbody>
 </table>
-<p>La unidad registra un total de <strong>936 horas</strong> de clases
-planeadas, divididas en 904 horas en pregrado y 32 horas en postgrado.
+<p>La unidad registra un total de <strong>938 horas</strong> de clases
+planeadas, divididas en 906 horas en pregrado y 32 horas en postgrado.
 Los profesores de jornada de la unidad cubren el 18% del total, mientras
 que los profesores por hora cubren el 76%.</p>
 <hr />
@@ -1863,14 +1838,14 @@ Código de programa: 5223
 </p>
 <table style="width:100%;">
 <colgroup>
-<col width="5%" />
+<col width="4%" />
 <col width="3%" />
-<col width="55%" />
-<col width="3%" />
+<col width="58%" />
 <col width="2%" />
-<col width="3%" />
+<col width="1%" />
+<col width="2%" />
 <col width="22%" />
-<col width="3%" />
+<col width="2%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1885,86 +1860,6 @@ Código de programa: 5223
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">PRIMERO</td>
-<td align="left">711</td>
-<td align="left">Inglés I</td>
-<td align="left">T-1</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">Francisco Cabañas Gac</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="left">PRIMERO</td>
-<td align="left">711</td>
-<td align="left">Inglés I</td>
-<td align="left">T-2</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">Francisca Rebolledo Henriquez</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">PRIMERO</td>
-<td align="left">711</td>
-<td align="left">Inglés I</td>
-<td align="left">T-3</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">Francisca Rebolledo Henriquez</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="left">PRIMERO</td>
-<td align="left">711</td>
-<td align="left">Inglés I</td>
-<td align="left">T-4</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">Francisca Rebolledo Henriquez</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">PRIMERO</td>
-<td align="left">711</td>
-<td align="left">Inglés I</td>
-<td align="left">T-5</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">Francisca Rebolledo Henriquez</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="left">PRIMERO</td>
-<td align="left">711</td>
-<td align="left">Inglés I</td>
-<td align="left">T-6</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">Paulina Muriel Sepúlveda Vásquez</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">PRIMERO</td>
-<td align="left">711</td>
-<td align="left">Inglés I</td>
-<td align="left">T-7</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">Tamara Karin Espinoza Sepulveda</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="left">PRIMERO</td>
-<td align="left">711</td>
-<td align="left">Inglés I</td>
-<td align="left">T-8</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">Paulina Zamora Vrsalovic</td>
-<td align="right">NA</td>
-</tr>
 <tr class="odd">
 <td align="left">PRIMERO</td>
 <td align="left">45300</td>
@@ -2366,29 +2261,29 @@ Código de programa: 5223
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
-<td align="left">TERCERO</td>
-<td align="left">713</td>
-<td align="left">Inglés Iii</td>
+<td align="left">PRIMERO</td>
+<td align="left">711</td>
+<td align="left">Inglés I</td>
 <td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Francisco Cabañas Gac</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">711</td>
+<td align="left">Inglés I</td>
+<td align="left">T-2</td>
 <td align="right">2</td>
 <td align="right">20</td>
 <td align="left">Francisca Rebolledo Henriquez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
-<td align="left">TERCERO</td>
-<td align="left">713</td>
-<td align="left">Inglés Iii</td>
-<td align="left">T-2</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">Isabella Ceppi Marino</td>
-<td align="right">NA</td>
-</tr>
 <tr class="odd">
-<td align="left">TERCERO</td>
-<td align="left">713</td>
-<td align="left">Inglés Iii</td>
+<td align="left">PRIMERO</td>
+<td align="left">711</td>
+<td align="left">Inglés I</td>
 <td align="left">T-3</td>
 <td align="right">2</td>
 <td align="right">20</td>
@@ -2396,53 +2291,53 @@ Código de programa: 5223
 <td align="right">NA</td>
 </tr>
 <tr class="even">
-<td align="left">TERCERO</td>
-<td align="left">713</td>
-<td align="left">Inglés Iii</td>
+<td align="left">PRIMERO</td>
+<td align="left">711</td>
+<td align="left">Inglés I</td>
 <td align="left">T-4</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Francisca Rebolledo Henriquez</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">711</td>
+<td align="left">Inglés I</td>
+<td align="left">T-5</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Francisca Rebolledo Henriquez</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">PRIMERO</td>
+<td align="left">711</td>
+<td align="left">Inglés I</td>
+<td align="left">T-6</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Paulina Muriel Sepúlveda Vásquez</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">711</td>
+<td align="left">Inglés I</td>
+<td align="left">T-7</td>
 <td align="right">2</td>
 <td align="right">20</td>
 <td align="left">Tamara Karin Espinoza Sepulveda</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
-<td align="left">TERCERO</td>
-<td align="left">713</td>
-<td align="left">Inglés Iii</td>
-<td align="left">T-5</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">Ernaldo Menares Velasco</td>
-<td align="right">NA</td>
-</tr>
 <tr class="even">
-<td align="left">TERCERO</td>
-<td align="left">713</td>
-<td align="left">Inglés Iii</td>
-<td align="left">T-6</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">María Laura Molina Matos</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">TERCERO</td>
-<td align="left">713</td>
-<td align="left">Inglés Iii</td>
-<td align="left">T-7</td>
-<td align="right">2</td>
-<td align="right">20</td>
-<td align="left">Marcela Patricia Torres Seguel</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="left">TERCERO</td>
-<td align="left">713</td>
-<td align="left">Inglés Iii</td>
+<td align="left">PRIMERO</td>
+<td align="left">711</td>
+<td align="left">Inglés I</td>
 <td align="left">T-8</td>
 <td align="right">2</td>
 <td align="right">20</td>
-<td align="left">Rodrigo Suarez Pemjean</td>
+<td align="left">Paulina Zamora Vrsalovic</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
@@ -2846,6 +2741,86 @@ Código de programa: 5223
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">713</td>
+<td align="left">Inglés Iii</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Francisca Rebolledo Henriquez</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">713</td>
+<td align="left">Inglés Iii</td>
+<td align="left">T-2</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Isabella Ceppi Marino</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">713</td>
+<td align="left">Inglés Iii</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Francisca Rebolledo Henriquez</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">713</td>
+<td align="left">Inglés Iii</td>
+<td align="left">T-4</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Tamara Karin Espinoza Sepulveda</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">713</td>
+<td align="left">Inglés Iii</td>
+<td align="left">T-5</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Ernaldo Menares Velasco</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">713</td>
+<td align="left">Inglés Iii</td>
+<td align="left">T-6</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">María Laura Molina Matos</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">713</td>
+<td align="left">Inglés Iii</td>
+<td align="left">T-7</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Marcela Patricia Torres Seguel</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">713</td>
+<td align="left">Inglés Iii</td>
+<td align="left">T-8</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="left">Rodrigo Suarez Pemjean</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45322</td>
 <td align="left">Teorías De La Personalidad Ii</td>
@@ -3088,8 +3063,8 @@ Código de programa: 5223
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">¿Qué Es Una Sociedad Justa? Teoría Social Normativa Y
-Desafíos De Cambio Social</td>
+<td align="left">Sello: ¿Qué Es Una Sociedad Justa? Teoría Social
+Normativa Y Desafíos De Cambio Social</td>
 <td align="left">S-1</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3099,8 +3074,8 @@ Desafíos De Cambio Social</td>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Datos Para Contar Historias: Análisis Y Visualización
-Para Humanidades Y Ciencias Sociales</td>
+<td align="left">Sello: Datos Para Contar Historias: Análisis Y
+Visualización Para Humanidades Y Ciencias Sociales</td>
 <td align="left">S-10</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3110,12 +3085,13 @@ Para Humanidades Y Ciencias Sociales</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Derechos Humanos Desde Los Juegos De Rol De Mesa</td>
+<td align="left">Sello: Derechos Humanos Desde Los Juegos De Rol De
+Mesa</td>
 <td align="left">S-11</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Nelson Andrés Ortiz Villalobos</td>
-<td align="right">NA</td>
+<td align="right">5</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
@@ -3131,8 +3107,8 @@ Mirada Critica Y Situada Desde Latinoamérica</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Desarrollo De Estrategias Y Proyectos De Incidencia
-Social Y Política Desde La Sociedad Civil</td>
+<td align="left">Sello: Desarrollo De Estrategias Y Proyectos De
+Incidencia Social Y Política Desde La Sociedad Civil</td>
 <td align="left">S-13</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3142,7 +3118,7 @@ Social Y Política Desde La Sociedad Civil</td>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Educación De Adultos</td>
+<td align="left">Sello: Educación De Adultos</td>
 <td align="left">S-14</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3152,59 +3128,82 @@ Social Y Política Desde La Sociedad Civil</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">El Arte Como Puente: Metodologías Interdisciplinares
-Para Comprender La Cultura Visual</td>
+<td align="left">Sello: El Arte Como Puente: Metodologías
+Interdisciplinares Para Comprender La Cultura Visual</td>
 <td align="left">S-15</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Manuel Antonio Aguirre Ossa</td>
-<td align="right">NA</td>
+<td align="right">5</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">El Podcast Educativo: Voz, Creación Y Comunicación
-Digital</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
 <td align="left">S-16</td>
-<td align="right">4</td>
+<td align="right">2</td>
 <td align="right">5 ⚠</td>
 <td align="left">Eduardo Inostroza Carvajal</td>
-<td align="right">NA</td>
+<td align="right">1</td>
 </tr>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
+<td align="left">S-16</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Luciano Guzman</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">45326</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
 <td align="left">S-17</td>
 <td align="right">2</td>
 <td align="right">5 ⚠</td>
 <td align="left">Luis Edilio Hernández Astudillo</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="left">QUINTO</td>
-<td align="left">45326</td>
-<td align="left">Estrategias De Innovación Para La Sostenibilidad</td>
-<td align="left">S-18</td>
-<td align="right">4</td>
-<td align="right">5 ⚠</td>
-<td align="left">Ignacio Olavarría Contreras</td>
-<td align="right">NA</td>
+<td align="right">2</td>
 </tr>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Fotografía De Principio Con Un Fin</td>
-<td align="left">S-19</td>
-<td align="right">4</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">S-17</td>
+<td align="right">2</td>
 <td align="right">5 ⚠</td>
-<td align="left">Ximena Myriam Riffo Piña</td>
-<td align="right">NA</td>
+<td align="left">Mario Hernan Radrigan Rubio</td>
+<td align="right">2</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Acción: Teoría Y Práctica De La Ética Ambiental</td>
+<td align="left">Sello: Estrategias De Innovación Para La
+Sostenibilidad</td>
+<td align="left">S-18</td>
+<td align="right">4</td>
+<td align="right">5 ⚠</td>
+<td align="left">Ignacio Olavarría Contreras</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">45326</td>
+<td align="left">Sello: Fotografía De Principio Con Un Fin</td>
+<td align="left">S-19</td>
+<td align="right">4</td>
+<td align="right">5 ⚠</td>
+<td align="left">Ximena Myriam Riffo Piña</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">45326</td>
+<td align="left">Sello: Acción: Teoría Y Práctica De La Ética
+Ambiental</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3217,9 +3216,9 @@ Digital</td>
 <td align="left">Sello: Gobernanza Y Transparencia Desde Los Derechos
 Humanos</td>
 <td align="left">S-20</td>
-<td align="right">0</td>
+<td align="right">2</td>
 <td align="right">5 ⚠</td>
-<td align="left">Vanessa Retamal Gutiérrez</td>
+<td align="left">Francisco Zambrano Meza</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
@@ -3230,24 +3229,24 @@ Humanos</td>
 <td align="left">S-20</td>
 <td align="right">2</td>
 <td align="right">5 ⚠</td>
-<td align="left">Francisco Zambrano Meza</td>
+<td align="left">Vanessa Retamal Gutiérrez</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Herramientas Socioemocionales En Contextos De
+<td align="left">Sello: Herramientas Socioemocionales En Contextos De
 Diversidad</td>
 <td align="left">S-21</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Isabel Margarita Puga Young</td>
-<td align="right">NA</td>
+<td align="right">7</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Historia Aplicada: Desarrollo Territorial
+<td align="left">Sello: Historia Aplicada: Desarrollo Territorial
 Sostenible</td>
 <td align="left">S-22</td>
 <td align="right">4</td>
@@ -3258,24 +3257,24 @@ Sostenible</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Interseccionalidad, Movilidad Humana Y Grupos De
+<td align="left">Sello: Interseccionalidad, Movilidad Humana Y Grupos De
 Especial Protección</td>
 <td align="left">S-23</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Teresa Perez Cosgaya</td>
-<td align="right">NA</td>
+<td align="right">2</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Juego: Herramienta Educativa Y Para La Intervención
-Social</td>
+<td align="left">Sello: Juego: Herramienta Educativa Y Para La
+Intervención Social</td>
 <td align="left">S-24</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Juan Armando Bastias Ovalle</td>
-<td align="right">NA</td>
+<td align="right">9</td>
 </tr>
 <tr class="odd">
 <td align="left">QUINTO</td>
@@ -3301,7 +3300,7 @@ Chilena</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">La Escuela Como Organización Que Cuida</td>
+<td align="left">Sello: La Escuela Como Organización Que Cuida</td>
 <td align="left">S-27</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3311,7 +3310,7 @@ Chilena</td>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">La Representaciones Del Futuro En El Cine De
+<td align="left">Sello: La Representaciones Del Futuro En El Cine De
 Ciencia-Ficción Y Distópico.</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
@@ -3322,18 +3321,18 @@ Ciencia-Ficción Y Distópico.</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Laboratorio De Cocreación De Gobernanza Para La
+<td align="left">Sello: Laboratorio De Cocreación De Gobernanza Para La
 Sostenibilidad</td>
 <td align="left">S-29</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Israel Patricio Perez Vargas</td>
-<td align="right">NA</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Análisis De Texto Como Dato: Herramientas
+<td align="left">Sello: Análisis De Texto Como Dato: Herramientas
 Computacionales Para Las Humanidades</td>
 <td align="left">S-3</td>
 <td align="right">4</td>
@@ -3344,18 +3343,18 @@ Computacionales Para Las Humanidades</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Liderazgo E Innovación Social</td>
+<td align="left">Sello: Liderazgo E Innovación Social</td>
 <td align="left">S-30</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Marco Iraola Barboza</td>
-<td align="right">NA</td>
+<td align="right">1</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Narrativas Visuales Y Ciudadanía Cultural: Del Manga Al
-Cómic Latinoamericano</td>
+<td align="left">Sello: Narrativas Visuales Y Ciudadanía Cultural: Del
+Manga Al Cómic Latinoamericano</td>
 <td align="left">S-31</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3365,8 +3364,8 @@ Cómic Latinoamericano</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Neurodivergencias Y Salud Mental Comunitaria:
-Aplicación Del Paradigma Neuroafirmativo En</td>
+<td align="left">Sello: Neurodivergencias Y Salud Mental Comunitaria:
+Aplicación Del Paradigma Neuroafirmativo</td>
 <td align="left">S-32</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3387,7 +3386,7 @@ Planetaria</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Participación Ciudadana Y Territorio</td>
+<td align="left">Sello: Participación Ciudadana Y Territorio</td>
 <td align="left">S-34</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3397,8 +3396,7 @@ Planetaria</td>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Persona Humana Y Justicia Social: Elementos
-Ético-Valóricos Para Una Comprensión Del Ejerc</td>
+<td align="left">Sello: Persona Humana Y Justicia Social</td>
 <td align="left">S-35</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3414,7 +3412,7 @@ Grupos Desde Lo Individual Y Lo Colectivo</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Gabriel Alejandro Silva Mancilla</td>
-<td align="right">5</td>
+<td align="right">6</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
@@ -3450,19 +3448,19 @@ Historia, Vivienda Y Desigualdad Urbana.</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Arte Y Cultura Para La Promoción De Los Derechos
+<td align="left">Sello: Arte Y Cultura Para La Promoción De Los Derechos
 Humanos</td>
 <td align="left">S-4</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Mariela Edith Llancaqueo Jimenez</td>
-<td align="right">NA</td>
+<td align="right">5</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Territorios En Conflicto: Desafíos De Sostenibilidad Y
-Justicia Socioambiental</td>
+<td align="left">Sello: Territorios En Conflicto: Desafíos De
+Sostenibilidad Y Justicia Socioambiental</td>
 <td align="left">S-40</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3482,7 +3480,7 @@ Justicia Socioambiental</td>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Ciudadanía Cultura Y Buenvivir</td>
+<td align="left">Sello: Ciudadanía Cultura Y Buenvivir</td>
 <td align="left">S-6</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3492,8 +3490,8 @@ Justicia Socioambiental</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Conectando Barrios: Buenas Prácticas En Torno A La
-Diversidad Cultural Y La Cohesión Socia</td>
+<td align="left">Sello: Conectando Barrios: Buenas Prácticas En Torno A
+La Diversidad Cultural Y La Cohesión Social</td>
 <td align="left">S-7</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3503,7 +3501,7 @@ Diversidad Cultural Y La Cohesión Socia</td>
 <tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Controversias Y Posicionamientos Éticos Para Una
+<td align="left">Sello: Controversias Y Posicionamientos Éticos Para Una
 Ciudadanía Crítica</td>
 <td align="left">S-8</td>
 <td align="right">4</td>
@@ -3514,12 +3512,12 @@ Ciudadanía Crítica</td>
 <tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">45326</td>
-<td align="left">Curiosidades Sobre El Cerebro</td>
+<td align="left">Sello: Curiosidades Sobre El Cerebro</td>
 <td align="left">S-9</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Juan Amaro Fuenzalida</td>
-<td align="right">NA</td>
+<td align="right">6</td>
 </tr>
 <tr class="even">
 <td align="left">QUINTO</td>
@@ -4719,9 +4717,9 @@ Organizaciones Vi</td>
 </tr>
 </tbody>
 </table>
-<p>La carrera registra <strong>279 secciones</strong> en <strong>36
-cursos</strong> con <strong>900 horas pedagógicas</strong>, dictadas por
-<strong>143 profesores</strong>.</p>
+<p>La carrera registra <strong>281 secciones</strong> en <strong>36
+cursos</strong> con <strong>904 horas pedagógicas</strong>, dictadas por
+<strong>145 profesores</strong>.</p>
 <h3 class="carr-titulo">
 Magíster en Psicología Educacional
 </h3>
@@ -4731,12 +4729,12 @@ Código de programa: 9574
 <table style="width:100%;">
 <colgroup>
 <col width="3%" />
-<col width="60%" />
-<col width="5%" />
+<col width="62%" />
+<col width="4%" />
 <col width="3%" />
 <col width="3%" />
 <col width="19%" />
-<col width="3%" />
+<col width="2%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -4846,5 +4844,15 @@ registra un promedio de <strong>13.1 HP</strong> en Primer semestre
 sello se contabilizan una sola vez por docente.</p>
 </main>
 <div class="pie">Base elaborada a partir de los registros de planeación docente. Código elaborado por Pablo Valenzuela con apoyo de Claude de Anthropic · Primer semestre 2026</div>
+
+<script>
+function toggleAcad(row) {
+  const detail = row.nextElementSibling;
+  if (!detail || !detail.classList.contains("detalle-row")) return;
+  row.classList.toggle("abierto");
+  detail.classList.toggle("visible");
+}
+</script>
 </body>
 </html>
+

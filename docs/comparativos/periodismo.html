@@ -10,10 +10,10 @@ body {
   font-size: 13px;
   line-height: 1.65;
   color: #394049;
-  max-width: 960px;
+  max-width: 1040px;
   margin: 0 auto;
-  padding: 2rem 2.5rem 4rem;
-  background: #fff;
+  padding: 2rem 1.25rem 4rem;
+  background: linear-gradient(180deg, #eef7f6 0%, #f6f7f8 220px);
 }
 @media (max-width: 600px) {
   body { padding: 1rem 1rem 3rem; font-size: 12px; }
@@ -23,9 +23,12 @@ body {
   .btn-volver, .btn-informe, .btn-pdf { text-align: center; }
 }
 header {
-  border-bottom: 3px solid #00A499;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
+  border-top: 6px solid #00A499;
+  padding: 1.5rem 1.5rem 1.2rem;
+  margin-bottom: 1.25rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
 }
 .facultad {
   font-size: 0.78rem;
@@ -60,7 +63,18 @@ h2 {
   padding-left: 0.7rem; margin: 2.5rem 0 0.5rem;
 }
 .nota { font-size: 0.75rem; color: #888; margin: 0 0 0.8rem; }
-.tabla-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 0.5rem; }
+.seccion {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1rem;
+}
+.seccion h2 { margin-top: 0; }
+.tabla-wrap {
+  overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 0.5rem;
+  background: #fff; border: 1px solid #e7ebee; border-radius: 14px;
+}
 table { width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 380px; }
 thead th {
   background: #394049; color: white; padding: 0.5rem 0.7rem;
@@ -80,7 +94,11 @@ tbody tr.fila-actual td { background: #EAAA0033; font-weight: 700; }
   margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #ddd;
   font-size: 0.72rem; color: #aaa; text-align: center;
 }
-@media print { .botones { display: none; } body { padding: 1rem; } }
+@media print {
+  .botones { display: none; }
+  body { padding: 1rem; background: #fff; }
+  header, .seccion { box-shadow: none; border-radius: 0; }
+}
 </style>
 </head>
 <body>
@@ -95,6 +113,7 @@ tbody tr.fila-actual td { background: #EAAA0033; font-weight: 700; }
   </div>
 </header>
 <main>
+<section class="seccion">
 <h2>Horas pedagógicas planeadas</h2>
 <p class="nota">Horas totales de los cursos del departamento según tipo de contrato. El semestre en curso aparece destacado.</p>
 <div class="tabla-wrap"><table>
@@ -103,9 +122,11 @@ tbody tr.fila-actual td { background: #EAAA0033; font-weight: 700; }
 <tr><td class="col-izq">2do sem 2024</td><td>152</td><td>554</td><td>20</td><td>726</td></tr>
 <tr><td class="col-izq">1er sem 2025</td><td>140</td><td>426</td><td>4</td><td>570</td></tr>
 <tr><td class="col-izq">2do sem 2025</td><td>178</td><td>626</td><td>2</td><td>806</td></tr>
-<tr class="fila-actual"><td class="col-izq">1er sem 2026</td><td>166</td><td>538</td><td>6</td><td>710</td></tr>
+<tr class="fila-actual"><td class="col-izq">1er sem 2026</td><td>168</td><td>538</td><td>6</td><td>712</td></tr>
 </tbody>
 </table></div>
+</section>
+<section class="seccion">
 <h2>Cobertura según tipo de contrato</h2>
 <p class="nota">Porcentaje de horas pedagógicas por tipo de contrato sobre el total del departamento.</p>
 <div class="tabla-wrap"><table>
@@ -114,9 +135,11 @@ tbody tr.fila-actual td { background: #EAAA0033; font-weight: 700; }
 <tr><td class="col-izq">2do sem 2024</td><td>20.9%</td><td>76.3%</td><td>2.8%</td></tr>
 <tr><td class="col-izq">1er sem 2025</td><td>24.6%</td><td>74.7%</td><td>0.7%</td></tr>
 <tr><td class="col-izq">2do sem 2025</td><td>22.1%</td><td>77.7%</td><td>0.2%</td></tr>
-<tr class="fila-actual"><td class="col-izq">1er sem 2026</td><td>23.4%</td><td>75.8%</td><td>0.8%</td></tr>
+<tr class="fila-actual"><td class="col-izq">1er sem 2026</td><td>23.6%</td><td>75.6%</td><td>0.8%</td></tr>
 </tbody>
 </table></div>
+</section>
+<section class="seccion">
 <h2>Promedio de horas por académico jornada</h2>
 <p class="nota">Numerador: HP de todos los jornada (académicos + autoridades). Denominador: solo académicos con CARGO = ACADÉMICO. Norma: ≥ 12 HP.</p>
 <div class="tabla-wrap"><table>
@@ -128,6 +151,7 @@ tbody tr.fila-actual td { background: #EAAA0033; font-weight: 700; }
 <tr class="fila-actual"><td class="col-izq">1er sem 2026</td><td>10</td><td>154</td><td>15.4</td><td><span class="ok">✓</span></td></tr>
 </tbody>
 </table></div>
+</section>
 </main>
 <div class="pie">Base elaborada a partir de los registros de planeación docente FAHU. Código elaborado por Pablo Valenzuela con apoyo de Claude de Anthropic.</div>
 </body>

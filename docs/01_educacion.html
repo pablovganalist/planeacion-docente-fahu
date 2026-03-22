@@ -5,20 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Departamento de Educación — Primer semestre 2026</title>
   <style>
-/* ── Tipografia y base ───────────────────────────────────── */
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   font-size: 13px;
   line-height: 1.65;
   color: #394049;
-  max-width: 900px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 2rem 2.5rem 4rem;
-  background: #fff;
+  padding: 2rem 1.25rem 4rem;
+  background: linear-gradient(180deg, #eef7f6 0%, #f6f7f8 220px);
 }
-
-/* ── Encabezados ─────────────────────────────────────────── */
-/* h1 se define en el bloque header institucional más abajo */
 h2 {
   color: #394049;
   font-size: 1.15rem;
@@ -34,8 +30,6 @@ h3, h3.carr-titulo {
   margin-top: 2rem;
   margin-bottom: 0.2rem;
 }
-
-/* ── Tablas ──────────────────────────────────────────────── */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -61,9 +55,6 @@ tbody td {
   padding: 5px 12px;
   border-bottom: 1px solid #E0E0E0;
 }
-
-/* ── Filas de totales: se detectan porque tienen <strong> en todas las celdas
-      Aplica a filas A, B, C de la tabla de horas y al promedio del claustro ── */
 tbody tr:has(td > strong) {
   background-color: #FFF3CD;
   border-top: 2px solid #EAAA00;
@@ -73,14 +64,10 @@ tbody tr:has(td > strong) td {
   font-weight: 700;
   color: #394049;
 }
-
-/* ── Cupos bajos (⚠): celda con simbolo de advertencia ───── */
 tbody td:has(> span.alerta) {
   color: #C8102E;
   font-weight: 700;
 }
-
-/* ── Blockquotes (alertas y notas) ──────────────────────── */
 blockquote {
   border-left: 4px solid #00A499;
   background: #E8F8F7;
@@ -90,14 +77,14 @@ blockquote {
   color: #394049;
 }
 blockquote p { margin: 0; }
-
-/* ── Header institucional ────────────────────────────────── */
 header {
-  border-bottom: 3px solid #00A499;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
+  border-top: 6px solid #00A499;
+  padding: 1.5rem 1.5rem 1.2rem;
+  margin-bottom: 1.25rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
 }
-/* Nombre de la facultad: supraencabezado pequeño sobre el título */
 p.facultad {
   font-size: 0.78rem;
   font-weight: 700;
@@ -106,23 +93,19 @@ p.facultad {
   color: #00A499;
   margin: 0 0 0.2rem 0;
 }
-/* h1: nombre de la unidad — título principal */
 h1 {
   color: #394049;
   font-size: 1.65rem;
   font-weight: 700;
   margin: 0 0 0.3rem 0;
-  border: none;        /* anula el border-bottom que estaba antes en h1 */
+  border: none;
   padding: 0;
 }
-/* Subtitulo de periodo */
 .periodo {
   color: #666;
   font-size: 0.95rem;
   margin: 0 0 1rem 0;
 }
-
-/* ── Código de programa bajo el nombre de carrera ────────── */
 .cod-programa {
   font-size: 0.85rem;
   color: #394049;
@@ -134,17 +117,6 @@ h1 {
   font-family: "Courier New", monospace;
   letter-spacing: 0.03em;
 }
-
-/* ── Pie de pagina ───────────────────────────────────────── */
-.pie {
-  margin-top: 3rem;
-  padding-top: 0.8rem;
-  border-top: 2px solid #00A499;
-  font-size: 11px;
-  color: #666;
-}
-
-/* ── Codigo de programa ──────────────────────────────────── */
 p.cod-programa {
   font-size: 0.82rem;
   color: #394049;
@@ -156,8 +128,27 @@ p.cod-programa {
   font-family: "Courier New", monospace;
   letter-spacing: 0.02em;
 }
-
-/* ── Boton descargar PDF ─────────────────────────────────── */
+.pie {
+  margin-top: 3rem;
+  padding-top: 0.8rem;
+  border-top: 2px solid #00A499;
+  font-size: 11px;
+  color: #666;
+}
+.contenido {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+  padding: 1.5rem;
+}
+.contenido > h2:first-child {
+  margin-top: 0;
+}
+.contenido hr {
+  border: 0;
+  border-top: 1px solid #e4e7ea;
+  margin: 1.35rem 0;
+}
 .botones-header {
   display: flex;
   gap: 0.6rem;
@@ -187,7 +178,6 @@ p.cod-programa {
 }
 .btn-pdf {
   display: inline-block;
-  margin-bottom: 1.5rem;
   padding: 0.45rem 1.1rem;
   background: #00A499;
   color: white !important;
@@ -202,8 +192,6 @@ p.cod-programa {
 .btn-pdf:hover {
   background: #394049;
 }
-
-/* ── Claustro expandible ─────────────────────────────────── */
 tr.acad-row { cursor: pointer; transition: background .15s; }
 tr.acad-row:hover { background: #E8F8F7 !important; }
 tr.acad-row.abierto { background: #E8F8F7 !important; font-weight: 600; }
@@ -237,10 +225,8 @@ tr.detalle-row > td {
 .detalle-total {
   font-size: 11px; color: #555; margin-top: .35rem;
 }
-
-/* ── Impresion ───────────────────────────────────────────── */
 @media print {
-  body { max-width: 100%; padding: 1cm; font-size: 11px; }
+  body { max-width: 100%; padding: 1cm; font-size: 11px; background: #fff; }
   h2 { page-break-before: auto; }
   table { font-size: 10px; }
   tbody tr:has(td > strong) { background-color: #FFF3CD !important; }
@@ -248,6 +234,7 @@ tr.detalle-row > td {
   p.cod-programa { background: #eee !important; }
   tr.detalle-row { display: table-row !important; }
   .flecha { display: none; }
+  header, .contenido { box-shadow: none; border-radius: 0; }
 }
   </style>
 </head>
@@ -258,23 +245,11 @@ tr.detalle-row > td {
 <p class="periodo">Primer semestre 2026</p>
 <div class="botones-header"><a href="index.html" class="btn-indice">← Índice</a> <a href="comparativos/educacion.html" class="btn-comp">📊 Informe comparado 2024–2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
 </header>
-<script>
-function toggleAcad(row) {
-  var det = row.nextElementSibling;
-  var open = row.classList.toggle("abierto");
-  det.classList.toggle("visible", open);
-}
-</script>
-<main>
+<main class="contenido">
 
 <h2 id="horas-planeadas-de-la-unidad">1. Horas planeadas de la
 unidad</h2>
 <table>
-<colgroup>
-<col width="25%" />
-<col width="63%" />
-<col width="10%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -1301,7 +1276,7 @@ Licenciatura en Estudios Internacionales
 44330
 </td>
 <td>
-La Escuela Como Organización Que Cuida
+Sello: La Escuela Como Organización Que Cuida
 </td>
 <td class="num">
 0
@@ -1318,7 +1293,7 @@ Licenciatura en Historia
 44536
 </td>
 <td>
-La Escuela Como Organización Que Cuida
+Sello: La Escuela Como Organización Que Cuida
 </td>
 <td class="num">
 0
@@ -1335,7 +1310,7 @@ Licenciatura en Historia
 44543
 </td>
 <td>
-La Escuela Como Organización Que Cuida
+Sello: La Escuela Como Organización Que Cuida
 </td>
 <td class="num">
 0
@@ -1352,7 +1327,7 @@ Pedagogía en Castellano
 46257
 </td>
 <td>
-La Escuela Como Organización Que Cuida
+Sello: La Escuela Como Organización Que Cuida
 </td>
 <td class="num">
 0
@@ -1386,7 +1361,7 @@ Pedagogía en Filosofía
 41244
 </td>
 <td>
-La Escuela Como Organización Que Cuida
+Sello: La Escuela Como Organización Que Cuida
 </td>
 <td class="num">
 4
@@ -1403,7 +1378,7 @@ Pedagogía en Historia y Ciencias Sociales
 44476
 </td>
 <td>
-La Escuela Como Organización Que Cuida
+Sello: La Escuela Como Organización Que Cuida
 </td>
 <td class="num">
 0
@@ -1420,7 +1395,7 @@ Periodismo
 47340
 </td>
 <td>
-La Escuela Como Organización Que Cuida
+Sello: La Escuela Como Organización Que Cuida
 </td>
 <td class="num">
 0
@@ -1488,7 +1463,7 @@ Psicología
 45326
 </td>
 <td>
-La Escuela Como Organización Que Cuida
+Sello: La Escuela Como Organización Que Cuida
 </td>
 <td class="num">
 0
@@ -1909,13 +1884,13 @@ Código de programa: 6543
 </p>
 <table>
 <colgroup>
-<col width="6%" />
+<col width="5%" />
 <col width="4%" />
-<col width="50%" />
+<col width="52%" />
+<col width="2%" />
+<col width="2%" />
 <col width="3%" />
-<col width="3%" />
-<col width="4%" />
-<col width="27%" />
+<col width="28%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -2692,15 +2667,15 @@ Programa de Regularización para Profesores Técnico Profesional
 <p class="cod-programa">
 Código de programa: 6849
 </p>
-<table style="width:100%;">
+<table>
 <colgroup>
-<col width="6%" />
+<col width="5%" />
 <col width="4%" />
-<col width="53%" />
-<col width="4%" />
+<col width="55%" />
 <col width="3%" />
-<col width="4%" />
-<col width="24%" />
+<col width="2%" />
+<col width="3%" />
+<col width="25%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -2992,14 +2967,14 @@ Magister en Educación Mención Curriculum y Evaluación
 <p class="cod-programa">
 Código de programa: 9562
 </p>
-<table style="width:100%;">
+<table>
 <colgroup>
 <col width="5%" />
-<col width="42%" />
-<col width="7%" />
+<col width="43%" />
+<col width="6%" />
 <col width="5%" />
 <col width="5%" />
-<col width="32%" />
+<col width="33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -3089,12 +3064,12 @@ Código de programa: 9580
 </p>
 <table>
 <colgroup>
-<col width="6%" />
-<col width="44%" />
+<col width="5%" />
+<col width="45%" />
 <col width="7%" />
-<col width="6%" />
-<col width="6%" />
-<col width="29%" />
+<col width="5%" />
+<col width="5%" />
+<col width="30%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -3169,5 +3144,15 @@ registra un promedio de <strong>15.5 HP</strong> en Primer semestre
 sello se contabilizan una sola vez por docente.</p>
 </main>
 <div class="pie">Base elaborada a partir de los registros de planeación docente. Código elaborado por Pablo Valenzuela con apoyo de Claude de Anthropic · Primer semestre 2026</div>
+
+<script>
+function toggleAcad(row) {
+  const detail = row.nextElementSibling;
+  if (!detail || !detail.classList.contains("detalle-row")) return;
+  row.classList.toggle("abierto");
+  detail.classList.toggle("visible");
+}
+</script>
 </body>
 </html>
+

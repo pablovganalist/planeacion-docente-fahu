@@ -5,20 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Departamento de Historia — Primer semestre 2026</title>
   <style>
-/* ── Tipografia y base ───────────────────────────────────── */
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   font-size: 13px;
   line-height: 1.65;
   color: #394049;
-  max-width: 900px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 2rem 2.5rem 4rem;
-  background: #fff;
+  padding: 2rem 1.25rem 4rem;
+  background: linear-gradient(180deg, #eef7f6 0%, #f6f7f8 220px);
 }
-
-/* ── Encabezados ─────────────────────────────────────────── */
-/* h1 se define en el bloque header institucional más abajo */
 h2 {
   color: #394049;
   font-size: 1.15rem;
@@ -34,8 +30,6 @@ h3, h3.carr-titulo {
   margin-top: 2rem;
   margin-bottom: 0.2rem;
 }
-
-/* ── Tablas ──────────────────────────────────────────────── */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -61,9 +55,6 @@ tbody td {
   padding: 5px 12px;
   border-bottom: 1px solid #E0E0E0;
 }
-
-/* ── Filas de totales: se detectan porque tienen <strong> en todas las celdas
-      Aplica a filas A, B, C de la tabla de horas y al promedio del claustro ── */
 tbody tr:has(td > strong) {
   background-color: #FFF3CD;
   border-top: 2px solid #EAAA00;
@@ -73,14 +64,10 @@ tbody tr:has(td > strong) td {
   font-weight: 700;
   color: #394049;
 }
-
-/* ── Cupos bajos (⚠): celda con simbolo de advertencia ───── */
 tbody td:has(> span.alerta) {
   color: #C8102E;
   font-weight: 700;
 }
-
-/* ── Blockquotes (alertas y notas) ──────────────────────── */
 blockquote {
   border-left: 4px solid #00A499;
   background: #E8F8F7;
@@ -90,14 +77,14 @@ blockquote {
   color: #394049;
 }
 blockquote p { margin: 0; }
-
-/* ── Header institucional ────────────────────────────────── */
 header {
-  border-bottom: 3px solid #00A499;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
+  border-top: 6px solid #00A499;
+  padding: 1.5rem 1.5rem 1.2rem;
+  margin-bottom: 1.25rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
 }
-/* Nombre de la facultad: supraencabezado pequeño sobre el título */
 p.facultad {
   font-size: 0.78rem;
   font-weight: 700;
@@ -106,23 +93,19 @@ p.facultad {
   color: #00A499;
   margin: 0 0 0.2rem 0;
 }
-/* h1: nombre de la unidad — título principal */
 h1 {
   color: #394049;
   font-size: 1.65rem;
   font-weight: 700;
   margin: 0 0 0.3rem 0;
-  border: none;        /* anula el border-bottom que estaba antes en h1 */
+  border: none;
   padding: 0;
 }
-/* Subtitulo de periodo */
 .periodo {
   color: #666;
   font-size: 0.95rem;
   margin: 0 0 1rem 0;
 }
-
-/* ── Código de programa bajo el nombre de carrera ────────── */
 .cod-programa {
   font-size: 0.85rem;
   color: #394049;
@@ -134,17 +117,6 @@ h1 {
   font-family: "Courier New", monospace;
   letter-spacing: 0.03em;
 }
-
-/* ── Pie de pagina ───────────────────────────────────────── */
-.pie {
-  margin-top: 3rem;
-  padding-top: 0.8rem;
-  border-top: 2px solid #00A499;
-  font-size: 11px;
-  color: #666;
-}
-
-/* ── Codigo de programa ──────────────────────────────────── */
 p.cod-programa {
   font-size: 0.82rem;
   color: #394049;
@@ -156,8 +128,27 @@ p.cod-programa {
   font-family: "Courier New", monospace;
   letter-spacing: 0.02em;
 }
-
-/* ── Boton descargar PDF ─────────────────────────────────── */
+.pie {
+  margin-top: 3rem;
+  padding-top: 0.8rem;
+  border-top: 2px solid #00A499;
+  font-size: 11px;
+  color: #666;
+}
+.contenido {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+  padding: 1.5rem;
+}
+.contenido > h2:first-child {
+  margin-top: 0;
+}
+.contenido hr {
+  border: 0;
+  border-top: 1px solid #e4e7ea;
+  margin: 1.35rem 0;
+}
 .botones-header {
   display: flex;
   gap: 0.6rem;
@@ -187,7 +178,6 @@ p.cod-programa {
 }
 .btn-pdf {
   display: inline-block;
-  margin-bottom: 1.5rem;
   padding: 0.45rem 1.1rem;
   background: #00A499;
   color: white !important;
@@ -202,8 +192,6 @@ p.cod-programa {
 .btn-pdf:hover {
   background: #394049;
 }
-
-/* ── Claustro expandible ─────────────────────────────────── */
 tr.acad-row { cursor: pointer; transition: background .15s; }
 tr.acad-row:hover { background: #E8F8F7 !important; }
 tr.acad-row.abierto { background: #E8F8F7 !important; font-weight: 600; }
@@ -237,10 +225,8 @@ tr.detalle-row > td {
 .detalle-total {
   font-size: 11px; color: #555; margin-top: .35rem;
 }
-
-/* ── Impresion ───────────────────────────────────────────── */
 @media print {
-  body { max-width: 100%; padding: 1cm; font-size: 11px; }
+  body { max-width: 100%; padding: 1cm; font-size: 11px; background: #fff; }
   h2 { page-break-before: auto; }
   table { font-size: 10px; }
   tbody tr:has(td > strong) { background-color: #FFF3CD !important; }
@@ -248,6 +234,7 @@ tr.detalle-row > td {
   p.cod-programa { background: #eee !important; }
   tr.detalle-row { display: table-row !important; }
   .flecha { display: none; }
+  header, .contenido { box-shadow: none; border-radius: 0; }
 }
   </style>
 </head>
@@ -258,23 +245,11 @@ tr.detalle-row > td {
 <p class="periodo">Primer semestre 2026</p>
 <div class="botones-header"><a href="index.html" class="btn-indice">← Índice</a> <a href="comparativos/historia.html" class="btn-comp">📊 Informe comparado 2024–2026</a> <button class="btn-pdf" onclick="window.print()">⬇ Descargar PDF</button></div>
 </header>
-<script>
-function toggleAcad(row) {
-  var det = row.nextElementSibling;
-  var open = row.classList.toggle("abierto");
-  det.classList.toggle("visible", open);
-}
-</script>
-<main>
+<main class="contenido">
 
 <h2 id="horas-planeadas-de-la-unidad">1. Horas planeadas de la
 unidad</h2>
 <table>
-<colgroup>
-<col width="25%" />
-<col width="63%" />
-<col width="11%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -286,7 +261,7 @@ unidad</h2>
 <tr class="odd">
 <td align="left"><strong>A (i+ii+iii+iv)</strong></td>
 <td align="left"><strong>Horas planeadas pregrado</strong></td>
-<td align="right"><strong>859</strong></td>
+<td align="right"><strong>865</strong></td>
 </tr>
 <tr class="even">
 <td align="left">i</td>
@@ -296,13 +271,13 @@ unidad</h2>
 <tr class="odd">
 <td align="left">ii</td>
 <td align="left">Horas profesores por hora de clase</td>
-<td align="right">578</td>
+<td align="right">582</td>
 </tr>
 <tr class="even">
 <td align="left">iii</td>
 <td align="left">Horas de profesores de jornada externos a la
 unidad</td>
-<td align="right">54</td>
+<td align="right">56</td>
 </tr>
 <tr class="odd">
 <td align="left">iv</td>
@@ -333,7 +308,7 @@ unidad</td>
 <tr class="even">
 <td align="left"><strong>C (A+B)</strong></td>
 <td align="left"><strong>Total horas planeadas unidad</strong></td>
-<td align="right"><strong>1009</strong></td>
+<td align="right"><strong>1015</strong></td>
 </tr>
 </tbody>
 </table>
@@ -354,12 +329,12 @@ unidad</td>
 <tr class="even">
 <td align="left">E (ii+vi)</td>
 <td align="left">Horas profesores por hora de clase</td>
-<td align="right">590</td>
+<td align="right">594</td>
 </tr>
 <tr class="odd">
 <td align="left">F (iii+vii)</td>
 <td align="left">Horas de profesores de jornada externos</td>
-<td align="right">66</td>
+<td align="right">68</td>
 </tr>
 <tr class="even">
 <td align="left">G</td>
@@ -368,10 +343,10 @@ unidad</td>
 </tr>
 </tbody>
 </table>
-<p>La unidad registra un total de <strong>1009 horas</strong> de clases
-planeadas, divididas en 859 horas en pregrado y 150 horas en postgrado.
+<p>La unidad registra un total de <strong>1015 horas</strong> de clases
+planeadas, divididas en 865 horas en pregrado y 150 horas en postgrado.
 Los profesores de jornada de la unidad cubren el 32% del total, mientras
-que los profesores por hora cubren el 58%.</p>
+que los profesores por hora cubren el 59%.</p>
 <hr />
 <h2 id="cobertura-de-horas-por-académicos-según-contratación">2.
 Cobertura de horas por académicos según contratación</h2>
@@ -393,7 +368,7 @@ Cobertura de horas por académicos según contratación</h2>
 </tr>
 <tr class="odd">
 <td align="left">% cobertura profesores por horas — total</td>
-<td align="right">58</td>
+<td align="right">59</td>
 </tr>
 </tbody>
 </table>
@@ -783,7 +758,7 @@ Licenciatura en Estudios Internacionales
 44330
 </td>
 <td>
-La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
+Sello: La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
 Distópico.
 </td>
 <td class="num">
@@ -801,7 +776,7 @@ Licenciatura en Historia
 44536
 </td>
 <td>
-La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
+Sello: La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
 Distópico.
 </td>
 <td class="num">
@@ -819,7 +794,7 @@ Licenciatura en Historia
 44543
 </td>
 <td>
-La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
+Sello: La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
 Distópico.
 </td>
 <td class="num">
@@ -837,7 +812,7 @@ Licenciatura en Historia
 44548
 </td>
 <td>
-La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
+Sello: La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
 Distópico.
 </td>
 <td class="num">
@@ -906,7 +881,7 @@ Pedagogía en Castellano
 46257
 </td>
 <td>
-La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
+Sello: La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
 Distópico.
 </td>
 <td class="num">
@@ -924,7 +899,7 @@ Pedagogía en Filosofía
 41244
 </td>
 <td>
-La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
+Sello: La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
 Distópico.
 </td>
 <td class="num">
@@ -942,7 +917,7 @@ Pedagogía en Historia y Ciencias Sociales
 44476
 </td>
 <td>
-La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
+Sello: La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
 Distópico.
 </td>
 <td class="num">
@@ -994,7 +969,7 @@ Periodismo
 47340
 </td>
 <td>
-La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
+Sello: La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
 Distópico.
 </td>
 <td class="num">
@@ -1012,7 +987,7 @@ Psicología
 45326
 </td>
 <td>
-La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
+Sello: La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y
 Distópico.
 </td>
 <td class="num">
@@ -2462,15 +2437,15 @@ Gestión Cultural
 <p class="cod-programa">
 Código de programa: 6637
 </p>
-<table style="width:100%;">
+<table>
 <colgroup>
 <col width="6%" />
-<col width="5%" />
-<col width="43%" />
-<col width="3%" />
-<col width="3%" />
 <col width="4%" />
-<col width="27%" />
+<col width="46%" />
+<col width="3%" />
+<col width="2%" />
+<col width="4%" />
+<col width="28%" />
 <col width="4%" />
 </colgroup>
 <thead>
@@ -2669,16 +2644,16 @@ Licenciatura en Historia
 <p class="cod-programa">
 Código de programa: 6635
 </p>
-<table style="width:100%;">
+<table>
 <colgroup>
-<col width="5%" />
+<col width="4%" />
 <col width="3%" />
-<col width="55%" />
-<col width="3%" />
+<col width="59%" />
 <col width="2%" />
-<col width="3%" />
+<col width="1%" />
+<col width="2%" />
 <col width="22%" />
-<col width="3%" />
+<col width="2%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -2693,26 +2668,6 @@ Código de programa: 6635
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">PRIMERO</td>
-<td align="left">701</td>
-<td align="left">Inglés I</td>
-<td align="left">T-6</td>
-<td align="right">4</td>
-<td align="right">40</td>
-<td align="left">Cristián Álvarez Fuenzalida</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="left">PRIMERO</td>
-<td align="left">701</td>
-<td align="left">Inglés I</td>
-<td align="left">T-7</td>
-<td align="right">4</td>
-<td align="right">0</td>
-<td align="left">Carolina Herrera Urrutia</td>
-<td align="right">NA</td>
-</tr>
 <tr class="odd">
 <td align="left">PRIMERO</td>
 <td align="left">44500</td>
@@ -2765,16 +2720,26 @@ Humanidad</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
-<td align="left">TERCERO</td>
-<td align="left">703</td>
-<td align="left">Inglés Iii</td>
-<td align="left">T-5</td>
+<td align="left">PRIMERO</td>
+<td align="left">701</td>
+<td align="left">Inglés I</td>
+<td align="left">T-6</td>
 <td align="right">4</td>
-<td align="right">30</td>
-<td align="left">Daniela Rosa Benavides Alvarez</td>
+<td align="right">40</td>
+<td align="left">Cristián Álvarez Fuenzalida</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
+<td align="left">PRIMERO</td>
+<td align="left">701</td>
+<td align="left">Inglés I</td>
+<td align="left">T-7</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="left">Carolina Herrera Urrutia</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44511</td>
 <td align="left">Ruralidad Y Relaciones De Poder: Occidente Y
@@ -2785,7 +2750,7 @@ Ultramar</td>
 <td align="left">Pablo Alfredo Castro Hernández</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44512</td>
 <td align="left">Sistemas De Colonización En América Y Chile</td>
@@ -2795,7 +2760,7 @@ Ultramar</td>
 <td align="left">Xochitl Guadalupe Inostroza Ponce</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44513</td>
 <td align="left">Escritura Académica I</td>
@@ -2805,7 +2770,7 @@ Ultramar</td>
 <td align="left">Jorge Fernando Montealegre Iturra</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44514</td>
 <td align="left">Electivo De Profundización I</td>
@@ -2815,7 +2780,7 @@ Ultramar</td>
 <td align="left">Manuel Enrique Sepúlveda Contreras</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44514</td>
 <td align="left">Electivo De Profundización I</td>
@@ -2825,7 +2790,7 @@ Ultramar</td>
 <td align="left">Christian Retamal Hernandez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44514</td>
 <td align="left">Electivo De Profundización I</td>
@@ -2835,7 +2800,7 @@ Ultramar</td>
 <td align="left">Pablo Andrade Blanco</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44515</td>
 <td align="left">Métodos De Los Estudios Socioculturales En La
@@ -2846,7 +2811,7 @@ Construcción Del Conocimiento Historiográfico</td>
 <td align="left">Laura De La Luz Briceño Ramírez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44515</td>
 <td align="left">Métodos De Los Estudios Socioculturales En La
@@ -2857,7 +2822,7 @@ Construcción Del Conocimiento Historiográfico</td>
 <td align="left">Roberto Antonio Hernández Araya</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44515</td>
 <td align="left">Métodos De Los Estudios Socioculturales En La
@@ -2868,7 +2833,7 @@ Construcción Del Conocimiento Historiográfico</td>
 <td align="left">Diego Antonio Morales Barrientos</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44516</td>
 <td align="left">Teoría Y Práctica De La Gestión Cultural</td>
@@ -2876,6 +2841,16 @@ Construcción Del Conocimiento Historiográfico</td>
 <td align="right">4</td>
 <td align="right">30</td>
 <td align="left">Manuel Enrique Sepúlveda Contreras</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">703</td>
+<td align="left">Inglés Iii</td>
+<td align="left">T-5</td>
+<td align="right">4</td>
+<td align="right">30</td>
+<td align="left">Daniela Rosa Benavides Alvarez</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
@@ -2974,19 +2949,19 @@ Historiografía</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">¿Qué Es Una Sociedad Justa? Teoría Social Normativa Y
-Desafíos De Cambio Social</td>
+<td align="left">Sello: ¿Qué Es Una Sociedad Justa? Teoría Social
+Normativa Y Desafíos De Cambio Social</td>
 <td align="left">S-1</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Jorge Araya Moya</td>
-<td align="right">NA</td>
+<td align="right">1</td>
 </tr>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Datos Para Contar Historias: Análisis Y Visualización
-Para Humanidades Y Ciencias Sociales</td>
+<td align="left">Sello: Datos Para Contar Historias: Análisis Y
+Visualización Para Humanidades Y Ciencias Sociales</td>
 <td align="left">S-10</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -2996,7 +2971,8 @@ Para Humanidades Y Ciencias Sociales</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Derechos Humanos Desde Los Juegos De Rol De Mesa</td>
+<td align="left">Sello: Derechos Humanos Desde Los Juegos De Rol De
+Mesa</td>
 <td align="left">S-11</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3017,8 +2993,8 @@ Mirada Critica Y Situada Desde Latinoamérica</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Desarrollo De Estrategias Y Proyectos De Incidencia
-Social Y Política Desde La Sociedad Civil</td>
+<td align="left">Sello: Desarrollo De Estrategias Y Proyectos De
+Incidencia Social Y Política Desde La Sociedad Civil</td>
 <td align="left">S-13</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3028,7 +3004,7 @@ Social Y Política Desde La Sociedad Civil</td>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Educación De Adultos</td>
+<td align="left">Sello: Educación De Adultos</td>
 <td align="left">S-14</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3038,8 +3014,8 @@ Social Y Política Desde La Sociedad Civil</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">El Arte Como Puente: Metodologías Interdisciplinares
-Para Comprender La Cultura Visual</td>
+<td align="left">Sello: El Arte Como Puente: Metodologías
+Interdisciplinares Para Comprender La Cultura Visual</td>
 <td align="left">S-15</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3049,8 +3025,8 @@ Para Comprender La Cultura Visual</td>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">El Podcast Educativo: Voz, Creación Y Comunicación
-Digital</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
 <td align="left">S-16</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3060,37 +3036,60 @@ Digital</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
+<td align="left">S-16</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Luciano Guzman</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">SEXTO</td>
+<td align="left">44536</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
 <td align="left">S-17</td>
 <td align="right">2</td>
 <td align="right">5 ⚠</td>
 <td align="left">Luis Edilio Hernández Astudillo</td>
 <td align="right">NA</td>
 </tr>
+<tr class="even">
+<td align="left">SEXTO</td>
+<td align="left">44536</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">S-17</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Mario Hernan Radrigan Rubio</td>
+<td align="right">NA</td>
+</tr>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Estrategias De Innovación Para La Sostenibilidad</td>
+<td align="left">Sello: Estrategias De Innovación Para La
+Sostenibilidad</td>
 <td align="left">S-18</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Ignacio Olavarría Contreras</td>
-<td align="right">NA</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Fotografía De Principio Con Un Fin</td>
+<td align="left">Sello: Fotografía De Principio Con Un Fin</td>
 <td align="left">S-19</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Ximena Myriam Riffo Piña</td>
-<td align="right">NA</td>
+<td align="right">1</td>
 </tr>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Acción: Teoría Y Práctica De La Ética Ambiental</td>
+<td align="left">Sello: Acción: Teoría Y Práctica De La Ética
+Ambiental</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3103,9 +3102,9 @@ Digital</td>
 <td align="left">Sello: Gobernanza Y Transparencia Desde Los Derechos
 Humanos</td>
 <td align="left">S-20</td>
-<td align="right">0</td>
+<td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Vanessa Retamal Gutiérrez</td>
+<td align="left">Francisco Zambrano Meza</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
@@ -3114,15 +3113,15 @@ Humanos</td>
 <td align="left">Sello: Gobernanza Y Transparencia Desde Los Derechos
 Humanos</td>
 <td align="left">S-20</td>
-<td align="right">4</td>
+<td align="right">2</td>
 <td align="right">5 ⚠</td>
-<td align="left">Francisco Zambrano Meza</td>
+<td align="left">Vanessa Retamal Gutiérrez</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Herramientas Socioemocionales En Contextos De
+<td align="left">Sello: Herramientas Socioemocionales En Contextos De
 Diversidad</td>
 <td align="left">S-21</td>
 <td align="right">4</td>
@@ -3133,7 +3132,7 @@ Diversidad</td>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Historia Aplicada: Desarrollo Territorial
+<td align="left">Sello: Historia Aplicada: Desarrollo Territorial
 Sostenible</td>
 <td align="left">S-22</td>
 <td align="right">4</td>
@@ -3144,7 +3143,7 @@ Sostenible</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Interseccionalidad, Movilidad Humana Y Grupos De
+<td align="left">Sello: Interseccionalidad, Movilidad Humana Y Grupos De
 Especial Protección</td>
 <td align="left">S-23</td>
 <td align="right">4</td>
@@ -3155,8 +3154,8 @@ Especial Protección</td>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Juego: Herramienta Educativa Y Para La Intervención
-Social</td>
+<td align="left">Sello: Juego: Herramienta Educativa Y Para La
+Intervención Social</td>
 <td align="left">S-24</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3187,7 +3186,7 @@ Chilena</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">La Escuela Como Organización Que Cuida</td>
+<td align="left">Sello: La Escuela Como Organización Que Cuida</td>
 <td align="left">S-27</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3197,7 +3196,7 @@ Chilena</td>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">La Representaciones Del Futuro En El Cine De
+<td align="left">Sello: La Representaciones Del Futuro En El Cine De
 Ciencia-Ficción Y Distópico.</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
@@ -3208,18 +3207,18 @@ Ciencia-Ficción Y Distópico.</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Laboratorio De Cocreación De Gobernanza Para La
+<td align="left">Sello: Laboratorio De Cocreación De Gobernanza Para La
 Sostenibilidad</td>
 <td align="left">S-29</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Israel Patricio Perez Vargas</td>
-<td align="right">NA</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Análisis De Texto Como Dato: Herramientas
+<td align="left">Sello: Análisis De Texto Como Dato: Herramientas
 Computacionales Para Las Humanidades</td>
 <td align="left">S-3</td>
 <td align="right">4</td>
@@ -3230,7 +3229,7 @@ Computacionales Para Las Humanidades</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Liderazgo E Innovación Social</td>
+<td align="left">Sello: Liderazgo E Innovación Social</td>
 <td align="left">S-30</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3240,8 +3239,8 @@ Computacionales Para Las Humanidades</td>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Narrativas Visuales Y Ciudadanía Cultural: Del Manga Al
-Cómic Latinoamericano</td>
+<td align="left">Sello: Narrativas Visuales Y Ciudadanía Cultural: Del
+Manga Al Cómic Latinoamericano</td>
 <td align="left">S-31</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3251,8 +3250,8 @@ Cómic Latinoamericano</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Neurodivergencias Y Salud Mental Comunitaria:
-Aplicación Del Paradigma Neuroafirmativo En</td>
+<td align="left">Sello: Neurodivergencias Y Salud Mental Comunitaria:
+Aplicación Del Paradigma Neuroafirmativo</td>
 <td align="left">S-32</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3273,7 +3272,7 @@ Planetaria</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Participación Ciudadana Y Territorio</td>
+<td align="left">Sello: Participación Ciudadana Y Territorio</td>
 <td align="left">S-34</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3283,8 +3282,7 @@ Planetaria</td>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Persona Humana Y Justicia Social: Elementos
-Ético-Valóricos Para Una Comprensión Del Ejerc</td>
+<td align="left">Sello: Persona Humana Y Justicia Social</td>
 <td align="left">S-35</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3336,7 +3334,7 @@ Historia, Vivienda Y Desigualdad Urbana.</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Arte Y Cultura Para La Promoción De Los Derechos
+<td align="left">Sello: Arte Y Cultura Para La Promoción De Los Derechos
 Humanos</td>
 <td align="left">S-4</td>
 <td align="right">4</td>
@@ -3347,8 +3345,8 @@ Humanos</td>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Territorios En Conflicto: Desafíos De Sostenibilidad Y
-Justicia Socioambiental</td>
+<td align="left">Sello: Territorios En Conflicto: Desafíos De
+Sostenibilidad Y Justicia Socioambiental</td>
 <td align="left">S-40</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3368,7 +3366,7 @@ Justicia Socioambiental</td>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Ciudadanía Cultura Y Buenvivir</td>
+<td align="left">Sello: Ciudadanía Cultura Y Buenvivir</td>
 <td align="left">S-6</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3378,8 +3376,8 @@ Justicia Socioambiental</td>
 <tr class="even">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Conectando Barrios: Buenas Prácticas En Torno A La
-Diversidad Cultural Y La Cohesión Socia</td>
+<td align="left">Sello: Conectando Barrios: Buenas Prácticas En Torno A
+La Diversidad Cultural Y La Cohesión Social</td>
 <td align="left">S-7</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3389,7 +3387,7 @@ Diversidad Cultural Y La Cohesión Socia</td>
 <tr class="odd">
 <td align="left">SEXTO</td>
 <td align="left">44536</td>
-<td align="left">Controversias Y Posicionamientos Éticos Para Una
+<td align="left">Sello: Controversias Y Posicionamientos Éticos Para Una
 Ciudadanía Crítica</td>
 <td align="left">S-8</td>
 <td align="right">4</td>
@@ -3600,8 +3598,8 @@ Ciudadanía Crítica</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">¿Qué Es Una Sociedad Justa? Teoría Social Normativa Y
-Desafíos De Cambio Social</td>
+<td align="left">Sello: ¿Qué Es Una Sociedad Justa? Teoría Social
+Normativa Y Desafíos De Cambio Social</td>
 <td align="left">S-1</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3611,8 +3609,8 @@ Desafíos De Cambio Social</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Datos Para Contar Historias: Análisis Y Visualización
-Para Humanidades Y Ciencias Sociales</td>
+<td align="left">Sello: Datos Para Contar Historias: Análisis Y
+Visualización Para Humanidades Y Ciencias Sociales</td>
 <td align="left">S-10</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3622,7 +3620,8 @@ Para Humanidades Y Ciencias Sociales</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Derechos Humanos Desde Los Juegos De Rol De Mesa</td>
+<td align="left">Sello: Derechos Humanos Desde Los Juegos De Rol De
+Mesa</td>
 <td align="left">S-11</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3643,8 +3642,8 @@ Mirada Critica Y Situada Desde Latinoamérica</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Desarrollo De Estrategias Y Proyectos De Incidencia
-Social Y Política Desde La Sociedad Civil</td>
+<td align="left">Sello: Desarrollo De Estrategias Y Proyectos De
+Incidencia Social Y Política Desde La Sociedad Civil</td>
 <td align="left">S-13</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3654,7 +3653,7 @@ Social Y Política Desde La Sociedad Civil</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Educación De Adultos</td>
+<td align="left">Sello: Educación De Adultos</td>
 <td align="left">S-14</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3664,8 +3663,8 @@ Social Y Política Desde La Sociedad Civil</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">El Arte Como Puente: Metodologías Interdisciplinares
-Para Comprender La Cultura Visual</td>
+<td align="left">Sello: El Arte Como Puente: Metodologías
+Interdisciplinares Para Comprender La Cultura Visual</td>
 <td align="left">S-15</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3675,8 +3674,8 @@ Para Comprender La Cultura Visual</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">El Podcast Educativo: Voz, Creación Y Comunicación
-Digital</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
 <td align="left">S-16</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3686,27 +3685,49 @@ Digital</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
+<td align="left">S-16</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Luciano Guzman</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">44543</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
 <td align="left">S-17</td>
 <td align="right">2</td>
 <td align="right">5 ⚠</td>
 <td align="left">Luis Edilio Hernández Astudillo</td>
 <td align="right">NA</td>
 </tr>
+<tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">44543</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">S-17</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Mario Hernan Radrigan Rubio</td>
+<td align="right">NA</td>
+</tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Estrategias De Innovación Para La Sostenibilidad</td>
+<td align="left">Sello: Estrategias De Innovación Para La
+Sostenibilidad</td>
 <td align="left">S-18</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Ignacio Olavarría Contreras</td>
-<td align="right">NA</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Fotografía De Principio Con Un Fin</td>
+<td align="left">Sello: Fotografía De Principio Con Un Fin</td>
 <td align="left">S-19</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3716,7 +3737,8 @@ Digital</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Acción: Teoría Y Práctica De La Ética Ambiental</td>
+<td align="left">Sello: Acción: Teoría Y Práctica De La Ética
+Ambiental</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3748,7 +3770,7 @@ Humanos</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Herramientas Socioemocionales En Contextos De
+<td align="left">Sello: Herramientas Socioemocionales En Contextos De
 Diversidad</td>
 <td align="left">S-21</td>
 <td align="right">4</td>
@@ -3759,18 +3781,18 @@ Diversidad</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Historia Aplicada: Desarrollo Territorial
+<td align="left">Sello: Historia Aplicada: Desarrollo Territorial
 Sostenible</td>
 <td align="left">S-22</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Pablo Alberto Lacoste Ssa</td>
-<td align="right">NA</td>
+<td align="right">2</td>
 </tr>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Interseccionalidad, Movilidad Humana Y Grupos De
+<td align="left">Sello: Interseccionalidad, Movilidad Humana Y Grupos De
 Especial Protección</td>
 <td align="left">S-23</td>
 <td align="right">4</td>
@@ -3781,8 +3803,8 @@ Especial Protección</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Juego: Herramienta Educativa Y Para La Intervención
-Social</td>
+<td align="left">Sello: Juego: Herramienta Educativa Y Para La
+Intervención Social</td>
 <td align="left">S-24</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3813,7 +3835,7 @@ Chilena</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">La Escuela Como Organización Que Cuida</td>
+<td align="left">Sello: La Escuela Como Organización Que Cuida</td>
 <td align="left">S-27</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3823,7 +3845,7 @@ Chilena</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">La Representaciones Del Futuro En El Cine De
+<td align="left">Sello: La Representaciones Del Futuro En El Cine De
 Ciencia-Ficción Y Distópico.</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
@@ -3834,18 +3856,18 @@ Ciencia-Ficción Y Distópico.</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Laboratorio De Cocreación De Gobernanza Para La
+<td align="left">Sello: Laboratorio De Cocreación De Gobernanza Para La
 Sostenibilidad</td>
 <td align="left">S-29</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Israel Patricio Perez Vargas</td>
-<td align="right">NA</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Análisis De Texto Como Dato: Herramientas
+<td align="left">Sello: Análisis De Texto Como Dato: Herramientas
 Computacionales Para Las Humanidades</td>
 <td align="left">S-3</td>
 <td align="right">4</td>
@@ -3856,7 +3878,7 @@ Computacionales Para Las Humanidades</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Liderazgo E Innovación Social</td>
+<td align="left">Sello: Liderazgo E Innovación Social</td>
 <td align="left">S-30</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3866,8 +3888,8 @@ Computacionales Para Las Humanidades</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Narrativas Visuales Y Ciudadanía Cultural: Del Manga Al
-Cómic Latinoamericano</td>
+<td align="left">Sello: Narrativas Visuales Y Ciudadanía Cultural: Del
+Manga Al Cómic Latinoamericano</td>
 <td align="left">S-31</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3877,8 +3899,8 @@ Cómic Latinoamericano</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Neurodivergencias Y Salud Mental Comunitaria:
-Aplicación Del Paradigma Neuroafirmativo En</td>
+<td align="left">Sello: Neurodivergencias Y Salud Mental Comunitaria:
+Aplicación Del Paradigma Neuroafirmativo</td>
 <td align="left">S-32</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3899,7 +3921,7 @@ Planetaria</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Participación Ciudadana Y Territorio</td>
+<td align="left">Sello: Participación Ciudadana Y Territorio</td>
 <td align="left">S-34</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3909,7 +3931,7 @@ Planetaria</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Participación Ciudadana Y Territorio</td>
+<td align="left">Sello: Participación Ciudadana Y Territorio</td>
 <td align="left">S-34</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3919,8 +3941,7 @@ Planetaria</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Persona Humana Y Justicia Social: Elementos
-Ético-Valóricos Para Una Comprensión Del Ejerc</td>
+<td align="left">Sello: Persona Humana Y Justicia Social</td>
 <td align="left">S-35</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -3972,7 +3993,7 @@ Historia, Vivienda Y Desigualdad Urbana.</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Arte Y Cultura Para La Promoción De Los Derechos
+<td align="left">Sello: Arte Y Cultura Para La Promoción De Los Derechos
 Humanos</td>
 <td align="left">S-4</td>
 <td align="right">4</td>
@@ -3983,8 +4004,8 @@ Humanos</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Territorios En Conflicto: Desafíos De Sostenibilidad Y
-Justicia Socioambiental</td>
+<td align="left">Sello: Territorios En Conflicto: Desafíos De
+Sostenibilidad Y Justicia Socioambiental</td>
 <td align="left">S-40</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4004,7 +4025,7 @@ Justicia Socioambiental</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Ciudadanía Cultura Y Buenvivir</td>
+<td align="left">Sello: Ciudadanía Cultura Y Buenvivir</td>
 <td align="left">S-6</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4014,8 +4035,8 @@ Justicia Socioambiental</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Conectando Barrios: Buenas Prácticas En Torno A La
-Diversidad Cultural Y La Cohesión Socia</td>
+<td align="left">Sello: Conectando Barrios: Buenas Prácticas En Torno A
+La Diversidad Cultural Y La Cohesión Social</td>
 <td align="left">S-7</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4025,7 +4046,7 @@ Diversidad Cultural Y La Cohesión Socia</td>
 <tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Controversias Y Posicionamientos Éticos Para Una
+<td align="left">Sello: Controversias Y Posicionamientos Éticos Para Una
 Ciudadanía Crítica</td>
 <td align="left">S-8</td>
 <td align="right">4</td>
@@ -4036,7 +4057,7 @@ Ciudadanía Crítica</td>
 <tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44543</td>
-<td align="left">Curiosidades Sobre El Cerebro</td>
+<td align="left">Sello: Curiosidades Sobre El Cerebro</td>
 <td align="left">S-9</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4056,8 +4077,8 @@ Ciudadanía Crítica</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">¿Qué Es Una Sociedad Justa? Teoría Social Normativa Y
-Desafíos De Cambio Social</td>
+<td align="left">Sello: ¿Qué Es Una Sociedad Justa? Teoría Social
+Normativa Y Desafíos De Cambio Social</td>
 <td align="left">S-1</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4067,8 +4088,8 @@ Desafíos De Cambio Social</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Datos Para Contar Historias: Análisis Y Visualización
-Para Humanidades Y Ciencias Sociales</td>
+<td align="left">Sello: Datos Para Contar Historias: Análisis Y
+Visualización Para Humanidades Y Ciencias Sociales</td>
 <td align="left">S-10</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4078,7 +4099,8 @@ Para Humanidades Y Ciencias Sociales</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Derechos Humanos Desde Los Juegos De Rol De Mesa</td>
+<td align="left">Sello: Derechos Humanos Desde Los Juegos De Rol De
+Mesa</td>
 <td align="left">S-11</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4099,8 +4121,8 @@ Mirada Critica Y Situada Desde Latinoamérica</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Desarrollo De Estrategias Y Proyectos De Incidencia
-Social Y Política Desde La Sociedad Civil</td>
+<td align="left">Sello: Desarrollo De Estrategias Y Proyectos De
+Incidencia Social Y Política Desde La Sociedad Civil</td>
 <td align="left">S-13</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4110,7 +4132,7 @@ Social Y Política Desde La Sociedad Civil</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Educación De Adultos</td>
+<td align="left">Sello: Educación De Adultos</td>
 <td align="left">S-14</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4120,8 +4142,8 @@ Social Y Política Desde La Sociedad Civil</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">El Arte Como Puente: Metodologías Interdisciplinares
-Para Comprender La Cultura Visual</td>
+<td align="left">Sello: El Arte Como Puente: Metodologías
+Interdisciplinares Para Comprender La Cultura Visual</td>
 <td align="left">S-15</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4131,8 +4153,8 @@ Para Comprender La Cultura Visual</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">El Podcast Educativo: Voz, Creación Y Comunicación
-Digital</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
 <td align="left">S-16</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4142,27 +4164,49 @@ Digital</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
+<td align="left">S-16</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Luciano Guzman</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">OCTAVO</td>
+<td align="left">44548</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
 <td align="left">S-17</td>
 <td align="right">2</td>
 <td align="right">5 ⚠</td>
 <td align="left">Luis Edilio Hernández Astudillo</td>
 <td align="right">NA</td>
 </tr>
+<tr class="odd">
+<td align="left">OCTAVO</td>
+<td align="left">44548</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">S-17</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Mario Hernan Radrigan Rubio</td>
+<td align="right">NA</td>
+</tr>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Estrategias De Innovación Para La Sostenibilidad</td>
+<td align="left">Sello: Estrategias De Innovación Para La
+Sostenibilidad</td>
 <td align="left">S-18</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Ignacio Olavarría Contreras</td>
-<td align="right">NA</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Fotografía De Principio Con Un Fin</td>
+<td align="left">Sello: Fotografía De Principio Con Un Fin</td>
 <td align="left">S-19</td>
 <td align="right">4</td>
 <td align="right">3 ⚠</td>
@@ -4172,7 +4216,8 @@ Digital</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Acción: Teoría Y Práctica De La Ética Ambiental</td>
+<td align="left">Sello: Acción: Teoría Y Práctica De La Ética
+Ambiental</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4185,9 +4230,9 @@ Digital</td>
 <td align="left">Sello: Gobernanza Y Transparencia Desde Los Derechos
 Humanos</td>
 <td align="left">S-20</td>
-<td align="right">0</td>
+<td align="right">4</td>
 <td align="right">5 ⚠</td>
-<td align="left">Vanessa Retamal Gutiérrez</td>
+<td align="left">Francisco Zambrano Meza</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
@@ -4196,15 +4241,15 @@ Humanos</td>
 <td align="left">Sello: Gobernanza Y Transparencia Desde Los Derechos
 Humanos</td>
 <td align="left">S-20</td>
-<td align="right">4</td>
+<td align="right">2</td>
 <td align="right">5 ⚠</td>
-<td align="left">Francisco Zambrano Meza</td>
+<td align="left">Vanessa Retamal Gutiérrez</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Herramientas Socioemocionales En Contextos De
+<td align="left">Sello: Herramientas Socioemocionales En Contextos De
 Diversidad</td>
 <td align="left">S-21</td>
 <td align="right">4</td>
@@ -4215,7 +4260,7 @@ Diversidad</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Historia Aplicada: Desarrollo Territorial
+<td align="left">Sello: Historia Aplicada: Desarrollo Territorial
 Sostenible</td>
 <td align="left">S-22</td>
 <td align="right">4</td>
@@ -4226,7 +4271,7 @@ Sostenible</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Interseccionalidad, Movilidad Humana Y Grupos De
+<td align="left">Sello: Interseccionalidad, Movilidad Humana Y Grupos De
 Especial Protección</td>
 <td align="left">S-23</td>
 <td align="right">4</td>
@@ -4237,8 +4282,8 @@ Especial Protección</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Juego: Herramienta Educativa Y Para La Intervención
-Social</td>
+<td align="left">Sello: Juego: Herramienta Educativa Y Para La
+Intervención Social</td>
 <td align="left">S-24</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4269,7 +4314,7 @@ Chilena</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">La Representaciones Del Futuro En El Cine De
+<td align="left">Sello: La Representaciones Del Futuro En El Cine De
 Ciencia-Ficción Y Distópico.</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
@@ -4280,18 +4325,18 @@ Ciencia-Ficción Y Distópico.</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Laboratorio De Cocreación De Gobernanza Para La
+<td align="left">Sello: Laboratorio De Cocreación De Gobernanza Para La
 Sostenibilidad</td>
 <td align="left">S-29</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Israel Patricio Perez Vargas</td>
-<td align="right">NA</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Análisis De Texto Como Dato: Herramientas
+<td align="left">Sello: Análisis De Texto Como Dato: Herramientas
 Computacionales Para Las Humanidades</td>
 <td align="left">S-3</td>
 <td align="right">4</td>
@@ -4302,7 +4347,7 @@ Computacionales Para Las Humanidades</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Liderazgo E Innovación Social</td>
+<td align="left">Sello: Liderazgo E Innovación Social</td>
 <td align="left">S-30</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4312,8 +4357,8 @@ Computacionales Para Las Humanidades</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Narrativas Visuales Y Ciudadanía Cultural: Del Manga Al
-Cómic Latinoamericano</td>
+<td align="left">Sello: Narrativas Visuales Y Ciudadanía Cultural: Del
+Manga Al Cómic Latinoamericano</td>
 <td align="left">S-31</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4323,8 +4368,8 @@ Cómic Latinoamericano</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Neurodivergencias Y Salud Mental Comunitaria:
-Aplicación Del Paradigma Neuroafirmativo En</td>
+<td align="left">Sello: Neurodivergencias Y Salud Mental Comunitaria:
+Aplicación Del Paradigma Neuroafirmativo</td>
 <td align="left">S-32</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4345,7 +4390,7 @@ Planetaria</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Participación Ciudadana Y Territorio</td>
+<td align="left">Sello: Participación Ciudadana Y Territorio</td>
 <td align="left">S-34</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4355,8 +4400,7 @@ Planetaria</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Persona Humana Y Justicia Social: Elementos
-Ético-Valóricos Para Una Comprensión Del Ejerc</td>
+<td align="left">Sello: Persona Humana Y Justicia Social</td>
 <td align="left">S-35</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4408,7 +4452,7 @@ Historia, Vivienda Y Desigualdad Urbana.</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Arte Y Cultura Para La Promoción De Los Derechos
+<td align="left">Sello: Arte Y Cultura Para La Promoción De Los Derechos
 Humanos</td>
 <td align="left">S-4</td>
 <td align="right">4</td>
@@ -4419,8 +4463,8 @@ Humanos</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Territorios En Conflicto: Desafíos De Sostenibilidad Y
-Justicia Socioambiental</td>
+<td align="left">Sello: Territorios En Conflicto: Desafíos De
+Sostenibilidad Y Justicia Socioambiental</td>
 <td align="left">S-40</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4440,7 +4484,7 @@ Justicia Socioambiental</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Ciudadanía Cultura Y Buenvivir</td>
+<td align="left">Sello: Ciudadanía Cultura Y Buenvivir</td>
 <td align="left">S-6</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4450,8 +4494,8 @@ Justicia Socioambiental</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Conectando Barrios: Buenas Prácticas En Torno A La
-Diversidad Cultural Y La Cohesión Socia</td>
+<td align="left">Sello: Conectando Barrios: Buenas Prácticas En Torno A
+La Diversidad Cultural Y La Cohesión Social</td>
 <td align="left">S-7</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4461,7 +4505,7 @@ Diversidad Cultural Y La Cohesión Socia</td>
 <tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Controversias Y Posicionamientos Éticos Para Una
+<td align="left">Sello: Controversias Y Posicionamientos Éticos Para Una
 Ciudadanía Crítica</td>
 <td align="left">S-8</td>
 <td align="right">4</td>
@@ -4472,7 +4516,7 @@ Ciudadanía Crítica</td>
 <tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44548</td>
-<td align="left">Curiosidades Sobre El Cerebro</td>
+<td align="left">Sello: Curiosidades Sobre El Cerebro</td>
 <td align="left">S-9</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
@@ -4491,9 +4535,9 @@ Ciudadanía Crítica</td>
 </tr>
 </tbody>
 </table>
-<p>La carrera registra <strong>171 secciones</strong> en <strong>29
-cursos</strong> con <strong>652 horas pedagógicas</strong>, dictadas por
-<strong>75 profesores</strong>.</p>
+<p>La carrera registra <strong>177 secciones</strong> en <strong>29
+cursos</strong> con <strong>668 horas pedagógicas</strong>, dictadas por
+<strong>77 profesores</strong>.</p>
 <blockquote>
 <p>Sin cupo asignado: 701 Inglés i (T-7).</p>
 </blockquote>
@@ -4505,14 +4549,14 @@ Código de programa: 6634
 </p>
 <table style="width:100%;">
 <colgroup>
-<col width="5%" />
+<col width="4%" />
 <col width="3%" />
-<col width="55%" />
-<col width="3%" />
+<col width="58%" />
 <col width="2%" />
-<col width="3%" />
+<col width="1%" />
+<col width="2%" />
 <col width="22%" />
-<col width="3%" />
+<col width="2%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -4688,6 +4732,16 @@ Código de programa: 6634
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
+<td align="left">DECIMO</td>
+<td align="left">44482</td>
+<td align="left">Practica Profesional Ii</td>
+<td align="left">T-1</td>
+<td align="right">2</td>
+<td align="right">1 ⚠</td>
+<td align="left">Daisy Soledad Penrroz Maldonado</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44416</td>
 <td align="left">Metodología De La Investigación En Historia</td>
@@ -4697,7 +4751,7 @@ Código de programa: 6634
 <td align="left">Diego Antonio Morales Barrientos</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44416</td>
 <td align="left">Metodología De La Investigación En Historia</td>
@@ -4707,7 +4761,7 @@ Código de programa: 6634
 <td align="left">Anibal Andrés Benito Perez Contreras</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44417</td>
 <td align="left">Metodología De La Investigación En Ciencias
@@ -4718,7 +4772,7 @@ Sociales</td>
 <td align="left">Alejandra Carola Ruiz Tarrés</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44417</td>
 <td align="left">Metodología De La Investigación En Ciencias
@@ -4729,7 +4783,7 @@ Sociales</td>
 <td align="left">Alejandra Carola Ruiz Tarrés</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44418</td>
 <td align="left">Chile Y América En El Siglo Xix</td>
@@ -4739,7 +4793,7 @@ Sociales</td>
 <td align="left">Ivette Angelica Lozoya Lopez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44418</td>
 <td align="left">Chile Y América En El Siglo Xix</td>
@@ -4749,7 +4803,7 @@ Sociales</td>
 <td align="left">José Ignacio Ponce López</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44419</td>
 <td align="left">Modernidad En Los Siglo Xviii Y Xix</td>
@@ -4759,7 +4813,7 @@ Sociales</td>
 <td align="left">Rolando Eugenio Alvarez Vallejos</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44419</td>
 <td align="left">Modernidad En Los Siglo Xviii Y Xix</td>
@@ -4769,7 +4823,7 @@ Sociales</td>
 <td align="left">Mariana Sofía Labarca Pinto</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44420</td>
 <td align="left">Geografía Del Medio Ambiente Y Desarrollo Social</td>
@@ -4779,7 +4833,7 @@ Sociales</td>
 <td align="left">Maria Alejandra Concha Gómez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44420</td>
 <td align="left">Geografía Del Medio Ambiente Y Desarrollo Social</td>
@@ -4789,7 +4843,7 @@ Sociales</td>
 <td align="left">Maria Alejandra Concha Gómez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44421</td>
 <td align="left">Planificación Territorial Y Desarrollo Sustentable</td>
@@ -4799,7 +4853,7 @@ Sociales</td>
 <td align="left">Ivo Yure Kovacic Sapunar</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44421</td>
 <td align="left">Planificación Territorial Y Desarrollo Sustentable</td>
@@ -4809,39 +4863,40 @@ Sociales</td>
 <td align="left">Claudio Andrés Luis Curiqueo Hernández</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">¿Qué Es Una Sociedad Justa? Teoría Social Normativa Y
-Desafíos De Cambio Social</td>
+<td align="left">Sello: ¿Qué Es Una Sociedad Justa? Teoría Social
+Normativa Y Desafíos De Cambio Social</td>
 <td align="left">S-1</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Jorge Araya Moya</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Datos Para Contar Historias: Análisis Y Visualización
-Para Humanidades Y Ciencias Sociales</td>
+<td align="left">Sello: Datos Para Contar Historias: Análisis Y
+Visualización Para Humanidades Y Ciencias Sociales</td>
 <td align="left">S-10</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Camilo Andrés Avendaño Avello</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Derechos Humanos Desde Los Juegos De Rol De Mesa</td>
+<td align="left">Sello: Derechos Humanos Desde Los Juegos De Rol De
+Mesa</td>
 <td align="left">S-11</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Nelson Andrés Ortiz Villalobos</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
 <td align="left">Sello: Derechos Humanos Y Desarrollo Sostenible: Una
@@ -4852,53 +4907,64 @@ Mirada Critica Y Situada Desde Latinoamérica</td>
 <td align="left">Angela Carolina Morales Ravest</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Desarrollo De Estrategias Y Proyectos De Incidencia
-Social Y Política Desde La Sociedad Civil</td>
+<td align="left">Sello: Desarrollo De Estrategias Y Proyectos De
+Incidencia Social Y Política Desde La Sociedad Civil</td>
 <td align="left">S-13</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Mauricio Iván Weibel Barahona</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Educación De Adultos</td>
+<td align="left">Sello: Educación De Adultos</td>
 <td align="left">S-14</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Miguel Ivan Pedraza Gutierrez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">El Arte Como Puente: Metodologías Interdisciplinares
-Para Comprender La Cultura Visual</td>
+<td align="left">Sello: El Arte Como Puente: Metodologías
+Interdisciplinares Para Comprender La Cultura Visual</td>
 <td align="left">S-15</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Manuel Antonio Aguirre Ossa</td>
 <td align="right">NA</td>
 </tr>
+<tr class="odd">
+<td align="left">TERCERO</td>
+<td align="left">44476</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
+<td align="left">S-16</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Eduardo Inostroza Carvajal</td>
+<td align="right">0</td>
+</tr>
 <tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">El Podcast Educativo: Voz, Creación Y Comunicación
-Digital</td>
+<td align="left">Sello: El Podcast Educativo: Voz, Creación Y
+Comunicación Digital</td>
 <td align="left">S-16</td>
-<td align="right">4</td>
+<td align="right">2</td>
 <td align="right">5 ⚠</td>
-<td align="left">Eduardo Inostroza Carvajal</td>
-<td align="right">NA</td>
+<td align="left">Luciano Guzman</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
 <td align="left">S-17</td>
 <td align="right">2</td>
 <td align="right">5 ⚠</td>
@@ -4908,42 +4974,43 @@ Digital</td>
 <tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Estrategias De Innovación Para La Sostenibilidad</td>
-<td align="left">S-18</td>
-<td align="right">4</td>
+<td align="left">Sello: Emprendimientos Sociales Y Cooperativas</td>
+<td align="left">S-17</td>
+<td align="right">2</td>
 <td align="right">5 ⚠</td>
-<td align="left">Ignacio Olavarría Contreras</td>
+<td align="left">Mario Hernan Radrigan Rubio</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Fotografía De Principio Con Un Fin</td>
+<td align="left">Sello: Estrategias De Innovación Para La
+Sostenibilidad</td>
+<td align="left">S-18</td>
+<td align="right">4</td>
+<td align="right">5 ⚠</td>
+<td align="left">Ignacio Olavarría Contreras</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">44476</td>
+<td align="left">Sello: Fotografía De Principio Con Un Fin</td>
 <td align="left">S-19</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Ximena Myriam Riffo Piña</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Acción: Teoría Y Práctica De La Ética Ambiental</td>
+<td align="left">Sello: Acción: Teoría Y Práctica De La Ética
+Ambiental</td>
 <td align="left">S-2</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Hernan Neira Barrera</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">TERCERO</td>
-<td align="left">44476</td>
-<td align="left">Sello: Gobernanza Y Transparencia Desde Los Derechos
-Humanos</td>
-<td align="left">S-20</td>
-<td align="right">0</td>
-<td align="right">5 ⚠</td>
-<td align="left">Vanessa Retamal Gutiérrez</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
@@ -4960,7 +5027,18 @@ Humanos</td>
 <tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Herramientas Socioemocionales En Contextos De
+<td align="left">Sello: Gobernanza Y Transparencia Desde Los Derechos
+Humanos</td>
+<td align="left">S-20</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Vanessa Retamal Gutiérrez</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">TERCERO</td>
+<td align="left">44476</td>
+<td align="left">Sello: Herramientas Socioemocionales En Contextos De
 Diversidad</td>
 <td align="left">S-21</td>
 <td align="right">4</td>
@@ -4968,10 +5046,10 @@ Diversidad</td>
 <td align="left">Isabel Margarita Puga Young</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Historia Aplicada: Desarrollo Territorial
+<td align="left">Sello: Historia Aplicada: Desarrollo Territorial
 Sostenible</td>
 <td align="left">S-22</td>
 <td align="right">4</td>
@@ -4979,10 +5057,10 @@ Sostenible</td>
 <td align="left">Pablo Alberto Lacoste Ssa</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Interseccionalidad, Movilidad Humana Y Grupos De
+<td align="left">Sello: Interseccionalidad, Movilidad Humana Y Grupos De
 Especial Protección</td>
 <td align="left">S-23</td>
 <td align="right">4</td>
@@ -4990,18 +5068,18 @@ Especial Protección</td>
 <td align="left">Teresa Perez Cosgaya</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Juego: Herramienta Educativa Y Para La Intervención
-Social</td>
+<td align="left">Sello: Juego: Herramienta Educativa Y Para La
+Intervención Social</td>
 <td align="left">S-24</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Juan Armando Bastias Ovalle</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
 <td align="left">Sello: La Cárcel Como Problema Social</td>
@@ -5011,7 +5089,7 @@ Social</td>
 <td align="left">Lucía Dammert Guardia</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
 <td align="left">Sello: La Comunicación De La Lengua De Señas
@@ -5022,20 +5100,20 @@ Chilena</td>
 <td align="left">Diego Manzo Faúndez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">La Escuela Como Organización Que Cuida</td>
+<td align="left">Sello: La Escuela Como Organización Que Cuida</td>
 <td align="left">S-27</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Sergio Ignacio Galdames Poblete</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">La Representaciones Del Futuro En El Cine De
+<td align="left">Sello: La Representaciones Del Futuro En El Cine De
 Ciencia-Ficción Y Distópico.</td>
 <td align="left">S-28</td>
 <td align="right">4</td>
@@ -5043,21 +5121,21 @@ Ciencia-Ficción Y Distópico.</td>
 <td align="left">Christian Retamal Hernandez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Laboratorio De Cocreación De Gobernanza Para La
+<td align="left">Sello: Laboratorio De Cocreación De Gobernanza Para La
 Sostenibilidad</td>
 <td align="left">S-29</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Israel Patricio Perez Vargas</td>
-<td align="right">NA</td>
+<td align="right">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Análisis De Texto Como Dato: Herramientas
+<td align="left">Sello: Análisis De Texto Como Dato: Herramientas
 Computacionales Para Las Humanidades</td>
 <td align="left">S-3</td>
 <td align="right">4</td>
@@ -5065,39 +5143,39 @@ Computacionales Para Las Humanidades</td>
 <td align="left">Camilo Andrés Avendaño Avello</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Liderazgo E Innovación Social</td>
+<td align="left">Sello: Liderazgo E Innovación Social</td>
 <td align="left">S-30</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Marco Iraola Barboza</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Narrativas Visuales Y Ciudadanía Cultural: Del Manga Al
-Cómic Latinoamericano</td>
+<td align="left">Sello: Narrativas Visuales Y Ciudadanía Cultural: Del
+Manga Al Cómic Latinoamericano</td>
 <td align="left">S-31</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Gloria Andrea Fernández Lagos</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Neurodivergencias Y Salud Mental Comunitaria:
-Aplicación Del Paradigma Neuroafirmativo En</td>
+<td align="left">Sello: Neurodivergencias Y Salud Mental Comunitaria:
+Aplicación Del Paradigma Neuroafirmativo</td>
 <td align="left">S-32</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Illaritza Siuxie Parada Cortés</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
 <td align="left">Sello: Nuevas Perspectivas Ante La Crisis
@@ -5108,28 +5186,27 @@ Planetaria</td>
 <td align="left">Catalina Santos Astudillo</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Participación Ciudadana Y Territorio</td>
+<td align="left">Sello: Participación Ciudadana Y Territorio</td>
 <td align="left">S-34</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Mónica Alejandra Vargas Aguirre</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Persona Humana Y Justicia Social: Elementos
-Ético-Valóricos Para Una Comprensión Del Ejerc</td>
+<td align="left">Sello: Persona Humana Y Justicia Social</td>
 <td align="left">S-35</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Mauricio Chapsal Escudero</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
 <td align="left">Sello: Psicodrama: Estrategias Para El Abordaje De
@@ -5140,7 +5217,7 @@ Grupos Desde Lo Individual Y Lo Colectivo</td>
 <td align="left">Gabriel Alejandro Silva Mancilla</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
 <td align="left">Sello: Salud Cerebral Y Lenguaje</td>
@@ -5150,7 +5227,7 @@ Grupos Desde Lo Individual Y Lo Colectivo</td>
 <td align="left">Adolfo Garcia Ssa</td>
 <td align="right">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
 <td align="left">Sello: Salud Cerebral Y Lenguaje</td>
@@ -5160,7 +5237,7 @@ Grupos Desde Lo Individual Y Lo Colectivo</td>
 <td align="left">Edinson Muñoz Arias</td>
 <td align="right">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
 <td align="left">Sello: Santiago De Chile: Una Ciudad En Disputa.
@@ -5171,10 +5248,10 @@ Historia, Vivienda Y Desigualdad Urbana.</td>
 <td align="left">Santiago Castillo Braithwaite</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Arte Y Cultura Para La Promoción De Los Derechos
+<td align="left">Sello: Arte Y Cultura Para La Promoción De Los Derechos
 Humanos</td>
 <td align="left">S-4</td>
 <td align="right">4</td>
@@ -5182,18 +5259,18 @@ Humanos</td>
 <td align="left">Mariela Edith Llancaqueo Jimenez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Territorios En Conflicto: Desafíos De Sostenibilidad Y
-Justicia Socioambiental</td>
+<td align="left">Sello: Territorios En Conflicto: Desafíos De
+Sostenibilidad Y Justicia Socioambiental</td>
 <td align="left">S-40</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Natalia Alejandra Aravena Solís</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
 <td align="left">Sello: Arte, Ciudad Y Espacio Público</td>
@@ -5203,31 +5280,31 @@ Justicia Socioambiental</td>
 <td align="left">Andrea Carolina Catalán Muñoz</td>
 <td align="right">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Ciudadanía Cultura Y Buenvivir</td>
+<td align="left">Sello: Ciudadanía Cultura Y Buenvivir</td>
 <td align="left">S-6</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Maria Paulina Soto Labbe</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Conectando Barrios: Buenas Prácticas En Torno A La
-Diversidad Cultural Y La Cohesión Socia</td>
+<td align="left">Sello: Conectando Barrios: Buenas Prácticas En Torno A
+La Diversidad Cultural Y La Cohesión Social</td>
 <td align="left">S-7</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Teresa Perez Cosgaya</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Controversias Y Posicionamientos Éticos Para Una
+<td align="left">Sello: Controversias Y Posicionamientos Éticos Para Una
 Ciudadanía Crítica</td>
 <td align="left">S-8</td>
 <td align="right">4</td>
@@ -5235,37 +5312,17 @@ Ciudadanía Crítica</td>
 <td align="left">María Elena Abarca Salinas</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TERCERO</td>
 <td align="left">44476</td>
-<td align="left">Curiosidades Sobre El Cerebro</td>
+<td align="left">Sello: Curiosidades Sobre El Cerebro</td>
 <td align="left">S-9</td>
 <td align="right">4</td>
 <td align="right">5 ⚠</td>
 <td align="left">Juan Amaro Fuenzalida</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
-<td align="left">QUINTO</td>
-<td align="left">701</td>
-<td align="left">Inglés I</td>
-<td align="left">T-1</td>
-<td align="right">4</td>
-<td align="right">20</td>
-<td align="left">Claudia García Aravena</td>
-<td align="right">NA</td>
-</tr>
 <tr class="odd">
-<td align="left">QUINTO</td>
-<td align="left">701</td>
-<td align="left">Inglés I</td>
-<td align="left">T-2</td>
-<td align="right">4</td>
-<td align="right">20</td>
-<td align="left">Nelly Ester Delgadillo Bascunan</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">44429</td>
 <td align="left">Epistemología Y Métodos De La Didáctica En Las
@@ -5276,7 +5333,7 @@ Ccss</td>
 <td align="left">Lucia Victoria Valencia Castaneda</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">44429</td>
 <td align="left">Epistemología Y Métodos De La Didáctica En Las
@@ -5287,7 +5344,7 @@ Ccss</td>
 <td align="left">Lucia Victoria Valencia Castaneda</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">44430</td>
 <td align="left">Fundamentos Del Currículum En Ciencias Sociales</td>
@@ -5297,7 +5354,7 @@ Ccss</td>
 <td align="left">Macarena Ceron Sepulveda</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">44430</td>
 <td align="left">Fundamentos Del Currículum En Ciencias Sociales</td>
@@ -5307,7 +5364,7 @@ Ccss</td>
 <td align="left">Rodrigo Edgargo Sánchez Edmonson</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">44431</td>
 <td align="left">Aspectos Cognoscitivos De La Enseñanza Aprendizaje</td>
@@ -5317,7 +5374,7 @@ Ccss</td>
 <td align="left">Rocio Alejandra Almendras Chacana</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">44431</td>
 <td align="left">Aspectos Cognoscitivos De La Enseñanza Aprendizaje</td>
@@ -5327,7 +5384,7 @@ Ccss</td>
 <td align="left">Rocio Alejandra Almendras Chacana</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">44432</td>
 <td align="left">Análisis De Procesos Económico Contemporáneos</td>
@@ -5337,7 +5394,7 @@ Ccss</td>
 <td align="left">Eduardo López Bravo</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">44432</td>
 <td align="left">Análisis De Procesos Económico Contemporáneos</td>
@@ -5347,7 +5404,7 @@ Ccss</td>
 <td align="left">Eduardo López Bravo</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">44433</td>
 <td align="left">Análisis Del Sistema Educativo En Chile</td>
@@ -5357,7 +5414,7 @@ Ccss</td>
 <td align="left">Christian Eduardo Matamoros Fernandez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">44433</td>
 <td align="left">Análisis Del Sistema Educativo En Chile</td>
@@ -5367,7 +5424,7 @@ Ccss</td>
 <td align="left">Christian Eduardo Matamoros Fernandez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">44434</td>
 <td align="left">Práctica En Alternancia I</td>
@@ -5377,7 +5434,7 @@ Ccss</td>
 <td align="left">Carmen Gloria Zuniga Fuentealba</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">44434</td>
 <td align="left">Práctica En Alternancia I</td>
@@ -5387,7 +5444,7 @@ Ccss</td>
 <td align="left">Jennifer Catalina Carrasco Figueroa</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">44434</td>
 <td align="left">Práctica En Alternancia I</td>
@@ -5397,7 +5454,7 @@ Ccss</td>
 <td align="left">Daisy Soledad Penrroz Maldonado</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">44435</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5407,7 +5464,7 @@ Ccss</td>
 <td align="left">Patricio Jose Garcia Perez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">44435</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5417,7 +5474,7 @@ Ccss</td>
 <td align="left">Brenda Paulina Ampuero Paredes</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">44435</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5427,7 +5484,7 @@ Ccss</td>
 <td align="left">Mario Garces Duran</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">44435</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5437,7 +5494,7 @@ Ccss</td>
 <td align="left">Claudio Andrés Luis Curiqueo Hernández</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">44435</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5447,7 +5504,7 @@ Ccss</td>
 <td align="left">Lucia Victoria Valencia Castaneda</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">QUINTO</td>
 <td align="left">44435</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5457,7 +5514,7 @@ Ccss</td>
 <td align="left">Carla Andrea Rivera Aravena</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">QUINTO</td>
 <td align="left">44435</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5467,27 +5524,27 @@ Ccss</td>
 <td align="left">Rafael Eduardo Chavarria Contreras</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
-<td align="left">SEPTIMO</td>
-<td align="left">703</td>
-<td align="left">Inglés Iii</td>
+<tr class="odd">
+<td align="left">QUINTO</td>
+<td align="left">701</td>
+<td align="left">Inglés I</td>
 <td align="left">T-1</td>
 <td align="right">4</td>
-<td align="right">25</td>
-<td align="left">Juan Francisco Moreno Venegas</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">SEPTIMO</td>
-<td align="left">703</td>
-<td align="left">Inglés Iii</td>
-<td align="left">T-2</td>
-<td align="right">4</td>
-<td align="right">25</td>
+<td align="right">20</td>
 <td align="left">Claudia García Aravena</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
+<td align="left">QUINTO</td>
+<td align="left">701</td>
+<td align="left">Inglés I</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">20</td>
+<td align="left">Nelly Ester Delgadillo Bascunan</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44443</td>
 <td align="left">Didáctica E Innovación En La Enseñanza De La Economía Y
@@ -5498,7 +5555,7 @@ La Ciudadanía</td>
 <td align="left">Carolina Garcia Gonzalez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44443</td>
 <td align="left">Didáctica E Innovación En La Enseñanza De La Economía Y
@@ -5509,7 +5566,7 @@ La Ciudadanía</td>
 <td align="left">Gerardo Andrés Ubilla Sánchez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44444</td>
 <td align="left">Interacciones Educativas Y Gestión De Clima En El
@@ -5520,7 +5577,7 @@ Aula</td>
 <td align="left">Sebastián Omar González García</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44444</td>
 <td align="left">Interacciones Educativas Y Gestión De Clima En El
@@ -5531,7 +5588,7 @@ Aula</td>
 <td align="left">Camila Andrea Adasme Valencia</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44445</td>
 <td align="left">Creación De Ambientes De Aprendizajes Para Las Ciencias
@@ -5542,7 +5599,7 @@ Sociales Con Tics</td>
 <td align="left">Elio Michel Fernández Serrano</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44445</td>
 <td align="left">Creación De Ambientes De Aprendizajes Para Las Ciencias
@@ -5553,7 +5610,7 @@ Sociales Con Tics</td>
 <td align="left">Marina Loreto Donoso Rivas</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44446</td>
 <td align="left">Elaboración De Instrumentos Evaluativos Aplicados A Las
@@ -5564,7 +5621,7 @@ Cs Sociales</td>
 <td align="left">Nicole Edith Abricot Marchant</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44446</td>
 <td align="left">Elaboración De Instrumentos Evaluativos Aplicados A Las
@@ -5575,7 +5632,7 @@ Cs Sociales</td>
 <td align="left">Nicole Edith Abricot Marchant</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44447</td>
 <td align="left">Práctica En Alternancia Iii</td>
@@ -5585,7 +5642,7 @@ Cs Sociales</td>
 <td align="left">Daniela Estefanía Burgos Morales</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44447</td>
 <td align="left">Práctica En Alternancia Iii</td>
@@ -5595,7 +5652,7 @@ Cs Sociales</td>
 <td align="left">Nicole Margarita Collante Basaez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44447</td>
 <td align="left">Práctica En Alternancia Iii</td>
@@ -5605,7 +5662,7 @@ Cs Sociales</td>
 <td align="left">Camila Beatriz Silva Salinas</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44448</td>
 <td align="left">Electivo Curso De Especialización Disciplinaria</td>
@@ -5615,7 +5672,7 @@ Cs Sociales</td>
 <td align="left">Patricio Jose Garcia Perez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44448</td>
 <td align="left">Electivo Curso De Especialización Disciplinaria</td>
@@ -5625,7 +5682,7 @@ Cs Sociales</td>
 <td align="left">Brenda Paulina Ampuero Paredes</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44448</td>
 <td align="left">Electivo Curso De Especialización Disciplinaria</td>
@@ -5635,7 +5692,7 @@ Cs Sociales</td>
 <td align="left">Mario Garces Duran</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44448</td>
 <td align="left">Electivo Curso De Especialización Disciplinaria</td>
@@ -5645,7 +5702,7 @@ Cs Sociales</td>
 <td align="left">Claudio Andrés Luis Curiqueo Hernández</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44448</td>
 <td align="left">Electivo Curso De Especialización Disciplinaria</td>
@@ -5655,7 +5712,7 @@ Cs Sociales</td>
 <td align="left">Lucia Victoria Valencia Castaneda</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SEPTIMO</td>
 <td align="left">44448</td>
 <td align="left">Electivo Curso De Especialización Disciplinaria</td>
@@ -5665,7 +5722,7 @@ Cs Sociales</td>
 <td align="left">Carla Andrea Rivera Aravena</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SEPTIMO</td>
 <td align="left">44448</td>
 <td align="left">Electivo Curso De Especialización Disciplinaria</td>
@@ -5675,7 +5732,27 @@ Cs Sociales</td>
 <td align="left">Rafael Eduardo Chavarria Contreras</td>
 <td align="right">NA</td>
 </tr>
+<tr class="odd">
+<td align="left">SEPTIMO</td>
+<td align="left">703</td>
+<td align="left">Inglés Iii</td>
+<td align="left">T-1</td>
+<td align="right">4</td>
+<td align="right">25</td>
+<td align="left">Juan Francisco Moreno Venegas</td>
+<td align="right">NA</td>
+</tr>
 <tr class="even">
+<td align="left">SEPTIMO</td>
+<td align="left">703</td>
+<td align="left">Inglés Iii</td>
+<td align="left">T-2</td>
+<td align="right">4</td>
+<td align="right">25</td>
+<td align="left">Claudia García Aravena</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44454</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5685,7 +5762,7 @@ Cs Sociales</td>
 <td align="left">Patricio Jose Garcia Perez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44454</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5695,7 +5772,7 @@ Cs Sociales</td>
 <td align="left">Brenda Paulina Ampuero Paredes</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44454</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5705,7 +5782,7 @@ Cs Sociales</td>
 <td align="left">Mario Garces Duran</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44454</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5715,7 +5792,7 @@ Cs Sociales</td>
 <td align="left">Claudio Andrés Luis Curiqueo Hernández</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44454</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5725,7 +5802,7 @@ Cs Sociales</td>
 <td align="left">Lucia Victoria Valencia Castaneda</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">OCTAVO</td>
 <td align="left">44454</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5735,7 +5812,7 @@ Cs Sociales</td>
 <td align="left">Carla Andrea Rivera Aravena</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">OCTAVO</td>
 <td align="left">44454</td>
 <td align="left">Electivo Curso De Profundización Disciplinaria</td>
@@ -5745,7 +5822,7 @@ Cs Sociales</td>
 <td align="left">Rafael Eduardo Chavarria Contreras</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44457</td>
 <td align="left">Seminario De Título I</td>
@@ -5755,7 +5832,7 @@ Cs Sociales</td>
 <td align="left">Paloma Miranda Arredondo</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44457</td>
 <td align="left">Seminario De Título I</td>
@@ -5765,7 +5842,7 @@ Cs Sociales</td>
 <td align="left">Elisa Del Carmen Loncon Antileo</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44457</td>
 <td align="left">Seminario De Título I</td>
@@ -5775,7 +5852,7 @@ Cs Sociales</td>
 <td align="left">Saul Contreras Palma</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44457</td>
 <td align="left">Seminario De Título I</td>
@@ -5785,7 +5862,7 @@ Cs Sociales</td>
 <td align="left">David Andrés Herrera Araya</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44457</td>
 <td align="left">Seminario De Título I</td>
@@ -5795,7 +5872,7 @@ Cs Sociales</td>
 <td align="left">Jaime Andres Retamal Salazar</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44457</td>
 <td align="left">Seminario De Título I</td>
@@ -5805,7 +5882,7 @@ Cs Sociales</td>
 <td align="left">Mabel Alvear Espinoza</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44457</td>
 <td align="left">Seminario De Título I</td>
@@ -5815,7 +5892,7 @@ Cs Sociales</td>
 <td align="left">Lucia Victoria Valencia Castaneda</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44457</td>
 <td align="left">Seminario De Título I</td>
@@ -5825,7 +5902,7 @@ Cs Sociales</td>
 <td align="left">Carolina Garcia Gonzalez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44457</td>
 <td align="left">Seminario De Título I</td>
@@ -5835,7 +5912,7 @@ Cs Sociales</td>
 <td align="left">Sylvia Contreras Salinas</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44457</td>
 <td align="left">Seminario De Título I</td>
@@ -5845,7 +5922,7 @@ Cs Sociales</td>
 <td align="left">Claudia Cordoba Calquin</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44457</td>
 <td align="left">Seminario De Título I</td>
@@ -5855,7 +5932,7 @@ Cs Sociales</td>
 <td align="left">Natalia Ester Ferrada Quezada</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5865,7 +5942,7 @@ Cs Sociales</td>
 <td align="left">Sonia Victoria Zarricueta Agurto</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5875,7 +5952,7 @@ Cs Sociales</td>
 <td align="left">Loreto Andrea Nunez Veliz</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5885,7 +5962,7 @@ Cs Sociales</td>
 <td align="left">Carolina Ester Veliz Madariaga</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5895,7 +5972,7 @@ Cs Sociales</td>
 <td align="left">Solange Viviana Novoa Saez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5905,7 +5982,7 @@ Cs Sociales</td>
 <td align="left">Daniela Venegas Foncea</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5915,7 +5992,7 @@ Cs Sociales</td>
 <td align="left">Treicy Tirado Rogat</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5925,7 +6002,7 @@ Cs Sociales</td>
 <td align="left">Felipe Roberto Galvez Calderón</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5935,7 +6012,7 @@ Cs Sociales</td>
 <td align="left">Daniela Estefanía Burgos Morales</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5945,7 +6022,7 @@ Cs Sociales</td>
 <td align="left">Gerardo Andrés Ubilla Sánchez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5955,7 +6032,7 @@ Cs Sociales</td>
 <td align="left">Nicole Margarita Collante Basaez</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5965,16 +6042,6 @@ Cs Sociales</td>
 <td align="left">Daisy Soledad Penrroz Maldonado</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
-<td align="left">NOVENO</td>
-<td align="left">44477</td>
-<td align="left">Practica Profesional I</td>
-<td align="left">T-3</td>
-<td align="right">2</td>
-<td align="right">5 ⚠</td>
-<td align="left">Carmen Gloria Zuniga Fuentealba</td>
-<td align="right">NA</td>
-</tr>
 <tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
@@ -5986,6 +6053,16 @@ Cs Sociales</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
+<td align="left">NOVENO</td>
+<td align="left">44477</td>
+<td align="left">Practica Profesional I</td>
+<td align="left">T-3</td>
+<td align="right">2</td>
+<td align="right">5 ⚠</td>
+<td align="left">Carmen Gloria Zuniga Fuentealba</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -5995,7 +6072,7 @@ Cs Sociales</td>
 <td align="left">Jennifer Catalina Carrasco Figueroa</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -6005,7 +6082,7 @@ Cs Sociales</td>
 <td align="left">Macarena Ceron Sepulveda</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -6015,7 +6092,7 @@ Cs Sociales</td>
 <td align="left">Sebastián Omar González García</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -6025,7 +6102,7 @@ Cs Sociales</td>
 <td align="left">Javier Enrique Gallardo Cariqueo</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -6035,7 +6112,7 @@ Cs Sociales</td>
 <td align="left">Camila Beatriz Silva Salinas</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44477</td>
 <td align="left">Practica Profesional I</td>
@@ -6045,7 +6122,7 @@ Cs Sociales</td>
 <td align="left">Mercedes Patricia Alvarez Schrader</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44478</td>
 <td align="left">Formación Ciudadana</td>
@@ -6055,7 +6132,7 @@ Cs Sociales</td>
 <td align="left">Daniela Estefanía Burgos Morales</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44479</td>
 <td align="left">Educación Inclusiva</td>
@@ -6065,7 +6142,7 @@ Cs Sociales</td>
 <td align="left">Adriana Isabel Palomera Valenzuela</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NOVENO</td>
 <td align="left">44480</td>
 <td align="left">Formación Ciudadana</td>
@@ -6075,7 +6152,7 @@ Cs Sociales</td>
 <td align="left">Camila Berríos Silva</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NOVENO</td>
 <td align="left">44481</td>
 <td align="left">Educación Inclusiva</td>
@@ -6085,37 +6162,27 @@ Cs Sociales</td>
 <td align="left">Juan Pablo Espinoza Espinoza</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
-<td align="left">DECIMO</td>
-<td align="left">44482</td>
-<td align="left">Practica Profesional Ii</td>
-<td align="left">T-1</td>
-<td align="right">2</td>
-<td align="right">1 ⚠</td>
-<td align="left">Daisy Soledad Penrroz Maldonado</td>
-<td align="right">NA</td>
-</tr>
 </tbody>
 </table>
-<p>La carrera registra <strong>153 secciones</strong> en <strong>38
-cursos</strong> con <strong>537 horas pedagógicas</strong>, dictadas por
-<strong>105 profesores</strong>.</p>
+<p>La carrera registra <strong>155 secciones</strong> en <strong>38
+cursos</strong> con <strong>541 horas pedagógicas</strong>, dictadas por
+<strong>107 profesores</strong>.</p>
 <h3 class="carr-titulo">
 Pedagogía en Historia y Ciencias Sociales
 </h3>
 <p class="cod-programa">
 Código de programa: 6636
 </p>
-<table>
+<table style="width:100%;">
 <colgroup>
 <col width="7%" />
 <col width="5%" />
-<col width="38%" />
+<col width="40%" />
+<col width="3%" />
+<col width="2%" />
 <col width="4%" />
+<col width="31%" />
 <col width="4%" />
-<col width="5%" />
-<col width="30%" />
-<col width="5%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -6304,11 +6371,11 @@ Código de programa: 9479
 <table>
 <colgroup>
 <col width="5%" />
-<col width="41%" />
-<col width="7%" />
+<col width="43%" />
+<col width="6%" />
 <col width="5%" />
 <col width="5%" />
-<col width="29%" />
+<col width="30%" />
 <col width="4%" />
 </colgroup>
 <thead>
@@ -6433,14 +6500,14 @@ Magíster en Historia
 <p class="cod-programa">
 Código de programa: 9414
 </p>
-<table>
+<table style="width:100%;">
 <colgroup>
 <col width="6%" />
-<col width="33%" />
+<col width="34%" />
 <col width="8%" />
 <col width="6%" />
 <col width="6%" />
-<col width="33%" />
+<col width="34%" />
 <col width="5%" />
 </colgroup>
 <thead>
@@ -6635,5 +6702,15 @@ registra un promedio de <strong>32.3 HP</strong> en Primer semestre
 sello se contabilizan una sola vez por docente.</p>
 </main>
 <div class="pie">Base elaborada a partir de los registros de planeación docente. Código elaborado por Pablo Valenzuela con apoyo de Claude de Anthropic · Primer semestre 2026</div>
+
+<script>
+function toggleAcad(row) {
+  const detail = row.nextElementSibling;
+  if (!detail || !detail.classList.contains("detalle-row")) return;
+  row.classList.toggle("abierto");
+  detail.classList.toggle("visible");
+}
+</script>
 </body>
 </html>
+
