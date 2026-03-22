@@ -19,7 +19,7 @@ ARCHIVO   <- if (exists("ARCHIVO")) ARCHIVO else "BASE_FAHU.xlsx"
 ARCHIVO   <- resolver_archivo_base(ARCHIVO)
 PLANTILLA <- "reporte_planeacion.Rmd"
 
-EXCLUIR_UNIDADES <- c("HORA DE CLASE", "SIN PROFESOR", "SP",
+EXCLUIR_UNIDADES <- c("HORA DE CLASE", "SIN PROFESOR", "SP", "POR HORA",
                       "DERECHO", "FAE", "IDEA")
 
 CARPETA_MD   <- "informes_md"
