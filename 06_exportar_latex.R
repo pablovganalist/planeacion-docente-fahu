@@ -198,7 +198,7 @@ preambulo_latex <- function(titulo_doc) {
 # CARGA DE DATOS
 # =============================================================================
 cargar_base <- function(path) {
-  read_excel(path) |>
+  read_excel(path, col_types = "text") |>
     normalizar_base_planeacion() |>
     mutate(
       profesor    = str_to_title(str_squish(profesor)),

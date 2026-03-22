@@ -77,10 +77,10 @@ body {{
   font-size: 13px;
   line-height: 1.65;
   color: {C_DARK};
-  max-width: 960px;
+  max-width: 1040px;
   margin: 0 auto;
-  padding: 2rem 2.5rem 4rem;
-  background: #fff;
+  padding: 2rem 1.25rem 4rem;
+  background: linear-gradient(180deg, #eef7f6 0%, #f6f7f8 220px);
 }}
 @media (max-width: 600px) {{
   body {{ padding: 1rem 1rem 3rem; font-size: 12px; }}
@@ -90,9 +90,12 @@ body {{
   .btn-volver, .btn-informe, .btn-pdf {{ text-align: center; }}
 }}
 header {{
-  border-bottom: 3px solid {C_TEAL};
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
+  border-top: 6px solid {C_TEAL};
+  padding: 1.5rem 1.5rem 1.2rem;
+  margin-bottom: 1.25rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
 }}
 .facultad {{
   font-size: 0.78rem;
@@ -127,7 +130,18 @@ h2 {{
   padding-left: 0.7rem; margin: 2.5rem 0 0.5rem;
 }}
 .nota {{ font-size: 0.75rem; color: #888; margin: 0 0 0.8rem; }}
-.tabla-wrap {{ overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 0.5rem; }}
+.seccion {{
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1rem;
+}}
+.seccion h2 {{ margin-top: 0; }}
+.tabla-wrap {{
+  overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 0.5rem;
+  background: #fff; border: 1px solid #e7ebee; border-radius: 14px;
+}}
 table {{ width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 380px; }}
 thead th {{
   background: {C_DARK}; color: white; padding: 0.5rem 0.7rem;
@@ -147,7 +161,11 @@ tbody tr.fila-actual td {{ background: {C_GOLD}33; font-weight: 700; }}
   margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #ddd;
   font-size: 0.72rem; color: #aaa; text-align: center;
 }}
-@media print {{ .botones {{ display: none; }} body {{ padding: 1rem; }} }}
+@media print {{
+  .botones {{ display: none; }}
+  body {{ padding: 1rem; background: #fff; }}
+  header, .seccion {{ box-shadow: none; border-radius: 0; }}
+}}
 ')
 
 html_tabla <- function(encabezados, filas_df, fila_destacada = NULL) {
@@ -174,7 +192,7 @@ html_tabla <- function(encabezados, filas_df, fila_destacada = NULL) {
 # =============================================================================
 
 cargar_base <- function(path) {
-  read_excel(path) |>
+  read_excel(path, col_types = "text") |>
     normalizar_base_planeacion() |>
     mutate(
       profesor    = str_to_title(str_squish(profesor)),
@@ -351,16 +369,22 @@ generar_comparativo <- function(UP) {
   </div>
 </header>
 <main>
+<section class="seccion">
 <h2>Horas pedag\u00f3gicas planeadas</h2>
 <p class="nota">Horas totales de los cursos del departamento seg\u00fan tipo de contrato. El semestre en curso aparece destacado.</p>
 ', html_tabla(c("Periodo","Jornada (HP)","Por hora (HP)","SP (HP)","Total HP"), t1, fila_act), '
+</section>
+<section class="seccion">
 <h2>Cobertura seg\u00fan tipo de contrato</h2>
 <p class="nota">Porcentaje de horas pedag\u00f3gicas por tipo de contrato sobre el total del departamento.</p>
 ', html_tabla(c("Periodo","Jornada","Por hora","SP"), t2, fila_act), '
+</section>
+<section class="seccion">
 <h2>Promedio de horas por acad\u00e9mico jornada</h2>
 <p class="nota">Numerador: HP de todos los jornada (acad\u00e9micos + autoridades). Denominador: solo acad\u00e9micos con CARGO = ACAD\u00c9MICO. Norma: \u2265 ', NORMA_PROM_HP, ' HP.</p>
 ', html_tabla(c("Periodo","N acad\u00e9micos","HP jornada","Promedio HP",
                paste0("\u2265 ",NORMA_PROM_HP," HP")), t3, fila_act), '
+</section>
 </main>
 <div class="pie">Base elaborada a partir de los registros de planeaci\u00f3n docente FAHU. C\u00f3digo elaborado por Pablo Valenzuela con apoyo de Claude de Anthropic.</div>
 </body>

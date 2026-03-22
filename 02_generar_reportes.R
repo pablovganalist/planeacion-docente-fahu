@@ -51,6 +51,23 @@ slug <- function(x) {
     str_remove("^_|_$")
 }
 
+strip_front_matter <- function(lineas) {
+  if (length(lineas) < 2 || !identical(lineas[[1]], "---")) {
+    return(lineas)
+  }
+
+  cierre <- which(lineas[-1] == "---")[1]
+  if (is.na(cierre)) {
+    return(lineas)
+  }
+
+  salida <- lineas[-seq_len(cierre + 1)]
+  while (length(salida) > 0 && salida[[1]] == "") {
+    salida <- salida[-1]
+  }
+  salida
+}
+
 generar_informes <- function(
     archivo = ARCHIVO,
     plantilla = PLANTILLA,
@@ -70,7 +87,7 @@ generar_informes <- function(
   if (!dir.exists(carpeta_md)) dir.create(carpeta_md, recursive = TRUE)
   unlink(list.files(carpeta_md, pattern = "\\.md$", full.names = TRUE))
 
-  todas <- read_excel(archivo, sheet = 1) |>
+  todas <- read_excel(archivo, sheet = 1, col_types = "text") |>
     normalizar_base_planeacion() |>
     mutate(unidad_prof = str_to_upper(str_squish(unidad_prof))) |>
     filter(!is.na(unidad_prof), unidad_prof != "") |>
@@ -91,6 +108,7 @@ generar_informes <- function(
 
   generados <- character(0)
   errores <- character(0)
+  manifest <- vector("list", length(unidades))
 
   message(glue("Generando {length(unidades)} informes .md..."))
 
@@ -115,6 +133,23 @@ generar_informes <- function(
         envir = entorno,
         quiet = TRUE
       )
+
+      lineas <- readLines(ruta_salida, encoding = "UTF-8", warn = FALSE)
+      lineas <- strip_front_matter(lineas)
+      writeLines(lineas, ruta_salida, useBytes = TRUE)
+
+      titulo <- lineas[str_detect(lineas, "^# ")][1]
+      titulo <- if (is.na(titulo)) nombre_largo_unidad(unidad) else str_remove(titulo, "^#\\s+")
+
+      manifest[[i]] <- tibble(
+        unidad_prof = unidad,
+        nombre_largo = titulo,
+        nombre_indice = str_to_upper(titulo),
+        slug = slug(unidad),
+        md_file = nombre,
+        html_file = paste0(tools::file_path_sans_ext(nombre), ".html")
+      )
+
       generados <- c(generados, nombre)
       message(glue("    OK {nombre}"))
     }, error = function(e) {
@@ -133,6 +168,9 @@ generar_informes <- function(
     cat(glue("  Fallaron: {paste(errores, collapse = ', ')}\n"))
   }
   cat("\n")
+
+  manifest_df <- bind_rows(manifest)
+  readr::write_csv(manifest_df, file.path(carpeta_md, "_manifest_informes.csv"))
 
   invisible(generados)
 }

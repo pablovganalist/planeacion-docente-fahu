@@ -61,7 +61,7 @@ fmt_var <- function(a,b) {
 }
 
 cargar <- function(path) {
-  read_excel(path) |>
+  read_excel(path, col_types = "text") |>
     normalizar_base_planeacion() |>
     mutate(
       profesor    = str_to_title(str_squish(profesor)),
@@ -267,17 +267,28 @@ css <- sprintf('
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"Segoe UI",Arial,sans-serif;font-size:13px;color:%s;
-     max-width:1150px;margin:0 auto;padding:2rem 2rem 4rem}
-h1{color:%s;font-size:1.3rem;border-bottom:3px solid %s;padding-bottom:.4rem;margin-bottom:.3rem}
-.subtitulo{color:#666;font-size:.82rem;margin-bottom:2rem}
+     max-width:1180px;margin:0 auto;padding:2rem 1.25rem 4rem;
+     background:linear-gradient(180deg,#eef7f6 0%%,#f6f7f8 220px)}
+.hero{background:#fff;border-radius:18px;padding:1.5rem 1.5rem 1.2rem;
+  box-shadow:0 18px 40px rgba(57,64,73,.08);border-top:6px solid %s;margin-bottom:1.25rem}
+.hero-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.btn-indice{display:inline-block;padding:.38rem .9rem;background:#e9ecef;color:#394049;
+  border-radius:4px;font-size:.78rem;font-weight:600;text-decoration:none}
+.btn-indice:hover{background:#dce2e6}
+h1{color:%s;font-size:1.55rem;margin-bottom:.35rem}
+.subtitulo{color:#666;font-size:.82rem;margin-bottom:0}
+.buscador-card{background:#fff;border-radius:18px;padding:1.1rem 1.2rem;
+  box-shadow:0 18px 40px rgba(57,64,73,.08);margin-bottom:1rem}
+.unidad-card{background:#fff;border-radius:18px;padding:1.1rem 1.2rem;
+  box-shadow:0 18px 40px rgba(57,64,73,.08);margin-bottom:1rem}
 .unidad-hdr{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
-  color:white;background:%s;padding:5px 14px;margin:2.5rem 0 .5rem;border-left:5px solid %s}
-h2{font-size:.85rem;color:%s;margin:.3rem 0 .3rem;display:flex;align-items:center;gap:6px}
+  color:%s;margin:0 0 .85rem;border-left:5px solid %s;padding-left:.65rem}
+h2{font-size:.85rem;color:%s;margin:.3rem 0 .55rem;display:flex;align-items:center;gap:6px}
 .prog-tag{background:%s;color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px}
 .nivel-tag{font-size:10px;font-weight:700;padding:1px 7px;border-radius:3px}
 .tag-pre{background:rgba(0,164,153,.15);color:#00706a}
 .tag-post{background:rgba(120,80,180,.13);color:#6a3daa}
-.tabla-wrap{overflow-x:auto;margin-bottom:1rem}
+.tabla-wrap{overflow-x:auto;margin-bottom:1rem;background:#fff;border:1px solid #e7ebee;border-radius:14px}
 table{border-collapse:collapse;width:100%%;font-size:11.5px}
 thead tr.hdr-main{background:%s;color:white}
 thead tr.hdr-sub{background:#555;color:#ddd;font-size:10px}
@@ -297,7 +308,7 @@ tbody tr:hover td{background:#E8F8F7!important}
 .badge-ok{color:#27ae60;font-weight:700}
 .tip{color:#999;font-size:10px;font-style:italic}
 input[type=text]{padding:6px 12px;width:100%%;max-width:380px;border:1px solid #ccc;
-  border-radius:4px;font-size:12px;font-family:inherit;margin-bottom:1.5rem}
+  border-radius:999px;font-size:12px;font-family:inherit;background:#fbfcfd}
 .pie{margin-top:3rem;font-size:11px;color:#aaa;border-top:1px solid #eee;padding-top:.8rem}
 </style>
 <style>
@@ -395,8 +406,10 @@ bloques <- map_chr(unidades_ord, function(unidad) {
 
   progs_html <- progs_html[progs_html!=""]
   if(length(progs_html)==0) return("")
-  paste0(sprintf('<div class="unidad-hdr">%s</div>\n',he(unidad)),
-         paste(progs_html,collapse="\n"))
+  paste0('<section class="unidad-card">',
+         sprintf('<div class="unidad-hdr">%s</div>\n',he(unidad)),
+         paste(progs_html,collapse="\n"),
+         '</section>')
 })
 
 bloques    <- bloques[bloques!=""]
@@ -410,10 +423,13 @@ html <- paste0(
   '<meta name="viewport" content="width=device-width,initial-scale=1">',
   paste0('<title>Síntesis por carrera — ',PERIODO_LABEL,'</title>'),
   css,'</head><body>',
+  '<section class="hero">',
   paste0('<h1>Planeación docente — síntesis por carrera y programa</h1>'),
   paste0('<p class="subtitulo">',INST_LABEL,' &mdash; '),
   ETIQ_ACT,' vs ',ETIQ_ANT,' &mdash; ',n_prog,' programas &mdash; ',n_carr,' carreras</p>',
-  '<input type="text" id="buscador" placeholder="Buscar por carrera o código..." oninput="filtrar()">',
+  '<div class="hero-actions"><a href="index.html" class="btn-indice">← Índice</a></div>',
+  '</section>',
+  '<section class="buscador-card"><input type="text" id="buscador" placeholder="Buscar por carrera o código..." oninput="filtrar()"></section>',
   paste(bloques,collapse="\n"),
   '<p class="pie">Generado el ',fecha_gen,'</p>',
   '</body></html>'

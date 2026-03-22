@@ -14,6 +14,57 @@ resolver_archivo_base <- function(path = "BASE_FAHU.xlsx") {
   path
 }
 
+mapa_nombres_unidad <- function() {
+  c(
+    "EDUCACIÓN" = "Departamento de Educación",
+    "EDUCACION" = "Departamento de Educación",
+    "ESTUDIOS POLÍTICOS" = "Departamento de Estudios Políticos",
+    "ESTUDIOS POLITICOS" = "Departamento de Estudios Políticos",
+    "FILOSOFÍA" = "Departamento de Filosofía",
+    "FILOSOFIA" = "Departamento de Filosofía",
+    "HISTORIA" = "Departamento de Historia",
+    "LINGÜÍSTICA Y LITERATURA" = "Departamento de Lingüística y Literatura",
+    "LINGUISTICA Y LITERATURA" = "Departamento de Lingüística y Literatura",
+    "PERIODISMO" = "Escuela de Periodismo",
+    "PSICOLOGÍA" = "Escuela de Psicología",
+    "PSICOLOGIA" = "Escuela de Psicología"
+  )
+}
+
+titulo_esp_base <- function(x) {
+  menores <- c("de","del","en","y","e","con","para","la","el","los","las",
+               "un","una","por","sin","a","o","u","al","sobre","bajo","ante",
+               "desde","hasta","entre","segun","según","hacia","tras")
+  x <- stringr::str_squish(as.character(x))
+  palabras <- stringr::str_split(stringr::str_to_lower(x), "\\s+")[[1]]
+  if (length(palabras) == 0) return(x)
+  resultado <- purrr::imap_chr(palabras, function(w, i) {
+    if (i == 1 || !(w %in% menores)) {
+      paste0(toupper(substr(w, 1, 1)), substr(w, 2, nchar(w)))
+    } else {
+      w
+    }
+  })
+  paste(resultado, collapse = " ")
+}
+
+nombre_largo_unidad <- function(unidad_prof, unidad_dep_fallback = NULL) {
+  mapa <- mapa_nombres_unidad()
+  clave <- stringr::str_to_upper(stringr::str_squish(as.character(unidad_prof)))
+  nombre <- unname(mapa[[clave]])
+
+  if (!is.null(nombre) && !is.na(nombre)) {
+    return(nombre)
+  }
+
+  if (!is.null(unidad_dep_fallback) && !is.na(unidad_dep_fallback) &&
+      nzchar(stringr::str_squish(unidad_dep_fallback))) {
+    return(titulo_esp_base(unidad_dep_fallback))
+  }
+
+  titulo_esp_base(clave)
+}
+
 detectar_semestre_actual <- function(path) {
   tmp <- readxl::read_excel(path, col_types = "text")
   col_ano <- detectar_columna_base(names(tmp), c("ano", "a_o", "a__o", "anio", "year"))

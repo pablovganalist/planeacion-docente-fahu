@@ -64,7 +64,7 @@ CARGOS_AUTORIDAD <- c("DIRECTOR", "DIRECTORA", "DECANA", "VICEDECANO", "VIME")
 # 1. CARGA Y LIMPIEZA BASE
 # =============================================================================
 
-df_raw <- read_excel(ARCHIVO, sheet = 1) |>
+df_raw <- read_excel(ARCHIVO, sheet = 1, col_types = "text") |>
   normalizar_base_planeacion() |>
   mutate(
     # ── Texto ─────────────────────────────────────────────────────────────────

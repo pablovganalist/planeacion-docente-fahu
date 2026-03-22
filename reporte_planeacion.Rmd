@@ -23,19 +23,7 @@ params$archivo <- resolver_archivo_base(params$archivo)
 
 # titulo_esp: capitaliza solo 1ª palabra + sustantivos; preposiciones en minúscula
 # Vectorizada para usar en mutate()
-titulo_esp_1 <- function(x) {
-  menores <- c("de","del","en","y","e","con","para","la","el","los","las",
-               "un","una","por","sin","a","o","u","al","sobre","bajo","ante",
-               "desde","hasta","entre","según","hacia","tras")
-  palabras <- str_split(str_to_lower(str_squish(x)), "\\s+")[[1]]
-  resultado <- purrr::imap_chr(palabras, function(w, i) {
-    if (i == 1 || !(w %in% menores))
-      paste0(toupper(substr(w, 1, 1)), substr(w, 2, nchar(w)))
-    else w
-  })
-  paste(resultado, collapse = " ")
-}
-titulo_esp <- function(x) vapply(x, titulo_esp_1, character(1), USE.NAMES = FALSE)
+titulo_esp <- function(x) vapply(x, titulo_esp_base, character(1), USE.NAMES = FALSE)
 
 # primera_mayus: solo la primera letra del string en mayúscula (norma española
 # para nombres de asignaturas: solo primera palabra va con mayúscula)
@@ -57,7 +45,7 @@ ANO_SEM   <- .sem_base$ano
 PER_SEM   <- .sem_base$periodo
 rm(.sem_base)
 
-df_raw <- read_excel(params$archivo, sheet = 1) |>
+df_raw <- read_excel(params$archivo, sheet = 1, col_types = "text") |>
   normalizar_base_planeacion() |>
   mutate(
     profesor    = str_to_title(str_squish(profesor)),
@@ -128,16 +116,7 @@ nombre_largo_upper <- df_raw |>
 
 if (length(nombre_largo_upper) == 0) nombre_largo_upper <- UNIDAD_PROF
 
-nombre_largo <- switch(UNIDAD_PROF,
-  "EDUCACIÓN"                = "Departamento de Educación",
-  "ESTUDIOS POLÍTICOS"       = "Departamento de Estudios Políticos",
-  "FILOSOFÍA"                = "Departamento de Filosofía",
-  "HISTORIA"                 = "Departamento de Historia",
-  "LINGÜÍSTICA Y LITERATURA" = "Departamento de Lingüística y Literatura",
-  "PERIODISMO"               = "Escuela de Periodismo",
-  "PSICOLOGÍA"               = "Escuela de Psicología",
-  titulo_esp(nombre_largo_upper)
-)
+nombre_largo <- nombre_largo_unidad(UNIDAD_PROF, nombre_largo_upper)
 
 # =============================================================================
 # SUBCONJUNTOS CLAVE
