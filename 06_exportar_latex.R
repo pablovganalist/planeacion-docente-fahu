@@ -16,10 +16,13 @@ library(tidyverse)
 # -- Configuracion -------------------------------------------------------------
 ARCHIVO <- if (exists("ARCHIVO")) ARCHIVO else "BASE_FAHU.xlsx"
 if (!exists("ANO_SEM") || !exists("PER_SEM")) {
-  .tmp   <- readxl::read_excel(ARCHIVO, col_types="text") |> janitor::clean_names()
-  ANO_SEM <- max(as.integer(.tmp$ano),     na.rm=TRUE)
-  PER_SEM <- max(as.integer(.tmp$periodo), na.rm=TRUE)
-  rm(.tmp)
+  .tmp  <- readxl::read_excel(ARCHIVO, col_types = "text")
+  .cols <- names(.tmp)
+  .col_ano <- .cols[str_detect(str_to_lower(.cols), "^a.?o$")][1]
+  .col_per <- .cols[str_detect(str_to_lower(.cols), "^periodo$")][1]
+  ANO_SEM <- max(as.integer(.tmp[[.col_ano]]), na.rm = TRUE)
+  PER_SEM <- max(as.integer(.tmp[[.col_per]]), na.rm = TRUE)
+  rm(.tmp, .cols, .col_ano, .col_per)
 }
 CARPETA_LATEX <- file.path("docs", "latex")
 INSTITUCION   <- "Facultad de Humanidades"

@@ -49,14 +49,17 @@ primera_mayus <- function(x) vapply(x, primera_mayus_1, character(1), USE.NAMES 
 # =============================================================================
 
 # Detectar semestre actual en la base unificada
-.tmp_base <- readxl::read_excel(params$archivo, col_types="text") |>
-  janitor::clean_names()
-ANO_SEM <- max(as.integer(.tmp_base$ano),     na.rm=TRUE)
-PER_SEM <- max(as.integer(.tmp_base$periodo), na.rm=TRUE)
-rm(.tmp_base)
+.tmp_base <- readxl::read_excel(params$archivo, col_types = "text")
+.cols_b   <- names(.tmp_base)
+.col_ano  <- .cols_b[grepl("^a.?o$", tolower(.cols_b))][1]
+.col_per  <- .cols_b[grepl("^periodo$", tolower(.cols_b))][1]
+ANO_SEM   <- max(as.integer(.tmp_base[[.col_ano]]), na.rm = TRUE)
+PER_SEM   <- max(as.integer(.tmp_base[[.col_per]]), na.rm = TRUE)
+rm(.tmp_base, .cols_b, .col_ano, .col_per)
 
 df_raw <- read_excel(params$archivo, sheet = 1) |>
   clean_names() |>
+  rename_with(~"ano", any_of(c("ano","a_o","a__o","anio"))) |>
   rename(
     unidad_dep  = unidad,
     unidad_prof = unidad_profesor,

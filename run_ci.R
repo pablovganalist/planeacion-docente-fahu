@@ -27,13 +27,14 @@ CARPETA_HTML <- "docs"          # GitHub Pages sirve desde /docs
 INSTITUCION  <- "Facultad de Humanidades"
 
 # Detectar semestre actual (el más reciente en la base)
-.df_tmp    <- readxl::read_excel(ARCHIVO, col_types="text") |>
-  janitor::clean_names()
-ANO_SEM  <- max(as.integer(.df_tmp$ano),     na.rm=TRUE)
-PER_SEM  <- max(as.integer(.df_tmp$periodo), na.rm=TRUE)
-PERIODO  <- if (PER_SEM==1) paste("Primer semestre",  ANO_SEM) else
-                             paste("Segundo semestre", ANO_SEM)
-rm(.df_tmp)
+.df_tmp    <- readxl::read_excel(ARCHIVO, col_types = "text")
+.cols_t    <- names(.df_tmp)
+.col_ano   <- .cols_t[grepl("^a.?o$", tolower(.cols_t))][1]
+ANO_SEM    <- max(as.integer(.df_tmp[[.col_ano]]), na.rm = TRUE)
+PER_SEM    <- max(as.integer(.df_tmp$periodo),     na.rm = TRUE)
+PERIODO    <- if (PER_SEM==1) paste("Primer semestre",  ANO_SEM) else
+                               paste("Segundo semestre", ANO_SEM)
+rm(.df_tmp, .cols_t, .col_ano)
 
 cat("=============================================================\n")
 cat("  PIPELINE PLANEACIÓN DOCENTE — FAHU USACH\n")

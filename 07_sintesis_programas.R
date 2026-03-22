@@ -11,9 +11,11 @@ INST_LABEL    <- if (exists("INSTITUCION")) INSTITUCION else "Facultad de Humani
 
 if (!exists("ANO_SEM") || !exists("PER_SEM")) {
   .tmp    <- readxl::read_excel(ARCHIVO, col_types="text") |> janitor::clean_names()
-  ANO_SEM <- max(as.integer(.tmp$ano),     na.rm=TRUE)
-  PER_SEM <- max(as.integer(.tmp$periodo), na.rm=TRUE)
-  rm(.tmp)
+  .cols_t  <- names(.tmp)
+  .col_ano <- .cols_t[grepl("^a.?o$", tolower(.cols_t))][1]
+  ANO_SEM  <- max(as.integer(.tmp[[.col_ano]]), na.rm=TRUE)
+  PER_SEM  <- max(as.integer(.tmp$periodo),     na.rm=TRUE)
+  rm(.tmp, .cols_t, .col_ano)
 }
 if (is.null(PERIODO_LABEL))
   PERIODO_LABEL <- if (PER_SEM==1) paste("Primer semestre", ANO_SEM) else paste("Segundo semestre", ANO_SEM)

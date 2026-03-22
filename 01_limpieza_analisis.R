@@ -41,10 +41,14 @@ library(glue)
 # o detectar automáticamente si se corre de forma independiente
 if (!exists("ARCHIVO"))  ARCHIVO  <- "BASE_FAHU.xlsx"
 if (!exists("ANO_SEM") || !exists("PER_SEM")) {
-  .tmp   <- readxl::read_excel(ARCHIVO, col_types="text") |> janitor::clean_names()
-  ANO_SEM <- max(as.integer(.tmp$ano),     na.rm=TRUE)
-  PER_SEM <- max(as.integer(.tmp$periodo), na.rm=TRUE)
-  rm(.tmp)
+  .tmp  <- readxl::read_excel(ARCHIVO, col_types = "text")
+  # Detectar columnas sin depender de clean_names (AÑO puede variar)
+  .cols <- names(.tmp)
+  .col_ano <- .cols[str_detect(str_to_lower(.cols), "^a.?o$")][1]
+  .col_per <- .cols[str_detect(str_to_lower(.cols), "^periodo$")][1]
+  ANO_SEM <- max(as.integer(.tmp[[.col_ano]]), na.rm = TRUE)
+  PER_SEM <- max(as.integer(.tmp[[.col_per]]), na.rm = TRUE)
+  rm(.tmp, .cols, .col_ano, .col_per)
 }
 if (!exists("PERIODO"))
   PERIODO <- if (PER_SEM==1) paste("Primer semestre", ANO_SEM) else paste("Segundo semestre", ANO_SEM)
@@ -64,6 +68,8 @@ CARGOS_AUTORIDAD <- c("DIRECTOR", "DIRECTORA", "DECANA", "VICEDECANO", "VIME")
 
 df_raw <- read_excel(ARCHIVO, sheet = 1) |>
   clean_names() |>
+  # Normalizar columna AÑO que puede quedar como 'ano' o 'a_o' según entorno
+  rename_with(~"ano", any_of(c("ano", "a_o", "a__o", "anio"))) |>
   rename(
     unidad_dep  = unidad,
     unidad_prof = unidad_profesor,
@@ -136,7 +142,7 @@ df_raw <- read_excel(ARCHIVO, sheet = 1) |>
     insc = as.numeric(insc)   # permanece NA hasta inscripcion
   ) |>
   # Filtrar solo el semestre actual
-  filter(as.integer(ano) == ANO_SEM, as.integer(periodo) == PER_SEM)
+  filter(ano == ANO_SEM, periodo == PER_SEM)
 
 message(glue("Base cargada: {nrow(df_raw)} filas (semestre {ANO_SEM}-{PER_SEM})"))
 message(glue("  CARGO values: {paste(sort(unique(df_raw$cargo)), collapse=' | ')}"))
