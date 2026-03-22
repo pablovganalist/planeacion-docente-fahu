@@ -37,8 +37,17 @@ library(glue)
 # ── Configuracion ─────────────────────────────────────────────────────────────
 # setwd: no necesario en CI (wd = raíz del repo)
 
-ARCHIVO        <- "BASE_SEMESTRE.xlsx"
-PERIODO        <- "Primer semestre 2026"
+# Usar variables del pipeline si existen (llamado desde run_ci.R)
+# o detectar automáticamente si se corre de forma independiente
+if (!exists("ARCHIVO"))  ARCHIVO  <- "BASE_FAHU.xlsx"
+if (!exists("ANO_SEM") || !exists("PER_SEM")) {
+  .tmp   <- readxl::read_excel(ARCHIVO, col_types="text") |> janitor::clean_names()
+  ANO_SEM <- max(as.integer(.tmp$ano),     na.rm=TRUE)
+  PER_SEM <- max(as.integer(.tmp$periodo), na.rm=TRUE)
+  rm(.tmp)
+}
+if (!exists("PERIODO"))
+  PERIODO <- if (PER_SEM==1) paste("Primer semestre", ANO_SEM) else paste("Segundo semestre", ANO_SEM)
 CARPETA_SALIDA <- "output"
 
 if (!dir.exists(CARPETA_SALIDA)) dir.create(CARPETA_SALIDA)
@@ -125,9 +134,11 @@ df_raw <- read_excel(ARCHIVO, sheet = 1) |>
     across(c(t, e, l, s, horas_ped, horas_plan, eq_cron, cupo),
            ~ replace_na(suppressWarnings(as.numeric(.)), 0)),
     insc = as.numeric(insc)   # permanece NA hasta inscripcion
-  )
+  ) |>
+  # Filtrar solo el semestre actual
+  filter(as.integer(ano) == ANO_SEM, as.integer(periodo) == PER_SEM)
 
-message(glue("Base cargada: {nrow(df_raw)} filas"))
+message(glue("Base cargada: {nrow(df_raw)} filas (semestre {ANO_SEM}-{PER_SEM})"))
 message(glue("  CARGO values: {paste(sort(unique(df_raw$cargo)), collapse=' | ')}"))
 
 
@@ -151,6 +162,65 @@ df <- df_raw |>
 n_secs_dedup <- sum(df$seccion_duplicada)
 message(glue("  Sellos deduplicados: {n_secs_dedup} filas marcadas (horas_prof = 0)"))
 
+# =============================================================================
+# 2b. COMPROBACION DE CONSISTENCIA TELS
+# =============================================================================
+# Regla: si TIPO == "T", solo la columna T debe tener horas (E, L, S = 0)
+#        si TIPO == "E", solo E; si TIPO == "L", solo L; si TIPO == "S", solo S.
+# Las filas que no cumplen se reportan como advertencia pero no detienen el pipeline.
+
+comprobar_tels <- function(df) {
+  reglas <- list(
+    T = list(debe = "t", no_debe = c("e","l","s")),
+    E = list(debe = "e", no_debe = c("t","l","s")),
+    L = list(debe = "l", no_debe = c("t","e","s")),
+    S = list(debe = "s", no_debe = c("t","e","l"))
+  )
+
+  errores <- map_dfr(names(reglas), function(tp) {
+    regla  <- reglas[[tp]]
+    filas  <- df |> filter(tipo == tp)
+    if (nrow(filas) == 0) return(NULL)
+
+    # Columnas que NO deberían tener horas
+    mask_error <- rowSums(filas[, regla$no_debe, drop = FALSE] != 0) > 0
+
+    if (!any(mask_error)) return(NULL)
+
+    filas[mask_error, ] |>
+      select(unidad_dep, carrera, codprog, cod, curso, sec,
+             t, e, l, s, horas_plan, profesor) |>
+      mutate(tipo_sec = tp,
+             problema = paste0("TIPO=", tp, " pero tiene horas en: ",
+               map_chr(seq_len(sum(mask_error)), function(i) {
+                 paste(regla$no_debe[
+                   as.numeric(filas[mask_error,][i, regla$no_debe]) != 0
+                 ], collapse=", ")
+               })))
+  })
+
+  errores
+}
+
+inconsistencias_tels <- comprobar_tels(df)
+
+if (nrow(inconsistencias_tels) == 0) {
+  message("  Comprobación TELS: OK — sin inconsistencias")
+} else {
+  message(glue("  *** ADVERTENCIA TELS: {nrow(inconsistencias_tels)} filas con inconsistencias ***"))
+  message("  Detalle:")
+  inconsistencias_tels |>
+    select(tipo_sec, unidad_dep, cod, curso, sec, t, e, l, s, profesor, problema) |>
+    as.data.frame() |>
+    apply(1, function(r) message("    · ", paste(r, collapse=" | ")))
+
+  # Guardar reporte de inconsistencias
+  ruta_err <- file.path(CARPETA_SALIDA, "inconsistencias_tels.xlsx")
+  if (requireNamespace("openxlsx", quietly=TRUE)) {
+    openxlsx::write.xlsx(inconsistencias_tels, ruta_err, overwrite=TRUE)
+    message(glue("  Reporte guardado en: {ruta_err}"))
+  }
+}
 
 # =============================================================================
 # 3. FUNCIONES DE ANALISIS

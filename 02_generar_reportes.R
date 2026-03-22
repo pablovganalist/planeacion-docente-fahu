@@ -16,7 +16,7 @@ library(glue)
 # ── Configuracion ─────────────────────────────────────────────────────────────
 # setwd: no necesario en CI (wd = raíz del repo)
 
-ARCHIVO       <- "BASE_SEMESTRE.xlsx"
+ARCHIVO <- if (exists("ARCHIVO")) ARCHIVO else "BASE_FAHU.xlsx"
 PLANTILLA     <- "reporte_planeacion.Rmd"
 PERIODO       <- "Primer semestre 2026"
 CARPETA_MD    <- "informes_md"

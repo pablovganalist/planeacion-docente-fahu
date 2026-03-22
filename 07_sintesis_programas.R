@@ -3,20 +3,26 @@
 # =============================================================================
 library(readxl); library(janitor); library(tidyverse)
 
-# Configuración heredada del pipeline (definida en run_ci.R)
-# ARCHIVO     <- BASE_SEMESTRE.xlsx
-# ARCHIVO_HIST_PATH <- BASE_HISTORICA_FAHU.xlsx
-# PERIODO     <- "Primer semestre 2026"
-# INSTITUCION <- "Facultad de Humanidades"
-# CARPETA_HTML <- "docs"
-
-ARCHIVO_SEM  <- if (exists("ARCHIVO"))      ARCHIVO      else "BASE_SEMESTRE.xlsx"
-ARCHIVO_HIST <- if (exists("ARCHIVO_HIST")) ARCHIVO_HIST else "BASE_HISTORICA_FAHU.xlsx"
+# Configuración — hereda del pipeline si existe, o detecta automáticamente
+ARCHIVO      <- if (exists("ARCHIVO"))      ARCHIVO      else "BASE_FAHU.xlsx"
 CARPETA_OUT  <- if (exists("CARPETA_HTML")) CARPETA_HTML else "docs"
-PERIODO_LABEL <- if (exists("PERIODO"))     PERIODO      else "Primer semestre 2026"
-INST_LABEL    <- if (exists("INSTITUCION")) INSTITUCION  else "Facultad de Humanidades"
-ETIQ_ACT <- "1S-2026";  ETIQ_ANT <- "1S-2025"
-ANO_ANT  <- 2025;        PER_ANT  <- 1
+PERIODO_LABEL <- if (exists("PERIODO"))    PERIODO      else NULL
+INST_LABEL    <- if (exists("INSTITUCION")) INSTITUCION else "Facultad de Humanidades"
+
+if (!exists("ANO_SEM") || !exists("PER_SEM")) {
+  .tmp    <- readxl::read_excel(ARCHIVO, col_types="text") |> janitor::clean_names()
+  ANO_SEM <- max(as.integer(.tmp$ano),     na.rm=TRUE)
+  PER_SEM <- max(as.integer(.tmp$periodo), na.rm=TRUE)
+  rm(.tmp)
+}
+if (is.null(PERIODO_LABEL))
+  PERIODO_LABEL <- if (PER_SEM==1) paste("Primer semestre", ANO_SEM) else paste("Segundo semestre", ANO_SEM)
+
+# Semestre anterior: mismo periodo del año anterior
+ANO_ANT <- ANO_SEM - 1
+PER_ANT <- PER_SEM
+ETIQ_ACT <- paste0(PER_SEM, "S-", ANO_SEM)
+ETIQ_ANT <- paste0(PER_ANT, "S-", ANO_ANT)
 
 C_TEAL="#00A499"; C_ORANGE="#EA7600"; C_DARK="#394049"
 C_BLUE="#498BCA"; C_GOLD="#EAAA00"
@@ -82,9 +88,9 @@ cargar <- function(path) {
     )
 }
 
-df_act  <- cargar(ARCHIVO_SEM)
-df_hist <- cargar(ARCHIVO_HIST)
-df_ant  <- df_hist |> filter(ano==ANO_ANT, periodo==PER_ANT)
+df_todo <- cargar(ARCHIVO)
+df_act  <- df_todo |> filter(as.integer(ano)==ANO_SEM, as.integer(periodo)==PER_SEM)
+df_ant  <- df_todo |> filter(as.integer(ano)==ANO_ANT, as.integer(periodo)==PER_ANT)
 
 
 # =============================================================================

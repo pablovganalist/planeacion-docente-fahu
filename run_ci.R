@@ -15,8 +15,7 @@ library(knitr)
 library(openxlsx)
 
 # ── Configuración ──────────────────────────────────────────────────────────────
-ARCHIVO   <- "BASE_SEMESTRE.xlsx"
-PERIODO   <- "Primer semestre 2026"
+ARCHIVO   <- "BASE_FAHU.xlsx"   # base unificada — todos los semestres
 PLANTILLA <- "reporte_planeacion.Rmd"
 
 EXCLUIR_UNIDADES <- c("HORA DE CLASE", "SIN PROFESOR", "SP",
@@ -27,9 +26,18 @@ CARPETA_HTML <- "docs"          # GitHub Pages sirve desde /docs
 
 INSTITUCION  <- "Facultad de Humanidades"
 
+# Detectar semestre actual (el más reciente en la base)
+.df_tmp    <- readxl::read_excel(ARCHIVO, col_types="text") |>
+  janitor::clean_names()
+ANO_SEM  <- max(as.integer(.df_tmp$ano),     na.rm=TRUE)
+PER_SEM  <- max(as.integer(.df_tmp$periodo), na.rm=TRUE)
+PERIODO  <- if (PER_SEM==1) paste("Primer semestre",  ANO_SEM) else
+                             paste("Segundo semestre", ANO_SEM)
+rm(.df_tmp)
+
 cat("=============================================================\n")
 cat("  PIPELINE PLANEACIÓN DOCENTE — FAHU USACH\n")
-cat(glue("  {PERIODO}\n"))
+cat(glue("  {PERIODO} (detectado automáticamente)\n"))
 cat("=============================================================\n\n")
 
 # ── 1. Limpieza y análisis (genera Excel resumen) ─────────────────────────────
@@ -47,14 +55,10 @@ cat("── Paso 3: exportando a HTML...\n")
 source("04_exportar_html.R", local = TRUE)
 cat("   OK\n\n")
 
-# ── 4. Informes comparativos desde base histórica ────────────────────────────
+# ── 4. Informes comparativos históricos ──────────────────────────────────────
 cat("── Paso 4: generando comparativos históricos...\n")
-if (file.exists("BASE_HISTORICA_FAHU.xlsx")) {
-  source("05_comparativo.R", local = TRUE)
-  cat("   OK\n\n")
-} else {
-  cat("   OMITIDO (BASE_HISTORICA_FAHU.xlsx no encontrada)\n\n")
-}
+source("05_comparativo.R", local = TRUE)
+cat("   OK\n\n")
 
 # ── 5. Exportar archivos LaTeX ────────────────────────────────────────────────
 cat("── Paso 5: exportando a LaTeX...\n")

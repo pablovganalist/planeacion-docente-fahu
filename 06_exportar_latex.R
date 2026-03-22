@@ -14,8 +14,13 @@ library(janitor)
 library(tidyverse)
 
 # -- Configuracion -------------------------------------------------------------
-ARCHIVO_SEM   <- "BASE_SEMESTRE.xlsx"
-ARCHIVO_HIST  <- "BASE_HISTORICA_FAHU.xlsx"
+ARCHIVO <- if (exists("ARCHIVO")) ARCHIVO else "BASE_FAHU.xlsx"
+if (!exists("ANO_SEM") || !exists("PER_SEM")) {
+  .tmp   <- readxl::read_excel(ARCHIVO, col_types="text") |> janitor::clean_names()
+  ANO_SEM <- max(as.integer(.tmp$ano),     na.rm=TRUE)
+  PER_SEM <- max(as.integer(.tmp$periodo), na.rm=TRUE)
+  rm(.tmp)
+}
 CARPETA_LATEX <- file.path("docs", "latex")
 INSTITUCION   <- "Facultad de Humanidades"
 PERIODO       <- "Primer semestre 2026"
@@ -238,12 +243,12 @@ aplicar_dedup <- function(df) {
     ungroup()
 }
 
-if (!file.exists(ARCHIVO_SEM))  stop(paste0("No se encuentra: '", ARCHIVO_SEM, "'"))
-if (!file.exists(ARCHIVO_HIST)) stop(paste0("No se encuentra: '", ARCHIVO_HIST, "'"))
+if (!file.exists(ARCHIVO)) stop(paste0("No se encuentra: '", ARCHIVO, "'"))
 
-df_sem  <- cargar_base(ARCHIVO_SEM)  |> aplicar_dedup()
-df_hist <- cargar_base(ARCHIVO_HIST) |> aplicar_dedup()
-df_todo <- bind_rows(df_hist, df_sem)
+df_todo_raw <- cargar_base(ARCHIVO) |> aplicar_dedup()
+df_sem  <- df_todo_raw |> filter(as.integer(ano)==ANO_SEM, as.integer(periodo)==PER_SEM)
+df_hist <- df_todo_raw |> filter(!(as.integer(ano)==ANO_SEM & as.integer(periodo)==PER_SEM))
+df_todo <- df_todo_raw
 
 sem_ano <- max(df_sem$ano,     na.rm = TRUE)
 sem_per <- max(df_sem$periodo, na.rm = TRUE)
