@@ -33,6 +33,7 @@ library(readxl)
 library(janitor)
 library(writexl)
 library(glue)
+source("00_base_utils.R", local = TRUE)
 
 # ── Configuracion ─────────────────────────────────────────────────────────────
 # setwd: no necesario en CI (wd = raíz del repo)
@@ -40,15 +41,12 @@ library(glue)
 # Usar variables del pipeline si existen (llamado desde run_ci.R)
 # o detectar automáticamente si se corre de forma independiente
 if (!exists("ARCHIVO"))  ARCHIVO  <- "BASE_FAHU.xlsx"
+ARCHIVO <- resolver_archivo_base(ARCHIVO)
 if (!exists("ANO_SEM") || !exists("PER_SEM")) {
-  .tmp  <- readxl::read_excel(ARCHIVO, col_types = "text")
-  # Detectar columnas sin depender de clean_names (AÑO puede variar)
-  .cols <- names(.tmp)
-  .col_ano <- .cols[str_detect(str_to_lower(.cols), "^a.?o$")][1]
-  .col_per <- .cols[str_detect(str_to_lower(.cols), "^periodo$")][1]
-  ANO_SEM <- max(as.integer(.tmp[[.col_ano]]), na.rm = TRUE)
-  PER_SEM <- max(as.integer(.tmp[[.col_per]]), na.rm = TRUE)
-  rm(.tmp, .cols, .col_ano, .col_per)
+  .sem <- detectar_semestre_actual(ARCHIVO)
+  ANO_SEM <- .sem$ano
+  PER_SEM <- .sem$periodo
+  rm(.sem)
 }
 if (!exists("PERIODO"))
   PERIODO <- if (PER_SEM==1) paste("Primer semestre", ANO_SEM) else paste("Segundo semestre", ANO_SEM)
@@ -67,20 +65,7 @@ CARGOS_AUTORIDAD <- c("DIRECTOR", "DIRECTORA", "DECANA", "VICEDECANO", "VIME")
 # =============================================================================
 
 df_raw <- read_excel(ARCHIVO, sheet = 1) |>
-  clean_names() |>
-  # Normalizar columna AÑO que puede quedar como 'ano' o 'a_o' según entorno
-  rename_with(~"ano", any_of(c("ano", "a_o", "a__o", "anio"))) |>
-  rename(
-    unidad_dep  = unidad,
-    unidad_prof = unidad_profesor,
-    curso       = asignatura,
-    cod         = codcur,
-    pre         = prepost,
-    cupo        = cupos,
-    insc        = inscritos
-  ) |>
-  rename_with(~ "horas_ped",  any_of(c("horas_ped",  "horasped")))  |>
-  rename_with(~ "horas_plan", any_of(c("horas_plan", "horasplan"))) |>
+  normalizar_base_planeacion() |>
   mutate(
     # ── Texto ─────────────────────────────────────────────────────────────────
     profesor    = str_to_title(str_squish(profesor)),

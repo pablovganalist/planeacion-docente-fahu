@@ -12,17 +12,16 @@
 library(readxl)
 library(janitor)
 library(tidyverse)
+source("00_base_utils.R", local = TRUE)
 
 # -- Configuracion -------------------------------------------------------------
 ARCHIVO <- if (exists("ARCHIVO")) ARCHIVO else "BASE_FAHU.xlsx"
+ARCHIVO <- resolver_archivo_base(ARCHIVO)
 if (!exists("ANO_SEM") || !exists("PER_SEM")) {
-  .tmp  <- readxl::read_excel(ARCHIVO, col_types = "text")
-  .cols <- names(.tmp)
-  .col_ano <- .cols[str_detect(str_to_lower(.cols), "^a.?o$")][1]
-  .col_per <- .cols[str_detect(str_to_lower(.cols), "^periodo$")][1]
-  ANO_SEM <- max(as.integer(.tmp[[.col_ano]]), na.rm = TRUE)
-  PER_SEM <- max(as.integer(.tmp[[.col_per]]), na.rm = TRUE)
-  rm(.tmp, .cols, .col_ano, .col_per)
+  .sem <- detectar_semestre_actual(ARCHIVO)
+  ANO_SEM <- .sem$ano
+  PER_SEM <- .sem$periodo
+  rm(.sem)
 }
 CARPETA_LATEX <- file.path("docs", "latex")
 INSTITUCION   <- "Facultad de Humanidades"
@@ -200,18 +199,7 @@ preambulo_latex <- function(titulo_doc) {
 # =============================================================================
 cargar_base <- function(path) {
   read_excel(path) |>
-    clean_names() |>
-    rename(
-      unidad_dep  = unidad,
-      unidad_prof = unidad_profesor,
-      curso       = asignatura,
-      cod         = codcur,
-      pre         = prepost,
-      cupo        = cupos,
-      insc        = inscritos
-    ) |>
-    rename_with(~ "horas_ped",  any_of(c("horas_ped",  "horasped")))  |>
-    rename_with(~ "horas_plan", any_of(c("horas_plan", "horasplan"))) |>
+    normalizar_base_planeacion() |>
     mutate(
       profesor    = str_to_title(str_squish(profesor)),
       unidad_dep  = str_to_upper(str_squish(unidad_dep)),

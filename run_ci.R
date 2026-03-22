@@ -12,10 +12,11 @@ library(janitor)
 library(tidyverse)
 library(glue)
 library(knitr)
-library(openxlsx)
+source("00_base_utils.R", local = TRUE)
 
 # ── Configuración ──────────────────────────────────────────────────────────────
-ARCHIVO   <- "BASE_FAHU.xlsx"   # base unificada — todos los semestres
+ARCHIVO   <- if (exists("ARCHIVO")) ARCHIVO else "BASE_FAHU.xlsx"
+ARCHIVO   <- resolver_archivo_base(ARCHIVO)
 PLANTILLA <- "reporte_planeacion.Rmd"
 
 EXCLUIR_UNIDADES <- c("HORA DE CLASE", "SIN PROFESOR", "SP",
@@ -27,14 +28,12 @@ CARPETA_HTML <- "docs"          # GitHub Pages sirve desde /docs
 INSTITUCION  <- "Facultad de Humanidades"
 
 # Detectar semestre actual (el más reciente en la base)
-.df_tmp    <- readxl::read_excel(ARCHIVO, col_types = "text")
-.cols_t    <- names(.df_tmp)
-.col_ano   <- .cols_t[grepl("^a.?o$", tolower(.cols_t))][1]
-ANO_SEM    <- max(as.integer(.df_tmp[[.col_ano]]), na.rm = TRUE)
-PER_SEM    <- max(as.integer(.df_tmp$periodo),     na.rm = TRUE)
+.sem_actual <- detectar_semestre_actual(ARCHIVO)
+ANO_SEM    <- .sem_actual$ano
+PER_SEM    <- .sem_actual$periodo
 PERIODO    <- if (PER_SEM==1) paste("Primer semestre",  ANO_SEM) else
                                paste("Segundo semestre", ANO_SEM)
-rm(.df_tmp, .cols_t, .col_ano)
+rm(.sem_actual)
 
 cat("=============================================================\n")
 cat("  PIPELINE PLANEACIÓN DOCENTE — FAHU USACH\n")
@@ -48,12 +47,20 @@ cat("   OK\n\n")
 
 # ── 2. Generar informes .md por unidad ────────────────────────────────────────
 cat("── Paso 2: generando informes .md...\n")
-source("02_generar_reportes.R", local = TRUE)
+if (file.exists("02_generar_reportes.R")) {
+  source("02_generar_reportes.R", local = TRUE)
+} else {
+  cat("   OMITIDO (no existe 02_generar_reportes.R)\n")
+}
 cat("   OK\n\n")
 
 # ── 3. Convertir .md a HTML institucional ─────────────────────────────────────
 cat("── Paso 3: exportando a HTML...\n")
-source("04_exportar_html.R", local = TRUE)
+if (file.exists("04_exportar_html.R")) {
+  source("04_exportar_html.R", local = TRUE)
+} else {
+  cat("   OMITIDO (no existe 04_exportar_html.R)\n")
+}
 cat("   OK\n\n")
 
 # ── 4. Informes comparativos históricos ──────────────────────────────────────

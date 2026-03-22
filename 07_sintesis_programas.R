@@ -2,20 +2,20 @@
 # exp_04_sintesis_por_programa.R  — v4 (pre-computed metrics, no inner filter)
 # =============================================================================
 library(readxl); library(janitor); library(tidyverse)
+source("00_base_utils.R", local = TRUE)
 
 # Configuración — hereda del pipeline si existe, o detecta automáticamente
 ARCHIVO      <- if (exists("ARCHIVO"))      ARCHIVO      else "BASE_FAHU.xlsx"
+ARCHIVO      <- resolver_archivo_base(ARCHIVO)
 CARPETA_OUT  <- if (exists("CARPETA_HTML")) CARPETA_HTML else "docs"
 PERIODO_LABEL <- if (exists("PERIODO"))    PERIODO      else NULL
 INST_LABEL    <- if (exists("INSTITUCION")) INSTITUCION else "Facultad de Humanidades"
 
 if (!exists("ANO_SEM") || !exists("PER_SEM")) {
-  .tmp    <- readxl::read_excel(ARCHIVO, col_types="text") |> janitor::clean_names()
-  .cols_t  <- names(.tmp)
-  .col_ano <- .cols_t[grepl("^a.?o$", tolower(.cols_t))][1]
-  ANO_SEM  <- max(as.integer(.tmp[[.col_ano]]), na.rm=TRUE)
-  PER_SEM  <- max(as.integer(.tmp$periodo),     na.rm=TRUE)
-  rm(.tmp, .cols_t, .col_ano)
+  .sem <- detectar_semestre_actual(ARCHIVO)
+  ANO_SEM <- .sem$ano
+  PER_SEM <- .sem$periodo
+  rm(.sem)
 }
 if (is.null(PERIODO_LABEL))
   PERIODO_LABEL <- if (PER_SEM==1) paste("Primer semestre", ANO_SEM) else paste("Segundo semestre", ANO_SEM)
@@ -61,11 +61,8 @@ fmt_var <- function(a,b) {
 }
 
 cargar <- function(path) {
-  read_excel(path) |> clean_names() |>
-    rename(unidad_dep=unidad, unidad_prof=unidad_profesor,
-           curso=asignatura, cod=codcur, pre=prepost, cupo=cupos, insc=inscritos) |>
-    rename_with(~"horas_ped",  any_of(c("horas_ped","horasped")))  |>
-    rename_with(~"horas_plan", any_of(c("horas_plan","horasplan"))) |>
+  read_excel(path) |>
+    normalizar_base_planeacion() |>
     mutate(
       profesor    = str_to_title(str_squish(profesor)),
       curso       = str_to_title(str_squish(curso)),
