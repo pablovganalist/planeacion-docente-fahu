@@ -255,8 +255,14 @@ tr.detalle-row > td {{
 }}
 .carr-grid {{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem; margin-top: 0.8rem;
+}}
+@media (max-width: 900px) {{
+  .carr-grid {{ grid-template-columns: repeat(2, 1fr); }}
+}}
+@media (max-width: 560px) {{
+  .carr-grid {{ grid-template-columns: 1fr; }}
 }}
 .carr-card {{
   display: block; text-decoration: none;
@@ -424,6 +430,17 @@ html_carrera <- function(carrera, unit_html_file, css) {
         htmltools::htmlEscape(nv), nrow(sub_df), ths, trs
       )
     }), collapse = "\n")
+  } else if (!is.null(df)) {
+    # Sin columna NIVEL (postgrado): tabla plana directa
+    ths <- paste(sprintf("<th>%s</th>", names(df)), collapse = "")
+    trs <- paste(apply(df, 1L, function(row) {
+      tds <- paste(sprintf("<td>%s</td>", htmltools::htmlEscape(as.character(row))), collapse = "")
+      paste0("<tr>", tds, "</tr>")
+    }), collapse = "\n")
+    details_html <- sprintf(
+      '<div class="nivel-content"><table><thead><tr>%s</tr></thead><tbody>%s</tbody></table></div>',
+      ths, trs
+    )
   } else {
     details_html <- "<p><em>Sin datos de planeaci\u00f3n.</em></p>"
   }
