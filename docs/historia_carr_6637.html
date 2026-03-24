@@ -234,22 +234,25 @@ tr.detalle-row > td {
   header, .contenido { box-shadow: none; border-radius: 0; }
 }
 .carr-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem; margin-top: 0.8rem;
-}
-@media (max-width: 900px) {
-  .carr-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .carr-grid { grid-template-columns: 1fr; }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.8rem;
 }
 .carr-card {
+  box-sizing: border-box;
+  flex: 0 0 calc(25% - 0.5625rem);
   display: block; text-decoration: none;
   background: linear-gradient(135deg, rgba(0,164,153,0.08), rgba(73,139,202,0.06));
   border: 1px solid rgba(0,164,153,0.18);
   border-radius: 12px; padding: 1rem; color: #394049;
   transition: border-color .15s, transform .15s;
+}
+@media (max-width: 900px) {
+  .carr-card { flex: 0 0 calc(50% - 0.375rem); }
+}
+@media (max-width: 560px) {
+  .carr-card { flex: 0 0 100%; }
 }
 .carr-card:hover { border-color: #00A499; transform: translateY(-1px); }
 .carr-card-nombre {
