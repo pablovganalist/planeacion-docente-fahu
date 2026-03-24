@@ -253,6 +253,51 @@ tr.detalle-row > td {{
   .flecha {{ display: none; }}
   header, .contenido {{ box-shadow: none; border-radius: 0; }}
 }}
+.carr-grid {{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem; margin-top: 0.8rem;
+}}
+.carr-card {{
+  display: block; text-decoration: none;
+  background: linear-gradient(135deg, rgba(0,164,153,0.08), rgba(73,139,202,0.06));
+  border: 1px solid rgba(0,164,153,0.18);
+  border-radius: 12px; padding: 1rem; color: {C_DARK};
+  transition: border-color .15s, transform .15s;
+}}
+.carr-card:hover {{ border-color: {C_TEAL}; transform: translateY(-1px); }}
+.carr-card-nombre {{
+  display: block; font-weight: 700; font-size: 0.92rem; line-height: 1.35;
+}}
+.carr-card-cod {{
+  display: block; font-size: 0.78rem; color: #666;
+  margin-top: 0.25rem; font-family: "Courier New", monospace;
+}}
+.carr-card-link {{
+  display: block; margin-top: 0.5rem;
+  color: {C_TEAL}; font-size: 0.8rem; font-weight: 600;
+}}
+details.nivel-details {{
+  margin-top: 0.6rem; border-bottom: 1px solid #e0e7ee;
+}}
+details.nivel-details > summary.nivel-summary {{
+  cursor: pointer; padding: 0.5rem 0;
+  font-weight: 700; font-size: 0.9rem; color: {C_BLUE};
+  list-style: none; display: flex; align-items: center; gap: 0.5rem;
+}}
+details.nivel-details > summary.nivel-summary::-webkit-details-marker {{ display: none; }}
+details.nivel-details > summary.nivel-summary::before {{
+  content: "\25B6"; font-size: 9px; color: {C_BLUE}; transition: transform .2s;
+}}
+details.nivel-details[open] > summary.nivel-summary::before {{
+  transform: rotate(90deg);
+}}
+.nivel-count {{ font-weight: 400; font-size: 0.8rem; color: #888; }}
+.nivel-content {{ padding: 0.35rem 0 0.6rem 0.5rem; }}
+@media print {{
+  details.nivel-details[open] > summary.nivel-summary {{ display: none; }}
+  .nivel-content {{ display: block !important; padding-left: 0; }}
+}}
 ')
 
 strip_front_matter <- function(lineas) {
@@ -306,15 +351,143 @@ leer_manifest <- function(carpeta_md) {
   readr::read_csv(ruta, show_col_types = FALSE)
 }
 
+# Parsea la sección 4 del markdown y retorna carreras + límites de la sección
+parsear_sec4 <- function(md_lineas) {
+  s4_idx <- which(grepl("^## 4\\.", md_lineas))
+  if (!length(s4_idx)) return(list(carreras = list(), s4_line = NA, s4_end = NA))
+  s4      <- s4_idx[1]
+  next_h2 <- which(grepl("^## ", md_lineas) & seq_along(md_lineas) > s4)
+  s4_end  <- if (length(next_h2)) next_h2[1] - 1L else length(md_lineas)
+  sec4    <- md_lineas[(s4 + 1L):s4_end]
+
+  h3_idx <- which(grepl('<h3 class="carr-titulo">', sec4, fixed = TRUE))
+  carreras <- lapply(seq_along(h3_idx), function(i) {
+    s     <- h3_idx[i]
+    e     <- if (i < length(h3_idx)) h3_idx[i + 1L] - 1L else length(sec4)
+    block <- sec4[s:e]
+    m_nom <- regmatches(block[1], regexpr("(?<=>)[^<]+(?=</h3>)", block[1], perl = TRUE))
+    nombre <- if (length(m_nom)) m_nom else ""
+    cod_ln <- block[grepl("cod-programa", block, fixed = TRUE)]
+    cod    <- if (length(cod_ln)) {
+      m <- regmatches(cod_ln[1], regexpr("[0-9]{3,}", cod_ln[1]))
+      if (length(m)) m else ""
+    } else ""
+    if (!nzchar(cod)) cod <- slug(nombre)
+    tbl_ln <- block[grepl("^\\|", block)]
+    list(nombre = nombre, cod = cod, tbl_lines = tbl_ln)
+  })
+  list(carreras = carreras, s4_line = s4, s4_end = s4_end)
+}
+
+# Parsea tabla pipe-delimitada a data.frame
+parse_tabla_md <- function(tbl_lines) {
+  if (length(tbl_lines) < 3L) return(NULL)
+  split_row <- function(l) {
+    p <- strsplit(l, "\\|")[[1]]
+    trimws(p[nzchar(trimws(p))])
+  }
+  headers    <- split_row(tbl_lines[1])
+  nc         <- length(headers)
+  data_lines <- tbl_lines[-(1:2)]
+  if (!length(data_lines)) return(NULL)
+  rows <- Filter(function(r) length(r) >= 1L, lapply(data_lines, split_row))
+  if (!length(rows)) return(NULL)
+  mat <- do.call(rbind, lapply(rows, function(r) {
+    r <- r[seq_len(min(length(r), nc))]
+    length(r) <- nc
+    r[is.na(r)] <- ""
+    r
+  }))
+  df <- as.data.frame(mat, stringsAsFactors = FALSE)
+  names(df) <- headers
+  df
+}
+
+# Genera el HTML completo de una carrera (con <details> por nivel)
+html_carrera <- function(carrera, unit_html_file, css) {
+  nombre <- carrera$nombre
+  cod    <- carrera$cod
+  df     <- parse_tabla_md(carrera$tbl_lines)
+
+  if (!is.null(df) && "NIVEL" %in% names(df)) {
+    col_data <- setdiff(names(df), "NIVEL")
+    niveles  <- unique(df[["NIVEL"]])
+    details_html <- paste(sapply(niveles, function(nv) {
+      sub_df <- df[df[["NIVEL"]] == nv, col_data, drop = FALSE]
+      ths <- paste(sprintf("<th>%s</th>", col_data), collapse = "")
+      trs <- paste(apply(sub_df, 1L, function(row) {
+        tds <- paste(sprintf("<td>%s</td>", htmltools::htmlEscape(as.character(row))), collapse = "")
+        paste0("<tr>", tds, "</tr>")
+      }), collapse = "\n")
+      sprintf(
+        '<details class="nivel-details"><summary class="nivel-summary">%s <span class="nivel-count">(%d secc.)</span></summary><div class="nivel-content"><table><thead><tr>%s</tr></thead><tbody>%s</tbody></table></div></details>',
+        htmltools::htmlEscape(nv), nrow(sub_df), ths, trs
+      )
+    }), collapse = "\n")
+  } else {
+    details_html <- "<p><em>Sin datos de planeaci\u00f3n.</em></p>"
+  }
+
+  cod_p <- if (nzchar(cod) && !is.na(cod))
+    sprintf('<p class="cod-programa">C\u00f3digo de programa: %s</p>\n', htmltools::htmlEscape(cod))
+  else ""
+
+  paste0(
+    '<!DOCTYPE html><html lang="es"><head>\n',
+    '<meta charset="UTF-8">',
+    '<meta name="viewport" content="width=device-width,initial-scale=1">\n',
+    '<title>', htmltools::htmlEscape(nombre), ' \u2014 ', PERIODO, '</title>\n',
+    '<style>\n', css, '\n</style></head><body>\n',
+    '<header>\n',
+    '<p class="facultad">', INSTITUCION, '</p>\n',
+    '<h1>', htmltools::htmlEscape(nombre), '</h1>\n',
+    '<p class="periodo">', PERIODO, '</p>\n',
+    '<div class="botones-header">',
+    '<a href="', unit_html_file, '" class="btn-indice">\u2190 Volver al informe de unidad</a>',
+    '</div></header>\n',
+    '<main class="contenido">\n',
+    cod_p,
+    details_html,
+    '\n</main></body></html>\n'
+  )
+}
+
 md_a_html <- function(ruta_md, ruta_html, css, fila_manifest) {
-  md_lineas <- readLines(ruta_md, encoding = "UTF-8", warn = FALSE)
-  md_lineas <- strip_front_matter(md_lineas)
+  md_lineas  <- readLines(ruta_md, encoding = "UTF-8", warn = FALSE)
+  md_lineas  <- strip_front_matter(md_lineas)
+  titulo     <- fila_manifest$nombre_largo[[1]]
+  slug_unit  <- fila_manifest$slug[[1]]
+  slug_comp  <- fila_manifest$slug[[1]]
+  carpeta_h  <- dirname(ruta_html)
+  unit_file  <- basename(ruta_html)
+
+  # -- Generar HTMLs por carrera y reemplazar sección 4 con botones -----------
+  sec4 <- parsear_sec4(md_lineas)
+  if (!is.na(sec4$s4_line) && length(sec4$carreras) > 0) {
+    for (carr in sec4$carreras) {
+      carr_fname <- paste0(slug_unit, "_carr_", carr$cod, ".html")
+      writeLines(html_carrera(carr, unit_file, css),
+                 file.path(carpeta_h, carr_fname), useBytes = TRUE)
+    }
+    cards <- sapply(sec4$carreras, function(carr) {
+      fname <- paste0(slug_unit, "_carr_", carr$cod, ".html")
+      sprintf(
+        '<a class="carr-card" href="%s"><span class="carr-card-nombre">%s</span><span class="carr-card-cod">%s</span><span class="carr-card-link">Ver planeaci\u00f3n \u2192</span></a>',
+        fname,
+        htmltools::htmlEscape(carr$nombre),
+        htmltools::htmlEscape(carr$cod)
+      )
+    })
+    btns_bloque <- c("", '<div class="carr-grid">', cards, "</div>", "")
+    md_lineas <- c(
+      md_lineas[seq_len(sec4$s4_line)],
+      btns_bloque,
+      if (sec4$s4_end < length(md_lineas)) md_lineas[(sec4$s4_end + 1L):length(md_lineas)] else character(0)
+    )
+  }
+
   md_texto <- paste(md_lineas, collapse = "\n")
-
-  titulo <- fila_manifest$nombre_largo[[1]]
-  slug_comp <- fila_manifest$slug[[1]]
-
-  html_raw <- convertir_markdown_a_html(md_texto, ruta_md)
+  html_raw  <- convertir_markdown_a_html(md_texto, ruta_md)
   html_body <- html_raw |>
     str_replace_all("<h1[^>]*>.*?</h1>", "")
 
