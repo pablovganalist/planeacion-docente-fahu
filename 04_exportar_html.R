@@ -481,8 +481,9 @@ md_a_html <- function(ruta_md, ruta_html, css, fila_manifest) {
   carpeta_h  <- dirname(ruta_html)
   unit_file  <- basename(ruta_html)
 
-  # -- Generar HTMLs por carrera y reemplazar sección 4 con botones -----------
-  sec4 <- parsear_sec4(md_lineas)
+  # -- Generar HTMLs por carrera; construir grid de botones para post-inyección
+  sec4          <- parsear_sec4(md_lineas)
+  carr_grid_html <- ""
   if (!is.na(sec4$s4_line) && length(sec4$carreras) > 0) {
     for (carr in sec4$carreras) {
       carr_fname <- paste0(slug_unit, "_carr_", carr$cod, ".html")
@@ -498,10 +499,12 @@ md_a_html <- function(ruta_md, ruta_html, css, fila_manifest) {
         htmltools::htmlEscape(carr$cod)
       )
     })
-    btns_bloque <- c("", '<div class="carr-grid">', cards, "</div>", "")
+    carr_grid_html <- paste0(
+      '<div class="carr-grid">', paste(cards, collapse = ""), '</div>'
+    )
+    # Quitar el contenido de sección 4 del markdown; dejar solo el heading
     md_lineas <- c(
       md_lineas[seq_len(sec4$s4_line)],
-      btns_bloque,
       if (sec4$s4_end < length(md_lineas)) md_lineas[(sec4$s4_end + 1L):length(md_lineas)] else character(0)
     )
   }
@@ -510,6 +513,15 @@ md_a_html <- function(ruta_md, ruta_html, css, fila_manifest) {
   html_raw  <- convertir_markdown_a_html(md_texto, ruta_md)
   html_body <- html_raw |>
     str_replace_all("<h1[^>]*>.*?</h1>", "")
+
+  # Inyectar grid directamente en el HTML ya convertido (evita que commonmark lo toque)
+  if (nzchar(carr_grid_html)) {
+    html_body <- sub(
+      "(<h2[^>]*>[^<]*4\\.[^<]*</h2>)",
+      paste0("\\1", carr_grid_html),
+      html_body, perl = TRUE
+    )
+  }
 
   botones_header <- paste0(
     '<div class="botones-header">',
