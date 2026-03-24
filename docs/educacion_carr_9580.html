@@ -235,8 +235,14 @@ tr.detalle-row > td {
 }
 .carr-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem; margin-top: 0.8rem;
+}
+@media (max-width: 900px) {
+  .carr-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .carr-grid { grid-template-columns: 1fr; }
 }
 .carr-card {
   display: block; text-decoration: none;
@@ -286,6 +292,10 @@ details.nivel-details[open] > summary.nivel-summary::before {
 <div class="botones-header"><a href="01_educacion.html" class="btn-indice">← Volver al informe de unidad</a></div></header>
 <main class="contenido">
 <p class="cod-programa">Código de programa: 9580</p>
-<p><em>Sin datos de planeación.</em></p>
+<div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SECCION</th><th>HORAS</th><th>CUPOS</th><th>PROFESOR</th></tr></thead><tbody><tr><td>48934</td><td>Investigación Aplicada Al Ejercicio Profesional I</td><td>T-1</td><td>4</td><td>12</td><td>Sylvia Contreras Salinas</td></tr>
+<tr><td>48935</td><td>Gestión Y Liderazgo De Organizaciones Educativas</td><td>T-1</td><td>4</td><td>12</td><td>Marco Berengüela Silva</td></tr>
+<tr><td>48936</td><td>Gestión De Procesos Y Recursos</td><td>T-1</td><td>4</td><td>12</td><td>Rodrigo Pablo Pavez Neime</td></tr>
+<tr><td>48937</td><td>Prácticum Ii: Formulación Del Problema</td><td>T-1</td><td>4</td><td>12</td><td>Mónica Antonieta Ramirez Pavelic</td></tr>
+<tr><td>48942</td><td>Prácticum Iv: Monitoreo Y Evaluación</td><td>T-1</td><td>4</td><td>12</td><td>Ricardo Rosales Rodríguez</td></tr></tbody></table></div>
 </main></body></html>
 

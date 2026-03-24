@@ -235,8 +235,14 @@ tr.detalle-row > td {
 }
 .carr-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem; margin-top: 0.8rem;
+}
+@media (max-width: 900px) {
+  .carr-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .carr-grid { grid-template-columns: 1fr; }
 }
 .carr-card {
   display: block; text-decoration: none;
@@ -286,6 +292,31 @@ details.nivel-details[open] > summary.nivel-summary::before {
 <div class="botones-header"><a href="02_estudios_politicos.html" class="btn-indice">← Volver al informe de unidad</a></div></header>
 <main class="contenido">
 <p class="cod-programa">Código de programa: 9571</p>
-<p><em>Sin datos de planeación.</em></p>
+<div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SECCION</th><th>HORAS</th><th>CUPOS</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>49200</td><td>Introducción Al Análisis Político</td><td>T-1</td><td>2</td><td>14</td><td>Alfonso Dingemans Calderon</td><td>NA</td></tr>
+<tr><td>49200</td><td>Introducción Al Análisis Político</td><td>T-1</td><td>2</td><td>14</td><td>Juan Marcelo Mella Polanco</td><td>NA</td></tr>
+<tr><td>49201</td><td>Gobernanza Y Políticas Públicas</td><td>T-1</td><td>2</td><td>14</td><td>Bernardo Eric Navarrete Yanez</td><td>NA</td></tr>
+<tr><td>49201</td><td>Gobernanza Y Políticas Públicas</td><td>T-1</td><td>2</td><td>14</td><td>Mauricio Olavarria Gambi</td><td>NA</td></tr>
+<tr><td>49202</td><td>Metodología De La Investigación</td><td>T-1</td><td>4</td><td>14</td><td>Nelson Paulus Santibañez</td><td>NA</td></tr>
+<tr><td>49203</td><td>Inglés Científico</td><td>T-1</td><td>3</td><td>14</td><td>Aldo Schiappacasse Buckendahl</td><td>NA</td></tr>
+<tr><td>49208</td><td>Dep 1</td><td>T-1</td><td>4</td><td>14</td><td>Bernardo Eric Navarrete Yanez</td><td>NA</td></tr>
+<tr><td>49208</td><td>Dep 2</td><td>T-2</td><td>4</td><td>14</td><td>Lucía Dammert Guardia</td><td>NA</td></tr>
+<tr><td>49208</td><td>Dep 3</td><td>T-3</td><td>4</td><td>14</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>49208</td><td>Mcd-Econometría Aplicada I</td><td>T-4</td><td>4</td><td>14</td><td>Carlos Yevenes Ortega</td><td>NA</td></tr>
+<tr><td>49208</td><td>Mcd-Métodos Y Herramientas Computacionales I</td><td>T-5</td><td>4</td><td>14</td><td>Robinson Dettoni Hidalgo</td><td>NA</td></tr>
+<tr><td>49208</td><td>Mcd-Machine Learning Para La Gestión</td><td>T-6</td><td>4</td><td>14</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>49209</td><td>Dep 1</td><td>T-1</td><td>4</td><td>14</td><td>Bernardo Eric Navarrete Yanez</td><td>NA</td></tr>
+<tr><td>49209</td><td>Dep 2</td><td>T-2</td><td>4</td><td>14</td><td>Lucía Dammert Guardia</td><td>NA</td></tr>
+<tr><td>49209</td><td>Dep 3</td><td>T-3</td><td>4</td><td>14</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>49209</td><td>Mcd-Econometría Aplicada I</td><td>T-4</td><td>4</td><td>14</td><td>Carlos Yevenes Ortega</td><td>NA</td></tr>
+<tr><td>49209</td><td>Mcd-Métodos Y Herramientas Computacionales I</td><td>T-5</td><td>4</td><td>15</td><td>Robinson Dettoni Hidalgo</td><td>NA</td></tr>
+<tr><td>49209</td><td>Mcd-Machine Learning Para La Gestión</td><td>T-6</td><td>4</td><td>14</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>49210</td><td>Tesis I</td><td>T-1</td><td>4</td><td>2 ⚠</td><td>Carolina Segovia Arancibia</td><td>NA</td></tr>
+<tr><td>49210</td><td>Tesis I</td><td>T-2</td><td>4</td><td>2 ⚠</td><td>Nelson Paulus Santibañez</td><td>NA</td></tr>
+<tr><td>49210</td><td>Tesis I</td><td>T-3</td><td>4</td><td>2 ⚠</td><td>Alfonso Dingemans Calderon</td><td>NA</td></tr>
+<tr><td>49210</td><td>Tesis I</td><td>T-4</td><td>4</td><td>2 ⚠</td><td>Martín Ordoñez Astete</td><td>NA</td></tr>
+<tr><td>49210</td><td>Tesis I</td><td>T-5</td><td>4</td><td>2 ⚠</td><td>Bernardo Eric Navarrete Yanez</td><td>NA</td></tr>
+<tr><td>49210</td><td>Tesis I</td><td>T-6</td><td>4</td><td>2 ⚠</td><td>Mauricio Olavarria Gambi</td><td>NA</td></tr>
+<tr><td>49210</td><td>Tesis I</td><td>T-7</td><td>4</td><td>2 ⚠</td><td>Juan Marcelo Mella Polanco</td><td>NA</td></tr>
+<tr><td>49210</td><td>Tesis I</td><td>T-8</td><td>4</td><td>2 ⚠</td><td>Lucía Dammert Guardia</td><td>NA</td></tr></tbody></table></div>
 </main></body></html>
 

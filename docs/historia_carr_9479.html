@@ -235,8 +235,14 @@ tr.detalle-row > td {
 }
 .carr-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem; margin-top: 0.8rem;
+}
+@media (max-width: 900px) {
+  .carr-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .carr-grid { grid-template-columns: 1fr; }
 }
 .carr-card {
   display: block; text-decoration: none;
@@ -286,6 +292,16 @@ details.nivel-details[open] > summary.nivel-summary::before {
 <div class="botones-header"><a href="04_historia.html" class="btn-indice">← Volver al informe de unidad</a></div></header>
 <main class="contenido">
 <p class="cod-programa">Código de programa: 9479</p>
-<p><em>Sin datos de planeación.</em></p>
+<div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SECCION</th><th>HORAS</th><th>CUPOS</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>49715</td><td>Escuela Y Debates Historiográficos Contemporáneos</td><td>T-1</td><td>2</td><td>7 ⚠</td><td>Adriana Isabel Palomera Valenzuela</td><td>NA</td></tr>
+<tr><td>49715</td><td>Escuela Y Debates Historiográficos Contemporáneos</td><td>T-1</td><td>2</td><td>7 ⚠</td><td>Claudio Perez Silva</td><td>NA</td></tr>
+<tr><td>49716</td><td>Métodos Y Técnicas De La Investigación Histórica</td><td>T-1</td><td>2</td><td>7 ⚠</td><td>Igor Goicovic Donoso</td><td>NA</td></tr>
+<tr><td>49716</td><td>Métodos Y Técnicas De La Investigación Histórica</td><td>T-1</td><td>2</td><td>7 ⚠</td><td>Mariana Sofía Labarca Pinto</td><td>NA</td></tr>
+<tr><td>49719</td><td>Seminario Intensivo I</td><td>T-1</td><td>4</td><td>5 ⚠</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>49724</td><td>Avance De Tesis I</td><td>T-1</td><td>4</td><td>2 ⚠</td><td>Igor Goicovic Donoso</td><td>NA</td></tr>
+<tr><td>49724</td><td>Avance De Tesis I</td><td>T-2</td><td>4</td><td>3 ⚠</td><td>Rolando Eugenio Alvarez Vallejos</td><td>NA</td></tr>
+<tr><td>49724</td><td>Avance De Tesis I</td><td>T-3</td><td>4</td><td>3 ⚠</td><td>Cristina Andrea Moyano Barahona</td><td>NA</td></tr>
+<tr><td>49726</td><td>Avance De Tesis Iii</td><td>T-1</td><td>4</td><td>3 ⚠</td><td>Xochitl Guadalupe Inostroza Ponce</td><td>NA</td></tr>
+<tr><td>49726</td><td>Avance De Tesis Iii</td><td>T-2</td><td>4</td><td>3 ⚠</td><td>Mariana Sofía Labarca Pinto</td><td>NA</td></tr>
+<tr><td>49728</td><td>Tesis De Grado</td><td>T-1</td><td>16</td><td>3 ⚠</td><td>Mariana Sofía Labarca Pinto</td><td>NA</td></tr></tbody></table></div>
 </main></body></html>
 

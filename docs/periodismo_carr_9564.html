@@ -235,8 +235,14 @@ tr.detalle-row > td {
 }
 .carr-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem; margin-top: 0.8rem;
+}
+@media (max-width: 900px) {
+  .carr-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .carr-grid { grid-template-columns: 1fr; }
 }
 .carr-card {
   display: block; text-decoration: none;
@@ -286,6 +292,19 @@ details.nivel-details[open] > summary.nivel-summary::before {
 <div class="botones-header"><a href="06_periodismo.html" class="btn-indice">← Volver al informe de unidad</a></div></header>
 <main class="contenido">
 <p class="cod-programa">Código de programa: 9564</p>
-<p><em>Sin datos de planeación.</em></p>
+<div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SECCION</th><th>HORAS</th><th>CUPOS</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>47941</td><td>Comunicación Pública I</td><td>T-1</td><td>4</td><td>12</td><td>Juan Pablo Arancibia Carrizo</td><td>NA</td></tr>
+<tr><td>47942</td><td>Teorías De La Comunicación De Las Ciencias Y La Tecnología</td><td>T-1</td><td>2</td><td>12</td><td>Lorena Beatriz Valderrana Zenteno</td><td>NA</td></tr>
+<tr><td>47943</td><td>Epistemología Y Problemas De La Investigación En Comunicación</td><td>T-1</td><td>2</td><td>12</td><td>María Ximena Orchard Rieiro</td><td>NA</td></tr>
+<tr><td>47944</td><td>Electivo I “Acción Colectiva Y Movimientos Sociales En Transformación Comunicativa”</td><td>T-1</td><td>2</td><td>12</td><td>Gloria Baigorrotegui Baigorrotegui</td><td>NA</td></tr>
+<tr><td>47949</td><td>Electivo Iii “Estrategias De Análisis Cualitativo”</td><td>T-1</td><td>2</td><td>8 ⚠</td><td>María Ximena Orchard Rieiro</td><td>NA</td></tr>
+<tr><td>47950</td><td>Taller De Escritura Académica Y Ética De La Investigación</td><td>T-1</td><td>2</td><td>8 ⚠</td><td>Rubén Ignacio Dittus Benavente</td><td>NA</td></tr>
+<tr><td>47951</td><td>Proyecto De Graduación (Seminario)</td><td>T-1</td><td>4</td><td>1 ⚠</td><td>Lorena Beatriz Valderrana Zenteno</td><td>NA</td></tr>
+<tr><td>47951</td><td>Proyecto De Graduación (Seminario)</td><td>T-2</td><td>4</td><td>1 ⚠</td><td>Verónica Rocamora Villena</td><td>NA</td></tr>
+<tr><td>47951</td><td>Proyecto De Graduación (Seminario)</td><td>T-3</td><td>4</td><td>1 ⚠</td><td>María Ximena Orchard Rieiro</td><td>NA</td></tr>
+<tr><td>47951</td><td>Proyecto De Graduación (Seminario)</td><td>T-4</td><td>4</td><td>1 ⚠</td><td>Antoine Faure</td><td>NA</td></tr>
+<tr><td>47951</td><td>Proyecto De Graduación (Seminario)</td><td>T-5</td><td>4</td><td>1 ⚠</td><td>Ricardo Ramírez Vallejos</td><td>NA</td></tr>
+<tr><td>47951</td><td>Proyecto De Graduación (Seminario)</td><td>T-6</td><td>4</td><td>1 ⚠</td><td>Antoine Faure</td><td>NA</td></tr>
+<tr><td>47951</td><td>Proyecto De Graduación (Seminario)</td><td>T-6</td><td>4</td><td>1 ⚠</td><td>Antoine Faure</td><td>NA</td></tr>
+<tr><td>47952</td><td>Trabajo De Graduación (Tesis)</td><td>T-1</td><td>4</td><td>1 ⚠</td><td>Edi Efraín Bámaca López</td><td>NA</td></tr></tbody></table></div>
 </main></body></html>
 

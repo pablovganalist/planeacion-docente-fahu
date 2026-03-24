@@ -235,8 +235,14 @@ tr.detalle-row > td {
 }
 .carr-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem; margin-top: 0.8rem;
+}
+@media (max-width: 900px) {
+  .carr-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .carr-grid { grid-template-columns: 1fr; }
 }
 .carr-card {
   display: block; text-decoration: none;
@@ -286,6 +292,16 @@ details.nivel-details[open] > summary.nivel-summary::before {
 <div class="botones-header"><a href="03_filosofia.html" class="btn-indice">← Volver al informe de unidad</a></div></header>
 <main class="contenido">
 <p class="cod-programa">Código de programa: 9570</p>
-<p><em>Sin datos de planeación.</em></p>
+<div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SECCION</th><th>HORAS</th><th>CUPOS</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>48870</td><td>Filosofía De Las Ciencias</td><td>T-1</td><td>2</td><td>10</td><td>Francisco Javier Aoiz Monreal</td><td>NA</td></tr>
+<tr><td>48870</td><td>Filosofía De Las Ciencias</td><td>T-1</td><td>2</td><td>10</td><td>Sebastián Briceño Domínguez</td><td>NA</td></tr>
+<tr><td>48871</td><td>Métodos Formales</td><td>T-1</td><td>4</td><td>10</td><td>Carlo Francesco Rossi Fernández</td><td>NA</td></tr>
+<tr><td>48875</td><td>Lógica Inductiva</td><td>T-1</td><td>4</td><td>5 ⚠</td><td>Wilfredo Quezada Pulido</td><td>NA</td></tr>
+<tr><td>48875</td><td>Fundamentos De La Fisica Contemporánea</td><td>T-2</td><td>4</td><td>5 ⚠</td><td>Ricardo Gabriel Elías Moreno</td><td>NA</td></tr>
+<tr><td>48875</td><td>Problemas Clásicos Y Contemporáneos De Filosofía De La Mente</td><td>T-3</td><td>4</td><td>5 ⚠</td><td>Marcelo Diaz Soto</td><td>NA</td></tr>
+<tr><td>48876</td><td>Tesis I</td><td>T-1</td><td>4</td><td>1 ⚠</td><td>Carlo Francesco Rossi Fernández</td><td>NA</td></tr>
+<tr><td>48876</td><td>Tesis I</td><td>T-2</td><td>4</td><td>1 ⚠</td><td>Sebastián Briceño Domínguez</td><td>NA</td></tr>
+<tr><td>48876</td><td>Tesis I</td><td>T-3</td><td>4</td><td>1 ⚠</td><td>Francisco Javier Aoiz Monreal</td><td>NA</td></tr>
+<tr><td>48876</td><td>Tesis I</td><td>T-4</td><td>4</td><td>1 ⚠</td><td>Marcelo Diaz Soto</td><td>NA</td></tr>
+<tr><td>48876</td><td>Tesis I</td><td>T-5</td><td>4</td><td>1 ⚠</td><td>Hernan Neira Barrera</td><td>NA</td></tr></tbody></table></div>
 </main></body></html>
 

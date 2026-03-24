@@ -235,8 +235,14 @@ tr.detalle-row > td {
 }
 .carr-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem; margin-top: 0.8rem;
+}
+@media (max-width: 900px) {
+  .carr-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .carr-grid { grid-template-columns: 1fr; }
 }
 .carr-card {
   display: block; text-decoration: none;
@@ -286,6 +292,13 @@ details.nivel-details[open] > summary.nivel-summary::before {
 <div class="botones-header"><a href="07_psicologia.html" class="btn-indice">← Volver al informe de unidad</a></div></header>
 <main class="contenido">
 <p class="cod-programa">Código de programa: 9574</p>
-<p><em>Sin datos de planeación.</em></p>
+<div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SECCION</th><th>HORAS</th><th>CUPOS</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>48780</td><td>Discusiones Contemporáneas En Psicología Educacional</td><td>T-1</td><td>4</td><td>12</td><td>Carolina Paz Jorquera Martinez</td><td>NA</td></tr>
+<tr><td>48781</td><td>Políticas Educativas, Curriculum Y Psicología</td><td>T-1</td><td>4</td><td>12</td><td>Rodrigo Rojas Andrade</td><td>NA</td></tr>
+<tr><td>48782</td><td>Co-Laboratorio De Prácticas Situadas I: Comprensión Del Contexto Educativo</td><td>T-1</td><td>4</td><td>12</td><td>Gloria Miryam Mora</td><td>NA</td></tr>
+<tr><td>48786</td><td>Infancia En Chile Hoy: Derechos Civiles Y Políticos</td><td>T-1</td><td>4</td><td>12</td><td>Ana Vergara Del Solar</td><td>NA</td></tr>
+<tr><td>48786</td><td>Trabajo Intersectorial En Salud Mental Y Bienestar: Condiciones Necesarias Para Articular</td><td>T-2</td><td>4</td><td>12</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>48787</td><td>Comunidad Y Neurodiversidad En Espacios Educativos</td><td>T-1</td><td>4</td><td>12</td><td>Gabriel Prosser Bravo</td><td>NA</td></tr>
+<tr><td>48787</td><td>Gestión De La Diferencia Y La Diversidad En El Espacio Educativo Desde Un Enfoque Interse</td><td>T-2</td><td>4</td><td>12</td><td>Claudia Alejandra Calquin Donoso</td><td>NA</td></tr>
+<tr><td>48788</td><td>Co-Laboratorio De Prácticas Situadas Iii: Intervención Y/O Innovación Psicosocial En Contextos Educativos</td><td>T-1</td><td>4</td><td>12</td><td>Claudia Andrea Fonseca Carrillo</td><td>NA</td></tr></tbody></table></div>
 </main></body></html>
 

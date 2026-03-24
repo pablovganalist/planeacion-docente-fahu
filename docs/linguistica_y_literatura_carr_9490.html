@@ -235,8 +235,14 @@ tr.detalle-row > td {
 }
 .carr-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem; margin-top: 0.8rem;
+}
+@media (max-width: 900px) {
+  .carr-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .carr-grid { grid-template-columns: 1fr; }
 }
 .carr-card {
   display: block; text-decoration: none;
@@ -286,6 +292,11 @@ details.nivel-details[open] > summary.nivel-summary::before {
 <div class="botones-header"><a href="05_linguistica_y_literatura.html" class="btn-indice">← Volver al informe de unidad</a></div></header>
 <main class="contenido">
 <p class="cod-programa">Código de programa: 9490</p>
-<p><em>Sin datos de planeación.</em></p>
+<div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SECCION</th><th>HORAS</th><th>CUPOS</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>49878</td><td>Electivo Ii</td><td>T-1</td><td>4</td><td>15</td><td>Claudio Alejandro Reyes Lozano</td><td>NA</td></tr>
+<tr><td>49878</td><td>Electivo Ii</td><td>T-2</td><td>4</td><td>15</td><td>Macarena Urzúa Opazo</td><td>NA</td></tr>
+<tr><td>49878</td><td>Electivo Ii</td><td>T-3</td><td>4</td><td>15</td><td>Nain Abraham Nomez Diaz</td><td>NA</td></tr>
+<tr><td>49878</td><td>Electivo Ii</td><td>T-4</td><td>4</td><td>15</td><td>Natalia Paz Arcos Salvo</td><td>NA</td></tr>
+<tr><td>49879</td><td>Epistemología Y Metodología De La Investigación Literaria</td><td>T-1</td><td>4</td><td>15</td><td>Sebastián Reyes Gil</td><td>NA</td></tr>
+<tr><td>49880</td><td>Seminario De Tesis</td><td>T-1</td><td>4</td><td>15</td><td>Andrea Jeftanovic Avdaloff</td><td>NA</td></tr></tbody></table></div>
 </main></body></html>
 
