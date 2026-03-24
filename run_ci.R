@@ -1,6 +1,14 @@
 # =============================================================================
 # run_ci.R — Script maestro para GitHub Actions
-# Ejecuta el pipeline completo: limpieza → informes → HTML
+# Ejecuta el pipeline completo:
+#   1. Limpieza y análisis
+#   2. Informes .md por unidad
+#   3. HTML por unidad (+ HTMLs por carrera)
+#   4. Comparativos históricos
+#   5. Exportar LaTeX
+#   6. Síntesis por programa
+#   7. Tabla inscritos sellos (HTML + PDF)
+#   8. Informes y presentaciones PDF por carrera (Quarto + Typst)
 # =============================================================================
 # El working directory ya es la raíz del repo en el entorno CI.
 # Las rutas son relativas a esa raíz.
@@ -12,6 +20,8 @@ library(janitor)
 library(tidyverse)
 library(glue)
 library(knitr)
+library(quarto)
+library(withr)
 source("00_base_utils.R", local = TRUE)
 
 # ── Configuración ──────────────────────────────────────────────────────────────
@@ -76,6 +86,34 @@ cat("   OK\n\n")
 # ── 6. Síntesis por carrera y programa ────────────────────────────────────────
 cat("── Paso 6: generando síntesis por programa...\n")
 source("07_sintesis_programas.R", local = TRUE)
+cat("   OK\n\n")
+
+# ── 7. Tabla de inscritos en cursos sello ────────────────────────────────────
+cat("── Paso 7: tabla inscritos sellos (HTML + PDF)...\n")
+if (file.exists("exp_inscritos_sellos.R")) {
+  tryCatch(
+    source("exp_inscritos_sellos.R", local = TRUE),
+    error = function(e) cat("   ADVERTENCIA:", conditionMessage(e), "\n")
+  )
+} else {
+  cat("   OMITIDO (no existe exp_inscritos_sellos.R)\n")
+}
+cat("   OK\n\n")
+
+# ── 8. Informes y presentaciones PDF por carrera (Quarto + Typst) ────────────
+cat("── Paso 8: informes y presentaciones PDF por carrera...\n")
+if (file.exists("render_informes_quarto.R")) {
+  # Asegura que Quarto sea encontrado en CI y en local (RStudio embebido)
+  if (!nzchar(Sys.getenv("QUARTO_PATH")) && nzchar(Sys.which("quarto"))) {
+    Sys.setenv(QUARTO_PATH = Sys.which("quarto"))
+  }
+  tryCatch(
+    source("render_informes_quarto.R", local = TRUE),
+    error = function(e) cat("   ADVERTENCIA:", conditionMessage(e), "\n")
+  )
+} else {
+  cat("   OMITIDO (no existe render_informes_quarto.R)\n")
+}
 cat("   OK\n\n")
 
 cat("=============================================================\n")
