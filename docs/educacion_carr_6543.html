@@ -1,0 +1,371 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pedagogía en Educación General Básica — Primer semestre 2026</title>
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #394049;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  background: linear-gradient(180deg, #eef7f6 0%, #f6f7f8 220px);
+}
+h2 {
+  color: #394049;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-left: 5px solid #EA7600;
+  padding-left: 0.6rem;
+  margin-top: 2rem;
+}
+h3, h3.carr-titulo {
+  color: #498BCA;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.2rem;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0 1.5rem;
+  font-size: 12.5px;
+}
+thead tr {
+  background-color: #394049;
+  color: white;
+}
+thead th {
+  padding: 7px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+tbody tr:nth-child(even) {
+  background-color: #F5F7F8;
+}
+tbody tr:hover {
+  background-color: #E8F8F7;
+}
+tbody td {
+  padding: 5px 12px;
+  border-bottom: 1px solid #E0E0E0;
+}
+tbody tr:has(td > strong) {
+  background-color: #FFF3CD;
+  border-top: 2px solid #EAAA00;
+  border-bottom: 2px solid #EAAA00;
+}
+tbody tr:has(td > strong) td {
+  font-weight: 700;
+  color: #394049;
+}
+tbody td:has(> span.alerta) {
+  color: #C8102E;
+  font-weight: 700;
+}
+blockquote {
+  border-left: 4px solid #00A499;
+  background: #E8F8F7;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0 4px 4px 0;
+  color: #394049;
+}
+blockquote p { margin: 0; }
+header {
+  border-top: 6px solid #00A499;
+  padding: 1.5rem 1.5rem 1.2rem;
+  margin-bottom: 1.25rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+}
+p.facultad {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00A499;
+  margin: 0 0 0.2rem 0;
+}
+h1 {
+  color: #394049;
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem 0;
+  border: none;
+  padding: 0;
+}
+.periodo {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+}
+.cod-programa {
+  font-size: 0.85rem;
+  color: #394049;
+  background-color: #F0F0F0;
+  border-left: 4px solid #498BCA;
+  padding: 0.3rem 0.8rem;
+  margin-top: -0.8rem;
+  margin-bottom: 0.8rem;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.03em;
+}
+p.cod-programa {
+  font-size: 0.82rem;
+  color: #394049;
+  background: #F0F2F4;
+  border-left: 4px solid #498BCA;
+  padding: 0.3rem 0.8rem;
+  margin-top: -0.6rem;
+  margin-bottom: 0.9rem;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.02em;
+}
+.pie {
+  margin-top: 3rem;
+  padding-top: 0.8rem;
+  border-top: 2px solid #00A499;
+  font-size: 11px;
+  color: #666;
+}
+.contenido {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+  padding: 1.5rem;
+}
+.contenido > h2:first-child {
+  margin-top: 0;
+}
+.contenido hr {
+  border: 0;
+  border-top: 1px solid #e4e7ea;
+  margin: 1.35rem 0;
+}
+.botones-header {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+.btn-comp {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #498BCA;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-comp:hover { background: #3a7ab8; }
+.btn-indice {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #e9ecef;
+  color: #394049;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-pdf {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  background: #00A499;
+  color: white !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.03em;
+}
+.btn-pdf:hover {
+  background: #394049;
+}
+tr.acad-row { cursor: pointer; transition: background .15s; }
+tr.acad-row:hover { background: #E8F8F7 !important; }
+tr.acad-row.abierto { background: #E8F8F7 !important; font-weight: 600; }
+td.td-nombre { display: flex; align-items: center; gap: .5rem; }
+.flecha {
+  display: inline-block; width: 14px; font-size: 10px;
+  color: #00A499; transition: transform .2s; flex-shrink: 0;
+}
+tr.acad-row.abierto .flecha { transform: rotate(90deg); }
+tr.detalle-row { display: none; }
+tr.detalle-row.visible { display: table-row; }
+tr.detalle-row > td {
+  padding: 0;
+  background: #f4fbfb;
+  border-bottom: 2px solid #00A499;
+}
+.detalle-inner {
+  padding: .5rem 1rem .7rem 2.4rem;
+}
+.detalle-inner table {
+  font-size: 11.5px; width: auto; min-width: 480px;
+  margin: 0; border-collapse: collapse;
+}
+.detalle-inner thead tr { background: #555; }
+.detalle-inner thead th { padding: 4px 10px; font-weight: 500; color: white; text-align: left; }
+.detalle-inner thead th.num { text-align: right; }
+.detalle-inner tbody tr:nth-child(even) { background: #eef7f7; }
+.detalle-inner tbody tr:hover { background: #d6f0ef; }
+.detalle-inner tbody td { padding: 3px 10px; }
+.detalle-inner tbody td.num { text-align: right; }
+.detalle-total {
+  font-size: 11px; color: #555; margin-top: .35rem;
+}
+@media print {
+  body { max-width: 100%; padding: 1cm; font-size: 11px; background: #fff; }
+  h2 { page-break-before: auto; }
+  table { font-size: 10px; }
+  tbody tr:has(td > strong) { background-color: #FFF3CD !important; }
+  .btn-pdf { display: none; }
+  p.cod-programa { background: #eee !important; }
+  tr.detalle-row { display: table-row !important; }
+  .flecha { display: none; }
+  header, .contenido { box-shadow: none; border-radius: 0; }
+}
+.carr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem; margin-top: 0.8rem;
+}
+.carr-card {
+  display: block; text-decoration: none;
+  background: linear-gradient(135deg, rgba(0,164,153,0.08), rgba(73,139,202,0.06));
+  border: 1px solid rgba(0,164,153,0.18);
+  border-radius: 12px; padding: 1rem; color: #394049;
+  transition: border-color .15s, transform .15s;
+}
+.carr-card:hover { border-color: #00A499; transform: translateY(-1px); }
+.carr-card-nombre {
+  display: block; font-weight: 700; font-size: 0.92rem; line-height: 1.35;
+}
+.carr-card-cod {
+  display: block; font-size: 0.78rem; color: #666;
+  margin-top: 0.25rem; font-family: "Courier New", monospace;
+}
+.carr-card-link {
+  display: block; margin-top: 0.5rem;
+  color: #00A499; font-size: 0.8rem; font-weight: 600;
+}
+details.nivel-details {
+  margin-top: 0.6rem; border-bottom: 1px solid #e0e7ee;
+}
+details.nivel-details > summary.nivel-summary {
+  cursor: pointer; padding: 0.5rem 0;
+  font-weight: 700; font-size: 0.9rem; color: #498BCA;
+  list-style: none; display: flex; align-items: center; gap: 0.5rem;
+}
+details.nivel-details > summary.nivel-summary::-webkit-details-marker { display: none; }
+details.nivel-details > summary.nivel-summary::before {
+  content: "B6"; font-size: 9px; color: #498BCA; transition: transform .2s;
+}
+details.nivel-details[open] > summary.nivel-summary::before {
+  transform: rotate(90deg);
+}
+.nivel-count { font-weight: 400; font-size: 0.8rem; color: #888; }
+.nivel-content { padding: 0.35rem 0 0.6rem 0.5rem; }
+@media print {
+  details.nivel-details[open] > summary.nivel-summary { display: none; }
+  .nivel-content { display: block !important; padding-left: 0; }
+}
+</style></head><body>
+<header>
+<p class="facultad">Facultad de Humanidades</p>
+<h1>Pedagogía en Educación General Básica</h1>
+<p class="periodo">Primer semestre 2026</p>
+<div class="botones-header"><a href="01_educacion.html" class="btn-indice">← Volver al informe de unidad</a></div></header>
+<main class="contenido">
+<p class="cod-programa">Código de programa: 6543</p>
+<details class="nivel-details"><summary class="nivel-summary">PRIMERO <span class="nivel-count">(12 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th></tr></thead><tbody><tr><td>42200</td><td>Abordajes Interseccionales De Las Infancias</td><td>T-1</td><td>4</td><td>30</td><td>Sylvia Contreras Salinas</td></tr>
+<tr><td>42200</td><td>Abordajes Interseccionales De Las Infancias</td><td>T-2</td><td>4</td><td>30</td><td>Constanza Herrera Seda</td></tr>
+<tr><td>42201</td><td>Fundamentos De La Educación Para La Justicia Social</td><td>T-1</td><td>4</td><td>30</td><td>Mathias Marcelo Muñoz Tapia</td></tr>
+<tr><td>42201</td><td>Fundamentos De La Educación Para La Justicia Social</td><td>T-2</td><td>4</td><td>30</td><td>Claudia Cordoba Calquin</td></tr>
+<tr><td>42202</td><td>Filosofía Y Ética De La Educación Y Las Infancias</td><td>T-1</td><td>4</td><td>30</td><td>Paz Caro Rodriguez</td></tr>
+<tr><td>42202</td><td>Filosofía Y Ética De La Educación Y Las Infancias</td><td>T-2</td><td>4</td><td>30</td><td>Jaime Andres Retamal Salazar</td></tr>
+<tr><td>42203</td><td>Fundamentos De La Enseñanza De La Matemática En La Escuela Básica</td><td>T-1</td><td>6</td><td>30</td><td>Alfredo Rafae Carrasco Henriquez</td></tr>
+<tr><td>42203</td><td>Fundamentos De La Enseñanza De La Matemática En La Escuela Básica</td><td>T-2</td><td>6</td><td>30</td><td>Rosa Lucila Muñoz Guajardo</td></tr>
+<tr><td>42204</td><td>Fundamentos De La Enseñanza De La Lengua En La Escuela Básica</td><td>T-1</td><td>4</td><td>30</td><td>Richard Patricio Astudillo Olivares</td></tr>
+<tr><td>42204</td><td>Fundamentos De La Enseñanza De La Lengua En La Escuela Básica</td><td>T-2</td><td>4</td><td>30</td><td>Catherine Flores Gomez</td></tr>
+<tr><td>42205</td><td>Iniciación A La Lecto Escritura Académica Y Expresión Oral</td><td>T-1</td><td>4</td><td>30</td><td>Sara Ladisla Sepúlveda Galindo</td></tr>
+<tr><td>42205</td><td>Iniciación A La Lecto Escritura Académica Y Expresión Oral</td><td>T-2</td><td>4</td><td>30</td><td>Jose Francisco Perez Quintero</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">TERCERO <span class="nivel-count">(19 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th></tr></thead><tbody><tr><td>42213</td><td>Tendencias Y Corrientes Del Saber Pedagógico</td><td>T-1</td><td>4</td><td>20</td><td>Paula Veronica Villalobos Vergara</td></tr>
+<tr><td>42213</td><td>Tendencias Y Corrientes Del Saber Pedagógico</td><td>T-2</td><td>4</td><td>20</td><td>Cecil Araneda Gonzalez</td></tr>
+<tr><td>42214</td><td>Interculturalidad E Inclusión Educativa</td><td>T-1</td><td>4</td><td>20</td><td>Constanza Herrera Seda</td></tr>
+<tr><td>42214</td><td>Interculturalidad E Inclusión Educativa</td><td>T-2</td><td>4</td><td>20</td><td>Elisa Del Carmen Loncon Antileo</td></tr>
+<tr><td>42215</td><td>Álgebra Y Funciones Y Su Enseñanza</td><td>T-1</td><td>6</td><td>21</td><td>Amanda Del Carmen Cerón Espinoza</td></tr>
+<tr><td>42215</td><td>Álgebra Y Funciones Y Su Enseñanza</td><td>T-2</td><td>6</td><td>21</td><td>Peige Kelly Basaure Rivas</td></tr>
+<tr><td>42216</td><td>Lectura Comprensiva Y Literatura Infantil Y Su Enseñanza</td><td>T-1</td><td>4</td><td>20</td><td>Richard Patricio Astudillo Olivares</td></tr>
+<tr><td>42216</td><td>Lectura Comprensiva Y Literatura Infantil Y Su Enseñanza</td><td>T-2</td><td>4</td><td>20</td><td>Catherine Flores Gomez</td></tr>
+<tr><td>42217</td><td>Tiempo Histórico, Procesos Sociales Y Su Enseñanza</td><td>T-1</td><td>4</td><td>21</td><td>Eduardo Andres Godoy Sepulveda</td></tr>
+<tr><td>42217</td><td>Tiempo Histórico, Procesos Sociales Y Su Enseñanza</td><td>T-2</td><td>4</td><td>21</td><td>Nicolás Patricio Acevedo Arriaza</td></tr>
+<tr><td>42218</td><td>Fenómenos Biológicos Y Su Enseñanza</td><td>L-1</td><td>2</td><td>11</td><td>Rodrigo Antonio Sepúlveda González</td></tr>
+<tr><td>42218</td><td>Fenómenos Biológicos Y Su Enseñanza</td><td>L-2</td><td>2</td><td>11</td><td>Carlos Francisco Rivas Ruiz</td></tr>
+<tr><td>42218</td><td>Fenómenos Biológicos Y Su Enseñanza</td><td>L-3</td><td>2</td><td>11</td><td>Rodrigo Antonio Sepúlveda González</td></tr>
+<tr><td>42218</td><td>Fenómenos Biológicos Y Su Enseñanza</td><td>L-4</td><td>2</td><td>11</td><td>Carlos Francisco Rivas Ruiz</td></tr>
+<tr><td>42218</td><td>Fenómenos Biológicos Y Su Enseñanza</td><td>T-1</td><td>4</td><td>22</td><td>Saul Contreras Palma</td></tr>
+<tr><td>42218</td><td>Fenómenos Biológicos Y Su Enseñanza</td><td>T-2</td><td>4</td><td>22</td><td>Diego Enrique Saavedra Moya</td></tr>
+<tr><td>42219</td><td>Inglés I</td><td>L-1</td><td>2</td><td>0</td><td>Aldo Guerra Gonzalez</td></tr>
+<tr><td>42219</td><td>Inglés I</td><td>L-1</td><td>2</td><td>21</td><td>Aldo Guerra Gonzalez</td></tr>
+<tr><td>42219</td><td>Inglés I</td><td>L-3</td><td>2</td><td>21</td><td>Claudia Nuñez Madriaga</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">QUINTO <span class="nivel-count">(20 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th></tr></thead><tbody><tr><td>42227</td><td>Práctica Intermedia I</td><td>T-1</td><td>4</td><td>16</td><td>Carolina Alejandra Santibáñez Monsalve</td></tr>
+<tr><td>42227</td><td>Práctica Intermedia I</td><td>T-2</td><td>4</td><td>16</td><td>Lina Verónica Edith Wistuba Meneses</td></tr>
+<tr><td>42227</td><td>Práctica Intermedia I</td><td>T-3</td><td>4</td><td>16</td><td>Ana María Martínez Blasco</td></tr>
+<tr><td>42227</td><td>Práctica Intermedia I</td><td>T-4</td><td>4</td><td>16</td><td>Claudia Valentina González Campos</td></tr>
+<tr><td>42228</td><td>Evaluación Para El Aprendizaje</td><td>T-1</td><td>4</td><td>20</td><td>Daniel Eduardo Rios Munoz</td></tr>
+<tr><td>42228</td><td>Evaluación Para El Aprendizaje</td><td>T-2</td><td>4</td><td>20</td><td>David Andrés Herrera Araya</td></tr>
+<tr><td>42229</td><td>Liderazgo Pedagógico Y Clima De Aula</td><td>T-1</td><td>4</td><td>20</td><td>Sergio Ignacio Galdames Poblete</td></tr>
+<tr><td>42229</td><td>Liderazgo Pedagógico Y Clima De Aula</td><td>T-2</td><td>4</td><td>20</td><td>Jahel Ramírez Soro</td></tr>
+<tr><td>42230</td><td>Probabilidades Y, Estadística Y Su Enseñanza</td><td>T-1</td><td>6</td><td>21</td><td>Constanza Lopez Llanos</td></tr>
+<tr><td>42230</td><td>Probabilidades Y, Estadística Y Su Enseñanza</td><td>T-2</td><td>6</td><td>21</td><td>Nathalie Francisca Oyola Espinoza</td></tr>
+<tr><td>42231</td><td>La Oralidad Y Su Enseñanza</td><td>T-1</td><td>4</td><td>20</td><td>Denisse Maria Victoria Garrido Rivera</td></tr>
+<tr><td>42231</td><td>La Oralidad Y Su Enseñanza</td><td>T-2</td><td>4</td><td>20</td><td>Eduardo Adolfo Asfura Insunza</td></tr>
+<tr><td>42232</td><td>Infancia Y Formación Para La Cuidadanía En La Escuela Básica</td><td>T-1</td><td>4</td><td>21</td><td>Carolina Garcia Gonzalez</td></tr>
+<tr><td>42232</td><td>Infancia Y Formación Para La Cuidadanía En La Escuela Básica</td><td>T-2</td><td>4</td><td>21</td><td>Camila Beatriz Silva Salinas</td></tr>
+<tr><td>42233</td><td>Fenómenos Físicos, De La Tierra Y El Universo Y Su Enseñanza</td><td>L-1</td><td>2</td><td>20</td><td>Felipe David Márquez Salinas</td></tr>
+<tr><td>42233</td><td>Fenómenos Físicos, De La Tierra Y El Universo Y Su Enseñanza</td><td>L-2</td><td>2</td><td>20</td><td>Yasna Estefanía Muñoz León</td></tr>
+<tr><td>42233</td><td>Fenómenos Físicos, De La Tierra Y El Universo Y Su Enseñanza</td><td>T-1</td><td>4</td><td>20</td><td>Felipe David Márquez Salinas</td></tr>
+<tr><td>42233</td><td>Fenómenos Físicos, De La Tierra Y El Universo Y Su Enseñanza</td><td>T-2</td><td>4</td><td>20</td><td>Yasna Estefanía Muñoz León</td></tr>
+<tr><td>42234</td><td>Inglés Iii</td><td>L-1</td><td>2</td><td>21</td><td>Carlos Roberto Egar Aranda Muñoz</td></tr>
+<tr><td>42234</td><td>Inglés Iii</td><td>L-2</td><td>2</td><td>21</td><td>Pabla Andrea Japke Von Chrismar</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">SEPTIMO <span class="nivel-count">(18 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th></tr></thead><tbody><tr><td>42243</td><td>Práctica Avanzada I</td><td>T-1</td><td>4</td><td>15</td><td>Ximena Marcela Reyes Bubert</td></tr>
+<tr><td>42243</td><td>Práctica Avanzada I</td><td>T-2</td><td>4</td><td>15</td><td>Tamara Francisca Zúñiga Sanhueza</td></tr>
+<tr><td>42243</td><td>Práctica Avanzada I</td><td>T-3</td><td>4</td><td>15</td><td>Marcela Valeska Román Berríos</td></tr>
+<tr><td>42243</td><td>Práctica Avanzada I</td><td>T-4</td><td>4</td><td>15</td><td>Mónica Chávez Del Despósito</td></tr>
+<tr><td>42244</td><td>Innovación Educativa</td><td>T-1</td><td>4</td><td>20</td><td>Natalia Ester Ferrada Quezada</td></tr>
+<tr><td>42244</td><td>Innovación Educativa</td><td>T-2</td><td>4</td><td>20</td><td>Elisa Del Carmen Loncon Antileo</td></tr>
+<tr><td>42245</td><td>Competencia Digital Docente</td><td>T-1</td><td>4</td><td>20</td><td>Juan Eusebio Silva Quiroz</td></tr>
+<tr><td>42245</td><td>Competencia Digital Docente</td><td>T-2</td><td>4</td><td>20</td><td>María Paz Briceño Alvarez</td></tr>
+<tr><td>42246</td><td>Educación Sexual Integral</td><td>T-1</td><td>4</td><td>30</td><td>Mathias Marcelo Muñoz Tapia</td></tr>
+<tr><td>42246</td><td>Taller De Técnicas Artísticas Y Sus Aportes Didácticos En La Educación</td><td>T-2</td><td>4</td><td>15</td><td>Sergio Faundez Gomez</td></tr>
+<tr><td>42246</td><td>Migración Y Literatura</td><td>T-3</td><td>4</td><td>0</td><td>Eduardo Adolfo Asfura Insunza</td></tr>
+<tr><td>42247</td><td>Mención I (A)</td><td>T-1</td><td>2</td><td>0</td><td>Paloma Miranda Arredondo</td></tr>
+<tr><td>42247</td><td>Mención I (A)</td><td>T-1</td><td>2</td><td>30</td><td>Richard Patricio Astudillo Olivares</td></tr>
+<tr><td>42248</td><td>Mención I (B)</td><td>T-1</td><td>4</td><td>30</td><td>Felipe David Márquez Salinas</td></tr>
+<tr><td>42249</td><td>Las Artes Visuales Y Su Enseñanza</td><td>T-1</td><td>4</td><td>20</td><td>Sergio Faundez Gomez</td></tr>
+<tr><td>42249</td><td>Las Artes Visuales Y Su Enseñanza</td><td>T-2</td><td>4</td><td>20</td><td>Sin Profesor</td></tr>
+<tr><td>42250</td><td>Formación Integral I</td><td>T-1</td><td>4</td><td>25</td><td>María José Cea Zañartu</td></tr>
+<tr><td>42250</td><td>Formación Integral I</td><td>T-2</td><td>4</td><td>25</td><td>Sin Profesor</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">NOVENO <span class="nivel-count">(12 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th></tr></thead><tbody><tr><td>42259</td><td>Práctica Profesional I</td><td>T-1</td><td>4</td><td>16</td><td>Mariana Cantarero Rodríguez</td></tr>
+<tr><td>42259</td><td>Práctica Profesional I</td><td>T-2</td><td>4</td><td>16</td><td>Felipe Roberto Galvez Calderón</td></tr>
+<tr><td>42259</td><td>Práctica Profesional I</td><td>T-3</td><td>4</td><td>16</td><td>Sinara Raquel Madalozzo Severino</td></tr>
+<tr><td>42260</td><td>El Juego Como Encuentro Y Bienestar Educativo</td><td>T-1</td><td>4</td><td>15</td><td>María Paz Briceño Alvarez</td></tr>
+<tr><td>42260</td><td>Taller De Trabajo Docente</td><td>T-2</td><td>4</td><td>15</td><td>Christian Eduardo Matamoros Fernandez</td></tr>
+<tr><td>42261</td><td>Mención Iii (A)</td><td>T-1</td><td>2</td><td>0</td><td>Camila Beatriz Silva Salinas</td></tr>
+<tr><td>42261</td><td>Mención Iii (A)</td><td>T-1</td><td>2</td><td>0</td><td>Ruth Elizabeth Echeverría Valdés</td></tr>
+<tr><td>42262</td><td>Mención Iii (B)</td><td>T-1</td><td>4</td><td>0</td><td>Francisco Miguel Cerda Bonomo</td></tr>
+<tr><td>42263</td><td>Proyecto De Integración Mención A</td><td>T-1</td><td>4</td><td>0</td><td>Valeria Carmen Quiroz Quiroz</td></tr>
+<tr><td>42264</td><td>Proyecto De Integración Mención B</td><td>T-1</td><td>4</td><td>25</td><td>Francisco Miguel Cerda Bonomo</td></tr>
+<tr><td>42265</td><td>La Educación Tecnológica Y Su Enseñanza</td><td>T-1</td><td>4</td><td>30</td><td>Ximena Andrea Orellana Román</td></tr>
+<tr><td>42266</td><td>Formación Integral Iii</td><td>T-1</td><td>4</td><td>30</td><td>Mario Alejandro Catalan Marshall</td></tr></tbody></table></div></details>
+</main></body></html>
+

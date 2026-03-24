@@ -1,0 +1,571 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Psicología — Primer semestre 2026</title>
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #394049;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  background: linear-gradient(180deg, #eef7f6 0%, #f6f7f8 220px);
+}
+h2 {
+  color: #394049;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-left: 5px solid #EA7600;
+  padding-left: 0.6rem;
+  margin-top: 2rem;
+}
+h3, h3.carr-titulo {
+  color: #498BCA;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.2rem;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0 1.5rem;
+  font-size: 12.5px;
+}
+thead tr {
+  background-color: #394049;
+  color: white;
+}
+thead th {
+  padding: 7px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+tbody tr:nth-child(even) {
+  background-color: #F5F7F8;
+}
+tbody tr:hover {
+  background-color: #E8F8F7;
+}
+tbody td {
+  padding: 5px 12px;
+  border-bottom: 1px solid #E0E0E0;
+}
+tbody tr:has(td > strong) {
+  background-color: #FFF3CD;
+  border-top: 2px solid #EAAA00;
+  border-bottom: 2px solid #EAAA00;
+}
+tbody tr:has(td > strong) td {
+  font-weight: 700;
+  color: #394049;
+}
+tbody td:has(> span.alerta) {
+  color: #C8102E;
+  font-weight: 700;
+}
+blockquote {
+  border-left: 4px solid #00A499;
+  background: #E8F8F7;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0 4px 4px 0;
+  color: #394049;
+}
+blockquote p { margin: 0; }
+header {
+  border-top: 6px solid #00A499;
+  padding: 1.5rem 1.5rem 1.2rem;
+  margin-bottom: 1.25rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+}
+p.facultad {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00A499;
+  margin: 0 0 0.2rem 0;
+}
+h1 {
+  color: #394049;
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem 0;
+  border: none;
+  padding: 0;
+}
+.periodo {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+}
+.cod-programa {
+  font-size: 0.85rem;
+  color: #394049;
+  background-color: #F0F0F0;
+  border-left: 4px solid #498BCA;
+  padding: 0.3rem 0.8rem;
+  margin-top: -0.8rem;
+  margin-bottom: 0.8rem;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.03em;
+}
+p.cod-programa {
+  font-size: 0.82rem;
+  color: #394049;
+  background: #F0F2F4;
+  border-left: 4px solid #498BCA;
+  padding: 0.3rem 0.8rem;
+  margin-top: -0.6rem;
+  margin-bottom: 0.9rem;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.02em;
+}
+.pie {
+  margin-top: 3rem;
+  padding-top: 0.8rem;
+  border-top: 2px solid #00A499;
+  font-size: 11px;
+  color: #666;
+}
+.contenido {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+  padding: 1.5rem;
+}
+.contenido > h2:first-child {
+  margin-top: 0;
+}
+.contenido hr {
+  border: 0;
+  border-top: 1px solid #e4e7ea;
+  margin: 1.35rem 0;
+}
+.botones-header {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+.btn-comp {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #498BCA;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-comp:hover { background: #3a7ab8; }
+.btn-indice {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #e9ecef;
+  color: #394049;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-pdf {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  background: #00A499;
+  color: white !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.03em;
+}
+.btn-pdf:hover {
+  background: #394049;
+}
+tr.acad-row { cursor: pointer; transition: background .15s; }
+tr.acad-row:hover { background: #E8F8F7 !important; }
+tr.acad-row.abierto { background: #E8F8F7 !important; font-weight: 600; }
+td.td-nombre { display: flex; align-items: center; gap: .5rem; }
+.flecha {
+  display: inline-block; width: 14px; font-size: 10px;
+  color: #00A499; transition: transform .2s; flex-shrink: 0;
+}
+tr.acad-row.abierto .flecha { transform: rotate(90deg); }
+tr.detalle-row { display: none; }
+tr.detalle-row.visible { display: table-row; }
+tr.detalle-row > td {
+  padding: 0;
+  background: #f4fbfb;
+  border-bottom: 2px solid #00A499;
+}
+.detalle-inner {
+  padding: .5rem 1rem .7rem 2.4rem;
+}
+.detalle-inner table {
+  font-size: 11.5px; width: auto; min-width: 480px;
+  margin: 0; border-collapse: collapse;
+}
+.detalle-inner thead tr { background: #555; }
+.detalle-inner thead th { padding: 4px 10px; font-weight: 500; color: white; text-align: left; }
+.detalle-inner thead th.num { text-align: right; }
+.detalle-inner tbody tr:nth-child(even) { background: #eef7f7; }
+.detalle-inner tbody tr:hover { background: #d6f0ef; }
+.detalle-inner tbody td { padding: 3px 10px; }
+.detalle-inner tbody td.num { text-align: right; }
+.detalle-total {
+  font-size: 11px; color: #555; margin-top: .35rem;
+}
+@media print {
+  body { max-width: 100%; padding: 1cm; font-size: 11px; background: #fff; }
+  h2 { page-break-before: auto; }
+  table { font-size: 10px; }
+  tbody tr:has(td > strong) { background-color: #FFF3CD !important; }
+  .btn-pdf { display: none; }
+  p.cod-programa { background: #eee !important; }
+  tr.detalle-row { display: table-row !important; }
+  .flecha { display: none; }
+  header, .contenido { box-shadow: none; border-radius: 0; }
+}
+.carr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem; margin-top: 0.8rem;
+}
+.carr-card {
+  display: block; text-decoration: none;
+  background: linear-gradient(135deg, rgba(0,164,153,0.08), rgba(73,139,202,0.06));
+  border: 1px solid rgba(0,164,153,0.18);
+  border-radius: 12px; padding: 1rem; color: #394049;
+  transition: border-color .15s, transform .15s;
+}
+.carr-card:hover { border-color: #00A499; transform: translateY(-1px); }
+.carr-card-nombre {
+  display: block; font-weight: 700; font-size: 0.92rem; line-height: 1.35;
+}
+.carr-card-cod {
+  display: block; font-size: 0.78rem; color: #666;
+  margin-top: 0.25rem; font-family: "Courier New", monospace;
+}
+.carr-card-link {
+  display: block; margin-top: 0.5rem;
+  color: #00A499; font-size: 0.8rem; font-weight: 600;
+}
+details.nivel-details {
+  margin-top: 0.6rem; border-bottom: 1px solid #e0e7ee;
+}
+details.nivel-details > summary.nivel-summary {
+  cursor: pointer; padding: 0.5rem 0;
+  font-weight: 700; font-size: 0.9rem; color: #498BCA;
+  list-style: none; display: flex; align-items: center; gap: 0.5rem;
+}
+details.nivel-details > summary.nivel-summary::-webkit-details-marker { display: none; }
+details.nivel-details > summary.nivel-summary::before {
+  content: "B6"; font-size: 9px; color: #498BCA; transition: transform .2s;
+}
+details.nivel-details[open] > summary.nivel-summary::before {
+  transform: rotate(90deg);
+}
+.nivel-count { font-weight: 400; font-size: 0.8rem; color: #888; }
+.nivel-content { padding: 0.35rem 0 0.6rem 0.5rem; }
+@media print {
+  details.nivel-details[open] > summary.nivel-summary { display: none; }
+  .nivel-content { display: block !important; padding-left: 0; }
+}
+</style></head><body>
+<header>
+<p class="facultad">Facultad de Humanidades</p>
+<h1>Psicología</h1>
+<p class="periodo">Primer semestre 2026</p>
+<div class="botones-header"><a href="07_psicologia.html" class="btn-indice">← Volver al informe de unidad</a></div></header>
+<main class="contenido">
+<p class="cod-programa">Código de programa: 5223</p>
+<details class="nivel-details"><summary class="nivel-summary">PRIMERO <span class="nivel-count">(48 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>45300</td><td>Fundamentos De Investigación En Psicología</td><td>L-1</td><td>2</td><td>27</td><td>Pablo Alberto Martínez Díaz</td><td>NA</td></tr>
+<tr><td>45300</td><td>Fundamentos De Investigación En Psicología</td><td>L-2</td><td>2</td><td>27</td><td>Cristobal Bize Vivanco</td><td>NA</td></tr>
+<tr><td>45300</td><td>Fundamentos De Investigación En Psicología</td><td>L-3</td><td>2</td><td>27</td><td>Carlos Ascencio Garrido</td><td>NA</td></tr>
+<tr><td>45300</td><td>Fundamentos De Investigación En Psicología</td><td>L-4</td><td>2</td><td>27</td><td>Pablo Alberto Martínez Díaz</td><td>NA</td></tr>
+<tr><td>45300</td><td>Fundamentos De Investigación En Psicología</td><td>T-1</td><td>4</td><td>27</td><td>Pablo Alberto Martínez Díaz</td><td>NA</td></tr>
+<tr><td>45300</td><td>Fundamentos De Investigación En Psicología</td><td>T-2</td><td>4</td><td>27</td><td>Carmen Gloria Baeza Ugarte</td><td>NA</td></tr>
+<tr><td>45300</td><td>Fundamentos De Investigación En Psicología</td><td>T-3</td><td>4</td><td>27</td><td>Carlos Ascencio Garrido</td><td>NA</td></tr>
+<tr><td>45300</td><td>Fundamentos De Investigación En Psicología</td><td>T-4</td><td>4</td><td>27</td><td>Pablo Alberto Martínez Díaz</td><td>NA</td></tr>
+<tr><td>45301</td><td>Introducción A La Disciplina Psicológica</td><td>T-1</td><td>4</td><td>27</td><td>Ana Maria Fernandez Tapia</td><td>NA</td></tr>
+<tr><td>45301</td><td>Introducción A La Disciplina Psicológica</td><td>T-2</td><td>4</td><td>27</td><td>Christian Cofré Montenegro</td><td>NA</td></tr>
+<tr><td>45301</td><td>Introducción A La Disciplina Psicológica</td><td>T-3</td><td>4</td><td>27</td><td>Rodrigo Andres Lara Quinteros</td><td>NA</td></tr>
+<tr><td>45301</td><td>Introducción A La Disciplina Psicológica</td><td>T-4</td><td>4</td><td>27</td><td>Paula Andrea Pavez Salinas</td><td>NA</td></tr>
+<tr><td>45302</td><td>Bases Biológicas De La Psicología</td><td>E-1</td><td>2</td><td>27</td><td>Vanessa Corrales Saavedra</td><td>NA</td></tr>
+<tr><td>45302</td><td>Bases Biológicas De La Psicología</td><td>E-2</td><td>2</td><td>27</td><td>Diego Becerra Quispe</td><td>NA</td></tr>
+<tr><td>45302</td><td>Bases Biológicas De La Psicología</td><td>E-3</td><td>2</td><td>27</td><td>Lorena Andrea Lara Jimenez</td><td>NA</td></tr>
+<tr><td>45302</td><td>Bases Biológicas De La Psicología</td><td>E-4</td><td>2</td><td>27</td><td>Patricio Manuel Eugenio Saez Briones</td><td>NA</td></tr>
+<tr><td>45302</td><td>Bases Biológicas De La Psicología</td><td>T-1</td><td>4</td><td>27</td><td>Veronica Figueroa Gonzalez</td><td>NA</td></tr>
+<tr><td>45302</td><td>Bases Biológicas De La Psicología</td><td>T-2</td><td>4</td><td>27</td><td>Diego Becerra Quispe</td><td>NA</td></tr>
+<tr><td>45302</td><td>Bases Biológicas De La Psicología</td><td>T-3</td><td>4</td><td>27</td><td>Veronica Figueroa Gonzalez</td><td>NA</td></tr>
+<tr><td>45302</td><td>Bases Biológicas De La Psicología</td><td>T-4</td><td>4</td><td>27</td><td>Patricio Manuel Eugenio Saez Briones</td><td>NA</td></tr>
+<tr><td>45303</td><td>Fundamentos Filosóficos De La Psicología</td><td>E-1</td><td>2</td><td>27</td><td>Remis Andres Ramos Carreño</td><td>NA</td></tr>
+<tr><td>45303</td><td>Fundamentos Filosóficos De La Psicología</td><td>E-2</td><td>2</td><td>27</td><td>Rodolfo Galleguillos Serrano</td><td>NA</td></tr>
+<tr><td>45303</td><td>Fundamentos Filosóficos De La Psicología</td><td>E-3</td><td>2</td><td>27</td><td>Cristian Mauricio Martínez Bravo</td><td>NA</td></tr>
+<tr><td>45303</td><td>Fundamentos Filosóficos De La Psicología</td><td>E-4</td><td>2</td><td>27</td><td>Remis Andres Ramos Carreño</td><td>NA</td></tr>
+<tr><td>45303</td><td>Fundamentos Filosóficos De La Psicología</td><td>T-1</td><td>4</td><td>27</td><td>Remis Andres Ramos Carreño</td><td>NA</td></tr>
+<tr><td>45303</td><td>Fundamentos Filosóficos De La Psicología</td><td>T-2</td><td>4</td><td>27</td><td>Yasna Paola Valenzuela Roman</td><td>NA</td></tr>
+<tr><td>45303</td><td>Fundamentos Filosóficos De La Psicología</td><td>T-3</td><td>4</td><td>27</td><td>Cristian Mauricio Martínez Bravo</td><td>NA</td></tr>
+<tr><td>45303</td><td>Fundamentos Filosóficos De La Psicología</td><td>T-4</td><td>4</td><td>27</td><td>Remis Andres Ramos Carreño</td><td>NA</td></tr>
+<tr><td>45304</td><td>Fundamentos Teórico Sociales De La Psicología</td><td>T-1</td><td>4</td><td>27</td><td>Christian Andres Baez Rojas</td><td>NA</td></tr>
+<tr><td>45304</td><td>Fundamentos Teórico Sociales De La Psicología</td><td>T-2</td><td>4</td><td>27</td><td>José Matías Toro Leyton</td><td>NA</td></tr>
+<tr><td>45304</td><td>Fundamentos Teórico Sociales De La Psicología</td><td>T-3</td><td>4</td><td>27</td><td>José Matías Toro Leyton</td><td>NA</td></tr>
+<tr><td>45304</td><td>Fundamentos Teórico Sociales De La Psicología</td><td>T-4</td><td>4</td><td>27</td><td>Christian Andres Baez Rojas</td><td>NA</td></tr>
+<tr><td>45305</td><td>Formación Integral I</td><td>E-1</td><td>2</td><td>27</td><td>Camila Alejandra Arenas Perez</td><td>NA</td></tr>
+<tr><td>45305</td><td>Formación Integral I</td><td>E-2</td><td>2</td><td>27</td><td>Tamara Esthela Navarrete Valdés</td><td>NA</td></tr>
+<tr><td>45305</td><td>Formación Integral I</td><td>E-3</td><td>2</td><td>27</td><td>Illaritza Siuxie Parada Cortés</td><td>NA</td></tr>
+<tr><td>45305</td><td>Formación Integral I</td><td>E-4</td><td>2</td><td>27</td><td>Juan Armando Bastias Ovalle</td><td>NA</td></tr>
+<tr><td>45305</td><td>Formación Integral I</td><td>T-1</td><td>4</td><td>27</td><td>Alejandra Viviana Pezoa Gonzalez</td><td>NA</td></tr>
+<tr><td>45305</td><td>Formación Integral I</td><td>T-2</td><td>4</td><td>27</td><td>Maria Escobar Garcia</td><td>NA</td></tr>
+<tr><td>45305</td><td>Formación Integral I</td><td>T-3</td><td>4</td><td>27</td><td>Carolina Eugenia Canales Araya</td><td>NA</td></tr>
+<tr><td>45305</td><td>Formación Integral I</td><td>T-4</td><td>4</td><td>27</td><td>Juan Armando Bastias Ovalle</td><td>NA</td></tr>
+<tr><td>711</td><td>Inglés I</td><td>T-1</td><td>2</td><td>20</td><td>Francisco Cabañas Gac</td><td>NA</td></tr>
+<tr><td>711</td><td>Inglés I</td><td>T-2</td><td>2</td><td>20</td><td>Francisca Rebolledo Henriquez</td><td>NA</td></tr>
+<tr><td>711</td><td>Inglés I</td><td>T-3</td><td>2</td><td>20</td><td>Francisca Rebolledo Henriquez</td><td>NA</td></tr>
+<tr><td>711</td><td>Inglés I</td><td>T-4</td><td>2</td><td>20</td><td>Francisca Rebolledo Henriquez</td><td>NA</td></tr>
+<tr><td>711</td><td>Inglés I</td><td>T-5</td><td>2</td><td>20</td><td>Francisca Rebolledo Henriquez</td><td>NA</td></tr>
+<tr><td>711</td><td>Inglés I</td><td>T-6</td><td>2</td><td>20</td><td>Paulina Muriel Sepúlveda Vásquez</td><td>NA</td></tr>
+<tr><td>711</td><td>Inglés I</td><td>T-7</td><td>2</td><td>20</td><td>Tamara Karin Espinoza Sepulveda</td><td>NA</td></tr>
+<tr><td>711</td><td>Inglés I</td><td>T-8</td><td>2</td><td>20</td><td>Paulina Zamora Vrsalovic</td><td>NA</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">TERCERO <span class="nivel-count">(48 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>45311</td><td>Metodología Cuantitativa Ii</td><td>L-1</td><td>2</td><td>26</td><td>Patricio Manuel Eugenio Saez Briones</td><td>NA</td></tr>
+<tr><td>45311</td><td>Metodología Cuantitativa Ii</td><td>L-2</td><td>2</td><td>26</td><td>Dante Castillo Guajardo</td><td>NA</td></tr>
+<tr><td>45311</td><td>Metodología Cuantitativa Ii</td><td>L-3</td><td>2</td><td>26</td><td>Constanza Isabel Lizama Vidal</td><td>NA</td></tr>
+<tr><td>45311</td><td>Metodología Cuantitativa Ii</td><td>L-4</td><td>2</td><td>26</td><td>Dante Castillo Guajardo</td><td>NA</td></tr>
+<tr><td>45311</td><td>Metodología Cuantitativa Ii</td><td>T-1</td><td>4</td><td>26</td><td>Pablo Esteban Livacic Rojas</td><td>NA</td></tr>
+<tr><td>45311</td><td>Metodología Cuantitativa Ii</td><td>T-2</td><td>4</td><td>26</td><td>Dante Castillo Guajardo</td><td>NA</td></tr>
+<tr><td>45311</td><td>Metodología Cuantitativa Ii</td><td>T-3</td><td>4</td><td>26</td><td>Constanza Isabel Lizama Vidal</td><td>NA</td></tr>
+<tr><td>45311</td><td>Metodología Cuantitativa Ii</td><td>T-4</td><td>4</td><td>26</td><td>Dante Castillo Guajardo</td><td>NA</td></tr>
+<tr><td>45312</td><td>Teorías Y Perspectivas Psicológicas Ii</td><td>E-1</td><td>2</td><td>26</td><td>Rodolfo Galleguillos Serrano</td><td>NA</td></tr>
+<tr><td>45312</td><td>Teorías Y Perspectivas Psicológicas Ii</td><td>E-2</td><td>2</td><td>26</td><td>Francisca De La Fuentes Verdugo</td><td>NA</td></tr>
+<tr><td>45312</td><td>Teorías Y Perspectivas Psicológicas Ii</td><td>E-3</td><td>2</td><td>26</td><td>Francisca De La Fuentes Verdugo</td><td>NA</td></tr>
+<tr><td>45312</td><td>Teorías Y Perspectivas Psicológicas Ii</td><td>E-4</td><td>2</td><td>26</td><td>Pedro Julio Salinas Quintana</td><td>NA</td></tr>
+<tr><td>45312</td><td>Teorías Y Perspectivas Psicológicas Ii</td><td>T-1</td><td>4</td><td>26</td><td>Yasna Paola Valenzuela Roman</td><td>NA</td></tr>
+<tr><td>45312</td><td>Teorías Y Perspectivas Psicológicas Ii</td><td>T-2</td><td>4</td><td>26</td><td>Yasna Paola Valenzuela Roman</td><td>NA</td></tr>
+<tr><td>45312</td><td>Teorías Y Perspectivas Psicológicas Ii</td><td>T-3</td><td>4</td><td>26</td><td>Yasna Paola Valenzuela Roman</td><td>NA</td></tr>
+<tr><td>45312</td><td>Teorías Y Perspectivas Psicológicas Ii</td><td>T-4</td><td>4</td><td>26</td><td>Pedro Julio Salinas Quintana</td><td>NA</td></tr>
+<tr><td>45313</td><td>Psicología Del Ciclo Vital I</td><td>E-1</td><td>2</td><td>26</td><td>Paula Goñi Garbayo</td><td>NA</td></tr>
+<tr><td>45313</td><td>Psicología Del Ciclo Vital I</td><td>E-2</td><td>2</td><td>26</td><td>Ana Carolina Amaral</td><td>NA</td></tr>
+<tr><td>45313</td><td>Psicología Del Ciclo Vital I</td><td>E-3</td><td>2</td><td>26</td><td>Paula Goñi Garbayo</td><td>NA</td></tr>
+<tr><td>45313</td><td>Psicología Del Ciclo Vital I</td><td>E-4</td><td>2</td><td>26</td><td>Wilsa Margarita Szabo Lagos</td><td>NA</td></tr>
+<tr><td>45313</td><td>Psicología Del Ciclo Vital I</td><td>T-1</td><td>4</td><td>26</td><td>Paula Goñi Garbayo</td><td>NA</td></tr>
+<tr><td>45313</td><td>Psicología Del Ciclo Vital I</td><td>T-2</td><td>4</td><td>26</td><td>Claudia Alejandra Calquin Donoso</td><td>NA</td></tr>
+<tr><td>45313</td><td>Psicología Del Ciclo Vital I</td><td>T-3</td><td>4</td><td>26</td><td>Paula Goñi Garbayo</td><td>NA</td></tr>
+<tr><td>45313</td><td>Psicología Del Ciclo Vital I</td><td>T-4</td><td>4</td><td>26</td><td>Wilsa Margarita Szabo Lagos</td><td>NA</td></tr>
+<tr><td>45314</td><td>Psicología Social I</td><td>E-1</td><td>2</td><td>26</td><td>Gabriel Prosser Bravo</td><td>NA</td></tr>
+<tr><td>45314</td><td>Psicología Social I</td><td>E-2</td><td>2</td><td>26</td><td>Mariana Gálvez Ramírez</td><td>NA</td></tr>
+<tr><td>45314</td><td>Psicología Social I</td><td>E-3</td><td>2</td><td>26</td><td>Ana Vergara Del Solar</td><td>NA</td></tr>
+<tr><td>45314</td><td>Psicología Social I</td><td>E-4</td><td>2</td><td>26</td><td>Mauricio Sepulveda Galeas</td><td>NA</td></tr>
+<tr><td>45314</td><td>Psicología Social I</td><td>T-1</td><td>4</td><td>26</td><td>Gloria Miryam Mora</td><td>NA</td></tr>
+<tr><td>45314</td><td>Psicología Social I</td><td>T-2</td><td>4</td><td>26</td><td>Jorge Leandro Castillo Sepulveda</td><td>NA</td></tr>
+<tr><td>45314</td><td>Psicología Social I</td><td>T-3</td><td>4</td><td>26</td><td>Ana Vergara Del Solar</td><td>NA</td></tr>
+<tr><td>45314</td><td>Psicología Social I</td><td>T-4</td><td>4</td><td>26</td><td>Mauricio Sepulveda Galeas</td><td>NA</td></tr>
+<tr><td>45315</td><td>Formación Integral Iii</td><td>E-1</td><td>2</td><td>26</td><td>Camila Alejandra Arenas Perez</td><td>NA</td></tr>
+<tr><td>45315</td><td>Formación Integral Iii</td><td>E-2</td><td>2</td><td>26</td><td>Marina Oriel Muñoz Basualto</td><td>NA</td></tr>
+<tr><td>45315</td><td>Formación Integral Iii</td><td>E-3</td><td>2</td><td>26</td><td>Stefania Belén Jiménez Zambrano</td><td>NA</td></tr>
+<tr><td>45315</td><td>Formación Integral Iii</td><td>E-4</td><td>2</td><td>26</td><td>Gabriel Prosser Bravo</td><td>NA</td></tr>
+<tr><td>45315</td><td>Formación Integral Iii</td><td>T-1</td><td>4</td><td>26</td><td>Alejandra Viviana Pezoa Gonzalez</td><td>NA</td></tr>
+<tr><td>45315</td><td>Formación Integral Iii</td><td>T-2</td><td>4</td><td>26</td><td>Monica Elena Molina Torres</td><td>NA</td></tr>
+<tr><td>45315</td><td>Formación Integral Iii</td><td>T-3</td><td>4</td><td>26</td><td>Rodrigo Andres Lara Quinteros</td><td>NA</td></tr>
+<tr><td>45315</td><td>Formación Integral Iii</td><td>T-4</td><td>4</td><td>26</td><td>Claudia Alejandra Calquin Donoso</td><td>NA</td></tr>
+<tr><td>713</td><td>Inglés Iii</td><td>T-1</td><td>2</td><td>20</td><td>Francisca Rebolledo Henriquez</td><td>NA</td></tr>
+<tr><td>713</td><td>Inglés Iii</td><td>T-2</td><td>2</td><td>20</td><td>Isabella Ceppi Marino</td><td>NA</td></tr>
+<tr><td>713</td><td>Inglés Iii</td><td>T-3</td><td>2</td><td>20</td><td>Francisca Rebolledo Henriquez</td><td>NA</td></tr>
+<tr><td>713</td><td>Inglés Iii</td><td>T-4</td><td>2</td><td>20</td><td>Tamara Karin Espinoza Sepulveda</td><td>NA</td></tr>
+<tr><td>713</td><td>Inglés Iii</td><td>T-5</td><td>2</td><td>20</td><td>Ernaldo Menares Velasco</td><td>NA</td></tr>
+<tr><td>713</td><td>Inglés Iii</td><td>T-6</td><td>2</td><td>20</td><td>María Laura Molina Matos</td><td>NA</td></tr>
+<tr><td>713</td><td>Inglés Iii</td><td>T-7</td><td>2</td><td>20</td><td>Marcela Patricia Torres Seguel</td><td>NA</td></tr>
+<tr><td>713</td><td>Inglés Iii</td><td>T-8</td><td>2</td><td>20</td><td>Rodrigo Suarez Pemjean</td><td>NA</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">QUINTO <span class="nivel-count">(83 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>45322</td><td>Teorías De La Personalidad Ii</td><td>E-1</td><td>2</td><td>23</td><td>Maria Escobar Garcia</td><td>NA</td></tr>
+<tr><td>45322</td><td>Teorías De La Personalidad Ii</td><td>E-2</td><td>2</td><td>23</td><td>Maria Escobar Garcia</td><td>NA</td></tr>
+<tr><td>45322</td><td>Teorías De La Personalidad Ii</td><td>E-3</td><td>2</td><td>23</td><td>Cristopher Alonso Barrales Gomez</td><td>NA</td></tr>
+<tr><td>45322</td><td>Teorías De La Personalidad Ii</td><td>E-4</td><td>2</td><td>23</td><td>Stefania Belén Jiménez Zambrano</td><td>NA</td></tr>
+<tr><td>45322</td><td>Teorías De La Personalidad Ii</td><td>T-1</td><td>4</td><td>23</td><td>Antonio Letelier Soto</td><td>NA</td></tr>
+<tr><td>45322</td><td>Teorías De La Personalidad Ii</td><td>T-2</td><td>4</td><td>23</td><td>Antonio Letelier Soto</td><td>NA</td></tr>
+<tr><td>45322</td><td>Teorías De La Personalidad Ii</td><td>T-3</td><td>4</td><td>23</td><td>Cristopher Alonso Barrales Gomez</td><td>NA</td></tr>
+<tr><td>45322</td><td>Teorías De La Personalidad Ii</td><td>T-4</td><td>4</td><td>23</td><td>Maria Luisa Morales Torres</td><td>NA</td></tr>
+<tr><td>45324</td><td>Construcción De Test Y Pruebas Psicológicas</td><td>L-1</td><td>2</td><td>23</td><td>Samuel Alejandro Aranguren Zurita</td><td>NA</td></tr>
+<tr><td>45324</td><td>Construcción De Test Y Pruebas Psicológicas</td><td>L-2</td><td>2</td><td>23</td><td>Pablo Esteban Livacic Rojas</td><td>NA</td></tr>
+<tr><td>45324</td><td>Construcción De Test Y Pruebas Psicológicas</td><td>L-3</td><td>2</td><td>23</td><td>Pablo Esteban Livacic Rojas</td><td>NA</td></tr>
+<tr><td>45324</td><td>Construcción De Test Y Pruebas Psicológicas</td><td>L-4</td><td>2</td><td>23</td><td>Belen Andrea Valentina Cordero Zavalla</td><td>NA</td></tr>
+<tr><td>45324</td><td>Construcción De Test Y Pruebas Psicológicas</td><td>T-1</td><td>4</td><td>23</td><td>Samuel Alejandro Aranguren Zurita</td><td>NA</td></tr>
+<tr><td>45324</td><td>Construcción De Test Y Pruebas Psicológicas</td><td>T-2</td><td>4</td><td>23</td><td>Pablo Esteban Livacic Rojas</td><td>NA</td></tr>
+<tr><td>45324</td><td>Construcción De Test Y Pruebas Psicológicas</td><td>T-3</td><td>4</td><td>23</td><td>Pablo Esteban Livacic Rojas</td><td>NA</td></tr>
+<tr><td>45324</td><td>Construcción De Test Y Pruebas Psicológicas</td><td>T-4</td><td>4</td><td>23</td><td>Ana Maria Fernandez Tapia</td><td>NA</td></tr>
+<tr><td>45325</td><td>Formación Integral V</td><td>E-1</td><td>2</td><td>23</td><td>Nicolas Alviña Fuentes</td><td>NA</td></tr>
+<tr><td>45325</td><td>Formación Integral V</td><td>E-2</td><td>2</td><td>23</td><td>Gabriel Alejandro Silva Mancilla</td><td>NA</td></tr>
+<tr><td>45325</td><td>Formación Integral V</td><td>E-3</td><td>2</td><td>23</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>45325</td><td>Formación Integral V</td><td>E-4</td><td>2</td><td>23</td><td>Stefania Belén Jiménez Zambrano</td><td>NA</td></tr>
+<tr><td>45325</td><td>Formación Integral V</td><td>T-1</td><td>4</td><td>23</td><td>Alicia Paloma Ortega Baro</td><td>NA</td></tr>
+<tr><td>45325</td><td>Formación Integral V</td><td>T-2</td><td>4</td><td>23</td><td>Gabriel Alejandro Silva Mancilla</td><td>NA</td></tr>
+<tr><td>45325</td><td>Formación Integral V</td><td>T-3</td><td>4</td><td>23</td><td>Juan Armando Bastias Ovalle</td><td>NA</td></tr>
+<tr><td>45325</td><td>Formación Integral V</td><td>T-4</td><td>4</td><td>23</td><td>Rodrigo Andres Lara Quinteros</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: ¿Qué Es Una Sociedad Justa? Teoría Social Normativa Y Desafíos De Cambio Social</td><td>S-1</td><td>4</td><td>5 ⚠</td><td>Jorge Araya Moya</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Datos Para Contar Historias: Análisis Y Visualización Para Humanidades Y Ciencias Sociales</td><td>S-10</td><td>4</td><td>5 ⚠</td><td>Camilo Andrés Avendaño Avello</td><td>0</td></tr>
+<tr><td>45326</td><td>Sello: Derechos Humanos Desde Los Juegos De Rol De Mesa</td><td>S-11</td><td>4</td><td>5 ⚠</td><td>Nelson Andrés Ortiz Villalobos</td><td>5</td></tr>
+<tr><td>45326</td><td>Sello: Derechos Humanos Y Desarrollo Sostenible: Una Mirada Critica Y Situada Desde Latinoamérica</td><td>S-12</td><td>4</td><td>5 ⚠</td><td>Angela Carolina Morales Ravest</td><td>1</td></tr>
+<tr><td>45326</td><td>Sello: Desarrollo De Estrategias Y Proyectos De Incidencia Social Y Política Desde La Sociedad Civil</td><td>S-13</td><td>4</td><td>5 ⚠</td><td>Mauricio Iván Weibel Barahona</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Educación De Adultos</td><td>S-14</td><td>4</td><td>5 ⚠</td><td>Miguel Ivan Pedraza Gutierrez</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: El Arte Como Puente: Metodologías Interdisciplinares Para Comprender La Cultura Visual</td><td>S-15</td><td>4</td><td>5 ⚠</td><td>Manuel Antonio Aguirre Ossa</td><td>5</td></tr>
+<tr><td>45326</td><td>Sello: El Podcast Educativo: Voz, Creación Y Comunicación Digital</td><td>S-16</td><td>2</td><td>5 ⚠</td><td>Eduardo Inostroza Carvajal</td><td>1</td></tr>
+<tr><td>45326</td><td>Sello: El Podcast Educativo: Voz, Creación Y Comunicación Digital</td><td>S-16</td><td>2</td><td>5 ⚠</td><td>Luciano Guzman</td><td>1</td></tr>
+<tr><td>45326</td><td>Sello: Emprendimientos Sociales Y Cooperativas</td><td>S-17</td><td>2</td><td>5 ⚠</td><td>Luis Edilio Hernández Astudillo</td><td>2</td></tr>
+<tr><td>45326</td><td>Sello: Emprendimientos Sociales Y Cooperativas</td><td>S-17</td><td>2</td><td>5 ⚠</td><td>Mario Hernan Radrigan Rubio</td><td>2</td></tr>
+<tr><td>45326</td><td>Sello: Estrategias De Innovación Para La Sostenibilidad</td><td>S-18</td><td>4</td><td>5 ⚠</td><td>Ignacio Olavarría Contreras</td><td>0</td></tr>
+<tr><td>45326</td><td>Sello: Fotografía De Principio Con Un Fin</td><td>S-19</td><td>4</td><td>5 ⚠</td><td>Ximena Myriam Riffo Piña</td><td>5</td></tr>
+<tr><td>45326</td><td>Sello: Acción: Teoría Y Práctica De La Ética Ambiental</td><td>S-2</td><td>4</td><td>5 ⚠</td><td>Hernan Neira Barrera</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Gobernanza Y Transparencia Desde Los Derechos Humanos</td><td>S-20</td><td>2</td><td>5 ⚠</td><td>Francisco Zambrano Meza</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Gobernanza Y Transparencia Desde Los Derechos Humanos</td><td>S-20</td><td>2</td><td>5 ⚠</td><td>Vanessa Retamal Gutiérrez</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Herramientas Socioemocionales En Contextos De Diversidad</td><td>S-21</td><td>4</td><td>5 ⚠</td><td>Isabel Margarita Puga Young</td><td>7</td></tr>
+<tr><td>45326</td><td>Sello: Historia Aplicada: Desarrollo Territorial Sostenible</td><td>S-22</td><td>4</td><td>5 ⚠</td><td>Pablo Alberto Lacoste Ssa</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Interseccionalidad, Movilidad Humana Y Grupos De Especial Protección</td><td>S-23</td><td>4</td><td>5 ⚠</td><td>Teresa Perez Cosgaya</td><td>2</td></tr>
+<tr><td>45326</td><td>Sello: Juego: Herramienta Educativa Y Para La Intervención Social</td><td>S-24</td><td>4</td><td>5 ⚠</td><td>Juan Armando Bastias Ovalle</td><td>9</td></tr>
+<tr><td>45326</td><td>Sello: La Cárcel Como Problema Social</td><td>S-25</td><td>2</td><td>5 ⚠</td><td>Lucía Dammert Guardia</td><td>1</td></tr>
+<tr><td>45326</td><td>Sello: La Comunicación De La Lengua De Señas Chilena</td><td>S-26</td><td>4</td><td>5 ⚠</td><td>Diego Manzo Faúndez</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: La Escuela Como Organización Que Cuida</td><td>S-27</td><td>4</td><td>5 ⚠</td><td>Sergio Ignacio Galdames Poblete</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: La Representaciones Del Futuro En El Cine De Ciencia-Ficción Y Distópico.</td><td>S-28</td><td>4</td><td>5 ⚠</td><td>Christian Retamal Hernandez</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Laboratorio De Cocreación De Gobernanza Para La Sostenibilidad</td><td>S-29</td><td>4</td><td>5 ⚠</td><td>Israel Patricio Perez Vargas</td><td>0</td></tr>
+<tr><td>45326</td><td>Sello: Análisis De Texto Como Dato: Herramientas Computacionales Para Las Humanidades</td><td>S-3</td><td>4</td><td>5 ⚠</td><td>Camilo Andrés Avendaño Avello</td><td>0</td></tr>
+<tr><td>45326</td><td>Sello: Liderazgo E Innovación Social</td><td>S-30</td><td>4</td><td>5 ⚠</td><td>Marco Iraola Barboza</td><td>1</td></tr>
+<tr><td>45326</td><td>Sello: Narrativas Visuales Y Ciudadanía Cultural: Del Manga Al Cómic Latinoamericano</td><td>S-31</td><td>4</td><td>5 ⚠</td><td>Gloria Andrea Fernández Lagos</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Neurodivergencias Y Salud Mental Comunitaria: Aplicación Del Paradigma Neuroafirmativo</td><td>S-32</td><td>4</td><td>5 ⚠</td><td>Illaritza Siuxie Parada Cortés</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Nuevas Perspectivas Ante La Crisis Planetaria</td><td>S-33</td><td>4</td><td>5 ⚠</td><td>Catalina Santos Astudillo</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Participación Ciudadana Y Territorio</td><td>S-34</td><td>4</td><td>5 ⚠</td><td>Mónica Alejandra Vargas Aguirre</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Persona Humana Y Justicia Social</td><td>S-35</td><td>4</td><td>5 ⚠</td><td>Mauricio Chapsal Escudero</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Psicodrama: Estrategias Para El Abordaje De Grupos Desde Lo Individual Y Lo Colectivo</td><td>S-36</td><td>4</td><td>5 ⚠</td><td>Gabriel Alejandro Silva Mancilla</td><td>6</td></tr>
+<tr><td>45326</td><td>Sello: Salud Cerebral Y Lenguaje</td><td>S-38</td><td>2</td><td>5 ⚠</td><td>Adolfo Garcia Ssa</td><td>5</td></tr>
+<tr><td>45326</td><td>Sello: Salud Cerebral Y Lenguaje</td><td>S-38</td><td>2</td><td>5 ⚠</td><td>Edinson Muñoz Arias</td><td>5</td></tr>
+<tr><td>45326</td><td>Sello: Santiago De Chile: Una Ciudad En Disputa. Historia, Vivienda Y Desigualdad Urbana.</td><td>S-39</td><td>4</td><td>5 ⚠</td><td>Santiago Castillo Braithwaite</td><td>1</td></tr>
+<tr><td>45326</td><td>Sello: Arte Y Cultura Para La Promoción De Los Derechos Humanos</td><td>S-4</td><td>4</td><td>5 ⚠</td><td>Mariela Edith Llancaqueo Jimenez</td><td>5</td></tr>
+<tr><td>45326</td><td>Sello: Territorios En Conflicto: Desafíos De Sostenibilidad Y Justicia Socioambiental</td><td>S-40</td><td>4</td><td>5 ⚠</td><td>Natalia Alejandra Aravena Solís</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Arte, Ciudad Y Espacio Público</td><td>S-5</td><td>4</td><td>5 ⚠</td><td>Andrea Carolina Catalán Muñoz</td><td>0</td></tr>
+<tr><td>45326</td><td>Sello: Ciudadanía Cultura Y Buenvivir</td><td>S-6</td><td>4</td><td>5 ⚠</td><td>Maria Paulina Soto Labbe</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Conectando Barrios: Buenas Prácticas En Torno A La Diversidad Cultural Y La Cohesión Social</td><td>S-7</td><td>4</td><td>5 ⚠</td><td>Teresa Perez Cosgaya</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Controversias Y Posicionamientos Éticos Para Una Ciudadanía Crítica</td><td>S-8</td><td>4</td><td>5 ⚠</td><td>María Elena Abarca Salinas</td><td>NA</td></tr>
+<tr><td>45326</td><td>Sello: Curiosidades Sobre El Cerebro</td><td>S-9</td><td>4</td><td>5 ⚠</td><td>Juan Amaro Fuenzalida</td><td>6</td></tr>
+<tr><td>45366</td><td>Psicopatología Infanto Juvenil</td><td>T-1</td><td>4</td><td>23</td><td>Isabel Margarita Puga Young</td><td>NA</td></tr>
+<tr><td>45366</td><td>Psicopatología Infanto Juvenil</td><td>T-2</td><td>4</td><td>23</td><td>Makarena Moris Ibanez</td><td>NA</td></tr>
+<tr><td>45366</td><td>Psicopatología Infanto Juvenil</td><td>T-3</td><td>4</td><td>23</td><td>Maria Luisa Morales Torres</td><td>NA</td></tr>
+<tr><td>45366</td><td>Psicopatología Infanto Juvenil</td><td>T-4</td><td>4</td><td>23</td><td>Maria Luisa Morales Torres</td><td>NA</td></tr>
+<tr><td>45367</td><td>Psiquiatria Infanto Juvenil</td><td>T-1</td><td>4</td><td>23</td><td>Sebastian Andres Ortiz Perez</td><td>NA</td></tr>
+<tr><td>45367</td><td>Psiquiatria Infanto Juvenil</td><td>T-2</td><td>4</td><td>23</td><td>Antonieta Alejandra Perez Hernandez</td><td>NA</td></tr>
+<tr><td>45367</td><td>Psiquiatria Infanto Juvenil</td><td>T-3</td><td>4</td><td>23</td><td>Antonieta Alejandra Perez Hernandez</td><td>NA</td></tr>
+<tr><td>45367</td><td>Psiquiatria Infanto Juvenil</td><td>T-4</td><td>4</td><td>23</td><td>Makarena Moris Ibanez</td><td>NA</td></tr>
+<tr><td>45370</td><td>Metodología Cualitativa Ii</td><td>L-1</td><td>2</td><td>23</td><td>Luis Alejandro Vallejos Albornoz</td><td>NA</td></tr>
+<tr><td>45370</td><td>Metodología Cualitativa Ii</td><td>L-2</td><td>2</td><td>23</td><td>Gabriel Prosser Bravo</td><td>NA</td></tr>
+<tr><td>45370</td><td>Metodología Cualitativa Ii</td><td>L-3</td><td>2</td><td>23</td><td>Illaritza Siuxie Parada Cortés</td><td>NA</td></tr>
+<tr><td>45370</td><td>Metodología Cualitativa Ii</td><td>L-4</td><td>2</td><td>23</td><td>Luis Alejandro Vallejos Albornoz</td><td>NA</td></tr>
+<tr><td>45370</td><td>Metodología Cualitativa Ii</td><td>T-1</td><td>4</td><td>23</td><td>Marco Antonio Villalta Paucar</td><td>NA</td></tr>
+<tr><td>45370</td><td>Metodología Cualitativa Ii</td><td>T-2</td><td>4</td><td>23</td><td>Gabriel Prosser Bravo</td><td>NA</td></tr>
+<tr><td>45370</td><td>Metodología Cualitativa Ii</td><td>T-3</td><td>4</td><td>23</td><td>José Matías Toro Leyton</td><td>NA</td></tr>
+<tr><td>45370</td><td>Metodología Cualitativa Ii</td><td>T-4</td><td>4</td><td>23</td><td>Marco Antonio Villalta Paucar</td><td>NA</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">SEPTIMO <span class="nivel-count">(57 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>45333</td><td>Trabajo De Grado</td><td>T-1</td><td>4</td><td>7 ⚠</td><td>Maria Soledad Loyola Fuentes</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-10</td><td>4</td><td>7 ⚠</td><td>Rodrigo Andres Lara Quinteros</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-11</td><td>4</td><td>7 ⚠</td><td>Ana Vergara Del Solar</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-12</td><td>4</td><td>7 ⚠</td><td>Veronica Figueroa Gonzalez</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-13</td><td>4</td><td>7 ⚠</td><td>Ana Maria Fernandez Tapia</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-14</td><td>4</td><td>7 ⚠</td><td>Benito Alonso Urra Tobar</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-15</td><td>4</td><td>7 ⚠</td><td>José Matías Toro Leyton</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-16</td><td>4</td><td>7 ⚠</td><td>Irene Magaña Frade</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-17</td><td>4</td><td>7 ⚠</td><td>Ana Vergara Del Solar</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-2</td><td>4</td><td>7 ⚠</td><td>Irene Magaña Frade</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-3</td><td>4</td><td>7 ⚠</td><td>Marco Antonio Villalta Paucar</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-4</td><td>4</td><td>7 ⚠</td><td>Maria Paz Gomez Arizaga</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-5</td><td>4</td><td>7 ⚠</td><td>Johana Lorraine Cabrera Medina</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-6</td><td>4</td><td>7 ⚠</td><td>Claudia Alejandra Calquin Donoso</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-7</td><td>4</td><td>7 ⚠</td><td>Sergio Jose Gonzalez Rodriguez</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-8</td><td>4</td><td>7 ⚠</td><td>Sergio Jose Gonzalez Rodriguez</td><td>NA</td></tr>
+<tr><td>45333</td><td>Trabajo De Grado</td><td>T-9</td><td>4</td><td>7 ⚠</td><td>Sergio Jose Gonzalez Rodriguez</td><td>NA</td></tr>
+<tr><td>45334</td><td>Evaluación Psicológica Psicometrica</td><td>L-1</td><td>2</td><td>25</td><td>Cesar Antonio Trigo Vilches</td><td>NA</td></tr>
+<tr><td>45334</td><td>Evaluación Psicológica Psicometrica</td><td>L-2</td><td>2</td><td>25</td><td>Maricel Andrea Poblete Gonzalez</td><td>NA</td></tr>
+<tr><td>45334</td><td>Evaluación Psicológica Psicometrica</td><td>L-3</td><td>2</td><td>25</td><td>Danny Vargas Escobar</td><td>NA</td></tr>
+<tr><td>45334</td><td>Evaluación Psicológica Psicometrica</td><td>L-4</td><td>2</td><td>25</td><td>Maricel Andrea Poblete Gonzalez</td><td>NA</td></tr>
+<tr><td>45334</td><td>Evaluación Psicológica Psicometrica</td><td>T-1</td><td>4</td><td>25</td><td>Cesar Antonio Trigo Vilches</td><td>NA</td></tr>
+<tr><td>45334</td><td>Evaluación Psicológica Psicometrica</td><td>T-2</td><td>4</td><td>25</td><td>Maricel Andrea Poblete Gonzalez</td><td>NA</td></tr>
+<tr><td>45334</td><td>Evaluación Psicológica Psicometrica</td><td>T-3</td><td>4</td><td>25</td><td>Danny Vargas Escobar</td><td>NA</td></tr>
+<tr><td>45334</td><td>Evaluación Psicológica Psicometrica</td><td>T-4</td><td>4</td><td>25</td><td>Maricel Andrea Poblete Gonzalez</td><td>NA</td></tr>
+<tr><td>45335</td><td>Evaluación Psicológica Proyectiva</td><td>L-1</td><td>2</td><td>25</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>45335</td><td>Evaluación Psicológica Proyectiva</td><td>L-2</td><td>2</td><td>25</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>45335</td><td>Evaluación Psicológica Proyectiva</td><td>L-3</td><td>2</td><td>25</td><td>Cristian Alejandro Yañez Medina</td><td>NA</td></tr>
+<tr><td>45335</td><td>Evaluación Psicológica Proyectiva</td><td>L-4</td><td>2</td><td>25</td><td>Ana Karina Arroz Ceccarelli</td><td>NA</td></tr>
+<tr><td>45335</td><td>Evaluación Psicológica Proyectiva</td><td>T-1</td><td>4</td><td>25</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>45335</td><td>Evaluación Psicológica Proyectiva</td><td>T-2</td><td>4</td><td>25</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>45335</td><td>Evaluación Psicológica Proyectiva</td><td>T-3</td><td>4</td><td>25</td><td>Cristian Alejandro Yañez Medina</td><td>NA</td></tr>
+<tr><td>45335</td><td>Evaluación Psicológica Proyectiva</td><td>T-4</td><td>4</td><td>25</td><td>Ana Karina Arroz Ceccarelli</td><td>NA</td></tr>
+<tr><td>45336</td><td>Psicología Comunitaria</td><td>E-1</td><td>2</td><td>25</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>45336</td><td>Psicología Comunitaria</td><td>E-2</td><td>2</td><td>25</td><td>Francisco Javier Jeanneret Brith</td><td>NA</td></tr>
+<tr><td>45336</td><td>Psicología Comunitaria</td><td>E-3</td><td>2</td><td>25</td><td>Tamara Esthela Navarrete Valdés</td><td>NA</td></tr>
+<tr><td>45336</td><td>Psicología Comunitaria</td><td>E-4</td><td>2</td><td>25</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>45336</td><td>Psicología Comunitaria</td><td>T-1</td><td>4</td><td>25</td><td>Gloria Miryam Mora</td><td>NA</td></tr>
+<tr><td>45336</td><td>Psicología Comunitaria</td><td>T-2</td><td>4</td><td>25</td><td>Francisco Javier Jeanneret Brith</td><td>NA</td></tr>
+<tr><td>45336</td><td>Psicología Comunitaria</td><td>T-3</td><td>4</td><td>25</td><td>Javier Ernesto Bravo Bravo</td><td>NA</td></tr>
+<tr><td>45336</td><td>Psicología Comunitaria</td><td>T-4</td><td>4</td><td>25</td><td>Gabriel Prosser Bravo</td><td>NA</td></tr>
+<tr><td>45337</td><td>Psicofarmacología</td><td>E-1</td><td>2</td><td>25</td><td>Margarita Maria Borquez Quintas</td><td>NA</td></tr>
+<tr><td>45337</td><td>Psicofarmacología</td><td>E-2</td><td>2</td><td>25</td><td>Paulina Alejandra Pizarro Ramonda</td><td>NA</td></tr>
+<tr><td>45337</td><td>Psicofarmacología</td><td>E-3</td><td>2</td><td>25</td><td>Paulina Alejandra Pizarro Ramonda</td><td>NA</td></tr>
+<tr><td>45337</td><td>Psicofarmacología</td><td>E-4</td><td>2</td><td>25</td><td>Margarita Maria Borquez Quintas</td><td>NA</td></tr>
+<tr><td>45337</td><td>Psicofarmacología</td><td>T-1</td><td>4</td><td>25</td><td>Margarita Maria Borquez Quintas</td><td>NA</td></tr>
+<tr><td>45337</td><td>Psicofarmacología</td><td>T-2</td><td>4</td><td>25</td><td>Paulina Alejandra Pizarro Ramonda</td><td>NA</td></tr>
+<tr><td>45337</td><td>Psicofarmacología</td><td>T-3</td><td>4</td><td>25</td><td>Paulina Alejandra Pizarro Ramonda</td><td>NA</td></tr>
+<tr><td>45337</td><td>Psicofarmacología</td><td>T-4</td><td>4</td><td>25</td><td>Margarita Maria Borquez Quintas</td><td>NA</td></tr>
+<tr><td>45338</td><td>Diseño Y Evaluación De Proyectos De Intervención Psicosocial</td><td>E-1</td><td>2</td><td>25</td><td>Elianira Riveros Piro</td><td>NA</td></tr>
+<tr><td>45338</td><td>Diseño Y Evaluación De Proyectos De Intervención Psicosocial</td><td>E-2</td><td>2</td><td>25</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>45338</td><td>Diseño Y Evaluación De Proyectos De Intervención Psicosocial</td><td>E-3</td><td>2</td><td>25</td><td>Camilo Quinteros Espinoza</td><td>NA</td></tr>
+<tr><td>45338</td><td>Diseño Y Evaluación De Proyectos De Intervención Psicosocial</td><td>E-4</td><td>2</td><td>25</td><td>Cristóbal Nicolás Guevara Borroye</td><td>NA</td></tr>
+<tr><td>45338</td><td>Diseño Y Evaluación De Proyectos De Intervención Psicosocial</td><td>T-1</td><td>4</td><td>25</td><td>Maria Soledad Loyola Fuentes</td><td>NA</td></tr>
+<tr><td>45338</td><td>Diseño Y Evaluación De Proyectos De Intervención Psicosocial</td><td>T-2</td><td>4</td><td>25</td><td>Maria Soledad Loyola Fuentes</td><td>NA</td></tr>
+<tr><td>45338</td><td>Diseño Y Evaluación De Proyectos De Intervención Psicosocial</td><td>T-3</td><td>4</td><td>25</td><td>Ximena Daniela Diaz Cornejo</td><td>NA</td></tr>
+<tr><td>45338</td><td>Diseño Y Evaluación De Proyectos De Intervención Psicosocial</td><td>T-4</td><td>4</td><td>25</td><td>Ximena Daniela Diaz Cornejo</td><td>NA</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">NOVENO <span class="nivel-count">(45 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>45344</td><td>Práctica De Especialización Psicología Clínica</td><td>T-1</td><td>4</td><td>7 ⚠</td><td>Jose Ignacio Diaz Ledesma</td><td>NA</td></tr>
+<tr><td>45344</td><td>Práctica De Especialización Psicología Clínica</td><td>T-10</td><td>4</td><td>7 ⚠</td><td>Felipe Bernal Teran</td><td>NA</td></tr>
+<tr><td>45344</td><td>Práctica De Especialización Psicología Clínica</td><td>T-11</td><td>4</td><td>7 ⚠</td><td>Angelica Paulina Bastias Paredes</td><td>NA</td></tr>
+<tr><td>45344</td><td>Práctica De Especialización Psicología Clínica</td><td>T-2</td><td>4</td><td>7 ⚠</td><td>Wilsa Margarita Szabo Lagos</td><td>NA</td></tr>
+<tr><td>45344</td><td>Práctica De Especialización Psicología Clínica</td><td>T-3</td><td>4</td><td>7 ⚠</td><td>Marcela Garcia-Huidobro Diaz</td><td>NA</td></tr>
+<tr><td>45344</td><td>Práctica De Especialización Psicología Clínica</td><td>T-4</td><td>4</td><td>7 ⚠</td><td>Ana Karina Arroz Ceccarelli</td><td>NA</td></tr>
+<tr><td>45344</td><td>Práctica De Especialización Psicología Clínica</td><td>T-5</td><td>4</td><td>7 ⚠</td><td>Wilsa Margarita Szabo Lagos</td><td>NA</td></tr>
+<tr><td>45344</td><td>Práctica De Especialización Psicología Clínica</td><td>T-6</td><td>4</td><td>7 ⚠</td><td>Monserrat Saldias Rojas</td><td>NA</td></tr>
+<tr><td>45344</td><td>Práctica De Especialización Psicología Clínica</td><td>T-7</td><td>4</td><td>7 ⚠</td><td>Gina Angelica Muñoz Torres</td><td>NA</td></tr>
+<tr><td>45344</td><td>Práctica De Especialización Psicología Clínica</td><td>T-8</td><td>4</td><td>7 ⚠</td><td>Francisco Hernandez Ojeda</td><td>NA</td></tr>
+<tr><td>45344</td><td>Práctica De Especialización Psicología Clínica</td><td>T-9</td><td>4</td><td>7 ⚠</td><td>Felipe Bernal Teran</td><td>NA</td></tr>
+<tr><td>45345</td><td>Curso De Profundización Psicología Clínica V</td><td>L-1</td><td>2</td><td>36</td><td>Naiomi Odette Naipan Vasquez</td><td>NA</td></tr>
+<tr><td>45345</td><td>Curso De Profundización Psicología Clínica V</td><td>L-2</td><td>2</td><td>36</td><td>Sebastian Verdugo Carrasco</td><td>NA</td></tr>
+<tr><td>45345</td><td>Curso De Profundización Psicología Clínica V</td><td>T-1</td><td>4</td><td>36</td><td>Irene Magaña Frade</td><td>NA</td></tr>
+<tr><td>45345</td><td>Curso De Profundización Psicología Clínica V</td><td>T-2</td><td>4</td><td>36</td><td>Pablo Alberto Martínez Díaz</td><td>NA</td></tr>
+<tr><td>45346</td><td>Curso De Profundización Psicología Clínica Vi</td><td>L-1</td><td>2</td><td>25</td><td>Makarena Moris Ibanez</td><td>NA</td></tr>
+<tr><td>45346</td><td>Curso De Profundización Psicología Clínica Vi</td><td>L-2</td><td>2</td><td>25</td><td>Makarena Moris Ibanez</td><td>NA</td></tr>
+<tr><td>45346</td><td>Curso De Profundización Psicología Clínica Vi</td><td>L-3</td><td>2</td><td>25</td><td>Makarena Moris Ibanez</td><td>NA</td></tr>
+<tr><td>45346</td><td>Curso De Profundización Psicología Clínica Vi</td><td>T-1</td><td>4</td><td>25</td><td>Margarita Angelica Loubat Oyarce</td><td>NA</td></tr>
+<tr><td>45346</td><td>Curso De Profundización Psicología Clínica Vi</td><td>T-2</td><td>4</td><td>25</td><td>Margarita Angelica Loubat Oyarce</td><td>NA</td></tr>
+<tr><td>45346</td><td>Curso De Profundización Psicología Clínica Vi</td><td>T-3</td><td>4</td><td>25</td><td>Margarita Angelica Loubat Oyarce</td><td>NA</td></tr>
+<tr><td>45352</td><td>Práctica De Especialización Psicología Educacional</td><td>T-1</td><td>4</td><td>5 ⚠</td><td>Carolina Paz Jorquera Martinez</td><td>NA</td></tr>
+<tr><td>45352</td><td>Práctica De Especialización Psicología Educacional</td><td>T-2</td><td>4</td><td>5 ⚠</td><td>Ximena Daniela Diaz Cornejo</td><td>NA</td></tr>
+<tr><td>45352</td><td>Práctica De Especialización Psicología Educacional</td><td>T-3</td><td>4</td><td>5 ⚠</td><td>Rodrigo Rojas Andrade</td><td>NA</td></tr>
+<tr><td>45352</td><td>Práctica De Especialización Psicología Educacional</td><td>T-4</td><td>4</td><td>5 ⚠</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>45353</td><td>Curso De Profundización Psicología Educacional V</td><td>L-1</td><td>2</td><td>20</td><td>Maria Francisca Jaque Morales</td><td>NA</td></tr>
+<tr><td>45353</td><td>Curso De Profundización Psicología Educacional V</td><td>T-1</td><td>4</td><td>20</td><td>Rodrigo Rojas Andrade</td><td>NA</td></tr>
+<tr><td>45354</td><td>Curso De Profundización Psicología Educacional Vi</td><td>L-1</td><td>2</td><td>20</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>45354</td><td>Curso De Profundización Psicología Educacional Vi</td><td>T-1</td><td>4</td><td>20</td><td>Maria Paz Gomez Arizaga</td><td>NA</td></tr>
+<tr><td>45360</td><td>Práctica De Especialización Psicología Del Trabajo Y Las Organizaciones</td><td>T-1</td><td>4</td><td>6 ⚠</td><td>Pablo Ruiz Vásquez</td><td>NA</td></tr>
+<tr><td>45360</td><td>Práctica De Especialización Psicología Del Trabajo Y Las Organizaciones</td><td>T-2</td><td>4</td><td>6 ⚠</td><td>Catalina Amigo Favaron</td><td>NA</td></tr>
+<tr><td>45360</td><td>Práctica De Especialización Psicología Del Trabajo Y Las Organizaciones</td><td>T-3</td><td>4</td><td>6 ⚠</td><td>Danilo Ivan Rojas Miranda</td><td>NA</td></tr>
+<tr><td>45360</td><td>Práctica De Especialización Psicología Del Trabajo Y Las Organizaciones</td><td>T-4</td><td>4</td><td>6 ⚠</td><td>Maria Jose Rodriguez Araneda</td><td>NA</td></tr>
+<tr><td>45361</td><td>Curso De Profundización Psicología Del Trabajo Y Las Organizaciones V</td><td>L-1</td><td>2</td><td>27</td><td>Daniela Sepulveda Espinosa</td><td>NA</td></tr>
+<tr><td>45361</td><td>Curso De Profundización Psicología Del Trabajo Y Las Organizaciones V</td><td>T-1</td><td>4</td><td>27</td><td>Daniela Sepulveda Espinosa</td><td>NA</td></tr>
+<tr><td>45362</td><td>Curso De Profundización Psicología Del Trabajo Y Las Organizaciones Vi</td><td>L-1</td><td>2</td><td>27</td><td>Juan Andres Pucheu Moris</td><td>NA</td></tr>
+<tr><td>45362</td><td>Curso De Profundización Psicología Del Trabajo Y Las Organizaciones Vi</td><td>T-1</td><td>4</td><td>27</td><td>Juan Andres Pucheu Moris</td><td>NA</td></tr>
+<tr><td>45364</td><td>Intervención Psicosocial</td><td>L-1</td><td>2</td><td>28</td><td>Horacio Andrés Cornejo Garcés</td><td>NA</td></tr>
+<tr><td>45364</td><td>Intervención Psicosocial</td><td>L-2</td><td>2</td><td>28</td><td>Francisco Hernandez Ojeda</td><td>NA</td></tr>
+<tr><td>45364</td><td>Intervención Psicosocial</td><td>L-3</td><td>2</td><td>28</td><td>Horacio Andrés Cornejo Garcés</td><td>NA</td></tr>
+<tr><td>45364</td><td>Intervención Psicosocial</td><td>L-4</td><td>2</td><td>28</td><td>Cristóbal Nicolás Guevara Borroye</td><td>NA</td></tr>
+<tr><td>45364</td><td>Intervención Psicosocial</td><td>T-1</td><td>4</td><td>28</td><td>Horacio Andrés Cornejo Garcés</td><td>NA</td></tr>
+<tr><td>45364</td><td>Intervención Psicosocial</td><td>T-2</td><td>4</td><td>28</td><td>Francisco Hernandez Ojeda</td><td>NA</td></tr>
+<tr><td>45364</td><td>Intervención Psicosocial</td><td>T-3</td><td>4</td><td>28</td><td>Carolina Paz Jorquera Martinez</td><td>NA</td></tr>
+<tr><td>45364</td><td>Intervención Psicosocial</td><td>T-4</td><td>4</td><td>28</td><td>Ximena Daniela Diaz Cornejo</td><td>NA</td></tr></tbody></table></div></details>
+</main></body></html>
+

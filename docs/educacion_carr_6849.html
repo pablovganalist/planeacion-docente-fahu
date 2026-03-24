@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Programa de Regularización para Profesores Técnico Profesional — Primer semestre 2026</title>
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #394049;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  background: linear-gradient(180deg, #eef7f6 0%, #f6f7f8 220px);
+}
+h2 {
+  color: #394049;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-left: 5px solid #EA7600;
+  padding-left: 0.6rem;
+  margin-top: 2rem;
+}
+h3, h3.carr-titulo {
+  color: #498BCA;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.2rem;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0 1.5rem;
+  font-size: 12.5px;
+}
+thead tr {
+  background-color: #394049;
+  color: white;
+}
+thead th {
+  padding: 7px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+tbody tr:nth-child(even) {
+  background-color: #F5F7F8;
+}
+tbody tr:hover {
+  background-color: #E8F8F7;
+}
+tbody td {
+  padding: 5px 12px;
+  border-bottom: 1px solid #E0E0E0;
+}
+tbody tr:has(td > strong) {
+  background-color: #FFF3CD;
+  border-top: 2px solid #EAAA00;
+  border-bottom: 2px solid #EAAA00;
+}
+tbody tr:has(td > strong) td {
+  font-weight: 700;
+  color: #394049;
+}
+tbody td:has(> span.alerta) {
+  color: #C8102E;
+  font-weight: 700;
+}
+blockquote {
+  border-left: 4px solid #00A499;
+  background: #E8F8F7;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0 4px 4px 0;
+  color: #394049;
+}
+blockquote p { margin: 0; }
+header {
+  border-top: 6px solid #00A499;
+  padding: 1.5rem 1.5rem 1.2rem;
+  margin-bottom: 1.25rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+}
+p.facultad {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00A499;
+  margin: 0 0 0.2rem 0;
+}
+h1 {
+  color: #394049;
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem 0;
+  border: none;
+  padding: 0;
+}
+.periodo {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+}
+.cod-programa {
+  font-size: 0.85rem;
+  color: #394049;
+  background-color: #F0F0F0;
+  border-left: 4px solid #498BCA;
+  padding: 0.3rem 0.8rem;
+  margin-top: -0.8rem;
+  margin-bottom: 0.8rem;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.03em;
+}
+p.cod-programa {
+  font-size: 0.82rem;
+  color: #394049;
+  background: #F0F2F4;
+  border-left: 4px solid #498BCA;
+  padding: 0.3rem 0.8rem;
+  margin-top: -0.6rem;
+  margin-bottom: 0.9rem;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.02em;
+}
+.pie {
+  margin-top: 3rem;
+  padding-top: 0.8rem;
+  border-top: 2px solid #00A499;
+  font-size: 11px;
+  color: #666;
+}
+.contenido {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+  padding: 1.5rem;
+}
+.contenido > h2:first-child {
+  margin-top: 0;
+}
+.contenido hr {
+  border: 0;
+  border-top: 1px solid #e4e7ea;
+  margin: 1.35rem 0;
+}
+.botones-header {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+.btn-comp {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #498BCA;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-comp:hover { background: #3a7ab8; }
+.btn-indice {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #e9ecef;
+  color: #394049;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-pdf {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  background: #00A499;
+  color: white !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.03em;
+}
+.btn-pdf:hover {
+  background: #394049;
+}
+tr.acad-row { cursor: pointer; transition: background .15s; }
+tr.acad-row:hover { background: #E8F8F7 !important; }
+tr.acad-row.abierto { background: #E8F8F7 !important; font-weight: 600; }
+td.td-nombre { display: flex; align-items: center; gap: .5rem; }
+.flecha {
+  display: inline-block; width: 14px; font-size: 10px;
+  color: #00A499; transition: transform .2s; flex-shrink: 0;
+}
+tr.acad-row.abierto .flecha { transform: rotate(90deg); }
+tr.detalle-row { display: none; }
+tr.detalle-row.visible { display: table-row; }
+tr.detalle-row > td {
+  padding: 0;
+  background: #f4fbfb;
+  border-bottom: 2px solid #00A499;
+}
+.detalle-inner {
+  padding: .5rem 1rem .7rem 2.4rem;
+}
+.detalle-inner table {
+  font-size: 11.5px; width: auto; min-width: 480px;
+  margin: 0; border-collapse: collapse;
+}
+.detalle-inner thead tr { background: #555; }
+.detalle-inner thead th { padding: 4px 10px; font-weight: 500; color: white; text-align: left; }
+.detalle-inner thead th.num { text-align: right; }
+.detalle-inner tbody tr:nth-child(even) { background: #eef7f7; }
+.detalle-inner tbody tr:hover { background: #d6f0ef; }
+.detalle-inner tbody td { padding: 3px 10px; }
+.detalle-inner tbody td.num { text-align: right; }
+.detalle-total {
+  font-size: 11px; color: #555; margin-top: .35rem;
+}
+@media print {
+  body { max-width: 100%; padding: 1cm; font-size: 11px; background: #fff; }
+  h2 { page-break-before: auto; }
+  table { font-size: 10px; }
+  tbody tr:has(td > strong) { background-color: #FFF3CD !important; }
+  .btn-pdf { display: none; }
+  p.cod-programa { background: #eee !important; }
+  tr.detalle-row { display: table-row !important; }
+  .flecha { display: none; }
+  header, .contenido { box-shadow: none; border-radius: 0; }
+}
+.carr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem; margin-top: 0.8rem;
+}
+.carr-card {
+  display: block; text-decoration: none;
+  background: linear-gradient(135deg, rgba(0,164,153,0.08), rgba(73,139,202,0.06));
+  border: 1px solid rgba(0,164,153,0.18);
+  border-radius: 12px; padding: 1rem; color: #394049;
+  transition: border-color .15s, transform .15s;
+}
+.carr-card:hover { border-color: #00A499; transform: translateY(-1px); }
+.carr-card-nombre {
+  display: block; font-weight: 700; font-size: 0.92rem; line-height: 1.35;
+}
+.carr-card-cod {
+  display: block; font-size: 0.78rem; color: #666;
+  margin-top: 0.25rem; font-family: "Courier New", monospace;
+}
+.carr-card-link {
+  display: block; margin-top: 0.5rem;
+  color: #00A499; font-size: 0.8rem; font-weight: 600;
+}
+details.nivel-details {
+  margin-top: 0.6rem; border-bottom: 1px solid #e0e7ee;
+}
+details.nivel-details > summary.nivel-summary {
+  cursor: pointer; padding: 0.5rem 0;
+  font-weight: 700; font-size: 0.9rem; color: #498BCA;
+  list-style: none; display: flex; align-items: center; gap: 0.5rem;
+}
+details.nivel-details > summary.nivel-summary::-webkit-details-marker { display: none; }
+details.nivel-details > summary.nivel-summary::before {
+  content: "B6"; font-size: 9px; color: #498BCA; transition: transform .2s;
+}
+details.nivel-details[open] > summary.nivel-summary::before {
+  transform: rotate(90deg);
+}
+.nivel-count { font-weight: 400; font-size: 0.8rem; color: #888; }
+.nivel-content { padding: 0.35rem 0 0.6rem 0.5rem; }
+@media print {
+  details.nivel-details[open] > summary.nivel-summary { display: none; }
+  .nivel-content { display: block !important; padding-left: 0; }
+}
+</style></head><body>
+<header>
+<p class="facultad">Facultad de Humanidades</p>
+<h1>Programa de Regularización para Profesores Técnico Profesional</h1>
+<p class="periodo">Primer semestre 2026</p>
+<div class="botones-header"><a href="01_educacion.html" class="btn-indice">← Volver al informe de unidad</a></div></header>
+<main class="contenido">
+<p class="cod-programa">Código de programa: 6849</p>
+<details class="nivel-details"><summary class="nivel-summary">PRIMERO <span class="nivel-count">(3 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th></tr></thead><tbody><tr><td>43262</td><td>Comprensión Del Sistema Escolar Y De Las Instituciones Educativas</td><td>T-1</td><td>4</td><td>40</td><td>Carolina Garcia Gonzalez</td></tr>
+<tr><td>43263</td><td>Desarrollo Del Aprendizaje En Jovenes Y Adultos En Contexto Etp</td><td>T-1</td><td>4</td><td>40</td><td>Jocelyn Portugal Villar</td></tr>
+<tr><td>43264</td><td>Competencia Digital Docente En La Etp</td><td>T-1</td><td>4</td><td>40</td><td>María Paz Briceño Alvarez</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">TERCERO <span class="nivel-count">(9 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th></tr></thead><tbody><tr><td>43269</td><td>Metodología De La Investigación En Educación</td><td>T-1</td><td>4</td><td>40</td><td>Sergio Ignacio Galdames Poblete</td></tr>
+<tr><td>43270</td><td>Políticas Educativas Y Trayectorias Formativo- Laborales En Etp</td><td>T-1</td><td>4</td><td>40</td><td>Jonathan Albornoz Valdés</td></tr>
+<tr><td>43271</td><td>Planificación, Estrategias Y Recursos Para La Etp</td><td>T-1</td><td>4</td><td>40</td><td>Sebastián Omar González García</td></tr>
+<tr><td>43272</td><td>Práctica 1: Resignificación De La Teoría Y La Práctica Pedagógica</td><td>T-1</td><td>2</td><td>7 ⚠</td><td>Mercedes Patricia Alvarez Schrader</td></tr>
+<tr><td>43272</td><td>Práctica 1: Resignificación De La Teoría Y La Práctica Pedagógica</td><td>T-2</td><td>2</td><td>7 ⚠</td><td>Ignacio Andrés Castro Leiva</td></tr>
+<tr><td>43272</td><td>Práctica 1: Resignificación De La Teoría Y La Práctica Pedagógica</td><td>T-3</td><td>2</td><td>7 ⚠</td><td>Carolina Ester Veliz Madariaga</td></tr>
+<tr><td>43272</td><td>Práctica 1: Resignificación De La Teoría Y La Práctica Pedagógica</td><td>T-4</td><td>2</td><td>7 ⚠</td><td>Jonathan Albornoz Valdés</td></tr>
+<tr><td>43272</td><td>Práctica 1: Resignificación De La Teoría Y La Práctica Pedagógica</td><td>T-5</td><td>2</td><td>7 ⚠</td><td>Bernardita Cortés Pérez</td></tr>
+<tr><td>43272</td><td>Práctica 1: Resignificación De La Teoría Y La Práctica Pedagógica</td><td>T-6</td><td>2</td><td>7 ⚠</td><td>Helga Verónica Tello Dueñas</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">QUINTO <span class="nivel-count">(16 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th></tr></thead><tbody><tr><td>43277</td><td>Trabajo De Titulación</td><td>T-1</td><td>4</td><td>6 ⚠</td><td>Sergio Ignacio Galdames Poblete</td></tr>
+<tr><td>43277</td><td>Trabajo De Titulación</td><td>T-10</td><td>4</td><td>3 ⚠</td><td>Sebastián Omar González García</td></tr>
+<tr><td>43277</td><td>Trabajo De Titulación</td><td>T-2</td><td>4</td><td>6 ⚠</td><td>Sylvia Contreras Salinas</td></tr>
+<tr><td>43277</td><td>Trabajo De Titulación</td><td>T-3</td><td>4</td><td>6 ⚠</td><td>Juan Eusebio Silva Quiroz</td></tr>
+<tr><td>43277</td><td>Trabajo De Titulación</td><td>T-4</td><td>4</td><td>6 ⚠</td><td>Natalia Ester Ferrada Quezada</td></tr>
+<tr><td>43277</td><td>Trabajo De Titulación</td><td>T-6</td><td>4</td><td>6 ⚠</td><td>Sebastián Omar González García</td></tr>
+<tr><td>43277</td><td>Trabajo De Titulación</td><td>T-7</td><td>4</td><td>6 ⚠</td><td>Constanza Herrera Seda</td></tr>
+<tr><td>43277</td><td>Trabajo De Titulación</td><td>T-8</td><td>4</td><td>6 ⚠</td><td>Sergio Ignacio Galdames Poblete</td></tr>
+<tr><td>43277</td><td>Trabajo De Titulación</td><td>T-9</td><td>4</td><td>6 ⚠</td><td>Natalia Ester Ferrada Quezada</td></tr>
+<tr><td>43278</td><td>Ética Y Construcción De La Identidad Docente</td><td>T-1</td><td>4</td><td>40</td><td>Gonzalo Manases Ruz Wiznia</td></tr>
+<tr><td>43279</td><td>Práctica 3: Diseño, Implementación Y Evaluación De Propuestas De Aprendizaje</td><td>T-1</td><td>2</td><td>7 ⚠</td><td>Mercedes Patricia Alvarez Schrader</td></tr>
+<tr><td>43279</td><td>Práctica 3: Diseño, Implementación Y Evaluación De Propuestas De Aprendizaje</td><td>T-2</td><td>2</td><td>7 ⚠</td><td>Ignacio Andrés Castro Leiva</td></tr>
+<tr><td>43279</td><td>Práctica 3: Diseño, Implementación Y Evaluación De Propuestas De Aprendizaje</td><td>T-3</td><td>2</td><td>7 ⚠</td><td>Carolina Ester Veliz Madariaga</td></tr>
+<tr><td>43279</td><td>Práctica 3: Diseño, Implementación Y Evaluación De Propuestas De Aprendizaje</td><td>T-4</td><td>2</td><td>7 ⚠</td><td>Jonathan Albornoz Valdés</td></tr>
+<tr><td>43279</td><td>Práctica 3: Diseño, Implementación Y Evaluación De Propuestas De Aprendizaje</td><td>T-5</td><td>2</td><td>7 ⚠</td><td>Bernardita Cortés Pérez</td></tr>
+<tr><td>43279</td><td>Práctica 3: Diseño, Implementación Y Evaluación De Propuestas De Aprendizaje</td><td>T-6</td><td>2</td><td>7 ⚠</td><td>Helga Verónica Tello Dueñas</td></tr></tbody></table></div></details>
+</main></body></html>
+

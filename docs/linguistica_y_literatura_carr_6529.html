@@ -1,0 +1,449 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Licenciatura en Lingüística Aplicada a la Traducción — Primer semestre 2026</title>
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #394049;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  background: linear-gradient(180deg, #eef7f6 0%, #f6f7f8 220px);
+}
+h2 {
+  color: #394049;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-left: 5px solid #EA7600;
+  padding-left: 0.6rem;
+  margin-top: 2rem;
+}
+h3, h3.carr-titulo {
+  color: #498BCA;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.2rem;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0 1.5rem;
+  font-size: 12.5px;
+}
+thead tr {
+  background-color: #394049;
+  color: white;
+}
+thead th {
+  padding: 7px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+tbody tr:nth-child(even) {
+  background-color: #F5F7F8;
+}
+tbody tr:hover {
+  background-color: #E8F8F7;
+}
+tbody td {
+  padding: 5px 12px;
+  border-bottom: 1px solid #E0E0E0;
+}
+tbody tr:has(td > strong) {
+  background-color: #FFF3CD;
+  border-top: 2px solid #EAAA00;
+  border-bottom: 2px solid #EAAA00;
+}
+tbody tr:has(td > strong) td {
+  font-weight: 700;
+  color: #394049;
+}
+tbody td:has(> span.alerta) {
+  color: #C8102E;
+  font-weight: 700;
+}
+blockquote {
+  border-left: 4px solid #00A499;
+  background: #E8F8F7;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0 4px 4px 0;
+  color: #394049;
+}
+blockquote p { margin: 0; }
+header {
+  border-top: 6px solid #00A499;
+  padding: 1.5rem 1.5rem 1.2rem;
+  margin-bottom: 1.25rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+}
+p.facultad {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00A499;
+  margin: 0 0 0.2rem 0;
+}
+h1 {
+  color: #394049;
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem 0;
+  border: none;
+  padding: 0;
+}
+.periodo {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+}
+.cod-programa {
+  font-size: 0.85rem;
+  color: #394049;
+  background-color: #F0F0F0;
+  border-left: 4px solid #498BCA;
+  padding: 0.3rem 0.8rem;
+  margin-top: -0.8rem;
+  margin-bottom: 0.8rem;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.03em;
+}
+p.cod-programa {
+  font-size: 0.82rem;
+  color: #394049;
+  background: #F0F2F4;
+  border-left: 4px solid #498BCA;
+  padding: 0.3rem 0.8rem;
+  margin-top: -0.6rem;
+  margin-bottom: 0.9rem;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.02em;
+}
+.pie {
+  margin-top: 3rem;
+  padding-top: 0.8rem;
+  border-top: 2px solid #00A499;
+  font-size: 11px;
+  color: #666;
+}
+.contenido {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
+  padding: 1.5rem;
+}
+.contenido > h2:first-child {
+  margin-top: 0;
+}
+.contenido hr {
+  border: 0;
+  border-top: 1px solid #e4e7ea;
+  margin: 1.35rem 0;
+}
+.botones-header {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+.btn-comp {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #498BCA;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-comp:hover { background: #3a7ab8; }
+.btn-indice {
+  display: inline-block;
+  padding: 0.38rem 0.9rem;
+  background: #e9ecef;
+  color: #394049;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-pdf {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  background: #00A499;
+  color: white !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.03em;
+}
+.btn-pdf:hover {
+  background: #394049;
+}
+tr.acad-row { cursor: pointer; transition: background .15s; }
+tr.acad-row:hover { background: #E8F8F7 !important; }
+tr.acad-row.abierto { background: #E8F8F7 !important; font-weight: 600; }
+td.td-nombre { display: flex; align-items: center; gap: .5rem; }
+.flecha {
+  display: inline-block; width: 14px; font-size: 10px;
+  color: #00A499; transition: transform .2s; flex-shrink: 0;
+}
+tr.acad-row.abierto .flecha { transform: rotate(90deg); }
+tr.detalle-row { display: none; }
+tr.detalle-row.visible { display: table-row; }
+tr.detalle-row > td {
+  padding: 0;
+  background: #f4fbfb;
+  border-bottom: 2px solid #00A499;
+}
+.detalle-inner {
+  padding: .5rem 1rem .7rem 2.4rem;
+}
+.detalle-inner table {
+  font-size: 11.5px; width: auto; min-width: 480px;
+  margin: 0; border-collapse: collapse;
+}
+.detalle-inner thead tr { background: #555; }
+.detalle-inner thead th { padding: 4px 10px; font-weight: 500; color: white; text-align: left; }
+.detalle-inner thead th.num { text-align: right; }
+.detalle-inner tbody tr:nth-child(even) { background: #eef7f7; }
+.detalle-inner tbody tr:hover { background: #d6f0ef; }
+.detalle-inner tbody td { padding: 3px 10px; }
+.detalle-inner tbody td.num { text-align: right; }
+.detalle-total {
+  font-size: 11px; color: #555; margin-top: .35rem;
+}
+@media print {
+  body { max-width: 100%; padding: 1cm; font-size: 11px; background: #fff; }
+  h2 { page-break-before: auto; }
+  table { font-size: 10px; }
+  tbody tr:has(td > strong) { background-color: #FFF3CD !important; }
+  .btn-pdf { display: none; }
+  p.cod-programa { background: #eee !important; }
+  tr.detalle-row { display: table-row !important; }
+  .flecha { display: none; }
+  header, .contenido { box-shadow: none; border-radius: 0; }
+}
+.carr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem; margin-top: 0.8rem;
+}
+.carr-card {
+  display: block; text-decoration: none;
+  background: linear-gradient(135deg, rgba(0,164,153,0.08), rgba(73,139,202,0.06));
+  border: 1px solid rgba(0,164,153,0.18);
+  border-radius: 12px; padding: 1rem; color: #394049;
+  transition: border-color .15s, transform .15s;
+}
+.carr-card:hover { border-color: #00A499; transform: translateY(-1px); }
+.carr-card-nombre {
+  display: block; font-weight: 700; font-size: 0.92rem; line-height: 1.35;
+}
+.carr-card-cod {
+  display: block; font-size: 0.78rem; color: #666;
+  margin-top: 0.25rem; font-family: "Courier New", monospace;
+}
+.carr-card-link {
+  display: block; margin-top: 0.5rem;
+  color: #00A499; font-size: 0.8rem; font-weight: 600;
+}
+details.nivel-details {
+  margin-top: 0.6rem; border-bottom: 1px solid #e0e7ee;
+}
+details.nivel-details > summary.nivel-summary {
+  cursor: pointer; padding: 0.5rem 0;
+  font-weight: 700; font-size: 0.9rem; color: #498BCA;
+  list-style: none; display: flex; align-items: center; gap: 0.5rem;
+}
+details.nivel-details > summary.nivel-summary::-webkit-details-marker { display: none; }
+details.nivel-details > summary.nivel-summary::before {
+  content: "B6"; font-size: 9px; color: #498BCA; transition: transform .2s;
+}
+details.nivel-details[open] > summary.nivel-summary::before {
+  transform: rotate(90deg);
+}
+.nivel-count { font-weight: 400; font-size: 0.8rem; color: #888; }
+.nivel-content { padding: 0.35rem 0 0.6rem 0.5rem; }
+@media print {
+  details.nivel-details[open] > summary.nivel-summary { display: none; }
+  .nivel-content { display: block !important; padding-left: 0; }
+}
+</style></head><body>
+<header>
+<p class="facultad">Facultad de Humanidades</p>
+<h1>Licenciatura en Lingüística Aplicada a la Traducción</h1>
+<p class="periodo">Primer semestre 2026</p>
+<div class="botones-header"><a href="05_linguistica_y_literatura.html" class="btn-indice">← Volver al informe de unidad</a></div></header>
+<main class="contenido">
+<p class="cod-programa">Código de programa: 6529</p>
+<details class="nivel-details"><summary class="nivel-summary">PRIMERO <span class="nivel-count">(27 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>43301</td><td>Lengua Inglesa I</td><td>T-1</td><td>6</td><td>20</td><td>Marlene Andrea Espinoza Vilches</td><td>NA</td></tr>
+<tr><td>43301</td><td>Lengua Inglesa I</td><td>T-2</td><td>6</td><td>18</td><td>Marlene Andrea Espinoza Vilches</td><td>NA</td></tr>
+<tr><td>43301</td><td>Lengua Inglesa I</td><td>T-3</td><td>6</td><td>18</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>43301</td><td>Lengua Inglesa I</td><td>T-4</td><td>6</td><td>0</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>43302</td><td>Lengua Portuguesa I</td><td>T-1</td><td>4</td><td>0</td><td>Ana Karina Morales Cortés</td><td>NA</td></tr>
+<tr><td>43302</td><td>Lengua Portuguesa I</td><td>T-1</td><td>2</td><td>18</td><td>Felipe Andrés Bahamonde Vidal</td><td>NA</td></tr>
+<tr><td>43302</td><td>Lengua Portuguesa I</td><td>T-2</td><td>4</td><td>18</td><td>Ana Karina Morales Cortés</td><td>NA</td></tr>
+<tr><td>43302</td><td>Lengua Portuguesa I</td><td>T-2</td><td>2</td><td>0</td><td>Jennifer Andrea Castro Marchant</td><td>NA</td></tr>
+<tr><td>43302</td><td>Lengua Portuguesa I</td><td>T-3</td><td>4</td><td>0</td><td>Felipe Andrés Bahamonde Vidal</td><td>NA</td></tr>
+<tr><td>43302</td><td>Lengua Portuguesa I</td><td>T-3</td><td>2</td><td>18</td><td>Jennifer Andrea Castro Marchant</td><td>NA</td></tr>
+<tr><td>43302</td><td>Lengua Portuguesa I</td><td>T-4</td><td>6</td><td>18</td><td>Patricia Alejandra Faúndez Ríos</td><td>NA</td></tr>
+<tr><td>43303</td><td>Lengua Japonesa I</td><td>T-1</td><td>6</td><td>18</td><td>Maria Bernardita Vera Urbina</td><td>NA</td></tr>
+<tr><td>43303</td><td>Lengua Japonesa I</td><td>T-2</td><td>6</td><td>18</td><td>Macarena Paz De Lourdes Casanova Soto</td><td>NA</td></tr>
+<tr><td>43303</td><td>Lengua Japonesa I</td><td>T-3</td><td>6</td><td>18</td><td>Elizabeth Alejandra Rojas Muñoz</td><td>NA</td></tr>
+<tr><td>43303</td><td>Lengua Japonesa I</td><td>T-4</td><td>6</td><td>18</td><td>Raquel Rubio Martín</td><td>NA</td></tr>
+<tr><td>43304</td><td>Morfosintaxis Del Español I</td><td>T-1</td><td>4</td><td>18</td><td>Karen Segovia Bahamondes</td><td>NA</td></tr>
+<tr><td>43304</td><td>Morfosintaxis Del Español I</td><td>T-2</td><td>0</td><td>18</td><td>Karen Segovia Bahamondes</td><td>NA</td></tr>
+<tr><td>43304</td><td>Morfosintaxis Del Español I</td><td>T-3</td><td>4</td><td>18</td><td>Karen Segovia Bahamondes</td><td>NA</td></tr>
+<tr><td>43304</td><td>Morfosintaxis Del Español I</td><td>T-4</td><td>0</td><td>18</td><td>Karen Segovia Bahamondes</td><td>NA</td></tr>
+<tr><td>43305</td><td>Teoría De La Comunicación Lingüística</td><td>T-1</td><td>4</td><td>18</td><td>Rosa Maria De Lourdes Gutierrez Barrientos</td><td>NA</td></tr>
+<tr><td>43305</td><td>Teoría De La Comunicación Lingüística</td><td>T-2</td><td>0</td><td>18</td><td>Rosa Maria De Lourdes Gutierrez Barrientos</td><td>NA</td></tr>
+<tr><td>43305</td><td>Teoría De La Comunicación Lingüística</td><td>T-3</td><td>4</td><td>18</td><td>Rosa Maria De Lourdes Gutierrez Barrientos</td><td>NA</td></tr>
+<tr><td>43305</td><td>Teoría De La Comunicación Lingüística</td><td>T-4</td><td>0</td><td>18</td><td>Rosa Maria De Lourdes Gutierrez Barrientos</td><td>NA</td></tr>
+<tr><td>43306</td><td>Expresión Oral Y Escrita I</td><td>T-1</td><td>4</td><td>18</td><td>Claudia Isabel Jarpa Neira</td><td>NA</td></tr>
+<tr><td>43306</td><td>Expresión Oral Y Escrita I</td><td>T-2</td><td>4</td><td>18</td><td>Claudia Isabel Jarpa Neira</td><td>NA</td></tr>
+<tr><td>43306</td><td>Expresión Oral Y Escrita I</td><td>T-3</td><td>4</td><td>18</td><td>Claudia Isabel Jarpa Neira</td><td>NA</td></tr>
+<tr><td>43306</td><td>Expresión Oral Y Escrita I</td><td>T-4</td><td>4</td><td>18</td><td>Claudia Isabel Jarpa Neira</td><td>NA</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">DECIMO <span class="nivel-count">(7 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>43387</td><td>Práctica Profesional</td><td>T-1</td><td>2</td><td>3 ⚠</td><td>Monica Ahumada Figueroa</td><td>NA</td></tr>
+<tr><td>43387</td><td>Práctica Profesional</td><td>T-2</td><td>2</td><td>3 ⚠</td><td>Monica Ahumada Figueroa</td><td>NA</td></tr>
+<tr><td>43387</td><td>Práctica Profesional</td><td>T-3</td><td>2</td><td>3 ⚠</td><td>Patricia Ximena Aviles Retamal</td><td>NA</td></tr>
+<tr><td>43387</td><td>Práctica Profesional</td><td>T-4</td><td>2</td><td>3 ⚠</td><td>Patricia Ximena Aviles Retamal</td><td>NA</td></tr>
+<tr><td>43387</td><td>Práctica Profesional</td><td>T-5</td><td>2</td><td>1 ⚠</td><td>Ana Karina Morales Cortés</td><td>NA</td></tr>
+<tr><td>43387</td><td>Práctica Profesional</td><td>T-6</td><td>2</td><td>1 ⚠</td><td>Ana Karina Morales Cortés</td><td>NA</td></tr>
+<tr><td>43387</td><td>Práctica Profesional</td><td>T-7</td><td>2</td><td>2 ⚠</td><td>Elizabeth Alejandra Rojas Muñoz</td><td>NA</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">TERCERO <span class="nivel-count">(24 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>43313</td><td>Lengua Inglesa Iii</td><td>T-1</td><td>4</td><td>0</td><td>Marlene Andrea Espinoza Vilches</td><td>NA</td></tr>
+<tr><td>43313</td><td>Lengua Inglesa Iii</td><td>T-2</td><td>4</td><td>0</td><td>Sin Profesor</td><td>NA</td></tr>
+<tr><td>43313</td><td>Lengua Inglesa Iii</td><td>T-3</td><td>4</td><td>0</td><td>José Luís Poblete Bravo</td><td>NA</td></tr>
+<tr><td>43314</td><td>Fonética Y Fonología Inglesa I</td><td>T-1</td><td>2</td><td>0</td><td>Carlos Antonio Velozo Hurtado</td><td>NA</td></tr>
+<tr><td>43314</td><td>Fonética Y Fonología Inglesa I</td><td>T-2</td><td>2</td><td>0</td><td>Carlos Antonio Velozo Hurtado</td><td>NA</td></tr>
+<tr><td>43314</td><td>Fonética Y Fonología Inglesa I</td><td>T-3</td><td>2</td><td>0</td><td>Carlos Antonio Velozo Hurtado</td><td>NA</td></tr>
+<tr><td>43315</td><td>Cultura En Lengua Inglesa</td><td>T-1</td><td>4</td><td>16</td><td>Daniela Alejandra Terreros Silva</td><td>NA</td></tr>
+<tr><td>43315</td><td>Cultura En Lengua Inglesa</td><td>T-2</td><td>4</td><td>16</td><td>José Luís Poblete Bravo</td><td>NA</td></tr>
+<tr><td>43315</td><td>Cultura En Lengua Inglesa</td><td>T-3</td><td>4</td><td>16</td><td>Daniela Alejandra Terreros Silva</td><td>NA</td></tr>
+<tr><td>43316</td><td>Gramática Del Texto</td><td>T-1</td><td>4</td><td>16</td><td>Patricia Ximena Aviles Retamal</td><td>NA</td></tr>
+<tr><td>43316</td><td>Gramática Del Texto</td><td>T-2</td><td>0</td><td>16</td><td>Patricia Ximena Aviles Retamal</td><td>NA</td></tr>
+<tr><td>43316</td><td>Gramática Del Texto</td><td>T-3</td><td>4</td><td>16</td><td>Patricia Ximena Aviles Retamal</td><td>NA</td></tr>
+<tr><td>43317</td><td>Expresión Oral Y Escrita Iii</td><td>T-1</td><td>4</td><td>16</td><td>Alejandro Contreras Cortes</td><td>NA</td></tr>
+<tr><td>43317</td><td>Expresión Oral Y Escrita Iii</td><td>T-2</td><td>0</td><td>16</td><td>Alejandro Contreras Cortes</td><td>NA</td></tr>
+<tr><td>43317</td><td>Expresión Oral Y Escrita Iii</td><td>T-3</td><td>4</td><td>16</td><td>Alejandro Contreras Cortes</td><td>NA</td></tr>
+<tr><td>43318</td><td>Lengua Japonesa Iii</td><td>T-2</td><td>6</td><td>18</td><td>Maria Bernardita Vera Urbina</td><td>NA</td></tr>
+<tr><td>43318</td><td>Lengua Japonesa Iii</td><td>T-2</td><td>2</td><td>0</td><td>Mayu Ogiso</td><td>NA</td></tr>
+<tr><td>43318</td><td>Lengua Japonesa Iii</td><td>T-3</td><td>2</td><td>0</td><td>Mayu Ogiso</td><td>NA</td></tr>
+<tr><td>43318</td><td>Lengua Japonesa Iii</td><td>T-3</td><td>6</td><td>18</td><td>Tamara Montero Nova</td><td>NA</td></tr>
+<tr><td>43319</td><td>Cultura Japonesa</td><td>T-2</td><td>4</td><td>18</td><td>Matilde Belen Galvez Sepulveda</td><td>NA</td></tr>
+<tr><td>43319</td><td>Cultura Japonesa</td><td>T-3</td><td>4</td><td>18</td><td>Matilde Belen Galvez Sepulveda</td><td>NA</td></tr>
+<tr><td>43320</td><td>Lengua Portuguesa Iii</td><td>T-1</td><td>4</td><td>18</td><td>Felipe Andrés Bahamonde Vidal</td><td>NA</td></tr>
+<tr><td>43321</td><td>Fonética Y Fonología Portuguesa</td><td>T-1</td><td>4</td><td>18</td><td>Patricia Alejandra Faúndez Ríos</td><td>NA</td></tr>
+<tr><td>43322</td><td>Cultura En Lengua Portuguesa</td><td>T-1</td><td>4</td><td>18</td><td>Francisca Eugenia Dos Santos</td><td>NA</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">QUINTO <span class="nivel-count">(29 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>43332</td><td>Lengua Inglesa V</td><td>T-1</td><td>6</td><td>18</td><td>Wolfgang Egon Schroder Greve</td><td>NA</td></tr>
+<tr><td>43332</td><td>Lengua Inglesa V</td><td>T-2</td><td>6</td><td>18</td><td>José Luís Poblete Bravo</td><td>NA</td></tr>
+<tr><td>43332</td><td>Lengua Inglesa V</td><td>T-3</td><td>6</td><td>18</td><td>Wolfgang Egon Schroder Greve</td><td>NA</td></tr>
+<tr><td>43333</td><td>Gramática Contrastiva Inglés - Español</td><td>T-1</td><td>4</td><td>18</td><td>Angela Morales Santibanez</td><td>NA</td></tr>
+<tr><td>43333</td><td>Gramática Contrastiva Inglés - Español</td><td>T-2</td><td>4</td><td>18</td><td>Angela Morales Santibanez</td><td>NA</td></tr>
+<tr><td>43333</td><td>Gramática Contrastiva Inglés - Español</td><td>T-3</td><td>4</td><td>18</td><td>Angela Morales Santibanez</td><td>NA</td></tr>
+<tr><td>43334</td><td>Análisis Del Discurso</td><td>T-1</td><td>4</td><td>18</td><td>Felipe Cesar Delfin Moreno Perez</td><td>NA</td></tr>
+<tr><td>43334</td><td>Análisis Del Discurso</td><td>T-2</td><td>0</td><td>18</td><td>Felipe Cesar Delfin Moreno Perez</td><td>NA</td></tr>
+<tr><td>43334</td><td>Análisis Del Discurso</td><td>T-3</td><td>4</td><td>18</td><td>Felipe Cesar Delfin Moreno Perez</td><td>NA</td></tr>
+<tr><td>43335</td><td>Lexicogenesia</td><td>T-1</td><td>2</td><td>18</td><td>Felipe Cesar Delfin Moreno Perez</td><td>NA</td></tr>
+<tr><td>43335</td><td>Lexicogenesia</td><td>T-2</td><td>0</td><td>18</td><td>Felipe Cesar Delfin Moreno Perez</td><td>NA</td></tr>
+<tr><td>43335</td><td>Lexicogenesia</td><td>T-3</td><td>2</td><td>18</td><td>Felipe Cesar Delfin Moreno Perez</td><td>NA</td></tr>
+<tr><td>43336</td><td>Computación</td><td>T-1</td><td>2</td><td>18</td><td>Alejandro Contreras Cortes</td><td>NA</td></tr>
+<tr><td>43336</td><td>Computación</td><td>T-2</td><td>0</td><td>18</td><td>Alejandro Contreras Cortes</td><td>NA</td></tr>
+<tr><td>43336</td><td>Computación</td><td>T-3</td><td>2</td><td>18</td><td>Alejandro Contreras Cortes</td><td>NA</td></tr>
+<tr><td>43337</td><td>Lengua Japonesa V</td><td>T-2</td><td>4</td><td>18</td><td>Maria Bernardita Vera Urbina</td><td>NA</td></tr>
+<tr><td>43337</td><td>Lengua Japonesa V</td><td>T-2</td><td>2</td><td>0</td><td>Mayu Ogiso</td><td>NA</td></tr>
+<tr><td>43337</td><td>Lengua Japonesa V</td><td>T-2</td><td>2</td><td>0</td><td>Riko Iizumi</td><td>NA</td></tr>
+<tr><td>43337</td><td>Lengua Japonesa V</td><td>T-3</td><td>4</td><td>18</td><td>Gisselle Carolina Chamizo Galaz</td><td>NA</td></tr>
+<tr><td>43337</td><td>Lengua Japonesa V</td><td>T-3</td><td>2</td><td>0</td><td>Mayu Ogiso</td><td>NA</td></tr>
+<tr><td>43337</td><td>Lengua Japonesa V</td><td>T-3</td><td>2</td><td>0</td><td>Riko Iizumi</td><td>NA</td></tr>
+<tr><td>43338</td><td>Gramática Contrastiva Japonés - Español</td><td>T-2</td><td>2</td><td>18</td><td>Edinson Muñoz Arias</td><td>NA</td></tr>
+<tr><td>43338</td><td>Gramática Contrastiva Japonés - Español</td><td>T-2</td><td>2</td><td>18</td><td>Sebastián Andrés Rodríguez Escalona</td><td>NA</td></tr>
+<tr><td>43338</td><td>Gramática Contrastiva Japonés - Español</td><td>T-3</td><td>2</td><td>18</td><td>Edinson Muñoz Arias</td><td>NA</td></tr>
+<tr><td>43338</td><td>Gramática Contrastiva Japonés - Español</td><td>T-3</td><td>2</td><td>0</td><td>Sebastián Andrés Rodríguez Escalona</td><td>NA</td></tr>
+<tr><td>43339</td><td>Lengua Portuguesa V</td><td>T-1</td><td>4</td><td>18</td><td>Felipe Andrés Bahamonde Vidal</td><td>NA</td></tr>
+<tr><td>43340</td><td>Gramática Contrastiva Portugués - Español</td><td>T-1</td><td>4</td><td>18</td><td>Patricia Alejandra Faúndez Ríos</td><td>NA</td></tr>
+<tr><td>43341</td><td>Producción Escrita En Portugués I</td><td>T-1</td><td>2</td><td>18</td><td>Felipe Andrés Bahamonde Vidal</td><td>NA</td></tr>
+<tr><td>43341</td><td>Producción Escrita En Portugués I</td><td>T-1</td><td>2</td><td>0</td><td>Patricia Alejandra Faúndez Ríos</td><td>NA</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">SEPTIMO <span class="nivel-count">(33 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>43353</td><td>Lengua Inglesa Vii</td><td>T-1</td><td>4</td><td>18</td><td>Pamela Andrea Torres Aguilar</td><td>NA</td></tr>
+<tr><td>43353</td><td>Lengua Inglesa Vii</td><td>T-2</td><td>4</td><td>18</td><td>Carlos Antonio Velozo Hurtado</td><td>NA</td></tr>
+<tr><td>43353</td><td>Lengua Inglesa Vii</td><td>T-3</td><td>4</td><td>18</td><td>Pamela Andrea Torres Aguilar</td><td>NA</td></tr>
+<tr><td>43354</td><td>Traducción General Inglés - Español</td><td>T-1</td><td>4</td><td>18</td><td>Marcela Contreras Torregrosa</td><td>NA</td></tr>
+<tr><td>43354</td><td>Traducción General Inglés - Español</td><td>T-2</td><td>0</td><td>18</td><td>Marcela Contreras Torregrosa</td><td>NA</td></tr>
+<tr><td>43354</td><td>Traducción General Inglés - Español</td><td>T-3</td><td>4</td><td>18</td><td>Marcela Contreras Torregrosa</td><td>NA</td></tr>
+<tr><td>43355</td><td>Iniciación En Traducción Español - Inglés</td><td>T-1</td><td>4</td><td>18</td><td>Rodrigo Antonio Jorquera Gallardo</td><td>NA</td></tr>
+<tr><td>43355</td><td>Iniciación En Traducción Español - Inglés</td><td>T-2</td><td>0</td><td>18</td><td>Rodrigo Antonio Jorquera Gallardo</td><td>NA</td></tr>
+<tr><td>43355</td><td>Iniciación En Traducción Español - Inglés</td><td>T-3</td><td>4</td><td>18</td><td>Rosa Basaure Cabero</td><td>NA</td></tr>
+<tr><td>43356</td><td>Terminología</td><td>T-1</td><td>4</td><td>18</td><td>Andrea Viviana Gallardo Salazar</td><td>NA</td></tr>
+<tr><td>43356</td><td>Terminología</td><td>T-2</td><td>0</td><td>18</td><td>Andrea Viviana Gallardo Salazar</td><td>NA</td></tr>
+<tr><td>43356</td><td>Terminología</td><td>T-3</td><td>4</td><td>18</td><td>Andrea Viviana Gallardo Salazar</td><td>NA</td></tr>
+<tr><td>43357</td><td>Metodología De La Investigación En Traducción</td><td>T-1</td><td>4</td><td>5 ⚠</td><td>Nestor Singer Contreras</td><td>NA</td></tr>
+<tr><td>43357</td><td>Metodología De La Investigación En Traducción</td><td>T-10</td><td>4</td><td>5 ⚠</td><td>Marcela Contreras Torregrosa</td><td>NA</td></tr>
+<tr><td>43357</td><td>Metodología De La Investigación En Traducción</td><td>T-2</td><td>4</td><td>4 ⚠</td><td>Nestor Singer Contreras</td><td>NA</td></tr>
+<tr><td>43357</td><td>Metodología De La Investigación En Traducción</td><td>T-3</td><td>4</td><td>6 ⚠</td><td>Francisca Eugenia Dos Santos</td><td>NA</td></tr>
+<tr><td>43357</td><td>Metodología De La Investigación En Traducción</td><td>T-4</td><td>4</td><td>6 ⚠</td><td>Angela Morales Santibanez</td><td>NA</td></tr>
+<tr><td>43357</td><td>Metodología De La Investigación En Traducción</td><td>T-5</td><td>4</td><td>5 ⚠</td><td>Marcos Cárdenas Mancilla</td><td>NA</td></tr>
+<tr><td>43357</td><td>Metodología De La Investigación En Traducción</td><td>T-6</td><td>4</td><td>5 ⚠</td><td>Marcos Cárdenas Mancilla</td><td>NA</td></tr>
+<tr><td>43357</td><td>Metodología De La Investigación En Traducción</td><td>T-7</td><td>4</td><td>5 ⚠</td><td>Adolfo Garcia Ssa</td><td>NA</td></tr>
+<tr><td>43357</td><td>Metodología De La Investigación En Traducción</td><td>T-8</td><td>4</td><td>5 ⚠</td><td>Edinson Muñoz Arias</td><td>NA</td></tr>
+<tr><td>43357</td><td>Metodología De La Investigación En Traducción</td><td>T-9</td><td>4</td><td>5 ⚠</td><td>Rosa Basaure Cabero</td><td>NA</td></tr>
+<tr><td>43358</td><td>Lengua Japonesa Vii</td><td>T-2</td><td>2</td><td>18</td><td>Raquel Rubio Martín</td><td>NA</td></tr>
+<tr><td>43358</td><td>Lengua Japonesa Vii</td><td>T-2</td><td>2</td><td>0</td><td>Riko Iizumi</td><td>NA</td></tr>
+<tr><td>43358</td><td>Lengua Japonesa Vii</td><td>T-3</td><td>2</td><td>18</td><td>Raquel Rubio Martín</td><td>NA</td></tr>
+<tr><td>43358</td><td>Lengua Japonesa Vii</td><td>T-3</td><td>2</td><td>0</td><td>Riko Iizumi</td><td>NA</td></tr>
+<tr><td>43359</td><td>Comprensión De Lectura En Japonés Ii</td><td>T-2</td><td>4</td><td>18</td><td>Gisselle Carolina Chamizo Galaz</td><td>NA</td></tr>
+<tr><td>43359</td><td>Comprensión De Lectura En Japonés Ii</td><td>T-3</td><td>4</td><td>18</td><td>Gisselle Carolina Chamizo Galaz</td><td>NA</td></tr>
+<tr><td>43360</td><td>Iniciación En Traducción Japonés Español</td><td>T-2</td><td>4</td><td>18</td><td>Elizabeth Alejandra Rojas Muñoz</td><td>NA</td></tr>
+<tr><td>43360</td><td>Iniciación En Traducción Japonés Español</td><td>T-3</td><td>4</td><td>18</td><td>Elizabeth Alejandra Rojas Muñoz</td><td>NA</td></tr>
+<tr><td>43361</td><td>Lengua Portuguesa Vii</td><td>T-1</td><td>4</td><td>18</td><td>Ana Karina Morales Cortés</td><td>NA</td></tr>
+<tr><td>43362</td><td>Traducción General Portugués-Español</td><td>T-1</td><td>4</td><td>18</td><td>Jennifer Andrea Castro Marchant</td><td>NA</td></tr>
+<tr><td>43363</td><td>Iniciación En Traducción Español-Portugués</td><td>T-1</td><td>4</td><td>18</td><td>Francisca Eugenia Dos Santos</td><td>NA</td></tr></tbody></table></div></details>
+<details class="nivel-details"><summary class="nivel-summary">NOVENO <span class="nivel-count">(39 secc.)</span></summary><div class="nivel-content"><table><thead><tr><th>COD</th><th>CURSO</th><th>SEC</th><th>H</th><th>CUPO</th><th>PROFESOR</th><th>INSC</th></tr></thead><tbody><tr><td>43373</td><td>Producción Escrita En Inglés Ii</td><td>T-1</td><td>2</td><td>18</td><td>Marcos Cárdenas Mancilla</td><td>NA</td></tr>
+<tr><td>43373</td><td>Producción Escrita En Inglés Ii</td><td>T-2</td><td>2</td><td>18</td><td>Marcos Cárdenas Mancilla</td><td>NA</td></tr>
+<tr><td>43373</td><td>Producción Escrita En Inglés Ii</td><td>T-3</td><td>2</td><td>18</td><td>Marcos Cárdenas Mancilla</td><td>NA</td></tr>
+<tr><td>43374</td><td>Traducción En Cs. Jurídicas Inglés-Español</td><td>T-1</td><td>4</td><td>18</td><td>Rosa Basaure Cabero</td><td>NA</td></tr>
+<tr><td>43374</td><td>Traducción En Cs. Jurídicas Inglés-Español</td><td>T-2</td><td>0</td><td>18</td><td>Rosa Basaure Cabero</td><td>NA</td></tr>
+<tr><td>43374</td><td>Traducción En Cs. Jurídicas Inglés-Español</td><td>T-3</td><td>4</td><td>18</td><td>Rosa Basaure Cabero</td><td>NA</td></tr>
+<tr><td>43375</td><td>Traducción Español-Inglés Ii</td><td>T-1</td><td>4</td><td>18</td><td>Andrea Viviana Gallardo Salazar</td><td>NA</td></tr>
+<tr><td>43375</td><td>Traducción Español-Inglés Ii</td><td>T-2</td><td>0</td><td>18</td><td>Andrea Viviana Gallardo Salazar</td><td>NA</td></tr>
+<tr><td>43375</td><td>Traducción Español-Inglés Ii</td><td>T-3</td><td>4</td><td>18</td><td>Andrea Viviana Gallardo Salazar</td><td>NA</td></tr>
+<tr><td>43376</td><td>Electivo Ii Subtitulación Y Tav</td><td>T-1</td><td>4</td><td>3 ⚠</td><td>Alejandro Contreras Cortes</td><td>NA</td></tr>
+<tr><td>43376</td><td>Electivo Ii Metodología Para La Enseñanza De Segundas Lenguas</td><td>T-2</td><td>4</td><td>3 ⚠</td><td>Nestor Singer Contreras</td><td>NA</td></tr>
+<tr><td>43376</td><td>Electivo Ii Arte Y Cultura De Asia</td><td>T-3</td><td>4</td><td>3 ⚠</td><td>Matilde Belen Galvez Sepulveda</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Desarrollo De Estrategias Y Proyectos De Incidencia Social Y Política Desde La Sociedad Civil</td><td>S-10</td><td>4</td><td>2 ⚠</td><td>Mauricio Iván Weibel Barahona</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Gobernanza Y Transparencia Desde Los Derechos Humanos</td><td>S-11</td><td>4</td><td>2 ⚠</td><td>Francisco Zambrano Meza</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Gobernanza Y Transparencia Desde Los Derechos Humanos</td><td>S-11</td><td>4</td><td>2 ⚠</td><td>Vanessa Retamal Gutiérrez</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Herramientas Socioemocionales En Contextos De Diversidad</td><td>S-13</td><td>4</td><td>2 ⚠</td><td>Isabel Margarita Puga Young</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Interseccionalidad, Movilidad Humana Y Grupos De Especial Protección</td><td>S-14</td><td>4</td><td>2 ⚠</td><td>Teresa Perez Cosgaya</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Juego: Herramienta Educativa Y Para La Intervención Social</td><td>S-15</td><td>4</td><td>2 ⚠</td><td>Juan Armando Bastias Ovalle</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Neurodivergencias Y Salud Mental Comunitaria: Aplicación Del Paradigma Neuroafirmativo</td><td>S-16</td><td>4</td><td>2 ⚠</td><td>Illaritza Siuxie Parada Cortés</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Psicodrama: Estrategias Para El Abordaje De Grupos Desde Lo Individual Y Lo Colectivo</td><td>S-17</td><td>4</td><td>2 ⚠</td><td>Gabriel Alejandro Silva Mancilla</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Santiago De Chile: Una Ciudad En Disputa. Historia, Vivienda Y Desigualdad Urbana.</td><td>S-19</td><td>4</td><td>2 ⚠</td><td>Santiago Castillo Braithwaite</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: ¿Qué Es Una Sociedad Justa? Teoría Social Normativa Y Desafíos De Cambio Social</td><td>S-3</td><td>4</td><td>2 ⚠</td><td>Jorge Araya Moya</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Acción: Teoría Y Práctica De La Ética Ambiental</td><td>S-4</td><td>4</td><td>2 ⚠</td><td>Hernan Neira Barrera</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Arte Y Cultura Para La Promoción De Los Derechos Humanos</td><td>S-5</td><td>4</td><td>2 ⚠</td><td>Mariela Edith Llancaqueo Jimenez</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Conectando Barrios: Buenas Prácticas En Torno A La Diversidad Cultural Y La Cohesión Social</td><td>S-6</td><td>4</td><td>2 ⚠</td><td>Teresa Perez Cosgaya</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Controversias Y Posicionamientos Éticos Para Una Ciudadanía Crítica</td><td>S-7</td><td>4</td><td>2 ⚠</td><td>María Elena Abarca Salinas</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Curiosidades Sobre El Cerebro</td><td>S-8</td><td>4</td><td>2 ⚠</td><td>Juan Amaro Fuenzalida</td><td>NA</td></tr>
+<tr><td>43377</td><td>Sello: Derechos Humanos Desde Los Juegos De Rol De Mesa</td><td>S-9</td><td>4</td><td>2 ⚠</td><td>Nelson Andrés Ortiz Villalobos</td><td>NA</td></tr>
+<tr><td>43377</td><td>Electivo Iii Traducción Como Derecho</td><td>T-1</td><td>4</td><td>3 ⚠</td><td>Marcela Contreras Torregrosa</td><td>NA</td></tr>
+<tr><td>43377</td><td>Electivo Iii Marcos Semántico- Cognitivos Y Traducción</td><td>T-2</td><td>4</td><td>3 ⚠</td><td>Helmuth Franz Steil Velozo</td><td>NA</td></tr>
+<tr><td>43378</td><td>Ética Profesional I</td><td>T-1</td><td>2</td><td>18</td><td>Francisca Eugenia Dos Santos</td><td>NA</td></tr>
+<tr><td>43378</td><td>Ética Profesional I</td><td>T-2</td><td>0</td><td>18</td><td>Francisca Eugenia Dos Santos</td><td>NA</td></tr>
+<tr><td>43378</td><td>Ética Profesional I</td><td>T-3</td><td>2</td><td>18</td><td>Francisca Eugenia Dos Santos</td><td>NA</td></tr>
+<tr><td>43379</td><td>Expresión Oral Y Escrita En Japonés Ii</td><td>T-2</td><td>4</td><td>18</td><td>Riko Iizumi</td><td>NA</td></tr>
+<tr><td>43379</td><td>Expresión Oral Y Escrita En Japonés Ii</td><td>T-3</td><td>0</td><td>18</td><td>Riko Iizumi</td><td>NA</td></tr>
+<tr><td>43380</td><td>Traducción Cs. Sociales Japonés-Español</td><td>T-2</td><td>4</td><td>18</td><td>Sebastián Andrés Rodríguez Escalona</td><td>NA</td></tr>
+<tr><td>43380</td><td>Traducción Cs. Sociales Japonés-Español</td><td>T-3</td><td>4</td><td>18</td><td>Sebastián Andrés Rodríguez Escalona</td><td>NA</td></tr>
+<tr><td>43381</td><td>Traducción En Cs. Jurídicas Portugués-Español</td><td>T-1</td><td>4</td><td>18</td><td>Jennifer Andrea Castro Marchant</td><td>NA</td></tr>
+<tr><td>43382</td><td>Traducción Español-Portugués Ii</td><td>T-1</td><td>4</td><td>18</td><td>Jennifer Andrea Castro Marchant</td><td>NA</td></tr></tbody></table></div></details>
+</main></body></html>
+
