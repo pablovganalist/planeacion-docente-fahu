@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso — Planeación docente FAHU</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    :root {
+      --teal: #00A499;
+      --orange: #EA7600;
+      --dark: #394049;
+      --bg: #f6f7f8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #eef7f6 0%, var(--bg) 220px);
+      color: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 18px 40px rgba(57,64,73,0.10);
+      border-top: 6px solid var(--teal);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.75rem;
+      color: var(--teal);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-size: 1.45rem;
+      margin-bottom: 0.4rem;
+    }
+    .sub {
+      color: #66707a;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .btn-login {
+      display: inline-block;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 0.85rem 2rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    .btn-login:hover { background: #008f85; }
+    .notice {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #8a949e;
+      line-height: 1.5;
+    }
+    .error-msg {
+      display: none;
+      margin-top: 1rem;
+      background: #fff3f0;
+      border: 1px solid #f5c6bb;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <p class="eyebrow">Facultad de Humanidades · USACH</p>
+    <h1>Planeación docente</h1>
+    <p class="sub">Primer semestre 2026 — Acceso restringido</p>
+    <button class="btn-login" id="btn-login">Ingresar con Google</button>
+    <div class="error-msg" id="error-msg">
+      Tu cuenta no tiene acceso a ningún informe. Contacta al coordinador de Cursos Sello.
+    </div>
+    <p class="notice">Solo pueden acceder usuarios autorizados por la Facultad.<br>Si tienes problemas para ingresar, escribe a tu coordinación.</p>
+  </div>
+
+  <script>
+    // Mapa de roles a rutas de informe
+    const ROLE_MAP = {
+      educacion:          "/01_educacion.html",
+      estudios_politicos: "/02_estudios_politicos.html",
+      filosofia:          "/03_filosofia.html",
+      historia:           "/04_historia.html",
+      linguistica:        "/05_linguistica_y_literatura.html",
+      periodismo:         "/06_periodismo.html",
+      psicologia:         "/07_psicologia.html",
+      admin:              "/index.html"
+    };
+
+    function redirectByRole(user) {
+      const roles = user.app_metadata && user.app_metadata.roles
+        ? user.app_metadata.roles
+        : [];
+
+      // Admin va al index
+      if (roles.includes("admin")) {
+        window.location.href = "/index.html";
+        return;
+      }
+
+      // Busca el primer rol que tenga informe asignado
+      for (const role of roles) {
+        if (ROLE_MAP[role]) {
+          window.location.href = ROLE_MAP[role];
+          return;
+        }
+      }
+
+      // Tiene sesión pero no tiene rol válido
+      document.getElementById("error-msg").style.display = "block";
+    }
+
+    netlifyIdentity.on("init", user => {
+      if (user) redirectByRole(user);
+    });
+
+    netlifyIdentity.on("login", user => {
+      netlifyIdentity.close();
+      redirectByRole(user);
+    });
+
+    document.getElementById("btn-login").addEventListener("click", () => {
+      netlifyIdentity.open("login");
+    });
+  </script>
+</body>
+</html>
