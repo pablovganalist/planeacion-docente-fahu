@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Planeación docente — Primer semestre 2026</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     :root {
       --teal: #00A499;
@@ -32,6 +33,13 @@
       box-shadow: 0 18px 40px rgba(57, 64, 73, 0.08);
       border-top: 6px solid var(--teal);
     }
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
     .eyebrow {
       margin: 0;
       text-transform: uppercase;
@@ -48,6 +56,28 @@
       margin: 0;
       color: #66707a;
     }
+    .user-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: #66707a;
+    }
+    .user-email {
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .btn-logout {
+      border: 1px solid #d0d5da;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--dark);
+      padding: 0.35rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-logout:hover { background: #f0f2f4; }
     .tabs {
       display: flex;
       gap: 0.75rem;
@@ -137,6 +167,8 @@
       color: #6f7780;
       font-size: 0.82rem;
     }
+    /* Oculta todo hasta que Identity inicialice */
+    .content { display: none; }
     @media (max-width: 700px) {
       .hero, .panel { padding: 1.1rem; }
       h1 { font-size: 1.55rem; }
@@ -145,11 +177,19 @@
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="wrap content" id="main-content">
     <section class="hero">
-      <p class="eyebrow">Facultad de Humanidades</p>
-      <h1>Planeación docente</h1>
-      <p class="sub">Primer semestre 2026</p>
+      <div class="hero-top">
+        <div>
+          <p class="eyebrow">Facultad de Humanidades</p>
+          <h1>Planeación docente</h1>
+          <p class="sub">Primer semestre 2026</p>
+        </div>
+        <div class="user-bar">
+          <span class="user-email" id="user-email"></span>
+          <button class="btn-logout" id="btn-logout">Cerrar sesión</button>
+        </div>
+      </div>
       <div class="tabs">
         <button class="tab-btn active" data-tab="informes">Informes 1-2026</button>
         <button class="tab-btn" data-tab="sintesis">Síntesis por carrera</button>
@@ -159,14 +199,8 @@
 
     <section class="panel active" id="tab-informes">
       <h2>Informes por unidad</h2>
-      <div class="grid">
-        <a class="unidad-btn" href="01_educacion.html"><span class="unidad-nombre">DEPARTAMENTO DE EDUCACIÓN</span><span class="unidad-link">Abrir informe</span></a>
-<a class="unidad-btn" href="02_estudios_politicos.html"><span class="unidad-nombre">DEPARTAMENTO DE ESTUDIOS POLÍTICOS</span><span class="unidad-link">Abrir informe</span></a>
-<a class="unidad-btn" href="03_filosofia.html"><span class="unidad-nombre">DEPARTAMENTO DE FILOSOFÍA</span><span class="unidad-link">Abrir informe</span></a>
-<a class="unidad-btn" href="04_historia.html"><span class="unidad-nombre">DEPARTAMENTO DE HISTORIA</span><span class="unidad-link">Abrir informe</span></a>
-<a class="unidad-btn" href="05_linguistica_y_literatura.html"><span class="unidad-nombre">DEPARTAMENTO DE LINGÜÍSTICA Y LITERATURA</span><span class="unidad-link">Abrir informe</span></a>
-<a class="unidad-btn" href="06_periodismo.html"><span class="unidad-nombre">ESCUELA DE PERIODISMO</span><span class="unidad-link">Abrir informe</span></a>
-<a class="unidad-btn" href="07_psicologia.html"><span class="unidad-nombre">ESCUELA DE PSICOLOGÍA</span><span class="unidad-link">Abrir informe</span></a>
+      <div class="grid" id="grid-informes">
+        <!-- Se puebla dinámicamente según rol -->
       </div>
     </section>
 
@@ -190,13 +224,74 @@
 
     <p class="foot">Generado el 07/04/2026 17:56 · 7 informes por unidad.</p>
   </div>
+
   <script>
+    // Definición de unidades — rol → datos del link
+    const UNIDADES = [
+      { rol: "educacion",          href: "01_educacion.html",              nombre: "DEPARTAMENTO DE EDUCACIÓN" },
+      { rol: "estudios_politicos", href: "02_estudios_politicos.html",     nombre: "DEPARTAMENTO DE ESTUDIOS POLÍTICOS" },
+      { rol: "filosofia",          href: "03_filosofia.html",              nombre: "DEPARTAMENTO DE FILOSOFÍA" },
+      { rol: "historia",           href: "04_historia.html",               nombre: "DEPARTAMENTO DE HISTORIA" },
+      { rol: "linguistica",        href: "05_linguistica_y_literatura.html", nombre: "DEPARTAMENTO DE LINGÜÍSTICA Y LITERATURA" },
+      { rol: "periodismo",         href: "06_periodismo.html",             nombre: "ESCUELA DE PERIODISMO" },
+      { rol: "psicologia",         href: "07_psicologia.html",             nombre: "ESCUELA DE PSICOLOGÍA" },
+    ];
+
+    function buildGrid(roles) {
+      const grid = document.getElementById("grid-informes");
+      grid.innerHTML = "";
+
+      const isAdmin = roles.includes("admin");
+      const visibles = isAdmin
+        ? UNIDADES
+        : UNIDADES.filter(u => roles.includes(u.rol));
+
+      if (visibles.length === 0) {
+        grid.innerHTML = '<p style="color:#8a949e;font-size:0.9rem;">No tienes acceso a ningún informe. Contacta al coordinador.</p>';
+        return;
+      }
+
+      visibles.forEach(u => {
+        const a = document.createElement("a");
+        a.className = "unidad-btn";
+        a.href = u.href;
+        a.innerHTML = `<span class="unidad-nombre">${u.nombre}</span><span class="unidad-link">Abrir informe</span>`;
+        grid.appendChild(a);
+      });
+    }
+
+    function initUI(user) {
+      const roles = (user.app_metadata && user.app_metadata.roles) || [];
+      document.getElementById("user-email").textContent = user.email;
+      buildGrid(roles);
+      document.getElementById("main-content").style.display = "block";
+    }
+
+    // Si no hay sesión al iniciar → redirige a login
+    netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.location.href = "/login.html";
+      } else {
+        initUI(user);
+      }
+    });
+
+    // Logout
+    document.getElementById("btn-logout").addEventListener("click", () => {
+      netlifyIdentity.logout();
+    });
+
+    netlifyIdentity.on("logout", () => {
+      window.location.href = "/login.html";
+    });
+
+    // Tabs
     const buttons = document.querySelectorAll(".tab-btn");
     const panels = document.querySelectorAll(".panel");
-    buttons.forEach((button) => {
+    buttons.forEach(button => {
       button.addEventListener("click", () => {
-        buttons.forEach((b) => b.classList.remove("active"));
-        panels.forEach((p) => p.classList.remove("active"));
+        buttons.forEach(b => b.classList.remove("active"));
+        panels.forEach(p => p.classList.remove("active"));
         button.classList.add("active");
         document.getElementById("tab-" + button.dataset.tab).classList.add("active");
       });
