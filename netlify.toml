@@ -1,0 +1,58 @@
+[build]
+  publish = "docs"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+
+# Protege cada informe — solo usuarios con el rol correcto
+[[redirects]]
+  from = "/01_educacion.html"
+  to = "/login.html"
+  status = 401
+  conditions = {Role = ["educacion", "admin"]}
+  force = false
+
+[[redirects]]
+  from = "/02_estudios_politicos.html"
+  to = "/login.html"
+  status = 401
+  conditions = {Role = ["estudios_politicos", "admin"]}
+  force = false
+
+[[redirects]]
+  from = "/03_filosofia.html"
+  to = "/login.html"
+  status = 401
+  conditions = {Role = ["filosofia", "admin"]}
+  force = false
+
+[[redirects]]
+  from = "/04_historia.html"
+  to = "/login.html"
+  status = 401
+  conditions = {Role = ["historia", "admin"]}
+  force = false
+
+[[redirects]]
+  from = "/05_linguistica_y_literatura.html"
+  to = "/login.html"
+  status = 401
+  conditions = {Role = ["linguistica", "admin"]}
+  force = false
+
+[[redirects]]
+  from = "/06_periodismo.html"
+  to = "/login.html"
+  status = 401
+  conditions = {Role = ["periodismo", "admin"]}
+  force = false
+
+[[redirects]]
+  from = "/07_psicologia.html"
+  to = "/login.html"
+  status = 401
+  conditions = {Role = ["psicologia", "admin"]}
+  force = false
