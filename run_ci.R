@@ -4,6 +4,28 @@
 # Sin Quarto ni inscritos sellos (no disponibles en CI).
 # =============================================================================
 
+repos_ci <- Sys.getenv("RSPM", unset = "https://cloud.r-project.org")
+options(repos = c(CRAN = repos_ci))
+
+paquetes_ci <- c(
+  "rmarkdown",
+  "readxl",
+  "janitor",
+  "tidyverse",
+  "glue",
+  "knitr",
+  "writexl",
+  "openxlsx",
+  "commonmark",
+  "htmltools"
+)
+
+faltantes <- paquetes_ci[!vapply(paquetes_ci, requireNamespace, logical(1), quietly = TRUE)]
+if (length(faltantes) > 0) {
+  message("Instalando paquetes faltantes: ", paste(faltantes, collapse = ", "))
+  install.packages(faltantes)
+}
+
 library(rmarkdown)
 library(readxl)
 library(janitor)
