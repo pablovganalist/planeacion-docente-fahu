@@ -16,21 +16,21 @@
   to = "/login.html"
   status = 401
   conditions = {Role = ["educacion", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/educacion_carr_*.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["educacion", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/comparativos/educacion.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["educacion", "admin"]}
-  force = false
+  force = true
 
 # ─────────────────────────────────────────────
 # DEPARTAMENTO DE ESTUDIOS POLÍTICOS
@@ -40,21 +40,21 @@
   to = "/login.html"
   status = 401
   conditions = {Role = ["estudios_politicos", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/estudios_politicos_carr_*.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["estudios_politicos", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/comparativos/estudios_politicos.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["estudios_politicos", "admin"]}
-  force = false
+  force = true
 
 # ─────────────────────────────────────────────
 # DEPARTAMENTO DE FILOSOFÍA
@@ -64,21 +64,21 @@
   to = "/login.html"
   status = 401
   conditions = {Role = ["filosofia", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/filosofia_carr_*.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["filosofia", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/comparativos/filosofia.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["filosofia", "admin"]}
-  force = false
+  force = true
 
 # ─────────────────────────────────────────────
 # DEPARTAMENTO DE HISTORIA
@@ -88,21 +88,21 @@
   to = "/login.html"
   status = 401
   conditions = {Role = ["historia", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/historia_carr_*.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["historia", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/comparativos/historia.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["historia", "admin"]}
-  force = false
+  force = true
 
 # ─────────────────────────────────────────────
 # DEPARTAMENTO DE LINGÜÍSTICA Y LITERATURA
@@ -112,21 +112,21 @@
   to = "/login.html"
   status = 401
   conditions = {Role = ["linguistica", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/linguistica_y_literatura_carr_*.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["linguistica", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/comparativos/linguistica_y_literatura.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["linguistica", "admin"]}
-  force = false
+  force = true
 
 # ─────────────────────────────────────────────
 # ESCUELA DE PERIODISMO
@@ -136,21 +136,21 @@
   to = "/login.html"
   status = 401
   conditions = {Role = ["periodismo", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/periodismo_carr_*.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["periodismo", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/comparativos/periodismo.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["periodismo", "admin"]}
-  force = false
+  force = true
 
 # ─────────────────────────────────────────────
 # ESCUELA DE PSICOLOGÍA
@@ -160,21 +160,21 @@
   to = "/login.html"
   status = 401
   conditions = {Role = ["psicologia", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/psicologia_carr_*.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["psicologia", "admin"]}
-  force = false
+  force = true
 
 [[redirects]]
   from = "/comparativos/psicologia.html"
   to = "/login.html"
   status = 401
   conditions = {Role = ["psicologia", "admin"]}
-  force = false
+  force = true
 
 # ─────────────────────────────────────────────
 # SÍNTESIS — libre (no requiere autenticación)
